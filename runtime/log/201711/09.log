@@ -1,0 +1,915 @@
+---------------------------------------------------------------
+[ 2017-11-09T01:12:32+08:00 ] 172.17.245.113 123.125.71.90 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.021481s][吞吐率：46.55req/s] [内存消耗：777.36kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'close',
+  'user-agent' => 'Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',
+  'accept-language' => 'zh-cn,zh-tw',
+  'if-none-match' => '"@NULL@"',
+  'accept-encoding' => 'gzip',
+  'accept' => '*/*',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000322s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000794s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000242s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000302s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000269s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000588s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000271s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000457s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000190s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000490s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000149s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000491s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000142s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000130s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000154s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000161s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000502s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000200s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000134s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000130s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000141s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000126s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000127s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000132s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000124s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000514s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000214s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000485s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000204s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000141s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000133s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000133s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T01:20:40+08:00 ] 172.17.245.113 123.125.67.224 GET /robots.txt
+[ info ] www.hrbkcwl.com/robots.txt [运行时间：0.003035s][吞吐率：329.48req/s] [内存消耗：315.41kb] [文件加载：33]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'robots.txt',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'close',
+  'user-agent' => 'Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',
+  'accept-encoding' => 'gzip',
+  'accept-language' => 'zh-cn,zh-tw',
+  'accept' => '*/*',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2017-11-09T03:20:45+08:00 ] 172.17.245.113 101.226.65.107 GET /contact_16.html
+[ info ] www.hrbkcwl.com/contact_16.html [运行时间：0.013472s][吞吐率：74.23req/s] [内存消耗：723.63kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'contact',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.97 Safari/537.22',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'catId' => '16',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\EmptyController->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/EmptyController.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/page_show_contace.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+  9 => 'info',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000394s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.001201s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` = 16 LIMIT 1 [ RunTime:0.000315s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000279s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000275s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000498s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000469s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000150s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000540s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_page` WHERE  `id` = 16 LIMIT 1 [ RunTime:0.000151s ]
+[ sql ] [ SQL ] SELECT `template_show` FROM `cool_category` WHERE  `id` = 16 LIMIT 1 [ RunTime:0.000143s ]
+[ error ] [8]未定义数组索引: template[/data/wwwroot/www.hrbkcwl.com/app/home/controller/EmptyController.php:17]
+[ error ] [8]未定义数组索引: keywords[/data/wwwroot/www.hrbkcwl.com/runtime/temp/03a3d2717ffe0bf33c41812fd06a3f69.php:11]
+[ error ] [8]未定义数组索引: description[/data/wwwroot/www.hrbkcwl.com/runtime/temp/03a3d2717ffe0bf33c41812fd06a3f69.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T03:20:45+08:00 ] 172.17.245.113 101.226.66.174 GET /about_2.html
+[ info ] www.hrbkcwl.com/about_2.html [运行时间：0.013429s][吞吐率：74.47req/s] [内存消耗：743.88kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'about',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.97 Safari/537.22',
+  'accept-encoding' => 'gzip,deflate',
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'catId' => '2',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\EmptyController->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/EmptyController.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/page_show.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+  9 => 'info',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000190s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000679s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000230s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000203s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000185s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000490s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000222s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000720s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000207s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000725s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000223s ]
+[ sql ] [ SQL ] SELECT `template_show` FROM `cool_category` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000204s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000670s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000221s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000161s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  (  type_id = 10 ) LIMIT 999 [ RunTime:0.000161s ]
+[ error ] [8]未定义数组索引: template[/data/wwwroot/www.hrbkcwl.com/app/home/controller/EmptyController.php:17]
+[ error ] [8]未定义数组索引: keywords[/data/wwwroot/www.hrbkcwl.com/runtime/temp/0778042751b24d660d03a6e09dc27387.php:11]
+[ error ] [8]未定义数组索引: description[/data/wwwroot/www.hrbkcwl.com/runtime/temp/0778042751b24d660d03a6e09dc27387.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T08:58:44+08:00 ] 172.17.245.113 218.241.108.76 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.020988s][吞吐率：47.65req/s] [内存消耗：777.02kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'te' => 'deflate,gzip;q=0.3',
+  'connection' => 'TE, close',
+  'host' => 'www.hrbkcwl.com',
+  'range' => 'bytes=0-5242879',
+  'user-agent' => 'Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000378s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000835s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000241s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000248s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000216s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000452s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000190s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000508s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000175s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000518s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000193s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000421s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000194s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000154s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000140s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000179s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000604s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000240s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000161s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000151s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000128s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000131s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000158s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000140s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000156s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000137s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000558s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000205s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000626s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000217s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000149s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000139s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000152s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T09:15:11+08:00 ] 172.17.245.113 123.125.71.54 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.020686s][吞吐率：48.34req/s] [内存消耗：774.19kb] [文件加载：55]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'close',
+  'user-agent' => 'Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',
+  'accept-language' => 'zh-cn,zh-tw',
+  'if-none-match' => '"@NULL@"',
+  'accept-encoding' => 'gzip',
+  'accept' => '*/*',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000371s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000879s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000251s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000501s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000201s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000470s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000163s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000484s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000153s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000397s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000145s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000141s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000127s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000169s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000488s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000233s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000146s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000142s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000196s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000163s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000161s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000148s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000147s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000149s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000539s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000214s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000553s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000219s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000191s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000177s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000151s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T11:02:56+08:00 ] 172.17.245.113 61.135.165.43 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.021369s][吞吐率：46.80req/s] [内存消耗：776.72kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36',
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'close',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000346s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000869s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000255s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000248s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000230s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000502s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000173s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000650s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000185s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000550s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000171s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000464s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000183s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000177s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000143s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000198s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000594s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000218s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000159s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000175s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000173s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000187s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000145s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000146s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000180s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000178s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000610s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000238s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000550s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000211s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000153s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000144s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000138s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T11:02:59+08:00 ] 172.17.245.113 111.206.36.17 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.019218s][吞吐率：52.03req/s] [内存消耗：773.54kb] [文件加载：55]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36',
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'close',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000332s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000819s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000244s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000508s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000203s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000485s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000173s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000508s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000195s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000465s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000163s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000177s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000141s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000170s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000499s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000203s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000269s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000155s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000142s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000140s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000140s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000134s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000139s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000133s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000501s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000194s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000495s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000213s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000150s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000172s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T11:08:54+08:00 ] 172.17.245.113 106.11.225.29 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.020055s][吞吐率：49.86req/s] [内存消耗：774.30kb] [文件加载：55]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'gzip',
+  'user-agent' => 'Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'host' => 'www.hrbkcwl.com',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000345s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000797s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000234s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000458s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000196s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000433s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000167s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000540s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000207s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000467s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000167s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000145s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000146s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000167s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000606s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000220s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000160s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000148s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000136s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000142s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000143s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000138s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000136s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000153s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000522s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000196s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000492s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000210s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000144s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000135s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000136s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T11:46:09+08:00 ] 172.17.245.113 79.110.17.126 GET /caseload
+[ info ] www.hrbkcwl.com/caseload [运行时间：0.016730s][吞吐率：59.77req/s] [内存消耗：891.41kb] [文件加载：61]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'case',
+    2 => 'load',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'en-US,en;q=0.8,ru;q=0.6',
+  'connection' => 'keep-alive',
+  'dnt' => '1',
+  'host' => 'www.hrbkcwl.com',
+  'user-agent' => 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\EmptyController->load[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/EmptyController.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/case_load.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+  9 => 'page',
+  10 => 'list',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000343s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000844s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000249s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000442s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000216s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000480s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000170s ]
+[ sql ] [ SQL ] SELECT `id`,`catname` FROM `cool_category` WHERE  `parentid` = 10 [ RunTime:0.000195s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000501s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cool_blog` WHERE  `catid` = 23 LIMIT 1 [ RunTime:0.000160s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cool_blog` WHERE  `catid` = 27 LIMIT 1 [ RunTime:0.000151s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cool_blog` WHERE  `catid` = 28 LIMIT 1 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cool_blog` WHERE  `catid` = 29 LIMIT 1 [ RunTime:0.000156s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000518s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cool_case` WHERE  (  catid in(23,27,28,29) ) LIMIT 1 [ RunTime:0.000210s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_case` WHERE  (  catid in(23,27,28,29) ) LIMIT 0,8 [ RunTime:0.000302s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000165s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000161s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000191s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000166s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000143s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000168s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000152s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000128s ]
+[ error ] [8]未定义变量: str[/data/wwwroot/www.hrbkcwl.com/app/home/controller/EmptyController.php:156]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+[ error ] [8]未定义数组索引: catdir[/data/wwwroot/www.hrbkcwl.com/runtime/temp/fa4470281c375c31cfb6000599804177.php:10]
+---------------------------------------------------------------
+[ 2017-11-09T17:11:04+08:00 ] 172.17.245.113 123.125.71.33 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.022802s][吞吐率：43.86req/s] [内存消耗：777.36kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.hrbkcwl.com',
+  'connection' => 'close',
+  'user-agent' => 'Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)',
+  'accept-language' => 'zh-cn,zh-tw',
+  'if-none-match' => '"@NULL@"',
+  'accept-encoding' => 'gzip',
+  'accept' => '*/*',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000334s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000814s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000256s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000266s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000213s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000538s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000204s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000485s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000185s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000480s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000199s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000500s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000173s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000149s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000138s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000184s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000569s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000211s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000149s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000171s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000156s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000164s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000153s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000196s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000189s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000162s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000613s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000226s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000519s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000225s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000149s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000159s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000205s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T18:21:15+08:00 ] 172.17.245.113 106.11.226.151 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.021538s][吞吐率：46.43req/s] [内存消耗：777.44kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'gzip',
+  'user-agent' => 'Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+  'cache-control' => 'no-cache',
+  'pragma' => 'no-cache',
+  'host' => 'www.hrbkcwl.com',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'connection' => 'keep-alive',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000315s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000772s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000274s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000298s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000232s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000500s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000196s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000487s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000168s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000497s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000155s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000449s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000151s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000139s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000136s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000169s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000518s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000203s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000164s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000185s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000158s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000172s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000185s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000159s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000164s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000149s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000506s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000193s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000472s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000217s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000142s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000140s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000149s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
+---------------------------------------------------------------
+[ 2017-11-09T22:35:58+08:00 ] 172.17.245.113 183.136.190.62 GET /
+[ info ] www.hrbkcwl.com/ [运行时间：0.026154s][吞吐率：38.24req/s] [内存消耗：777.52kb] [文件加载：56]
+[ info ] [ LANG ] /data/wwwroot/www.hrbkcwl.com/think/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.hrbkcwl.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'accept-encoding' => '',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ RUN ] app\home\controller\Index->index[ /data/wwwroot/www.hrbkcwl.com/app/home/controller/Index.php ]
+[ info ] [ VIEW ] /data/wwwroot/www.hrbkcwl.com/app/home/view/index_index.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000403s ] mysql:dbname=db_cool;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.000945s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` IS NULL LIMIT 1 [ RunTime:0.000342s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `parentid` = 0  AND `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000294s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `ismenu` = 1 ORDER BY `listorder` [ RunTime:0.000268s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.000490s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY sort asc LIMIT 4 [ RunTime:0.000181s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.000441s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY sort asc [ RunTime:0.000161s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.000572s ]
+[ sql ] [ SQL ] SELECT `content` FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000205s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.000624s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000161s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000181s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000184s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  (  parentid = 10 ) LIMIT 3 [ RunTime:0.000236s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_case` [ RunTime:0.000570s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_case` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` ORDER BY listorder asc,createtime desc LIMIT 8 [ RunTime:0.000320s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000186s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000175s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000274s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000168s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000203s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000211s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000168s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000162s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_fuwukehu` [ RunTime:0.000606s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_fuwukehu` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid=22  ) ORDER BY listorder
+                            asc,createtime desc LIMIT 10 [ RunTime:0.000236s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_blog` [ RunTime:0.000582s ]
+[ sql ] [ SQL ] SELECT `a`.*,`c`.`catdir` FROM `cool_blog` `a` LEFT JOIN `cool_category` `c` ON `a`.`catid`=`c`.`id` WHERE  (  catid in(17,18,19,20,21)  ) ORDER BY listorder
+                asc,createtime desc LIMIT 3 [ RunTime:0.000245s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 18 LIMIT 1 [ RunTime:0.000191s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000176s ]
+[ sql ] [ SQL ] SELECT `catname` FROM `cool_category` WHERE  `id` = 17 LIMIT 1 [ RunTime:0.000181s ]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:10]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:11]
+[ error ] [8]未定义变量: info[/data/wwwroot/www.hrbkcwl.com/runtime/temp/c48b970f7d9a96c92da5129398a8e2a2.php:12]
