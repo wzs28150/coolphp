@@ -19,7 +19,7 @@ return [
         ':id'   => ['home/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['home/hello', ['method' => 'post']],
     ],
-    
+
     'index' => 'home/index/index',
 
     'news/:catId' => 'home/news/index',
@@ -34,12 +34,12 @@ return [
 
     'blog/:catId' => 'home/blog/index',
     'blogInfo/:id/:catId' => 'home/blog/info',
-    
+
     'about/:catId' => 'home/about/index',
 
     'services/:catId' => 'home/services/index',
     'servicesInfo/:id/:catId' => 'home/services/info',
-    
+
     'contact/:catId' => 'home/contact/index',
     'weidianji/' => 'home/weidianji/index',
     'weidianji/dourl' => 'home/weidianji/dourl',
