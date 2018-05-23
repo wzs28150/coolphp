@@ -11,6 +11,11 @@
 <script>
     var edittext=new Array();
 </script>
+<style>
+  .layui-form-label{
+    width: 100px;
+  }
+</style>
 <script src="__STATIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
 <script src="__STATIC__/ueditor/ueditor.all.min.js" type="text/javascript"></script>
 <div class="admin-main layui-anim layui-anim-upbit">
@@ -19,22 +24,21 @@
     </fieldset>
     <form class="layui-form" method="post">
     {if condition="$info['id'] neq ''"}<input TYPE="hidden" name="id" value="{$info.id}">{/if}
-   
         {volist name="fields" id="r"}
             {if condition="!empty($r['status'])"}
                 <div class="layui-form-item">
                     <label class="layui-form-label">{$r.name}</label>
                     {if condition="$r['type'] eq 'images'"}
-                    <div class="layui-input-4 dtsc" data-f="{$r['field']}" id="box_{$r['field']}"> 
-                    {else/}   
-                    <div class="layui-input-4" id="box_{$r['field']}"> 
-                    {/if}  
+                    <div class="layui-input-4 dtsc" data-f="{$r['field']}" id="box_{$r['field']}">
+                    {else/}
+                    <div class="layui-input-4" id="box_{$r['field']}">
+                    {/if}
                         {$r,input($r['field'])|getform=$form,###}
                     </div>
                 </div>
             {/if}
         {/volist}
-        <div class="layui-form-item"> 
+        <div class="layui-form-item">
             <div class="layui-input-block">
                 <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
                 {if condition="MODULE_NAME eq 'page'"}
@@ -58,6 +62,34 @@
 
     layui.use(['form','upload','layedit','laydate'], function () {
         var form = layui.form,upload = layui.upload,layedit = layui.layedit,laydate = layui.laydate;
+        // form.on('select(province)', function(data) {
+        //     var pid = data.value;
+        //     var loading = layer.load(1, {shade: [0.1, '#fff']});
+        //     $.get("/admin/article/getRegion.html?pid=" + pid, function (data) {
+        //         layer.close(loading);
+        //         var html='<option value="">请选择市</option>';
+        //         $.each(data, function (i, value) {
+        //             html += '<option value="'+value.id+'">'+value.name+'</option>';
+        //         });
+        //         $('#city').html(html);
+        //         $('#district').html('<option value="">请选择县/区</option>');
+        //         form.render()
+        //     });
+        // });
+        // form.on('select(city)', function(data) {
+        //     var pid = data.value;
+        //     var loading = layer.load(1, {shade: [0.1, '#fff']});
+        //     $.get("/admin/article/getRegion.html?pid=" + pid, function (data) {
+        //         layer.close(loading);
+        //         var html='<option value="">请选择县/区</option>';
+        //         $.each(data, function (i, value) {
+        //             html += '<option value="'+value.id+'">'+value.name+'</option>';
+        //         });
+        //         $('#district').html(html);
+        //
+        //         form.render()
+        //     });
+        // });
         //缩略图上传
         upload.render({
             elem: '#thumbBtn'
@@ -98,8 +130,20 @@
             //     images+=$(this).val()+';';
             // });
             // data.field.images = images;
+            $(".dtsc").each(function (i) {
+                var f = $(this).attr('data-f');
+                var s = "var images" + f + "=''";
+                eval(s);
+                $(this).find(".imgVal").each(function (i) {
+                    //images += $(this).val() + ';';
+                    var a = "images" + f + "+=$(this).val() + ';';";
+                    eval(a);
+                });
+                //data.field.images = images;
+                var t =" data.field."+f+"images" + f;
+                eval(t);
+            });
 
-    
 
             $.post(url, data.field, function (res) {
                 if (res.code > 0) {
@@ -118,7 +162,7 @@
         //         thisimg.parents('.layui-col-md3').remove();
         //         layer.close(index);
         //     })
-        // }) 
+        // })
     });
 
 </script>

@@ -67,7 +67,7 @@ class Form{
             }
         }
         $boldchecked= $style_bold=='bold' ? 'checked' : '';
-        $titleThumb =$title_thumb?__PUBLIC__.$title_thumb:"__ADMIN__/images/tong.png";
+        $titleThumb =$title_thumb?__PUBLIC__.$title_thumb:config('view_replace_str.__ADMIN__')."/images/tong.png";
         if(empty($info['setup']['upload_maxsize'])){
             $info['setup']['upload_maxsize'] =  intval(byte_format(config('attach_maxsize')));
         }
@@ -251,7 +251,7 @@ class Form{
             if(isset($info['setup']['onchange'])){
                 $onchange = $info['setup']['onchange'];
             }
-            $parseStr = '<select id="'.$id.'" name="'.$field.'"  onchange="'.$onchange.'" class="'.$info['class'].'"  '.$validate.' size="'.$info['setup']['size'].'" multiple="multiple" >';
+            $parseStr = '<select id="'.$id.'" name="'.$field.'"  onchange="'.$onchange.'" class="'.$info['class'].'"  '.$validate.' size="'.$info['setup']['size'].'" multiple="multiple" ><option value=""></option>';
         }else {
             $onchange = '';
             if(isset($info['setup']['onchange'])){
@@ -284,7 +284,6 @@ class Form{
     }
 
     public function checkbox($info,$value){
-
         $info['setup']=is_array($info['setup']) ? $info['setup'] : string2array($info['setup']);
         $id = $field = $info['field'];
         $validate = getvalidate($info);
@@ -449,12 +448,12 @@ class Form{
         $field = $info['field'];
         $action = ACTION_NAME;
         if($action=='add'){
-            $value =$value?__PUBLIC__.$value:"__ADMIN__/images/tong.png";
+            $value =$value?__PUBLIC__.$value:config('view_replace_str.__ADMIN__')."/images/tong.png";
         }else{
             if($this->data[$field]){
                 $value = $value ?$value :  __PUBLIC__.$this->data[$field];
             }else{
-                $value = "__ADMIN__/images/tong.png";
+                $value = config('view_replace_str.__ADMIN__')."/images/tong.png";
             }
 
         }
@@ -464,16 +463,16 @@ class Form{
         $thumbstr .='<button type="button" class="layui-btn layui-btn-primary" id="'.$info['class'].'"><i class="icon icon-upload3"></i>点击上传</button>';
         $thumbstr .='<div class="layui-upload-list"><img class="layui-upload-img" id="'.$info['class'].'Img" src="'.$value.'"><p id="thumbText"></p>';
         $thumbstr .='</div></div></div>';
-        $thumbstr.="<script> 
+        $thumbstr.="<script>
                         layui.use('upload', function () {
                             var upload = layui.upload;
                             upload.render({
-                                elem:'#".$info['class']."', 
+                                elem:'#".$info['class']."',
                                 url: '".url('upFiles/upload')."',
                                 title: '上传图片',
-                                ext: '".$info['setup']['upload_allowext']."', 
+                                ext: '".$info['setup']['upload_allowext']."',
                                 done: function(res){
-                                    $('#".$field."Img').attr('src', '__PUBLIC__'+res.url);
+                                    $('#".$field."Img').attr('src', '".__PUBLIC__."'+res.url);
                                     $('#".$field."Val').val(res.url);
                                 }
                             });
@@ -506,7 +505,7 @@ class Form{
         $parseStr   .= '<button type="button" class="layui-btn" id="btn_'.$field.'">多图片上传</button><input type="hidden" name="'.$field.'" value="'.$value.'">';
         $parseStr   .= '<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">';
         $parseStr   .= '预览图：<div class="layui-upload-list" id="demo_'.$field.'"><div class="layui-row layui-col-space10">'.$data.'</div></div> </blockquote></div>';
-        $parseStr.="<script> 
+        $parseStr.="<script>
         layui.use('upload', function () {
             var upload = layui.upload;
             var imagesSrc_".$field." = '';
@@ -526,7 +525,7 @@ class Form{
                 layer.confirm('你确定要删除该图片吗？', function(index){
                     thisimg.parents('.layui-col-md3').remove();
                     layer.close(index);
-                   
+
                     $('#demo_".$field." .imgVal').each(function(i) {
                         images+=$(this).val()+';';
                     });
@@ -539,6 +538,7 @@ class Form{
 
         return $parseStr;
     }
+
     public function file($info,$value){
         $info['setup']=is_array($info['setup']) ? $info['setup'] : string2array($info['setup']);
         $field = $info['field'];
@@ -554,15 +554,15 @@ class Form{
         $thumbstr .='<button type="button" class="layui-btn layui-btn-primary" id="'.$info['class'].'"><i class="icon icon-upload3"></i>点击上传</button>';
         $thumbstr .='<div class="layui-upload-list"><img class="layui-upload-img" id="'.$info['class'].'File" src="'.$value.'"><p id="thumbText"></p>';
         $thumbstr .='</div></div></div>';
-        $thumbstr.="<script> 
+        $thumbstr.="<script>
                         layui.use('upload', function () {
                             var upload = layui.upload;
                             upload.render({
-                                elem:'#".$info['class']."', 
+                                elem:'#".$info['class']."',
                                 accept:'file',
                                 url: '".url('upFiles/file')."',
                                 title: '上传文件',
-                                ext: '".$info['setup']['upload_allowext']."', 
+                                ext: '".$info['setup']['upload_allowext']."',
                                 done: function(res){
                                     $('#".$field."File').attr('src', '__STATIC__/common/images/'+res.ext+'.png');
                                     $('#".$field."fval').val(res.url);
@@ -573,6 +573,237 @@ class Form{
         return $thumbstr;
     }
 
+    public function linkage($info){
+        $field = $info['field'];
+        $value = '';
+        if($this->data[$field]){
+            $value = explode(',',$this->data[$field]);
+        }
+        $region = db('region')->where(['pid'=>1])->select();
+        $html='<div class="layui-input-inline">';
+        $html .='<select name="'.$field.'[]" id="'.$field.'_province" lay-filter="'.$field.'_province">';
+        $html .='<option value="">请选择省</option>';
+        foreach ($region as $k=>$v){
+            if($value[0] == $v['id']){
+                $html .='<option selected value="'.$v['id'].'">'.$v['name'].'</option>';
+            }else{
+                $html .='<option value="'.$v['id'].'">'.$v['name'].'</option>';
+            }
+        }
+        $html .='</select>';
+        $html .='</div>';
+
+        $city ='';
+        if($value[0]){
+            $city = db('region')->where(['pid'=>$value[0]])->select();
+        }
+
+        $html .='<div class="layui-input-inline">';
+        $html .='<select name="'.$field.'[]" id="'.$field.'_city" lay-filter="'.$field.'_city">';
+        $html .='<option value="">请选择市</option>';
+        if($city){
+            foreach ($city as $k=>$v){
+                if($value[1] == $v['id']){
+                    $html .='<option selected value="'.$v['id'].'">'.$v['name'].'</option>';
+                }else{
+                    $html .='<option value="'.$v['id'].'">'.$v['name'].'</option>';
+                }
+            }
+        }
+
+        $html .='</select>';
+        $html .='</div>';
+
+        $district ='';
+        if($value[1]){
+            $district = db('region')->where(['pid'=>$value[1]])->select();
+        }
+        if($field != 'zzd'){
+          $html .='<div class="layui-input-inline">';
+          $html .='<select name="'.$field.'[]" id="'.$field.'_district" lay-filter="'.$field.'_district">';
+          $html .='<option value="">请选择县/区</option>';
+
+          if($district){
+              foreach ($district as $k=>$v){
+                  if($value[2] == $v['id']){
+                      $html .='<option selected value="'.$v['id'].'">'.$v['name'].'</option>';
+                  }else{
+                      $html .='<option value="'.$v['id'].'">'.$v['name'].'</option>';
+                  }
+              }
+          }
+
+          $html .='</select>';
+        }else{
+          $html .='<div class="layui-input-inline" id="'.$field.'_district2" style="width:100%;margin-top:10px;">';
+          $html .= '<div style="float:left;margin-top:4px; line-height:28px;">请选择支持的区县：</div>';
+          if($district){
+            $value2 = $value;
+            array_splice($value2,0,2);
+            foreach ($district as $k=> $v) {
+              if(in_array($v['id'],$value2)){
+                //选中
+                $html .= '<div class="qxduoxuan" style="float:left; overflow:hidden; line-height:0; font-size:0;"><input type="checkbox" name="'.$field.'[]" value="'.$v['id'].'" checked style="float:left;"> <label style="line-height:28px; font-size:14px; display:inline-block;float:left; margin-top:4px;margin-right:10px;">' .$v['name'] .' </label></div>';
+              }else{
+                $html .= '<div class="qxduoxuan" style="float:left; overflow:hidden; line-height:0; font-size:0;"><input type="checkbox" name="'.$field.'[]" value="'.$v['id'].'" style="float:left;"> <label style="line-height:28px; font-size:14px; display:inline-block;float:left; margin-top:4px;margin-right:10px;">' .$v['name'] .' </label></div>';
+              }
+            }
+          }
+        }
+        $html .='</div><style>.qxduoxuan .layui-unselect.layui-form-checkbox{ float:left;}</style>';
+        $html .="
+        <script>
+        layui.use(['form'], function () {
+          var form = layui.form;
+        form.on('select(".$field."_province)', function(data) {
+            var pid = data.value;
+            var loading = layer.load(1, {shade: [0.1, '#fff']});
+            $.get(\"__PUBLIC__/../admin/article/getRegion.html?pid=\" + pid, function (data) {";
+                $html .="layer.close(loading);
+                var html='<option value=\"\">请选择市</option>';
+                $.each(data, function (i, value) {
+                    html += '<option value=\"'+value.id+'\">'+value.name+'</option>';
+                });
+                $('#".$field."_city').html(html);
+                $('#".$field."_district').html('<option value=\"\">请选择县/区</option>');
+                form.render()";
+          $html .="});
+        });
+        form.on('select(".$field."_city)', function(data) {
+            var pid = data.value;
+            var loading = layer.load(1, {shade: [0.1, '#fff']});
+            $.get(\"__PUBLIC__/../admin/article/getRegion.html?pid=\" + pid, function (data) {";
+              if($field != 'zzd'){
+                $html .="layer.close(loading);
+                var html='<option value=\"\">请选择县/区</option>';
+                $.each(data, function (i, value) {
+                    html += '<option value=\"'+value.id+'\">'+value.name+'</option>';
+                });
+                $('#".$field."_district').html(html);
+
+                form.render()";
+              }else{
+                $html.="layer.close(loading);
+                var html='<div style=\"float:left;margin-top:4px; line-height:28px;\">请选择支持的区县：</div>';
+                $.each(data, function (i, value) {
+                    html += '<div class=\"qxduoxuan\" style=\"float:left; overflow:hidden; line-height:0; font-size:0;\"><input type=\"checkbox\" name=\"".$field."[]\" value=\"'+value.id+'\" style=\"float:left;\"> <label style=\"line-height:28px; font-size:14px; display:inline-block;float:left; margin-top:4px;margin-right:10px;\">' +value.name+ ' </label></div>';
+                });
+                $('#".$field."_district2').html(html);
+                form.render()
+                ";
+              }
+
+            $html .="});
+        });
+        });
+        </script>";
+
+        return $html;
+    }
+
+    public function dcatid($info,$value){
+        //dump($info['moduleid']);
+
+        $info['setup']=is_array($info['setup']) ? $info['setup'] : string2array($info['setup']);
+        $id = $field = $info['field'];
+        $validate = getvalidate($info);
+        $action = ACTION_NAME;
+
+        if($action=='add'){
+            $value = $value ? $value : $info['setup']['default'];
+        }else{
+            $value = $value ? $value : $this->data[$field];
+        }
+
+        if($value != '') $value = strpos($value, ',') ? explode(',', $value) : $value;
+
+        $parentid = $info['setup']["parentid"];
+        if($info['setup']["source"] == 'content'){
+          //内容模式
+          $category = db('category')->find($parentid);
+          $module = $category['module'];
+  //echo $module.'11';
+  // echo $parentid;
+  // exit;
+          $list = db($module)->field('id,title')->where('catid',$parentid)->fetchsql(false)->select();
+// dump($list);
+        }elseif($info['setup']["source"] == 'cat'){
+          //栏目模式
+          $group_id = session('gid');
+          if($group_id>2){
+            if($info['moduleid'] == 28){
+              $category = F('Category_'.session('gid'));
+              //dump($category);exit;
+              $zzdqstr = '';
+              foreach ($category as $key => $value) {
+                if($value["parentid"] == 90){
+                  $zzdqstr .= $value["id"].',';
+                }
+              }
+              $map['id']=array('in',rtrim($zzdqstr,','));
+            }
+          }
+          $map['parentid']=array('=',$parentid);
+          $list = db('category')->field('id,catname')->where($map)->select();
+        }
+        $i = 1;
+        $parseStr ='';
+        if($info['setup']["dctype"] == 'select'){
+          $parseStr = '<select id="'.$id.'" name="'.$field.'"  onchange="'.$onchange.'" class="'.$info['class'].'"  '.$validate.' size="'.$info['setup']['size'].'" multiple="multiple" ><option value=""></option>';
+          foreach ($list as $key => $r) {
+            if(!empty($value)){
+                $selected='';
+                if(is_array($value)){
+                    if(in_array($r["id"],$value)){
+                        $selected = ' selected="selected"';
+                    }
+                }else{
+                    if($value==$r["id"]){
+                        $selected = ' selected="selected"';
+                    }
+                }
+            }
+            if($r["title"]){
+              $parseStr   .= '<option '.$selected.' value="'.$r["id"].'">'.$r["title"].'</option>';
+            }elseif($r["catname"]){
+              $parseStr   .= '<option '.$selected.' value="'.$r["id"].'">'.$r["catname"].'</option>';
+            }
+          }
+          $parseStr   .= '</select>';
+        }elseif($info['setup']["dctype"] == 'radio'){
+          foreach ($list as $key => $r) {
+            $checked = trim($value)==trim($r["id"]) ? 'checked' : '';
+            if(empty($value) && empty($r["id"]) ){
+                $checked = 'checked';
+            }
+            if($r["title"]){
+              $parseStr .= '<input name="'.$field.'" id="'.$id.'_'.$i.'" '.$checked.' value="'.$r["id"].'" '.$validate.' type="radio" class="ace" title="'.$r["title"].'" />';
+            }elseif($r["catname"]){
+              $parseStr .= '<input name="'.$field.'" id="'.$id.'_'.$i.'" '.$checked.' value="'.$r["id"].'" '.$validate.' type="radio" class="ace" title="'.$r["catname"].'" />';
+            }
+            $i++;
+          }
+        }elseif($info['setup']["dctype"] == 'checkbox'){
+          foreach ($list as $key => $r) {
+            if($i>1){
+                $validate='';
+            }
+            if(count($value)>1){
+              $checked = ($value && in_array($r["id"], $value)) ? 'checked' : '';
+            }else{
+              $checked = ($value == $r["id"]) ? 'checked' : '';
+            }
+            if($r["title"]){
+              $parseStr .= '<input name="'.$field.'['.$i.']" id="'.$id.'_'.$i.'" '.$checked.' value="'.$r["id"].'"  '.$validate.' type="checkbox" class="ace" title="'.$r["title"].'">';
+            }elseif($r["catname"]){
+              $parseStr .= '<input name="'.$field.'['.$i.']" id="'.$id.'_'.$i.'" '.$checked.' value="'.$r["id"].'"  '.$validate.' type="checkbox" class="ace" title="'.$r["catname"].'">';
+            }
+            $i++;
+          }
+        }
+        // echo $parseStr;
+        return $parseStr;
+    }
     /*public function files($info,$value){
         $info['setup']=is_array($info['setup']) ? $info['setup'] : string2array($info['setup']);
         $id = $field = $info['field'];
@@ -594,7 +825,7 @@ class Form{
                     $optionsarr[$k] = $v[0];
                     $data .='<div id="uplistd_'.$i.'" class="col-md-6 ">
                     <div class="upimgs">
-                    <input type="text"  class="form-control" name="'.$field.'[]" value="'.$v[0].'" style="margin-bottom:5px;"/> 
+                    <input type="text"  class="form-control" name="'.$field.'[]" value="'.$v[0].'" style="margin-bottom:5px;"/>
                     <input type="text" class="form-control" name="'.$field.'_name[]" value="'.$v[1].'" placeholder="请填写文件标题"/>
                     <textarea class="form-control" name="'.$field.'_text[]" rows="2" cols="" style="margin:5px 0;" placeholder="请填写文件简介">'.$v[2].'</textarea>
                     <div class="clearfix"></div>

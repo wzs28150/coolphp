@@ -18,8 +18,8 @@
     <input name="{{d.level_id}}" data-id="{{d.level_id}}" class="list_order layui-input" value=" {{d.sort}}" size="10"/>
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('groupEdit')}?level_id={{d.level_id}}" class="layui-btn layui-btn-mini">{:lang('edit')}</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">{:lang('del')}</a>
+    <a href="{:url('groupEdit')}?level_id={{d.level_id}}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">{:lang('del')}</a>
 </script>
 <script>
     layui.use('table', function() {

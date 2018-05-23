@@ -33,7 +33,7 @@ class Common extends Controller
             }
         }
         $this->system = F('System');
-        $this->categorys = F('Category');
+        $this->categorys = F('Category_'.session('gid'));
         $this->module = F('Module');
         $this->mod = F('Mod');
         $this->role = F('Role');

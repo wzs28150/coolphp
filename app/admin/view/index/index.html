@@ -3,7 +3,7 @@
     var ADMIN = '__ADMIN__';
     var navs = {$menus};
 </script>
-<div class="layui-layout layui-layout-admin on">
+<div class="layui-layout layui-layout-admin">
     <div class="layui-header header">
         <div class="layui-main">
             <div class="admin-login-box">
@@ -59,14 +59,14 @@
         <div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side"></div>
     </div>
     <div class="layui-body" style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
-        <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+        <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab" style="">
             <ul class="layui-tab-title">
                 <li class="layui-this">
                     <i class="icon icon-earth" aria-hidden="true"></i>
                     <cite>控制面板</cite>
                 </li>
             </ul>
-            <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+            <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0; " >
                 <div class="layui-tab-item layui-show">
                     <iframe src="{:url('main')}"></iframe>
                 </div>
@@ -75,9 +75,9 @@
     </div>
     <div class="layui-footer footer footer-demo" id="admin-footer">
         <div class="layui-main">
-            <p>2017 &copy;
+            <!-- <p>2017 &copy;
                 <a href="http://www.hrbkcwl.com/">www.hrbkcwl.com</a>
-            </p>
+            </p> -->
         </div>
     </div>
     <div class="site-tree-mobile layui-hide">

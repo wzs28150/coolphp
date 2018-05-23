@@ -11,7 +11,7 @@ return array (
     'listfields' => '*',
     'setup' => '',
     'listorder' => 0,
-    'status' => 1,
+    'status' => 0,
   ),
   2 => 
   array (
@@ -24,7 +24,7 @@ return array (
     'listfields' => '*',
     'setup' => '',
     'listorder' => 0,
-    'status' => 1,
+    'status' => 0,
   ),
   3 => 
   array (
@@ -37,14 +37,14 @@ return array (
     'listfields' => '*',
     'setup' => '',
     'listorder' => 0,
-    'status' => 1,
+    'status' => 0,
   ),
-  4 => 
+  27 => 
   array (
-    'id' => 4,
-    'title' => '产品模型',
-    'name' => 'product',
-    'description' => '产品展示',
+    'id' => 27,
+    'title' => '物流中转',
+    'name' => 'wlzzz',
+    'description' => '设置不同路线物流中转各种费用价格',
     'type' => 1,
     'issystem' => 0,
     'listfields' => '*',
@@ -52,12 +52,12 @@ return array (
     'listorder' => 0,
     'status' => 1,
   ),
-  10 => 
+  28 => 
   array (
-    'id' => 10,
-    'title' => '案例模型',
-    'name' => 'case',
-    'description' => '案例模型',
+    'id' => 28,
+    'title' => '物流管理',
+    'name' => 'wuliu',
+    'description' => '设置各个物流站的电话地址等信息',
     'type' => 1,
     'issystem' => 0,
     'listfields' => '*',
@@ -65,38 +65,12 @@ return array (
     'listorder' => 0,
     'status' => 1,
   ),
-  9 => 
+  29 => 
   array (
-    'id' => 9,
-    'title' => '博客模型',
-    'name' => 'blog',
-    'description' => '博客模型',
-    'type' => 1,
-    'issystem' => 0,
-    'listfields' => '*',
-    'setup' => '',
-    'listorder' => 0,
-    'status' => 1,
-  ),
-  11 => 
-  array (
-    'id' => 11,
-    'title' => '服务模型',
-    'name' => 'service',
-    'description' => '服务模型',
-    'type' => 1,
-    'issystem' => 0,
-    'listfields' => '*',
-    'setup' => '',
-    'listorder' => 0,
-    'status' => 1,
-  ),
-  13 => 
-  array (
-    'id' => 13,
-    'title' => '服务客户',
-    'name' => 'fuwukehu',
-    'description' => '',
+    'id' => 29,
+    'title' => '物流线路',
+    'name' => 'wlxl',
+    'description' => '设置物流站支持的物流线路',
     'type' => 1,
     'issystem' => 0,
     'listfields' => '*',

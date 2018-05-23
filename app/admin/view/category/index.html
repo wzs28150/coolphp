@@ -28,7 +28,10 @@
 <script>
     layui.use('table', function(){
         var table = layui.table,$= layui.jquery;
-        table.init('list', {});
+       table.init('list', {
+limit: 99 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+  //支持所有基础参数
+});
 
         $('body').on('blur','.list_order',function() {
             var id = $(this).attr('data-id');

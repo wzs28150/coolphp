@@ -64,7 +64,7 @@
 		<td>选项类型</td>
 		<td>
 			<input type="radio" name="setup[multiple]" value="0" title="下拉框" {if condition="$multiple==0"} checked{/if}>
-			<input type="radio" name="setup[multiple]" value="0" title="多选列表框" {if condition="$multiple==1"} checked{/if}>
+			<input type="radio" name="setup[multiple]" value="1" title="多选列表框" {if condition="$multiple==1"} checked{/if}>
 		</td>
 	</tr>
 	<tr>
@@ -290,6 +290,40 @@
 {case value="files"}
 <table cellpadding="2" cellspacing="1" width="100%">
 </table>
+{/case}
+{case value="dcatid"}
+<table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
+  <tr>
+      <th>源</th>
+      <td>
+        <input type="radio" name="setup[source]" id="cat" value="cat" <?php if($source=='cat') echo ' checked';?> title="栏目">
+        <input type="radio" name="setup[source]" id="content" <?php if($source=='content') echo ' checked';?> value="content" title="内容">
+      </td>
+  </tr>
+  <tr>
+      <th>类型</th>
+      <td>
+        <input type="radio" name="setup[dctype]" id="radio" value="radio" <?php if($dctype=='radio') echo ' checked';?> title="单选">
+        <input type="radio" name="setup[dctype]" id="checkbox" value="checkbox" <?php if($dctype=='checkbox') echo ' checked';?> title="多选">
+        <input type="radio" name="setup[dctype]" id="select" value="select" <?php if($dctype=='select') echo ' checked';?> title="select">
+      </td>
+  </tr>
+  <tr>
+      <th>父栏目ID</th>
+      <td>
+        <input type="text" class="layui-input input-text" size="50" name="setup[parentid]" style="margin-bottom: 15px;margin-top: 15px;" value="{$parentid}">
+      </td>
+  </tr>
+  <tr>
+      <th>默认值</th>
+      <td>
+        <input type="text" class="layui-input input-text" size="50" name="setup[default]" value="">
+      </td>
+  </tr>
+</table>
+<style>
+.typeTable th{ text-align: left; font-weight: normal; }
+</style>
 {/case}
 {default /}
 {/switch}

@@ -184,9 +184,11 @@ class Auth extends Common
     //分组配置规则
     public function groupAccess(){
         $nav = new Leftnav();
+
         $admin_rule=db('auth_rule')->field('id,pid,title')->order('sort asc')->select();
         $rules = db('auth_group')->where('group_id',input('id'))->value('rules');
         $arr = $nav->auth($admin_rule,$pid=0,$rules);
+        // dump($arr);
         $arr[] = array(
             "id"=>0,
             "pid"=>0,

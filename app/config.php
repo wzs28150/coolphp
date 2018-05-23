@@ -255,7 +255,7 @@ return [
 
     'pageSize'=>15,
     //自定义配置
-    'sys_name' =>'COOLPHP',
+    'sys_name' =>'物流管理系统',
     //文件上传
     'addwater'=>false,
     'watertext'=>'COOLPHP',

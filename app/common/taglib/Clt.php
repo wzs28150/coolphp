@@ -6,6 +6,7 @@ class Clt extends TagLib {
         'list_join' => array('attr' => 'db,joindb,order,limit,where,id,key,dbfield,joinfield','close' => 1),
         'list' => array('attr' => 'db,order,limit,where,id,key','close' => 1),
         'info' => array('attr' => 'db,where,id','close' => 1),
+        'tongji' => array('attr' => 'module','close' => 0)
     );
     public function tagInfo($attr,$content){
         $db = $attr['db']; //要查询的数据表
@@ -60,6 +61,22 @@ class Clt extends TagLib {
         return $str;
     }
 
-
-
+    public function tagtongji($attr,$content) {
+      $module = $attr['module']; //要查询的数据表
+      $str = '<?php ';
+      $str .= '$list ="<script type=\"text/javascript\">
+        var _hmt = _hmt || [];
+       (function() {
+        var hm = document.createElement(\"script\");
+          hm.src = \"__HOME__/../common/js/tongji.min.js\";
+          var s = document.getElementsByTagName(\"script\")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+       </script>
+       ";';
+      $str .= 'echo $list;';
+      $str .= '?>';
+      $str .= $content;
+      return $str;
+    }
 }

@@ -36,7 +36,19 @@ class EmptyController extends Common{
                     $catid = input('post.catid');
                 }
             }
-
+            $group_id = session('gid');
+            if($group_id>2){
+              if($modelname == wuliu){
+                $category = $this->categorys;
+                $zzdqstr = '';
+                foreach ($category as $key => $value) {
+                  if($value["parentid"] == 90){
+                    $zzdqstr .= $value["id"].',';
+                  }
+                }
+                $map['zzdq']=array('in',rtrim($zzdqstr,','));
+              }
+            }
             if(!empty($keyword) ){
                 $map['title']=array('like','%'.$keyword.'%');
             }
@@ -83,7 +95,6 @@ class EmptyController extends Common{
             }
         }
         $info = $this->dao->where('id',$id)->find();
-        //dump($info);
         $form=new Form($info);
         $returnData['vo'] = $info;
         $returnData['form'] = $form;
@@ -99,6 +110,7 @@ class EmptyController extends Common{
         $model = $this->dao;
         $fields = $this->fields;
         $data = $this->checkfield($fields,input('post.'));
+
         if($data['code']=="0"){
             $result['msg'] = $data['msg'];
             $result['code'] = 0;
@@ -134,15 +146,15 @@ class EmptyController extends Common{
         unset($data['aid']);
         unset($data['pics_name']);
         //编辑多图和多文件
-        foreach ($fields as $k=>$v){
-            if($v['type']=='files'){
-                if(!$data[$k]){
-                    $data[$k]='';
-                }
-                $data[$v['field']] = $data['images'];
-            }
-        }
-        
+        // foreach ($fields as $k=>$v){
+        //     if($v['type']=='files' or $v['type']=='images'){
+        //         if(!$data[$k]){
+        //             $data[$k]='';
+        //         }
+        //         $data[$v['field']] = $data['images'];
+        //     }
+        // }
+
         $list=$model->update($data);
         if (false !== $list) {
             if($controllerName=='Page'){
@@ -170,11 +182,12 @@ class EmptyController extends Common{
         return true;
     }
     function checkfield($fields,$post){
+
         foreach ( $post as $key => $val ) {
             if(isset($fields[$key])){
                 $setup=$fields[$key]['setup'];
                 if(!empty($fields[$key]['required']) && empty($post[$key])){
-                    $result['msg'] = $fields[$key]['errormsg']?$fields[$key]['errormsg']:'缺少必要参数！'."$key";
+                    $result['msg'] = $fields[$key]['errormsg']?$fields[$key]['errormsg']:'缺少必要参数！';
                     $result['code'] = 0;
                     return $result;
                 }
@@ -188,7 +201,7 @@ class EmptyController extends Common{
                         $post[$key] = implode(',',$post[$key]);
                     }
                 }
-                if(isset($setup['type'])){
+                if(isset($setup['fieldtype'])){
                     if($fields[$key]['type']=='checkbox'){
                         $post[$key] = implode(',',$post[$key]);
                     }
@@ -197,6 +210,18 @@ class EmptyController extends Common{
                     $post[$key] =strtotime($post[$key]);
                 }elseif($fields[$key]['type']=='textarea'){
                     $post[$key]=addslashes($post[$key]);
+                }elseif($fields[$key]['type']=='linkage'){
+                    if($post[$key][0]){
+                        $post[$key] = implode(',',$post[$key]);
+                    }else{
+                        unset($post[$key]);
+                    }
+                }elseif($fields[$key]['type']=='dcatid'){
+                  if(is_array($post[$key])){
+                      $post[$key] = implode(',',$post[$key]);
+                  }else{
+
+                  }
                 }elseif($fields[$key]['type']=='editor'){
                     if(isset($post['add_description']) && $post['description'] == '' && isset($post['content'])) {
                         $content = stripslashes($post['content']);
@@ -225,10 +250,12 @@ class EmptyController extends Common{
     }
     public function insert(){
         $request = Request::instance();
+
         $controllerName = $request->controller();
         $model = $this->dao;
         $fields = $this->fields;
         $data = $this->checkfield($fields,input('post.'));
+
         if(isset($data['code']) && $data['code']==0){
             return $data;
         }
@@ -269,14 +296,15 @@ class EmptyController extends Common{
         unset($data['aid']);
         unset($data['pics_name']);
         //编辑多图和多文件
-        foreach ($fields as $k=>$v){
-            if($v['type']=='files' ){
-                if(!$data[$k]){
-                    $data[$k]='';
-                }
-                $data[$v['field']] = $data['images'];
-            }
-        }
+        // foreach ($fields as $k=>$v){
+        //     if($v['type']=='files' or $v['type']=='images'){
+        //         if(!$data[$k]){
+        //             $data[$k]='';
+        //         }
+        //         $data[$v['field']] = $data['images'];
+        //     }
+        // }
+        // dump($data);exit;
         $id= $model->insertGetId($data);
         if ($id !==false) {
             $catid = $controllerName =='page' ? $id : $data['catid'];
@@ -330,8 +358,11 @@ class EmptyController extends Common{
         return $result;
     }
     public function delImg(){
+        if(!input('post.url')){
+            return ['code'=>0,'请指定要删除的图片资源'];
+        }
         $file = ROOT_PATH.__PUBLIC__.input('post.url');
-        if(file_exists($file)){
+        if(file_exists($file) && trim(input('post.url'))!=''){
             is_dir($file) ? dir_delete($file) : unlink($file);
         }
         if(input('post.id')){
@@ -345,5 +376,11 @@ class EmptyController extends Common{
         $result['msg'] = '删除成功!';
         $result['code'] = 1;
         return $result;
+    }
+    public function getRegion(){
+        $Region=db("region");
+        $map['pid'] = input("pid");
+        $list=$Region->where($map)->select();
+        return $list;
     }
 }

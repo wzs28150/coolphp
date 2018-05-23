@@ -21,7 +21,12 @@ return [
     ],
 
     'index' => 'home/index/index',
-
+    'index/info'=> 'home/index/getinfo',
+    'index/getRegion'=> 'home/index/getRegion',
+    'index/getRegion2'=> 'home/index/getRegion2',
+  	'index/getzhongzhuan'=> 'home/index/getzhongzhuan',
+    'index/geterjiwuliu'=> 'home/index/geterjiwuliu',
+    'index/geterjiwuliureal'=> 'home/index/geterjiwuliureal',
     'news/:catId' => 'home/news/index',
     'newsInfo/:id/:catId' => 'home/news/info',
 
@@ -32,16 +37,22 @@ return [
     'caseInfo/:id/:catId' => 'home/case/info',
     'caseload' => 'home/case/load',
 
+    'solution/:catId' => 'home/solution/index',
+    'solutionInfo/:id/:catId' => 'home/solution/info',
+    'solutionload' => 'home/case/load',
+
     'blog/:catId' => 'home/blog/index',
     'blogInfo/:id/:catId' => 'home/blog/info',
 
     'about/:catId' => 'home/about/index',
 
-    'services/:catId' => 'home/services/index',
-    'servicesInfo/:id/:catId' => 'home/services/info',
+    'service/:catId' => 'home/service/index',
+    'serviceInfo/:id/:catId' => 'home/service/info',
 
     'contact/:catId' => 'home/contact/index',
     'weidianji/' => 'home/weidianji/index',
     'weidianji/dourl' => 'home/weidianji/dourl',
     'weidianjishow/:id' => 'home/weidianji/show',
+    'datastatistics/' => 'home/datastatistics/index',
+    'datastatistics/dostatistics' => 'home/datastatistics/dostatistics',
 ];

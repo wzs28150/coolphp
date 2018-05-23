@@ -25,8 +25,8 @@
     {{# if(d.thumb){ }}<img src="__ADMIN__/images/image.gif" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.thumb}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();">{{# } }}
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('edit')}?id={{d.id}}&catid={{d.catid}}" class="layui-btn layui-btn-mini">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a href="{:url('edit')}?id={{d.id}}&catid={{d.catid}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
     layui.use('table', function() {

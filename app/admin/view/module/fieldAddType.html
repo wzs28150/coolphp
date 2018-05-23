@@ -1,18 +1,19 @@
 <style>
 .typeTable tr{padding-bottom: 5px;}
+.typeTable th{ font-weight: normal; }
 </style>
 {switch name="type" }
 {case value="title"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td width="120">标题图片</td>
+        <th width="120">标题图片</th>
         <td>
             <input type="radio" name="setup[thumb]" value="1" title="是">
             <input type="radio" name="setup[thumb]" value="0" checked title="否">
         </td>
     </tr>
     <tr>
-        <td>标题样式</td>
+        <th>标题样式</th>
         <td>
             <input type="radio" name="setup[style]" value="1" title="是">
             <input type="radio" name="setup[style]" value="0" checked title=" 否">
@@ -31,11 +32,11 @@
         <td><input type="text" class="layui-input input-text" size="5" name="setup[size]" value="" /></td>
     </tr>-->
     <tr>
-        <td>默认值</td>
+        <th>默认值</th>
         <td> <input type="text" class="layui-input input-text" size="50"  name="setup[default]" value="" /></td>
     </tr>
     <tr>
-        <td>是否为密码框</td>
+        <th>是否为密码框</th>
         <td>
             <input type="radio" name="setup[ispassword]" value="1" title="是">
             <input type="radio" name="setup[ispassword]" value="0" checked title="否">
@@ -47,7 +48,7 @@
 {case value="textarea" }
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td>字段类型</td>
+        <th>字段类型</th>
         <td>
             <select name="setup[fieldtype]">
                 <option value="mediumtext" selected>MEDIUMTEXT</option>
@@ -56,7 +57,7 @@
         </td>
     </tr>
     <tr>
-        <td>默认值</td>
+        <th>默认值</th>
         <td><textarea  name="setup[default]" rows="3" cols="40" class="layui-textarea"></textarea></td>
     </tr>
 </table>
@@ -64,20 +65,20 @@
 {case value="select" }
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td width="120">选项列表:<br>例: <font color="red">选项名称|值</font></td>
+        <th width="120">选项列表:<br>例: <font color="red">选项名称|值</font></th>
         <td>
             <textarea  name="setup[options]" rows="5" cols="40" class="layui-textarea"></textarea>
         </td>
     </tr>
     <tr>
-        <td>选项类型</td>
+        <th>选项类型</th>
         <td>
             <input type="radio" name="setup[multiple]" value="0" checked title="下拉框">
-            <input type="radio" name="setup[multiple]" value="0" title="多选列表框">
+            <input type="radio" name="setup[multiple]" value="1" title="多选列表框">
         </td>
     </tr>
     <tr>
-        <td>字段类型</td>
+        <th>字段类型</th>
         <td>
             <select name="setup[fieldtype]" onchange="javascript:numbertype(this.value);">
                 <option value="varchar" selected>字符 VARCHAR</option>
@@ -92,11 +93,11 @@
         </td>
     </tr>
     <tr>
-        <td>可见选项的数目</td>
+        <th>可见选项的数目</th>
         <td><input type="text" class="input-text layui-input" size="5" name="setup[size]" value="" /></td>
     </tr>
     <tr>
-        <td>默认值</td>
+        <th>默认值</th>
         <td> <input type="text" class="input-text layui-input" size="5"  name="setup[default]" value="" /></td>
     </tr>
 </table>
@@ -105,7 +106,7 @@
 {case value="editor"}
 <table cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td width="140">编辑器类型：</td>
+        <th width="140">编辑器类型：</th>
         <td><select name="setup[edittype]">
             <option value="layedit" selected>layedit</option>
             <option value="UEditor">UEditor</option>
@@ -119,7 +120,7 @@
 {case value="groupid"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td width="120">选项类型</td>
+        <th width="120">选项类型</th>
         <td>
             <input type="radio" name="setup[inputtype]" value="checkbox" title="复选框">
             <input type="radio" name="setup[inputtype]" value="select" title="下拉列表框">
@@ -127,7 +128,7 @@
         </td>
     </tr>
     <tr>
-        <td>字段类型</td>
+        <th>字段类型</th>
         <td>
             <select name="setup[fieldtype]"  onchange="javascript:numbertype(this.value);">
                 <option value="varchar" selected>字符 VARCHAR</option>
@@ -143,12 +144,11 @@
         <td> <input type="text" class="input-text layui-input" size="5"  name="setup[default]" value="" /></td>
     </tr>
 </table>
-
 {/case}
 {case value="typeid"}
 <table class="typeTable" c cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td width="120">选项类型</td>
+        <th width="120">选项类型</th>
         <td>
             <input type="radio" name="setup[inputtype]" value="checkbox" title="复选框">
             <input type="radio" name="setup[inputtype]" value="select" title="下拉列表框">
@@ -156,7 +156,7 @@
         </td>
     </tr>
     <tr>
-        <td>字段类型</td>
+        <th>字段类型</th>
         <td>
             <select name="setup[fieldtype]"  onchange="javascript:numbertype(this.value);">
                 <option value="varchar" selected>字符 VARCHAR</option>
@@ -169,7 +169,7 @@
         </td>
     </tr>
     <tr>
-        <td>顶级类别ID</td>
+        <th>顶级类别ID</th>
         <td> <input type="text" class="input-text layui-input" size="5"  name="setup[default]" value="" /></td>
     </tr>
 </table>
@@ -180,11 +180,11 @@
 {case value="radio"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td width="120">选项列表:<br>例: <font color="red">选项名称|值</font></td>
+        <th width="120">选项列表:<br>例: <font color="red">选项名称|值</font></th>
         <td><textarea  name="setup[options]" rows="5" cols="40"></textarea></td>
     </tr>
     <tr>
-        <td>字段类型</td>
+        <th>字段类型</th>
         <td>
             <select name="setup[fieldtype]" onchange="javascript:numbertype(this.value);">
                 <option value="varchar" selected>字符 VARCHAR</option>
@@ -205,18 +205,17 @@
         </td>
     </tr>
 </table>
-
 {/case}
 {case value="checkbox"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td width="120">选项列表:<br>例: <font color="red">选项名称|值</font></td>
+        <th width="120">选项列表:<br>例: <font color="red">选项名称|值</font></th>
         <td>
             <textarea  name="setup[options]" rows="5" cols="40" class="layui-textarea"></textarea>
         </td>
     </tr>
     <tr>
-        <td>字段类型</td>
+        <th>字段类型</th>
         <td>
             <select name="setup[fieldtype]" onchange="javascript:numbertype(this.value);">
                 <option value="varchar" selected>字符 VARCHAR</option>
@@ -231,24 +230,23 @@
         </td>
     </tr>
     <tr>
-        <td>默认值</td>
+        <th>默认值</th>
         <td>
             <input type="text" class="input-text layui-input" size="5"  name="setup[default]" value="" />
         </td>
     </tr>
 </table>
-
 {/case}
 {case value="number"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td>是否包括负数：</td>
+        <th>是否包括负数：</th>
         <td>
             <input type="checkbox" id="" name = "setup[numbertype]" value="1" checked title="不包括负数"/>
         </td>
     </tr>
     <tr>
-        <td>小数位数：</td>
+        <th>小数位数：</th>
         <td>
             <select name="setup[decimaldigits]">
                 <option value="0"selected>0</option>
@@ -261,7 +259,7 @@
         </td>
     </tr>
     <tr>
-        <td>默认值</td>
+        <th>默认值</th>
         <td>
             <input type="text" name="setup[default]" value="" size="40" class="input-text layui-input">
         </td>
@@ -271,7 +269,7 @@
 {case value="image"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td>允许上传的图片类型</td>
+        <th>允许上传的图片类型</th>
         <td><input type="text" name="setup[upload_allowext]" value="jpg|jpeg|gif|png" class="input-text layui-input"></td>
     </tr>
 </table>
@@ -283,7 +281,7 @@
 {case value="file"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
     <tr>
-        <td>允许上传的文件类型</td>
+        <th>允许上传的文件类型</th>
         <td><input type="text" name="setup[upload_allowext]" value="zip|rar|doc|ppt" class="input-text layui-input"></td>
     </tr>
 </table>
@@ -291,6 +289,37 @@
 {case value="files"}
 <table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
 
+</table>
+{/case}
+{case value="dcatid"}
+<table class="typeTable" cellpadding="2" cellspacing="1" width="100%">
+  <tr>
+      <th>源</th>
+      <td>
+        <input type="radio" name="setup[source]" id="cat" value="cat" checked="checked" title="栏目">
+        <input type="radio" name="setup[source]" id="content" value="content" title="内容">
+      </td>
+  </tr>
+  <tr>
+      <th>类型</th>
+      <td>
+        <input type="radio" name="setup[dctype]" id="radio" value="radio" checked="checked" title="单选">
+        <input type="radio" name="setup[dctype]" id="checkbox" value="checkbox" title="多选">
+        <input type="radio" name="setup[dctype]" id="select" value="select" title="select">
+      </td>
+  </tr>
+  <tr>
+      <th>父栏目ID</th>
+      <td>
+        <input type="text" class="layui-input input-text" size="50" name="setup[parentid]" style="margin-bottom: 15px;margin-top: 15px;" value="">
+      </td>
+  </tr>
+  <tr>
+      <th>默认值</th>
+      <td>
+        <input type="text" class="layui-input input-text" size="50" name="setup[default]" value="">
+      </td>
+  </tr>
 </table>
 {/case}
 {default /}

@@ -77,7 +77,6 @@ class Module extends Common
 
             $data = input('post.');
             $data['type'] = 1;
-            $data['setup'] = "";
             $moduleid = $this->dao->insertGetId($data);
             if(empty($moduleid)){
                 $result['code'] = 0;
@@ -98,7 +97,7 @@ class Module extends Common
 			  `keywords` varchar(120) NOT NULL DEFAULT '',
 			  `description` mediumtext NOT NULL,
 			  `content` mediumtext NOT NULL,
-			  `template` varchar(40) NOT NULL DEFAULT '', 
+			  `template` varchar(40) NOT NULL DEFAULT '',
 			  `posid` tinyint(2) unsigned NOT NULL DEFAULT '0',
 			  `status` tinyint(1) unsigned NOT NULL DEFAULT '0',
 			  `recommend` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -113,19 +112,19 @@ class Module extends Common
 			  KEY `catid` (`id`,`catid`,`status`),
 			  KEY `listorder` (`id`,`catid`,`status`,`listorder`)
 			) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'catid', '栏目', '', '1', '1', '6', '', '必须选择一个栏目', '', 'catid', '','1','', '1', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'title', '标题', '', '1', '1', '80', '', '标题必须为1-80个字符', '', 'title', 'array (\n  \'thumb\' => \'1\',\n  \'style\' => \'1\',\n  \'size\' => \'55\',\n)','1','',  '2', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'keywords', '关键词', '', '0', '0', '80', '', '', '', 'text', 'array (\n  \'size\' => \'55\',\n  \'default\' => \'\',\n  \'ispassword\' => \'0\',\n  \'fieldtype\' => \'varchar\',\n)','1','',  '3', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'description', 'SEO简介', '', '0', '0', '0', '', '', '', 'textarea', 'array (\n  \'fieldtype\' => \'mediumtext\',\n  \'rows\' => \'4\',\n  \'cols\' => \'55\',\n  \'default\' => \'\',\n)','1','',  '4', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'content', '内容', '', '0', '0', '0', '', '', '', 'editor', 'array (\n  \'toolbar\' => \'full\',\n  \'default\' => \'\',\n  \'height\' => \'\',\n  \'showpage\' => \'1\',\n  \'enablekeylink\' => \'0\',\n  \'replacenum\' => \'\',\n  \'enablesaveimage\' => \'0\',\n  \'flashupload\' => \'1\',\n  \'alowuploadexts\' => \'\',\n)','1','',  '5', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'createtime', '发布时间', '', '1', '0', '0', 'date', '', '', 'datetime', '','1','',  '6', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'status', '状态', '', '0', '0', '0', '', '', '', 'radio', 'array (\n  \'options\' => \'发布|1\r\n定时发布|0\',\n  \'fieldtype\' => \'tinyint\',\n  \'numbertype\' => \'1\',\n  \'labelwidth\' => \'75\',\n  \'default\' => \'1\',\n)','1','','7', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'recommend', '允许评论', '', '0', '0', '1', '', '', '', 'radio', 'array (\n  \'options\' => \'允许评论|1\r\n不允许评论|0\',\n  \'fieldtype\' => \'tinyint\',\n  \'numbertype\' => \'1\',\n  \'labelwidth\' => \'\',\n  \'default\' => \'\',\n)','1','', '8', '0', '0')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'readpoint', '阅读收费', '', '0', '0', '5', '', '', '', 'number', 'array (\n  \'size\' => \'5\',\n  \'numbertype\' => \'1\',\n  \'decimaldigits\' => \'0\',\n  \'default\' => \'0\',\n)','1','', '9', '0', '0')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'hits', '点击次数', '', '0', '0', '8', '', '', '', 'number', 'array (\n  \'size\' => \'10\',\n  \'numbertype\' => \'1\',\n  \'decimaldigits\' => \'0\',\n  \'default\' => \'0\',\n)','1','',  '10', '0', '0')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'readgroup', '访问权限', '', '0', '0', '0', '', '', '', 'groupid', 'array (\n  \'inputtype\' => \'checkbox\',\n  \'fieldtype\' => \'tinyint\',\n  \'labelwidth\' => \'85\',\n  \'default\' => \'\',\n)','1','', '11', '0', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'posid', '推荐位', '', '0', '0', '0', '', '', '', 'posid', '','1','', '12', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'template', '模板', '', '0', '0', '0', '', '', '', 'template', '','1','', '13', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'catid', '栏目', '', '1', '1', '6', '', '必须选择一个栏目', '', 'catid', '','1','', '1', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'title', '标题', '', '1', '1', '80', '', '标题必须为1-80个字符', '', 'title', 'array (\n  \'thumb\' => \'1\',\n  \'style\' => \'1\',\n  \'size\' => \'55\',\n)','1','',  '2', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'keywords', '关键词', '', '0', '0', '80', '', '', '', 'text', 'array (\n  \'size\' => \'55\',\n  \'default\' => \'\',\n  \'ispassword\' => \'0\',\n  \'fieldtype\' => \'varchar\',\n)','1','',  '3', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'description', 'SEO简介', '', '0', '0', '0', '', '', '', 'textarea', 'array (\n  \'fieldtype\' => \'mediumtext\',\n  \'rows\' => \'4\',\n  \'cols\' => \'55\',\n  \'default\' => \'\',\n)','1','',  '4', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'content', '内容', '', '0', '0', '0', '', '', '', 'editor', 'array (\n  \'toolbar\' => \'full\',\n  \'default\' => \'\',\n  \'height\' => \'\',\n  \'showpage\' => \'1\',\n  \'enablekeylink\' => \'0\',\n  \'replacenum\' => \'\',\n  \'enablesaveimage\' => \'0\',\n  \'flashupload\' => \'1\',\n  \'alowuploadexts\' => \'\',\n)','1','',  '5', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'createtime', '发布时间', '', '1', '0', '0', 'date', '', '', 'datetime', '','1','',  '6', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'status', '状态', '', '0', '0', '0', '', '', '', 'radio', 'array (\n  \'options\' => \'发布|1\r\n定时发布|0\',\n  \'fieldtype\' => \'tinyint\',\n  \'numbertype\' => \'1\',\n  \'labelwidth\' => \'75\',\n  \'default\' => \'1\',\n)','1','','7', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'recommend', '允许评论', '', '0', '0', '1', '', '', '', 'radio', 'array (\n  \'options\' => \'允许评论|1\r\n不允许评论|0\',\n  \'fieldtype\' => \'tinyint\',\n  \'numbertype\' => \'1\',\n  \'labelwidth\' => \'\',\n  \'default\' => \'\',\n)','1','', '8', '0', '0')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'readpoint', '阅读收费', '', '0', '0', '5', '', '', '', 'number', 'array (\n  \'size\' => \'5\',\n  \'numbertype\' => \'1\',\n  \'decimaldigits\' => \'0\',\n  \'default\' => \'0\',\n)','1','', '9', '0', '0')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'hits', '点击次数', '', '0', '0', '8', '', '', '', 'number', 'array (\n  \'size\' => \'10\',\n  \'numbertype\' => \'1\',\n  \'decimaldigits\' => \'0\',\n  \'default\' => \'0\',\n)','1','',  '10', '0', '0')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'readgroup', '访问权限', '', '0', '0', '0', '', '', '', 'groupid', 'array (\n  \'inputtype\' => \'checkbox\',\n  \'fieldtype\' => \'tinyint\',\n  \'labelwidth\' => \'85\',\n  \'default\' => \'\',\n)','1','', '11', '0', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'posid', '推荐位', '', '0', '0', '0', '', '', '', 'posid', '','1','', '12', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'template', '模板', '', '0', '0', '0', '', '', '', 'template', '','1','', '13', '1', '1')");
 
             }else{
                 Db::execute("CREATE TABLE `".$tablename."` (
@@ -141,14 +140,14 @@ class Module extends Common
 			  `createtime` int(11) unsigned NOT NULL DEFAULT '0',
 			  `updatetime` int(11) unsigned NOT NULL DEFAULT '0',
 			  `lang` tinyint(1) unsigned NOT NULL DEFAULT '0',
-			  `template` varchar(40) NOT NULL DEFAULT '', 
+			  `template` varchar(40) NOT NULL DEFAULT '',
 			  PRIMARY KEY (`id`)
 			) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'title', '标题', '', '1', '1', '80', '', '标题必须为1-80个字符', '', 'title', 'array (\n  \'thumb\' => \'1\',\n  \'style\' => \'1\',\n  \'size\' => \'55\',\n)','1','',  '2', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'hits', '点击次数', '', '0', '0', '8', '', '', '', 'number', 'array (\n  \'size\' => \'10\',\n  \'numbertype\' => \'1\',\n  \'decimaldigits\' => \'0\',\n  \'default\' => \'0\',\n)','1','',  '8', '0', '0')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'createtime', '发布时间', '', '1', '0', '0', 'date', '', '', 'datetime', '','1','',  '97', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'template', '模板', '', '0', '0', '0', '', '', '', 'template', '','1','', '99', '1', '1')");
-                Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'status', '状态', '', '0', '0', '0', '', '', '', 'radio', 'array (\n  \'options\' => \'发布|1\r\n定时发布|0\',\n  \'fieldtype\' => \'tinyint\',\n  \'numbertype\' => \'1\',\n  \'labelwidth\' => \'75\',\n  \'default\' => \'1\',\n)','1','', '98', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'title', '标题', '', '1', '1', '80', '', '标题必须为1-80个字符', '', 'title', 'array (\n  \'thumb\' => \'1\',\n  \'style\' => \'1\',\n  \'size\' => \'55\',\n)','1','',  '2', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'hits', '点击次数', '', '0', '0', '8', '', '', '', 'number', 'array (\n  \'size\' => \'10\',\n  \'numbertype\' => \'1\',\n  \'decimaldigits\' => \'0\',\n  \'default\' => \'0\',\n)','1','',  '8', '0', '0')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'createtime', '发布时间', '', '1', '0', '0', 'date', '', '', 'datetime', '','1','',  '97', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'template', '模板', '', '0', '0', '0', '', '', '', 'template', '','1','', '99', '1', '1')");
+                Db::execute("INSERT INTO `".$prefix."field` VALUES ('', '".$moduleid."', 'status', '状态', '', '0', '0', '0', '', '', '', 'radio', 'array (\n  \'options\' => \'发布|1\r\n定时发布|0\',\n  \'fieldtype\' => \'tinyint\',\n  \'numbertype\' => \'1\',\n  \'labelwidth\' => \'75\',\n  \'default\' => \'1\',\n)','1','', '98', '1', '1')");
             }
             if ($moduleid  !==false) {
                 savecache('Module');
@@ -163,23 +162,15 @@ class Module extends Common
             return $this->fetch('form');
         }
     }
-
-
+    //模型状态
     public function moduleState(){
         $id=input('post.id');
-        $status=$this->dao->where(array('id'=>$id))->value('status');//判断当前状态情况
-        if($status==1){
-            $data['status'] = 0;
-            $this->dao->where(array('id'=>$id))->setField($data);
-            $result['status'] = 1;
-            $result['moduleState'] = 0;
+        $status=input('post.status');
+        if($this->dao->where('id='.$id)->update(['status'=>$status])!==false){
+            return ['status'=>1,'msg'=>'设置成功!'];
         }else{
-            $data['status'] = 1;
-            $this->dao->where(array('id'=>$id))->setField($data);
-            $result['status'] = 1;
-            $result['moduleState'] = 1;
+            return ['status'=>0,'msg'=>'设置失败!'];
         }
-        return $result;
     }
     //删除模型
     function del() {
@@ -246,12 +237,15 @@ class Module extends Common
     public function fieldAdd(){
         if(request()->isPost()){
             if(input('isajax')) {
+
                 $this->assign(input('get.'));
                 $this->assign(input('post.'));
                 $name = db('module')->where(array('id' => input('moduleid')))->value('name');
+
                 if (input('name')) {
                     $files = Db::getTableInfo(config('database.prefix') . $name);
                     $fieldtype = $files['type'][input('name')];
+                    // dump($files);
                     $this->assign('fieldtype', $fieldtype);
                     return view('fieldType');
                 } else {
@@ -265,6 +259,7 @@ class Module extends Common
                 $name = db('module')->where(array('id'=>$data['moduleid']))->value('name');
                 $tablename=$prefix.$name;
                 $Fields=Db::getFields($tablename);
+              //  dump($Fields);
                 foreach ( $Fields as $key =>$r){
                     if($key==$fieldName){
                         $ishave=1;
@@ -275,11 +270,11 @@ class Module extends Common
                     $result['code'] = 0;
                     return $result;
                 }
+                // dump($data);exit;
                 $addfieldsql =$this->get_tablesql($data,'add');
+                //dump($data);exit;
                 if($data['setup']) {
                     $data['setup'] = array2string($data['setup']);
-                }else{
-                    $data['setup'] ="";
                 }
                 $data['status'] =1;
                 if($data['pattern']=='?'){
@@ -347,8 +342,11 @@ class Module extends Common
             if(empty($data['class'])){
                 $data['class'] = $data['field'];
             }
+
             $model = db('field');
+
             if (false !== $model->update($data)) {
+
                 savecache('Field',$data['moduleid']);
                 if(is_array($editfieldsql)){
                     foreach($editfieldsql as $sql){
@@ -376,6 +374,7 @@ class Module extends Common
             }
             $fieldInfo = $model->where(array('id'=>$id))->find();
             if($fieldInfo['setup']) $fieldInfo['setup']=string2array($fieldInfo['setup']);
+              // dump(json_encode($fieldInfo,true));
             $this->assign('info',json_encode($fieldInfo,true));
             $this->assign('title',lang('edit').lang('field'));
             $this->assign('moduleid', input('param.moduleid'));
@@ -413,12 +412,15 @@ class Module extends Common
 
 
     public function get_tablesql($info,$do){
+        //dump($info);
         $fieldtype = $info['type'];
         if($info['setup']['fieldtype']){
             $fieldtype=$info['setup']['fieldtype'];
         }
+
         $moduleid = $info['moduleid'];
         $default=   $info['setup']['default'];
+
         $field = $info['field'];
         $prefix = config('database.prefix');
         $name = db('module')->where(array('id'=>$moduleid))->value('name');
@@ -540,6 +542,12 @@ class Module extends Common
                 $sql = "ALTER TABLE `$tablename` $do `$field` MEDIUMTEXT NOT NULL";
                 break;
             case 'template':
+                $sql = "ALTER TABLE `$tablename` $do `$field` VARCHAR( 80 ) NOT NULL DEFAULT ''";
+                break;
+            case 'linkage':
+                $sql = "ALTER TABLE `$tablename` $do `$field` VARCHAR( 80 ) NOT NULL DEFAULT ''";
+                break;
+            case 'dcatid':
                 $sql = "ALTER TABLE `$tablename` $do `$field` VARCHAR( 80 ) NOT NULL DEFAULT ''";
                 break;
         }

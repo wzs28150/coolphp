@@ -13,7 +13,7 @@
 <div class="container login">
     <div class="content">
         <div id="large-header" class="large-header">
-            <canvas id="demo-canvas"></canvas>
+            <!-- <canvas id="demo-canvas"></canvas> -->
             <div class="main-title">
                 <div class="beg-login-box">
                     <header>
@@ -25,13 +25,13 @@
                                 <label class="beg-login-icon fs1">
                                     <span class="icon icon-user"></span>
                                 </label>
-                                <input type="text" name="username" lay-verify="required" placeholder="这里输入登录名" value="admin" class="layui-input">
+                                <input type="text" name="username" lay-verify="required" placeholder="这里输入登录名" value="" class="layui-input">
                             </div>
                             <div class="layui-form-item">
                                 <label class="beg-login-icon fs1">
                                     <i class="icon icon-key"></i>
                                 </label>
-                                <input type="password"  name="password" lay-verify="required" placeholder="这里输入密码" value="admin123" class="layui-input">
+                                <input type="password"  name="password" lay-verify="required" placeholder="这里输入密码" value="" class="layui-input">
                             </div>
                             <div class="layui-form-item">
                                 <input type="text" name="captcha" id="captcha" lay-verify="required" placeholder="验证码" autocomplete="off" class="layui-input">
@@ -45,16 +45,18 @@
                         </form>
                     </div>
                     <footer>
-                        <p>{:config('sys_name')} © {:config('url_domain_root')}</p>
+                        <p>{:config('sys_name')} </p>
                     </footer>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="__ADMIN__/js/rAF.js"></script>
-<script src="__ADMIN__/js/login.js"></script>
+<!-- <script src="__ADMIN__/js/rAF.js"></script> -->
+<!-- <script src="__ADMIN__/js/login.js"></script> -->
 <script type="text/javascript" src="__STATIC__/plugins/layui/layui.js"></script>
+<script type="text/javascript" src="__STATIC__/plugins/three/three.min.js"></script>
+<script type="text/javascript" src="__STATIC__/plugins/three/an.js"></script>
 <script>
     layui.use('form',function(){
         var form = layui.form,$ = layui.jquery;

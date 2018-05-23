@@ -78,6 +78,19 @@
             <div class="layui-form-mid layui-word-aux">打开后，其下将不能添加内容。</div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">外链栏目设置</label>
+            <div class="layui-input-1">
+                <input type="checkbox" name="type" value="1" lay-skin="switch" title="外链栏目设置">
+            </div>
+            <div class="layui-form-mid layui-word-aux">设置后栏目跳转到外链。</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">URL</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" placeholder="外链URL" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">导航</label>
             <div class="layui-input-block">
                 <input type="radio" name="ismenu" lay-filter="is_open" checked value="1" title="{:lang('yes')}">
@@ -157,7 +170,7 @@
             error: function(){
                 //演示失败状态，并实现重传
                 var demoText = $('#demoText');
-                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
                 demoText.find('.demo-reload').on('click', function(){
                     uploadInst.upload();
                 });

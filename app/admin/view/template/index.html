@@ -39,8 +39,8 @@
                     <td>{$v.filesize}</td>
                     <td>{$v.filemtime|date='Y-m-d h:i:s',###}</td>
                     <td>
-                        <a href="{:url('edit',['file'=>$v['filename'],'type'=>input('param.type')])}" class="layui-btn layui-btn-mini">{:lang('edit')}</a>
-                        <a href="javascript:;" onclick="return del('{$v.filename}')" class="layui-btn layui-btn-mini layui-btn-danger">{:lang('del')}</a>
+                        <a href="{:url('edit',['file'=>$v['filename'],'type'=>input('param.type')])}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
+                        <a href="javascript:;" onclick="return del('{$v.filename}')" class="layui-btn layui-btn-xs layui-btn-danger">{:lang('del')}</a>
                     </td>
                 </tr>
                 {/volist}

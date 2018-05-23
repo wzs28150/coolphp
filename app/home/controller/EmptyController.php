@@ -58,13 +58,32 @@ class EmptyController extends Common{
                 $this->assign('list',$list['data']);
                 $this->assign('page',$page);
             }elseif(DBNAME=='case'){
-                $listnav = db('category')->where(array('parentid'=>10))->field(['id','catname'])->select();
+
+                if(input('casetype')){
+                  $map['casetype'] = input('casetype');
+                }else{
+                  $casetype = db('casetype')->field('id')->select();
+                  $casetypestr = '';
+                  foreach ($casetype as $key => $value) {
+                    $casetypestr.= ','.$value['id'];
+                  }
+
+                  $map['casetype'] = ['in',substr($casetypestr,1)];
+                }
+                //dump($map);
+                $listnav = db('category')->where(array('parentid'=>31))->field(['id','catname','catdir'])->select();
                 foreach($listnav as $k=>$v){
                     $listnav[$k]['num']= db('blog')->where(array('catid'=>$v['id']))->count();
                     $str .=','.$v['id'];
                 }
                 $this->assign('listnav',$listnav);
-                $map ='catid in('.substr($str,1).')';
+
+                $listnav2 = db('casetype')->field(['id','title'])->select();
+                $this->assign('listnav2',$listnav2);
+                if($map["catid"] == 31){
+                  $map["catid"] = ['in',substr($str,1)];
+                }
+                //$map ='catid in('.substr($str,1).')';
                 $list=$this->dao->alias('a')
                 ->join(config('database.prefix').'category c','a.catid = c.id','left')
                 ->field('a.*,c.catdir')->where( $map )
@@ -85,7 +104,15 @@ class EmptyController extends Common{
                 $this->assign('list',$list['data']);
                 $this->assign('page',$page);
             }else{
-
+                if($map["catid"] == 34){
+                  $map["catid"] = 35;
+                }
+                $listnav = db('category')->where(array('parentid'=>34))->field(['id','catname','catdir'])->select();
+                foreach($listnav as $k=>$v){
+                    $listnav[$k]['num']= db('blog')->where(array('catid'=>$v['id']))->count();
+                    $str .=','.$v['id'];
+                }
+                $this->assign('listnav',$listnav);
                 $list=$this->dao->alias('a')
                     ->join(config('database.prefix').'category c','a.catid = c.id','left')
                     ->where($map)
@@ -106,8 +133,8 @@ class EmptyController extends Common{
                 $this->assign('list',$list['data']);
                 $this->assign('page',$page);
             }
-			$cattemplate = db('category')->where('id',input('catId'))->value('template_list');
-			$template =$cattemplate ? $cattemplate : DBNAME.'_list';
+      			$cattemplate = db('category')->where('id',input('catId'))->value('template_list');
+      			$template =$cattemplate ? $cattemplate : DBNAME.'_list';
             return $this->fetch($template);
         }
     }
@@ -145,7 +172,14 @@ class EmptyController extends Common{
             }
             $this->assign('listnav',$listnav);
         }elseif(DBNAME == 'case'){
-            //echo  $info['bannerzutu'];
+            // dump($info);
+        }elseif(DBNAME == 'article'){
+          $listnav = db('category')->where(array('parentid'=>34))->field(['id','catname','catdir'])->select();
+          foreach($listnav as $k=>$v){
+              $listnav[$k]['num']= db('blog')->where(array('catid'=>$v['id']))->count();
+              $str .=','.$v['id'];
+          }
+          $this->assign('listnav',$listnav);
         }
         return $this->fetch($template);
     }

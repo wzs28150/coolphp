@@ -4,8 +4,8 @@
         <legend>字段{:lang('list')}</legend>
     </fieldset>
     <blockquote class="layui-elem-quote">
-        <a href="{:url('fieldAdd',array('moduleid'=>input('id')))}" class="layui-btn layui-btn-small">{:lang('add')}{:lang('field')}</a>
-        <a href="{:url('index')}" class="layui-btn layui-btn-small layui-btn-primary pull-right">模型列表</a>
+        <a href="{:url('fieldAdd',array('moduleid'=>input('id')))}" class="layui-btn layui-btn-sm">{:lang('add')}{:lang('field')}</a>
+        <a href="{:url('index')}" class="layui-btn layui-btn-sm layui-btn-primary pull-right">模型列表</a>
     </blockquote>
     <table class="layui-table" id="list" lay-filter="list"></table>
 </div>
@@ -26,18 +26,18 @@
 </script>
 <script type="text/html" id="action">
     {{# if(d.disable==1){ }}
-        <a href="javascript:" class="layui-btn layui-btn-mini layui-btn-danger" lay-event="stateyes">已禁用</a>
+        <a href="javascript:" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="stateyes">已禁用</a>
     {{# }else if(d.disable==2){  }}
-        <a href="#" class="layui-btn layui-btn-mini layui-btn-disabled">已禁用</a>
+        <a href="#" class="layui-btn layui-btn-xs layui-btn-disabled">已禁用</a>
     {{# }else{  }}
-        <a href="javascript:" class="layui-btn layui-btn-mini layui-btn-warm" lay-event="stateyes">已启用</a>
+        <a href="javascript:" class="layui-btn layui-btn-xs layui-btn-warm" lay-event="stateyes">已启用</a>
     {{# } }}
-    <a href="{:url('fieldEdit')}?moduleid={{d.moduleid}}&id={{d.id}}" class="layui-btn layui-btn-mini">{:lang('edit')}</a>
+    <a href="{:url('fieldEdit')}?moduleid={{d.moduleid}}&id={{d.id}}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
 
     {{# if(d.delStatus==1){ }}
-        <a href="#" class="layui-btn layui-btn-mini layui-btn-disabled">删除</a>
+        <a href="#" class="layui-btn layui-btn-xs layui-btn-disabled">删除</a>
     {{# }else{  }}
-        <a href="#" class="layui-btn layui-btn-mini layui-btn-danger" lay-event="del">删除</a>
+        <a href="#" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
     {{# } }}
 </script>
 <script type="text/html" id="order">

@@ -113,7 +113,7 @@ return array (
     'class' => 'content',
     'type' => 'editor',
     'setup' => 'array (
-  \'edittype\' => \'layedit\',
+  \'edittype\' => \'UEditor\',
 )',
     'ispost' => 1,
     'unpostgroup' => '',
@@ -185,7 +185,7 @@ return array (
     'class' => 'copyfrom',
     'type' => 'text',
     'setup' => 'array (
-  \'default\' => \'CLTPHP\',
+  \'default\' => \'\',
   \'ispassword\' => \'0\',
   \'fieldtype\' => \'varchar\',
 )',
@@ -210,7 +210,7 @@ return array (
     'class' => 'fromlink',
     'type' => 'text',
     'setup' => 'array (
-  \'default\' => \'http://www.cltphp.com/\',
+  \'default\' => \'\',
   \'ispassword\' => \'0\',
   \'fieldtype\' => \'varchar\',
 )',

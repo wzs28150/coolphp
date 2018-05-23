@@ -5,9 +5,14 @@ use think\Db;
 use clt\Leftnav;
 use think\Request;
 use think\Controller;
+date_default_timezone_set('PRC');
 class Common extends Controller{
     protected $pagesize;
+    //设置北京时间为默认时区
     public function _initialize(){
+        //$this ->visit_day();
+        //$this ->visit_detail();
+        //echo $_SERVER['HTTP_USER_AGENT'] ;
         $sys = F('System');
         $this->assign('sys',$sys);
         //获取控制方法
@@ -50,7 +55,8 @@ class Common extends Controller{
             $linkList = db('link')->where('open',1)->order('sort asc')->select();
             cache('linkList', $linkList, 3600);
         }
-		$this->assign('linkList', $linkList);
+        $this->assign('linkList', $linkList);
+		    $this->assign('module', MODULE_NAME);
     }
     public function _empty(){
         return $this->error('空操作，返回上次访问页面中...');
