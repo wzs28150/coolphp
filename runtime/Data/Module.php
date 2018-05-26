@@ -1,0 +1,108 @@
+<?php
+return array (
+  1 => 
+  array (
+    'id' => 1,
+    'title' => '单页模型',
+    'name' => 'page',
+    'description' => '关于我们',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+  2 => 
+  array (
+    'id' => 2,
+    'title' => '文章模型',
+    'name' => 'article',
+    'description' => '新闻文章',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+  3 => 
+  array (
+    'id' => 3,
+    'title' => '图片模型',
+    'name' => 'picture',
+    'description' => '图片展示',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+  4 => 
+  array (
+    'id' => 4,
+    'title' => '产品模型',
+    'name' => 'product',
+    'description' => '产品展示',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+  10 => 
+  array (
+    'id' => 10,
+    'title' => '案例模型',
+    'name' => 'case',
+    'description' => '案例模型',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+  9 => 
+  array (
+    'id' => 9,
+    'title' => '博客模型',
+    'name' => 'blog',
+    'description' => '博客模型',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+  11 => 
+  array (
+    'id' => 11,
+    'title' => '服务模型',
+    'name' => 'service',
+    'description' => '服务模型',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+  13 => 
+  array (
+    'id' => 13,
+    'title' => '服务客户',
+    'name' => 'fuwukehu',
+    'description' => '',
+    'type' => 1,
+    'issystem' => 0,
+    'listfields' => '*',
+    'setup' => '',
+    'listorder' => 0,
+    'status' => 1,
+  ),
+);
+?>
