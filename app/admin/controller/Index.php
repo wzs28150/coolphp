@@ -21,39 +21,23 @@ class Index extends Common
             cache('authRule', $authRule, 3600);
         }
 
-        $topmenu = array();
+
 
         //dump($a);
         //声明数组
         $menus = array();
-
-        if(empty(input('topid'))){
-          foreach ($authRule as $key=>$val) {
-            if ($val['pid']==0) {
-              $topid = $val['id'];
-              break;
-            }
-          }
-        }else{
-          $topid = input('topid');
-        }
         foreach ($authRule as $key=>$val) {
             $authRule[$key]['href'] = url($val['href']);
-
             if ($val['pid']==0) {
                 if (session('aid')!=1) {
                     if (in_array($val['id'], $this->adminRules)) {
-                        $topmenu[] = $val;
+                        $menus[] = $val;
                     }
                 } else {
-                    $topmenu[] = $val;
-                    // $menus[] = $val;
+                    $menus[] = $val;
                 }
-            }elseif($val['pid'] == $topid){
-              $menus[] = $val;
             }
         }
-        // dump($menus);exit;
         foreach ($menus as $k=>$v) {
             foreach ($authRule as $kk=>$vv) {
                 if ($v['id']==$vv['pid']) {
@@ -67,10 +51,7 @@ class Index extends Common
                 }
             }
         }
-        // dump($_SERVER);exit;
-        $this->assign('topid', $topid);
         $this->assign('menus', json_encode($menus, true));
-        $this->assign('topmenu', json_encode($topmenu, true));
         return $this->fetch();
     }
     public function main()

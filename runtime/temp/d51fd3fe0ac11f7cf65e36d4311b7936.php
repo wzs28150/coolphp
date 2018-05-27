@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:57:"J:\web\201805\hrbkcwl.com/app/admin\view\index\index.html";i:1527312198;s:57:"J:\web\201805\hrbkcwl.com/app/admin\view\common\head.html";i:1511791799;s:57:"J:\web\201805\hrbkcwl.com/app/admin\view\common\foot.html";i:1511791799;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:56:"/www/wwwroot/hrbkcwl.com/app/admin/view/index/index.html";i:1511791805;s:56:"/www/wwwroot/hrbkcwl.com/app/admin/view/common/head.html";i:1511791799;s:56:"/www/wwwroot/hrbkcwl.com/app/admin/view/common/foot.html";i:1511791799;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,24 +18,23 @@
 <script>
     var ADMIN = '__ADMIN__';
     var navs = <?php echo $menus; ?>;
-    var topnav = <?php echo $topmenu; ?>;
-    var topid = <?php echo $topid; ?>;
 </script>
-<style media="screen">
-  .header .layui-nav .layui-this{ background: none;}
-</style>
-<div class="layui-layout layui-layout-admin">
+<div class="layui-layout layui-layout-admin on">
     <div class="layui-header header">
         <div class="layui-main">
             <div class="admin-login-box">
                 <a class="logo" style="left: 0;" href="<?php echo url('admin/index/index'); ?>">
                     <span style="font-size: 22px;"><?php echo config('sys_name'); ?></span>
                 </a>
-
+                <!-- <div class="admin-side-toggle">
+                    <span class="admin-storage"></span>
+                </div>
+                <div class="admin-side-full">
+                    <span class="admin-crop_free"></span>
+                </div> -->
             </div>
-            <ul class="layui-nav admin-header-item" lay-filter="topnav" id="topbar"   style="float:left;left:185px">
-            </ul>
-            <ul class="layui-nav admin-header-item" lay-filter="side-top-left" >
+
+            <ul class="layui-nav admin-header-item" lay-filter="side-top-right">
                 <li class="layui-nav-item" id="cache">
                     <a href="javascript:;"><?php echo lang('clearCache'); ?></a>
                 </li>

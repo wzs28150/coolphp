@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:41:"G:\coolphp/app/home\view\index_index.html";i:1527351657;s:41:"G:\coolphp/app/home\view\common_head.html";i:1527351657;s:48:"G:\coolphp/app/home\view\common_photography.html";i:1527351657;s:43:"G:\coolphp/app/home\view\common_footer.html";i:1527351657;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:55:"/www/wwwroot/hrbkcwl.com/app/home/view/index_index.html";i:1522924536;s:55:"/www/wwwroot/hrbkcwl.com/app/home/view/common_head.html";i:1522901848;s:62:"/www/wwwroot/hrbkcwl.com/app/home/view/common_photography.html";i:1522910506;s:57:"/www/wwwroot/hrbkcwl.com/app/home/view/common_footer.html";i:1522913090;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 

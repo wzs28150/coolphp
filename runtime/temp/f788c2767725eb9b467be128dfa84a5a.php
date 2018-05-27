@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:56:"J:\web\201805\hrbkcwl.com/app/admin\view\index\main.html";i:1511879065;s:57:"J:\web\201805\hrbkcwl.com/app/admin\view\common\head.html";i:1511791799;s:57:"J:\web\201805\hrbkcwl.com/app/admin\view\common\foot.html";i:1511791799;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:55:"/www/wwwroot/hrbkcwl.com/app/admin/view/index/main.html";i:1511879065;s:56:"/www/wwwroot/hrbkcwl.com/app/admin/view/common/head.html";i:1511791799;s:56:"/www/wwwroot/hrbkcwl.com/app/admin/view/common/foot.html";i:1511791799;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
