@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-05-27 12:13:16
+Date: 2018-05-27 22:18:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,11 +65,12 @@ CREATE TABLE `cool_addons` (
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '安装时间',
   `has_adminlist` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否有后台列表',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='插件表';
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
 -- ----------------------------
 -- Records of cool_addons
 -- ----------------------------
+INSERT INTO `cool_addons` VALUES ('38', 'diyform', '自定义表单', 'thinkph5插件测试', '1', '{\"display\":\"1\"}', 'by wzs', '0.1', '1527429947', '0');
 
 -- ----------------------------
 -- Table structure for cool_admin
@@ -592,6 +593,23 @@ INSERT INTO `cool_debris_type` VALUES ('6', '【关于我们】中部碎片', '5
 INSERT INTO `cool_debris_type` VALUES ('7', '【关于我们】图片滚动', '50');
 
 -- ----------------------------
+-- Table structure for cool_diyform
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_diyform`;
+CREATE TABLE `cool_diyform` (
+  `document_id` int(10) unsigned NOT NULL,
+  `good` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '赞数',
+  `bad` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '批数',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `uids` longtext NOT NULL COMMENT '投过票的用户id 字符合集 id1,id2,',
+  PRIMARY KEY (`document_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_diyform
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for cool_donation
 -- ----------------------------
 DROP TABLE IF EXISTS `cool_donation`;
@@ -811,6 +829,37 @@ CREATE TABLE `cool_fuwukehu` (
 INSERT INTO `cool_fuwukehu` VALUES ('2', '22', '1', 'admin', '哈尔滨工业大学实业技术培训中心', 'color:;font-weight:normal;', '/uploads/20171010/9ae948c559d80abfb13178e2b9c9ddcd.jpg', '', '', '<p>感谢酷创网络为我们设计了一个具有创造力的网站，酷创网络的设计员工，很有激情，很有礼貌，服务很好，网络推广方面也给了我们很大的帮助！</p>', '0', '0', '1', '0', '', '0', '0', '0', '1506390103', '1507619550', '校长', '蒋志文');
 INSERT INTO `cool_fuwukehu` VALUES ('3', '22', '1', 'admin', '哈尔滨腾飞龙餐饮管理有限公司', 'color:;font-weight:normal;', '/uploads/20171010/bc1ba450baeee360bbd4c4277ee49544.jpg', '', '', '<p>我们餐饮行业竞争大，设计作品的视觉冲击力要求极强。酷创网络在给我们设计网站的时候，在很多细节上下了很大功夫，包括给我们培训操作，图片处理的大小。非常感谢酷创网络给我们做出如此“高大尚”的网站。</p>', '0', '0', '1', '0', '', '0', '0', '0', '1506390142', '1507619334', '总经理', '吴总');
 INSERT INTO `cool_fuwukehu` VALUES ('4', '22', '1', 'admin', '哈尔滨平安融e贷', 'color:;font-weight:normal;', '/uploads/20170926/e1c04bf840c2515317dc4ed860a9a574.jpg', '', '', '<p style=\"white-space: normal;\">很幸运我们能够和酷创网络合作，让他们来提供程序开发，网站建设，网站推广等服务，对他们的服务感到非常满意！酷创网络是值得信赖的网络技术专业公司，祝愿他们加速发展！</p><p><br/></p>', '0', '0', '1', '0', '', '0', '0', '0', '1506390177', '1507619168', '总代理', '马琳');
+
+-- ----------------------------
+-- Table structure for cool_hooks
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_hooks`;
+CREATE TABLE `cool_hooks` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(40) NOT NULL DEFAULT '' COMMENT '钩子名称',
+  `description` text COMMENT '描述',
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '类型',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `addons` varchar(255) NOT NULL DEFAULT '' COMMENT '钩子挂载的插件 ''，''分割',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_hooks
+-- ----------------------------
+INSERT INTO `cool_hooks` VALUES ('1', 'pageHeader', '页面header钩子，一般用于加载插件CSS文件和代码', '1', '0', '', '1');
+INSERT INTO `cool_hooks` VALUES ('2', 'pageFooter', '页面footer钩子，一般用于加载插件JS文件和JS代码', '1', '0', 'ReturnTop', '1');
+INSERT INTO `cool_hooks` VALUES ('3', 'documentEditForm', '添加编辑表单的 扩展内容钩子', '1', '0', 'Attachment', '1');
+INSERT INTO `cool_hooks` VALUES ('4', 'documentDetailAfter', '文档末尾显示', '1', '0', 'Attachment,SocialComment,Digg', '1');
+INSERT INTO `cool_hooks` VALUES ('5', 'documentDetailBefore', '页面内容前显示用钩子', '1', '0', '', '1');
+INSERT INTO `cool_hooks` VALUES ('6', 'documentSaveComplete', '保存文档数据后的扩展钩子', '2', '0', 'Attachment', '1');
+INSERT INTO `cool_hooks` VALUES ('7', 'documentEditFormContent', '添加编辑表单的内容显示钩子', '1', '0', 'Editor', '1');
+INSERT INTO `cool_hooks` VALUES ('8', 'adminArticleEdit', '后台内容编辑页编辑器', '1', '1378982734', 'EditorForAdmin', '1');
+INSERT INTO `cool_hooks` VALUES ('13', 'AdminIndex', '首页小格子个性化显示', '1', '1382596073', 'SiteStat,SystemInfo,DevTeam', '1');
+INSERT INTO `cool_hooks` VALUES ('14', 'topicComment', '评论提交方式扩展钩子。', '1', '1380163518', 'Editor', '1');
+INSERT INTO `cool_hooks` VALUES ('16', 'app_begin', '应用开始', '2', '1384481614', '', '1');
 
 -- ----------------------------
 -- Table structure for cool_link
@@ -1068,7 +1117,7 @@ CREATE TABLE `cool_plus_seoinfo` (
   `sogou_count` varchar(50) DEFAULT NULL,
   `haosou360_count` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_plus_seoinfo
@@ -1105,6 +1154,7 @@ INSERT INTO `cool_plus_seoinfo` VALUES ('35', '1524832241', '<span style=\'margi
 INSERT INTO `cool_plus_seoinfo` VALUES ('36', '1525312602', '<span style=\'margin-left: 10px;\'>-</span>', '0', '6', '4', '1', '1');
 INSERT INTO `cool_plus_seoinfo` VALUES ('37', '1527304272', '<span style=\'margin-left: 10px;\'>-</span>', '0', '19', '7', '1', '1');
 INSERT INTO `cool_plus_seoinfo` VALUES ('38', '1527387119', '<span style=\'margin-left: 10px;\'>-</span>', '0', '19', '7', '1', '1');
+INSERT INTO `cool_plus_seoinfo` VALUES ('39', '1527409204', '<span style=\'margin-left: 10px;\'>-</span>', '0', '19', '6', '1', '1');
 
 -- ----------------------------
 -- Table structure for cool_posid
@@ -4810,7 +4860,7 @@ CREATE TABLE `cool_visit_day` (
   `lang` varchar(50) NOT NULL DEFAULT '',
   `keystr` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3225 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3267 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_visit_day
@@ -6529,6 +6579,48 @@ INSERT INTO `cool_visit_day` VALUES ('3221', '127.0.0.1', '1527389727', 'http://
 INSERT INTO `cool_visit_day` VALUES ('3222', '127.0.0.1', '1527389809', 'http://coolphp.local.com/about_2.html', 'http://coolphp.local.com/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
 INSERT INTO `cool_visit_day` VALUES ('3223', '127.0.0.1', '1527391524', 'http://coolphp.local.com/', '', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
 INSERT INTO `cool_visit_day` VALUES ('3224', '127.0.0.1', '1527391530', 'http://coolphp.local.com/', '', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3225', '127.0.0.1', '1527422656', 'http://coolphp.local.com/index_index.html', 'http://coolphp.local.com/admin/Addons/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3226', '127.0.0.1', '1527423059', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3227', '127.0.0.1', '1527423100', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3228', '127.0.0.1', '1527423164', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3229', '127.0.0.1', '1527423291', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3230', '127.0.0.1', '1527423298', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3231', '127.0.0.1', '1527423381', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3232', '127.0.0.1', '1527423404', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3233', '127.0.0.1', '1527423494', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3234', '127.0.0.1', '1527423534', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3235', '127.0.0.1', '1527423562', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3236', '127.0.0.1', '1527423593', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3237', '127.0.0.1', '1527423603', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3238', '127.0.0.1', '1527423664', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3239', '127.0.0.1', '1527423675', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3240', '127.0.0.1', '1527423687', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3241', '127.0.0.1', '1527423703', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3242', '127.0.0.1', '1527423711', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3243', '127.0.0.1', '1527423780', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3244', '127.0.0.1', '1527423793', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3245', '127.0.0.1', '1527423804', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3246', '127.0.0.1', '1527423808', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3247', '127.0.0.1', '1527424208', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3248', '127.0.0.1', '1527424218', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3249', '127.0.0.1', '1527424229', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3250', '127.0.0.1', '1527424239', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3251', '127.0.0.1', '1527424311', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3252', '127.0.0.1', '1527424314', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3253', '127.0.0.1', '1527424329', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3254', '127.0.0.1', '1527424342', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3255', '127.0.0.1', '1527424354', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3256', '127.0.0.1', '1527424582', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3257', '127.0.0.1', '1527424599', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3258', '127.0.0.1', '1527424650', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3259', '127.0.0.1', '1527424679', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3260', '127.0.0.1', '1527424751', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3261', '127.0.0.1', '1527424763', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3262', '127.0.0.1', '1527425126', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3263', '127.0.0.1', '1527425129', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3264', '127.0.0.1', '1527427494', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3265', '127.0.0.1', '1527429142', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
+INSERT INTO `cool_visit_day` VALUES ('3266', '127.0.0.1', '1527430662', 'http://coolphp.local.com/index_index.html', '', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
 
 -- ----------------------------
 -- Table structure for cool_visit_detail
@@ -6548,7 +6640,7 @@ CREATE TABLE `cool_visit_detail` (
   `stattime` int(11) NOT NULL,
   `lang` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=751 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=752 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_visit_detail
@@ -7278,9 +7370,10 @@ INSERT INTO `cool_visit_detail` VALUES ('744', 'http://www.hrbkcwl.com/blogInfo_
 INSERT INTO `cool_visit_detail` VALUES ('745', 'http://www.hrbkcwl.com/case_10.html', '1', '1', '1', '0', '', '0', '0', '0', '1527177600', '');
 INSERT INTO `cool_visit_detail` VALUES ('746', 'http://www.hrbkcwl.com/', '3', '2', '2', '0', '', '0', '0', '0', '1527264000', '');
 INSERT INTO `cool_visit_detail` VALUES ('747', 'http://hrbkcwl.local.com/', '4', '1', '1', '0', '', '0', '0', '0', '1527264000', '');
-INSERT INTO `cool_visit_detail` VALUES ('748', 'http://coolphp.local.com/index.html', '2', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
+INSERT INTO `cool_visit_detail` VALUES ('748', 'http://coolphp.local.com/index.html', '42', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
 INSERT INTO `cool_visit_detail` VALUES ('749', 'http://coolphp.local.com/about_2.html', '7', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
 INSERT INTO `cool_visit_detail` VALUES ('750', 'http://coolphp.local.com/', '2', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
+INSERT INTO `cool_visit_detail` VALUES ('751', 'http://coolphp.local.com/index_index.html', '2', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
 
 -- ----------------------------
 -- Table structure for cool_visit_summary

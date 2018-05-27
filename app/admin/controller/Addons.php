@@ -17,16 +17,17 @@ class Addons extends Common
      */
     public function index()
     {
-
         if(request()->isPost()){
           $page =input('page')?input('page'):1;
           $pageSize =input('limit')?input('limit'):config('pageSize');
           $list = $this -> getDir(ADDONS_PATH);
           $count = count($list);
           foreach ($list as $key => $value) {
-            $json_string = file_get_contents(ADDONS_PATH .$value. '/addons.json');
-            // 把JSON字符串转成PHP数组 得到插件列表
-            $addonsJson = json_decode($json_string, true);
+            $class          =   get_addon_class($value);
+            if(!class_exists($class))
+                  $this->error('插件不存在');
+            $addons  =   new $class;
+            $addonsJson = $addons->info;
             $list[$key]=$addonsJson;
           }
 
@@ -34,7 +35,6 @@ class Addons extends Common
           {
             $list[$key]['id'] = $key + 1;
             // echo $value['author']['name'];
-            $list[$key]['author'] = $value['authors'][0]['name'];
             if($this -> deep_in_array($value['name'], $this->addonsListM))
             {
               $list[$key]['status'] = 1;
@@ -66,19 +66,34 @@ class Addons extends Common
     public function install()
     {
       $addonsName = Input('addonsname');
-      $addonsInfo = $this -> getAddonsInfo($addonsName);
-      $data['name'] = $addonsInfo['name'];
-      $data['title'] = $addonsInfo['title'];
-      $data['description'] = $addonsInfo['description'];
-      $data['author'] = $addonsInfo['authors'][0]['name'];
-      $data['version'] = $addonsInfo['version'];
-      $data['create_time'] = time();
-      $res = db('addons')->insert($data);
+      $class          =   get_addon_class($addonsName);
+      if(!class_exists($class))
+            $this->error('插件不存在');
+      $addons  =   new $class;
+      $info = $addons->info;
+      if(!$info || !$addons->checkInfo())//检测信息的正确性
+            $this->error('插件信息缺失');
+      session('addons_install_error',null);
+      $install_flag   =   $addons->install();
+      if(!$install_flag){
+          $this->error('执行插件预安装操作失败'.session('addons_install_error'));
+      }
+      $info['status'] = 1;
+      $info['create_time'] = time();
+      $res = db('addons')->insert($info);
+      $config['config']=json_encode($addons->getConfig());
+      $updateres = db('addons')->where('name', $addonsName)->update($config);
       if($res){
+        if($updateres){
           $result['msg'] = '插件安装成功!';
           $result['url'] = url('index');
           $result['code'] = 1;
           return $result;
+        }else{
+          $result['msg'] = '插件安装失败!';
+          $result['code'] = 0;
+          return $result;
+        }
       }else{
           $result['msg'] = '插件安装失败!';
           $result['code'] = 0;
@@ -117,7 +132,6 @@ class Addons extends Common
         if (false != ($handle = opendir ( $dir ))) {
             $i=0;
             while ( false !== ($file = readdir ( $handle )) ) {
-                //去掉"“.”、“..”以及带“.xxx”后缀的文件
                 if ($file != "." && $file != ".."&&!strpos($file,".")) {
                     $dirArray[$i]=$file;
                     $i++;
