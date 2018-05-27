@@ -16,7 +16,10 @@ class Addons extends Common
     {
 
         if(request()->isPost()){
+          $page =input('page')?input('page'):1;
+          $pageSize =input('limit')?input('limit'):config('pageSize');
           $list = $this -> getDir(ADDONS_PATH);
+          $count = count($list);
           foreach ($list as $key => $value) {
             $json_string = file_get_contents(ADDONS_PATH .$value. '/addons.json');
             // 把JSON字符串转成PHP数组 得到插件列表
@@ -39,11 +42,12 @@ class Addons extends Common
             }
 
           }
+          $list = $this -> page_array($pageSize,$page,$list,0);
           // dump($list);
           $rsult['code'] = 0;
           $rsult['msg'] = "获取成功";
           $rsult['data'] = $list;
-          $rsult['count'] = $list['total'];
+          $rsult['count'] = $count;
           $rsult['rel'] = 1;
           return $rsult;
         }
@@ -69,24 +73,18 @@ class Addons extends Common
         return $dirArray;
     }
 
-    private function getFile($dir) {
-        $fileArray[]=NULL;
-        if (false != ($handle = opendir ( $dir ))) {
-            $i=0;
-            while ( false !== ($file = readdir ( $handle )) ) {
-                //去掉"“.”、“..”以及带“.xxx”后缀的文件
-                if ($file != "." && $file != ".."&&strpos($file,".")) {
-                    $fileArray[$i]="./imageroot/current/".$file;
-                    if($i==100){
-                        break;
-                    }
-                    $i++;
-                }
-            }
-            //关闭句柄
-            closedir ( $handle );
-        }
-        return $fileArray;
+    private function page_array($count,$page,$array,$order){
+      global $countpage; #定全局变量
+      $page=(empty($page))?'1':$page; #判断当前页面是否为空 如果为空就表示为第一页面
+        $start=($page-1)*$count; #计算每次分页的开始位置
+      if($order==1){
+        $array=array_reverse($array);
+      }
+      $totals=count($array);
+      $countpage=ceil($totals/$count); #计算总页面数
+      $pagedata=array();
+      $pagedata=array_slice($array,$start,$count);
+      return $pagedata; #返回查询数据
     }
 
 }
