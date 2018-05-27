@@ -20,5 +20,6 @@ define('DATA_PATH',  __DIR__.'/runtime/Data/');
 //插件目录
 define('PLUGIN_PATH', __DIR__ . '/core/plugins/');
 define('EXTEND_PATH', __DIR__ . '/core/extend/');
+define('ADDONS_PATH', __DIR__ . '/addons/');
 // 加载框架引导文件
 require __DIR__ . '/core/think/start.php';

@@ -1,4 +1,4 @@
-<?php
+.<?php
 // +----------------------------------------------------------------------
 // | thinkphp5 Addons [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
@@ -8,16 +8,14 @@
 // +----------------------------------------------------------------------
 // | Author: Byron Sampson <xiaobo.sun@qq.com>
 // +----------------------------------------------------------------------
-
-namespace addons\temp\controller;
-
-use think\addons\Controller;
-
-class Index extends Controller
-{
-    public function index()
-    {
-        echo '<p>我是temp插件中Index控制器的index方法</p>';
-        return $this->fetch();
-    }
-}
+return [
+    'display' => [
+        'title' => '是否显示:',
+        'type' => 'radio',
+        'options' => [
+            '1' => '显示',
+            '0' => '不显示'
+        ],
+        'value' => '1'
+    ]
+];

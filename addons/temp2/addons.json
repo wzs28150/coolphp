@@ -1,0 +1,12 @@
+{
+    "name": "temp2",
+    "title":"测试插件1",
+    "description": "测试插件1",
+    "authors": [
+        {
+            "name": "wzs",
+            "email": "wz666s@163.com"
+        }
+    ],
+    "version":"0.1"
+}

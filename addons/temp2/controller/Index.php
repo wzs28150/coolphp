@@ -9,7 +9,7 @@
 // | Author: Byron Sampson <xiaobo.sun@qq.com>
 // +----------------------------------------------------------------------
 
-namespace addons\temp\controller;
+namespace addons\temp2\controller;
 
 use think\addons\Controller;
 
@@ -17,7 +17,7 @@ class Index extends Controller
 {
     public function index()
     {
-        echo '<p>我是temp插件中Index控制器的index方法</p>';
+        echo '<p>我是temp2插件中Index控制器的index方法</p>';
         return $this->fetch();
     }
 }
