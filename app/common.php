@@ -869,3 +869,4 @@ function send_email($to, $subject='', $content='')
       $alltext = preg_replace("/[ ]+/s", " ", $alltext);
       return $alltext;
   }
+  

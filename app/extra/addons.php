@@ -12,7 +12,28 @@
 // +----------------------------------------------------------------------
 // | Addons插件配置
 // +----------------------------------------------------------------------
-return [
-    // 定义了temphook钩子名，通过temp插件来实现temphook钩子
-    'temphook' => 'temp'
-];
+
+function getDir($dir)
+{
+    $dirArray[]=NULL;
+    if (false != ($handle = opendir ( $dir ))) {
+        $i=0;
+        while ( false !== ($file = readdir ( $handle )) ) {
+            if ($file != "." && $file != ".."&&!strpos($file,".")) {
+                $dirArray[$i]=$file;
+                $i++;
+            }
+        }
+        //关闭句柄
+        closedir ( $handle );
+    }
+    return $dirArray;
+}
+
+$list = getDir(ADDONS_PATH);
+$array = [];
+foreach ($list as $key => $value) {
+  $array[$value.'hook'] = $value;
+}
+
+return $array;

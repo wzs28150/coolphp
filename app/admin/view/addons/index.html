@@ -18,16 +18,27 @@
     {{# if(d.thumb){ }}<img src="__ADMIN__/images/image.gif" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.thumb}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();">{{# } }}
 </script>
 <script type="text/html" id="status">
-    {{# if(d.status){ }}
+    {{# if(d.status == 1){ }}
     已安装
-    {{#  } else { }}
+    {{#  } else if(d.status == 0){ }}
     未安装
     {{# } }}
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('/addons_execute_temp2-index-index')}" class="layui-btn layui-btn-xs" target="_blank">入口</a>
-    <a href="{:url('edit')}?id={{d.id}}&catid={{d.catid}}" class="layui-btn layui-btn-xs">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    {{# if(d.status == 1){ }}
+      <a href="/addons_execute_{{d.name}}-index-index" class="layui-btn layui-btn-xs" target="_blank">前台入口</a>
+      <a href="/addons_execute_{{d.name}}-admin-index" class="layui-btn layui-btn-xs" >后台入口</a>
+    {{#  } else if(d.status == 0){ }}
+      <a href="/addons_execute_{{d.name}}-index-index" class="layui-btn layui-btn-xs layui-btn-disabled" target="_blank">前台入口</a>
+      <a href="/addons_execute_{{d.name}}-admin-index" class="layui-btn layui-btn-xs layui-btn-disabled" >后台入口</a>
+    {{# } }}
+    {{# if(d.status == 1){ }}
+      <a class="layui-btn layui-btn-normal layui-btn-xs layui-btn-disabled" lay-event="install">安装</a>
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="uninstall">卸载</a>
+    {{#  } else if(d.status == 0){ }}
+      <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="install">安装</a>
+      <a class="layui-btn layui-btn-danger layui-btn-xs layui-btn-disabled" lay-event="uninstall">卸载</a>
+    {{# } }}
 </script>
 <script>
 layui.use('table', function() {
@@ -47,11 +58,11 @@ layui.use('table', function() {
             {field: 'status', align: 'center', title: '状态',templet: '#status'},
             {field: 'author', title: '作者'},
             {field: 'version', title: '版本'},
-            {align: 'center', toolbar: '#action',title:'操作'}
+            {align: 'center', toolbar: '#action',title:'操作',width:300}
         ]],
         limit: 10
     });
-    //搜索
+    //搜索 {:url('install')}?addonsname={{d.name}}
     $('#search').on('click', function () {
         var key = $('#key').val();
         if ($.trim(key) === '') {
@@ -79,14 +90,14 @@ layui.use('table', function() {
     });
     table.on('tool(list)', function(obj) {
         var data = obj.data;
-        if(obj.event === 'del'){
-            layer.confirm('您确定要删除该内容吗？', function(index){
+        if(obj.event === 'uninstall'){
+            layer.confirm('您确定要卸载该内容吗？', function(index){
                 var loading = layer.load(1, {shade: [0.1, '#fff']});
-                $.post("{:url('listDel')}",{id:data.id},function(res){
+                $.post("{:url('uninstall')}",{addonsname:data.name},function(res){
                     layer.close(loading);
                     if(res.code===1){
                         layer.msg(res.msg,{time:1000,icon:1});
-                        tableIn.reload({where:{catid:'{:input("catid")}'}});
+                        tableIn.reload();
                     }else{
                         layer.msg('操作失败！',{time:1000,icon:2});
                     }
@@ -94,6 +105,23 @@ layui.use('table', function() {
                 layer.close(index);
             });
         }
+
+        if(obj.event === 'install'){
+            layer.confirm('您确定要安装该插件吗？', function(index){
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post("{:url('install')}",{addonsname:data.name},function(res){
+                    layer.close(loading);
+                    if(res.code===1){
+                        layer.msg(res.msg,{time:1000,icon:1});
+                        tableIn.reload();
+                    }else{
+                        layer.msg('操作失败！',{time:1000,icon:2});
+                    }
+                });
+                layer.close(index);
+            });
+        }
+
     });
     $('#delAll').click(function(){
         layer.confirm('确认要删除选中的内容吗？', {icon: 3}, function(index) {

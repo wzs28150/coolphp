@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: Byron Sampson <xiaobo.sun@qq.com>
 // +----------------------------------------------------------------------
-namespace addons\temp2;
+namespace addons\diyform;
 
 use think\Addons;
 
@@ -16,14 +16,14 @@ use think\Addons;
  * 插件测试
  * @author byron sampson
  */
-class Temp2 extends Addons
+class Diyform extends Addons
 {
     public $info = [
-        'name' => 'test',
-        'title' => '插件测试',
+        'name' => 'diy_form',
+        'title' => '自定义表单',
         'description' => 'thinkph5插件测试',
         'status' => 0,
-        'author' => 'byron sampson',
+        'author' => 'by wzs',
         'version' => '0.1'
     ];
 
@@ -46,10 +46,10 @@ class Temp2 extends Addons
     }
 
     /**
-     * 实现的testHook钩子方法
+     * 实现的diy_form钩子方法
      * @return mixed
      */
-    public function temphook($param)
+    public function diyformhook($param)
     {
         echo '<p><font color="red">开始处理钩子啦</font></p>';
         echo '<p><font color="green">打印传给钩子的参数：</font></p>';

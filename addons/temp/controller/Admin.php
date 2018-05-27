@@ -9,15 +9,23 @@
 // | Author: Byron Sampson <xiaobo.sun@qq.com>
 // +----------------------------------------------------------------------
 
-namespace addons\temp2\controller;
+namespace addons\temp\controller;
 
 use think\addons\Controller;
 
-class Index extends Controller
+class Admin extends Controller
 {
+    public function _initialize()
+    {
+        //判断管理员是否登录
+        if (!session('aid')) {
+            $this->redirect('login/index');
+        }
+    }
     public function index()
     {
-        echo '<p>我是temp2插件中Index控制器的index方法</p>';
-        return $this->fetch();
+      $title="自定义表单";
+      $this->assign('title',$title);
+      return $this->fetch();
     }
 }

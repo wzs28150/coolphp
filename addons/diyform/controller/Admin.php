@@ -9,7 +9,7 @@
 // | Author: Byron Sampson <xiaobo.sun@qq.com>
 // +----------------------------------------------------------------------
 
-namespace addons\temp2\controller;
+namespace addons\diyform\controller;
 
 use think\addons\Controller;
 
@@ -25,7 +25,6 @@ class Admin extends Controller
     }
     public function index()
     {
-        echo '<p>我是temp2插件中Index控制器的index方法</p>';
-        return $this->fetch();
+      return $this->fetch();
     }
 }

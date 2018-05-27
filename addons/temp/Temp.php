@@ -51,11 +51,11 @@ class Temp extends Addons
      */
     public function temphook($param)
     {
-        echo '<p><font color="red">开始处理钩子啦</font></p>';
-        echo '<p><font color="green">打印传给钩子的参数：</font></p>';
-        dump($param);
-        echo '<p><font color="green">打印插件配置：</font></p>';
-        dump($this->getConfig());
+        // echo '<p><font color="red">开始处理钩子啦</font></p>';
+        // echo '<p><font color="green">打印传给钩子的参数：</font></p>';
+        // dump($param);
+        // echo '<p><font color="green">打印插件配置：</font></p>';
+        // dump($this->getConfig());
 
         // 这里可以通过钩子来调用钩子模板
         return $this->fetch('info');

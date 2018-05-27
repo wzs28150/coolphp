@@ -9,27 +9,15 @@
 // | Author: Byron Sampson <xiaobo.sun@qq.com>
 // +----------------------------------------------------------------------
 
-namespace addons\temp\controller;
-use think\Db;
-use think\Request;
+namespace addons\diyform\controller;
+
 use think\addons\Controller;
 
 class Index extends Controller
 {
-    public function _initialize()
-    {
-      //判断插件是否安装
-      $this->addonsId = db('addons')->where('name',$this->addon)->find();
-      if(!$this->addonsId)
-      {
-        $this->redirect('index/index');
-      }
-    }
     public function index()
     {
-        $addonName = $this->addon;
-        dump($this->addon);
-        echo '<p>我是temp插件中Index控制器的index方法</p>';
+        echo '<p>我是temp2插件中Index控制器的index方法</p>';
         return $this->fetch();
     }
 }

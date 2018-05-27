@@ -1,7 +1,7 @@
 {
-    "name": "temp2",
-    "title":"测试插件1",
-    "description": "测试插件1",
+    "name": "diy_form",
+    "title":"自定义表单",
+    "description": "自定义表单",
     "authors": [
         {
             "name": "wzs",
