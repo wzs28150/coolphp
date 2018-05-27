@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'hrbkcwl_com',
+    'database'        => 'db_hrbkcwl',
     // 用户名
-    'username'        => 'hrbkcwl_com',
+    'username'        => 'root',
     // 密码
-    'password'        => 'pHQnYcKDxH',
+    'password'        => '123456',
     // 端口
     'hostport'        => '3306',
     // 连接dsn
