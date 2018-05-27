@@ -58,10 +58,12 @@ SQL;
      * 插件卸载方法
      * @return bool
      */
-    public function uninstall()
-    {
+     public function uninstall(){
+        $db_prefix = config('database.prefix');
+        $sql = "DROP TABLE IF EXISTS `{$db_prefix}diyform`;";
+        db()->execute($sql);
         return true;
-    }
+     }
 
     /**
      * 实现的diy_form钩子方法

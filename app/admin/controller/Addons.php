@@ -24,8 +24,11 @@ class Addons extends Common
           $count = count($list);
           foreach ($list as $key => $value) {
             $class          =   get_addon_class($value);
-            if(!class_exists($class))
-                  $this->error('插件不存在');
+            if(!class_exists($class)){
+              $result['msg'] = '插件不存在!';
+              $result['code'] = 0;
+              return $result;
+            }
             $addons  =   new $class;
             $addonsJson = $addons->info;
             $list[$key]=$addonsJson;
@@ -67,16 +70,27 @@ class Addons extends Common
     {
       $addonsName = Input('addonsname');
       $class          =   get_addon_class($addonsName);
-      if(!class_exists($class))
-            $this->error('插件不存在');
+      if(!class_exists($class)){
+        $result['msg'] = '插件不存在';
+        $result['code'] = 0;
+        return $result;
+        exit;
+      }
       $addons  =   new $class;
       $info = $addons->info;
-      if(!$info || !$addons->checkInfo())//检测信息的正确性
-            $this->error('插件信息缺失');
+      if(!$info || !$addons->checkInfo()){
+        $result['msg'] = '插件信息缺失';
+        $result['code'] = 0;
+        return $result;
+        exit;
+      }
       session('addons_install_error',null);
       $install_flag   =   $addons->install();
       if(!$install_flag){
-          $this->error('执行插件预安装操作失败'.session('addons_install_error'));
+          $result['msg'] = '执行插件预安装操作失败'.session('addons_install_error');
+          $result['code'] = 0;
+          return $result;
+          exit;
       }
       $info['status'] = 1;
       $info['create_time'] = time();
@@ -89,15 +103,18 @@ class Addons extends Common
           $result['url'] = url('index');
           $result['code'] = 1;
           return $result;
+          exit;
         }else{
           $result['msg'] = '插件安装失败!';
           $result['code'] = 0;
           return $result;
+          exit;
         }
       }else{
           $result['msg'] = '插件安装失败!';
           $result['code'] = 0;
           return $result;
+          exit;
       }
     }
     /**
@@ -106,16 +123,35 @@ class Addons extends Common
     public function uninstall()
     {
       $addonsName = Input('addonsname');
-      $res = db('addons')->where('name',$addonsName)->delete();
-      if($res){
-          $result['msg'] = '插件卸载成功!';
-          $result['url'] = url('index');
-          $result['code'] = 1;
-          return $result;
+      $class      =   get_addon_class($addonsName);
+      $db_addons = db('addons')->where('name',$addonsName)->find();
+      if(!$db_addons || !class_exists($class)){
+        $result['msg'] = '插件不存在!';
+        $result['code'] = 0;
+        return $result;
+        exit;
+      }
+      session('addons_uninstall_error',null);
+      $addons =   new $class;
+      $uninstall_flag =   $addons->uninstall();
+      if(!$uninstall_flag){
+        $result['msg'] = '执行插件预卸载操作失败'.session('addons_uninstall_error');
+        $result['code'] = 0;
+        return $result;
+        exit;
+      }
+      $hooks_update   =  db('addons')->where('name',$addonsName)->delete();;
+      if($hooks_update === false){
+        $result['msg'] = '插件卸载失败!';
+        $result['code'] = 0;
+        return $result;
+        exit;
       }else{
-          $result['msg'] = '插件卸载失败!';
-          $result['code'] = 0;
-          return $result;
+        $result['msg'] = '插件卸载成功!';
+        $result['url'] = url('index');
+        $result['code'] = 1;
+        return $result;
+        exit;
       }
     }
     private function getAddonsInfo($addonsName)
