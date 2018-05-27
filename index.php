@@ -18,6 +18,7 @@ if (!defined('__PUBLIC__')) {
 define('APP_PATH', __DIR__ . '/app/');
 define('DATA_PATH',  __DIR__.'/runtime/Data/');
 //插件目录
-define('PLUGIN_PATH', __DIR__ . '/plugins/');
+define('PLUGIN_PATH', __DIR__ . '/core/plugins/');
+define('EXTEND_PATH', __DIR__ . '/core/extend/');
 // 加载框架引导文件
-require __DIR__ . '/think/start.php';
+require __DIR__ . '/core/think/start.php';

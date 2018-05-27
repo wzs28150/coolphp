@@ -290,6 +290,31 @@ return array (
     'status' => 0,
     'issystem' => 0,
   ),
+  'url' => 
+  array (
+    'id' => 157,
+    'moduleid' => 10,
+    'field' => 'url',
+    'name' => '链接',
+    'tips' => '',
+    'required' => 0,
+    'minlength' => 0,
+    'maxlength' => 0,
+    'pattern' => 'defaul',
+    'errormsg' => '',
+    'class' => 'url',
+    'type' => 'text',
+    'setup' => 'array (
+  \'default\' => \'\',
+  \'ispassword\' => \'0\',
+  \'fieldtype\' => \'varchar\',
+)',
+    'ispost' => 0,
+    'unpostgroup' => '',
+    'listorder' => 8,
+    'status' => 1,
+    'issystem' => 0,
+  ),
   'readpoint' => 
   array (
     'id' => 105,

@@ -1,35 +1,39 @@
 [
     {
-        "name": "topthink/think-installer",
-        "version": "v1.0.12",
-        "version_normalized": "1.0.12.0",
+        "name": "5ini99/think-addons",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/top-think/think-installer.git",
-            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d"
+            "url": "https://github.com/5ini99/think-addons.git",
+            "reference": "078281eee61afcc55b97f4ff001de65bca4ad974"
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-installer/1be326e68f63de4e95977ed50f46ae75f017556d.zip",
-            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d",
+            "url": "https://files.phpcomposer.com/files/5ini99/think-addons/078281eee61afcc55b97f4ff001de65bca4ad974.zip",
+            "reference": "078281eee61afcc55b97f4ff001de65bca4ad974",
             "shasum": ""
         },
         "require": {
-            "composer-plugin-api": "^1.0"
+            "php": ">=5.4.0",
+            "topthink/think-helper": ">=1.0.4",
+            "topthink/think-installer": ">=1.0.10"
         },
-        "require-dev": {
-            "composer/composer": "1.0.*@dev"
-        },
-        "time": "2017-05-27T06:58:09+00:00",
-        "type": "composer-plugin",
+        "time": "2017-01-16T02:47:26+00:00",
+        "type": "library",
         "extra": {
-            "class": "think\\composer\\Plugin"
+            "think-config": {
+                "addons": "src/config.php"
+            }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "think\\composer\\": "src"
-            }
+                "think\\": "src/"
+            },
+            "files": [
+                "src/common.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -37,24 +41,89 @@
         ],
         "authors": [
             {
-                "name": "yunwuxin",
-                "email": "448901948@qq.com"
+                "name": "xiaobo.sun",
+                "email": "xiaobo.sun@qq.com"
             }
-        ]
+        ],
+        "description": "addons package for thinkphp5",
+        "homepage": "https://github.com/5ini99/think-addons"
     },
     {
-        "name": "topthink/framework",
-        "version": "v5.0.10",
-        "version_normalized": "5.0.10.0",
+        "name": "phpmailer/phpmailer",
+        "version": "v5.2.14",
+        "version_normalized": "5.2.14.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/top-think/framework.git",
-            "reference": "e428c43ec5138c989cfdb38ac300a964ad77f9cb"
+            "url": "https://github.com/PHPMailer/PHPMailer.git",
+            "reference": "e774bc9152de85547336e22b8926189e582ece95"
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/framework/e428c43ec5138c989cfdb38ac300a964ad77f9cb.zip",
-            "reference": "e428c43ec5138c989cfdb38ac300a964ad77f9cb",
+            "url": "https://files.phpcomposer.com/files/PHPMailer/PHPMailer/e774bc9152de85547336e22b8926189e582ece95.zip",
+            "reference": "e774bc9152de85547336e22b8926189e582ece95",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0.0"
+        },
+        "require-dev": {
+            "phpdocumentor/phpdocumentor": "*",
+            "phpunit/phpunit": "4.7.*"
+        },
+        "suggest": {
+            "league/oauth2-client": "Needed for XOAUTH2 authentication",
+            "league/oauth2-google": "Needed for Gmail XOAUTH2"
+        },
+        "time": "2015-11-01T10:15:28+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "class.phpmailer.php",
+                "class.phpmaileroauth.php",
+                "class.phpmaileroauthgoogle.php",
+                "class.smtp.php",
+                "class.pop3.php",
+                "extras/EasyPeasyICS.php",
+                "extras/ntlm_sasl_client.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
+            },
+            {
+                "name": "Marcus Bointon",
+                "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Andy Prevost",
+                "email": "codeworxtech@users.sourceforge.net"
+            },
+            {
+                "name": "Brent R. Matzelle"
+            }
+        ],
+        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "topthink/framework",
+        "version": "v5.0.11",
+        "version_normalized": "5.0.11.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/framework.git",
+            "reference": "926c9edb0c2682b14f563cac2c8a93f42f729016"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/top-think/framework/926c9edb0c2682b14f563cac2c8a93f42f729016.zip",
+            "reference": "926c9edb0c2682b14f563cac2c8a93f42f729016",
             "shasum": ""
         },
         "require": {
@@ -69,7 +138,7 @@
             "phpunit/phpunit": "4.8.*",
             "sebastian/phpcpd": "2.*"
         },
-        "time": "2017-07-05T03:35:06+00:00",
+        "time": "2017-09-13T03:30:29+00:00",
         "type": "think-framework",
         "installation-source": "dist",
         "autoload": {
@@ -132,5 +201,86 @@
             }
         ],
         "description": "captcha package for thinkphp5"
+    },
+    {
+        "name": "topthink/think-helper",
+        "version": "v1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-helper.git",
+            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/top-think/think-helper/0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f.zip",
+            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f",
+            "shasum": ""
+        },
+        "time": "2017-04-05T07:15:37+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "think\\helper\\": "src"
+            },
+            "files": [
+                "src/helper.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "yunwuxin",
+                "email": "448901948@qq.com"
+            }
+        ],
+        "description": "The ThinkPHP5 Helper Package"
+    },
+    {
+        "name": "topthink/think-installer",
+        "version": "v1.0.12",
+        "version_normalized": "1.0.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-installer.git",
+            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/top-think/think-installer/1be326e68f63de4e95977ed50f46ae75f017556d.zip",
+            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev"
+        },
+        "time": "2017-05-27T06:58:09+00:00",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "think\\composer\\Plugin"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "think\\composer\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "yunwuxin",
+                "email": "448901948@qq.com"
+            }
+        ]
     }
 ]

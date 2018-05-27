@@ -28,7 +28,7 @@ class Captcha
         // 中文验证码字符串
         'useImgBg' => false,
         // 使用背景图片
-        'fontSize' => 50,
+        'fontSize' => 25,
         // 验证码字体大小(px)
         'useCurve' => true,
         // 是否画混淆曲线
@@ -38,7 +38,7 @@ class Captcha
         // 验证码图片高度
         'imageW'   => 0,
         // 验证码图片宽度
-        'length'   => 4,
+        'length'   => 5,
         // 验证码位数
         'fontttf'  => '',
         // 验证码字体，不设置随机获取
