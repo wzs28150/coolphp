@@ -11,31 +11,48 @@ class Index extends Common
     {
         parent::_initialize();
     }
+
     public function index()
     {
         //导航
         // 获取缓存数据
         $authRule = cache('authRule');
         if (!$authRule) {
-            $authRule = db('auth_rule')->where('menustatus=1')->order('sort')->select();
+            $authRule = db('auth_rule')->where('menustatus=1')->order('sort asc,pid asc')->select();
+            // dump($authRule);exit;
             cache('authRule', $authRule, 3600);
         }
 
-
-
-        //dump($a);
-        //声明数组
+        foreach ($authRule as $key=>$val) {
+          if ($val['pid']==0) {
+            $topidw = $val['id'];
+            break;
+          }
+        }
+        if(empty(Input('topid'))){
+          $topid = $topidw;
+        }else{
+          $topid = Input('topid');
+        }
+        // dump($authRule);
+        // dump($topid);exit;
+        //声明菜单数组数组
         $menus = array();
+        $topmenus = array();
         foreach ($authRule as $key=>$val) {
             $authRule[$key]['href'] = url($val['href']);
             if ($val['pid']==0) {
                 if (session('aid')!=1) {
                     if (in_array($val['id'], $this->adminRules)) {
-                        $menus[] = $val;
+                        $topmenus[] = $val;
                     }
                 } else {
-                    $menus[] = $val;
+                    $topmenus[] = $val;
                 }
+            }else{
+              if($val['pid'] == $topid){
+                $menus[] = $val;
+              }
             }
         }
         foreach ($menus as $k=>$v) {
@@ -51,9 +68,59 @@ class Index extends Common
                 }
             }
         }
+        $this->assign('topmenus', json_encode($topmenus, true));
         $this->assign('menus', json_encode($menus, true));
         return $this->fetch();
     }
+
+    public function getleftnav(){
+      $authRule = cache('authRule');
+      if (!$authRule) {
+          $authRule = db('auth_rule')->where('menustatus=1')->order('sort asc,pid asc')->select();
+          // dump($authRule);exit;
+          cache('authRule', $authRule, 3600);
+      }
+
+      $topid = Input('topid');
+      // dump($authRule);
+      // dump($topid);exit;
+      //声明菜单数组数组
+      $menus = array();
+      $topmenus = array();
+      foreach ($authRule as $key=>$val) {
+          $authRule[$key]['href'] = url($val['href']);
+          if ($val['pid']==0) {
+              // if (session('aid')!=1) {
+              //     if (in_array($val['id'], $this->adminRules)) {
+              //         $topmenus[] = $val;
+              //     }
+              // } else {
+              //     $topmenus[] = $val;
+              // }
+          }else{
+            if($val['pid'] == $topid){
+              $menus[] = $val;
+            }
+          }
+      }
+      foreach ($menus as $k=>$v) {
+          foreach ($authRule as $kk=>$vv) {
+              if ($v['id']==$vv['pid']) {
+                  if (session('aid')!=1) {
+                      if (in_array($vv['id'], $this->adminRules)) {
+                          $menus[$k]['children'][] = $vv;
+                      }
+                  } else {
+                      $menus[$k]['children'][] = $vv;
+                  }
+              }
+          }
+      }
+      echo  json_encode($menus, true);
+    }
+    /**
+     * 首页主体展示
+     */
     public function main()
     {
         $version = Db::query('SELECT VERSION() AS ver');
@@ -108,6 +175,10 @@ class Index extends Common
         $this->assign('config', $config);
         return $this->fetch();
     }
+    /**
+     * seo 显示
+     * @return [type] [description]
+     */
     public function seo()
     {
         if (!function_exists('fsocketopen') && !function_exists('curl_init')) {
@@ -180,6 +251,15 @@ class Index extends Common
         echo json_encode($seo_info);
         exit;
     }
+    /**
+     * 获取seo信息
+     * @param  [type]  $url     [description]
+     * @param  integer $limit   [description]
+     * @param  string  $post    [description]
+     * @param  string  $cookie  [description]
+     * @param  integer $timeout [description]
+     * @return [type]           [description]
+     */
     private function seo_http_send($url, $limit=0, $post='', $cookie='', $timeout=5)
     {
         $return = '';
@@ -289,6 +369,9 @@ class Index extends Common
     {
         return $this->fetch();
     }
+    /**
+     * 清理缓存
+     */
     public function clear()
     {
         $R = RUNTIME_PATH;
@@ -320,7 +403,9 @@ class Index extends Common
         return rmdir($R);
     }
 
-    //退出登陆
+    /**
+     * 退出登陆
+     */
     public function logout()
     {
         session(null);

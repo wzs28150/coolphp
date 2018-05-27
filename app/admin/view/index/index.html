@@ -2,22 +2,24 @@
 <script>
     var ADMIN = '__ADMIN__';
     var navs = {$menus};
+    var topmenus = {$topmenus};
 </script>
-<div class="layui-layout layui-layout-admin on">
+<style media="screen">
+  .topnav{left: 185px;}
+  .topnav li{ background:none; }
+  .header .layui-nav.topnav .layui-this{background:none;}
+</style>
+<div class="layui-layout layui-layout-admin">
     <div class="layui-header header">
         <div class="layui-main">
             <div class="admin-login-box">
                 <a class="logo" style="left: 0;" href="{:url('admin/index/index')}">
                     <span style="font-size: 22px;">{:config('sys_name')}</span>
                 </a>
-                <!-- <div class="admin-side-toggle">
-                    <span class="admin-storage"></span>
-                </div>
-                <div class="admin-side-full">
-                    <span class="admin-crop_free"></span>
-                </div> -->
             </div>
+            <ul class="layui-nav topnav" lay-filter="topnav">
 
+            </ul>
             <ul class="layui-nav admin-header-item" lay-filter="side-top-right">
                 <li class="layui-nav-item" id="cache">
                     <a href="javascript:;">{:lang('clearCache')}</a>

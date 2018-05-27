@@ -43,6 +43,7 @@ layui.define(['element', 'common'], function(exports) {
     }
     if (_config.data !== undefined && typeof(_config.data) === 'object') {
       var html = getHtml(_config.data);
+      $container.html('');
       $container.html(html);
       element.init();
       _that.config.elem = $container;
@@ -62,6 +63,7 @@ layui.define(['element', 'common'], function(exports) {
                 value: result
               });
               var html = getHtml(result);
+              $container.html('');
               $container.html(html);
               element.init();
             },
