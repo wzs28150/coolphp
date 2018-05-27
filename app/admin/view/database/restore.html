@@ -10,9 +10,9 @@
     {{d.sortSize}}
 </script>
 <script type="text/html" id="action">
-    <a class="layui-btn layui-btn-normal layui-btn-mini" lay-event="recover">恢复</a>
-    <a href="{:url('downFile')}?type=sql&file={{d.name}}" class="layui-btn layui-btn-mini">下载</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">{:lang('del')}</a>
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="recover">恢复</a>
+    <a href="{:url('downFile')}?type=sql&file={{d.name}}" class="layui-btn layui-btn-xs">下载</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">{:lang('del')}</a>
 </script>
 <script>
     layui.use('table', function() {

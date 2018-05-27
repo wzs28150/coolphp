@@ -15,14 +15,14 @@
 </div>
 <script type="text/html" id="is_lock">
     {{# if(d.is_lock==1){ }}
-    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="is_lock">禁用</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="is_lock">禁用</a>
     {{# }else{  }}
-    <a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="is_lock">正常</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="is_lock">正常</a>
     {{# } }}
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('edit')}?id={{d.id}}" class="layui-btn layui-btn-mini">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a href="{:url('edit')}?id={{d.id}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="email">
     {{d.email}}
@@ -73,11 +73,11 @@
                     if (res.status ===1) {
                         if (res.is_lock === 1) {
                             obj.update({
-                                is_lock: '<a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="is_lock">禁用</a>'
+                                is_lock: '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="is_lock">禁用</a>'
                             });
                         } else {
                             obj.update({
-                                is_lock: '<a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="is_lock">正常</a>'
+                                is_lock: '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="is_lock">正常</a>'
                             });
                         }
                     } else {

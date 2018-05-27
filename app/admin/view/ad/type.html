@@ -19,8 +19,8 @@
     <input name="{{d.type_id}}" data-id="{{d.type_id}}" class="list_order layui-input" value=" {{d.sort}}" size="10"/>
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('editType')}?type_id={{d.type_id}}" class="layui-btn layui-btn-mini">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a href="{:url('editType')}?type_id={{d.type_id}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
     layui.use('table', function() {

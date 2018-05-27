@@ -18,14 +18,14 @@
 </script>
 <script type="text/html" id="status">
     {{# if(d.open==1){ }}
-    <a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="open">开启</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="open">开启</a>
     {{# }else{  }}
-    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="open">关闭</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="open">关闭</a>
     {{# } }}
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('editMenu')}?id={{d.id}}" class="layui-btn layui-btn-mini">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a href="{:url('editMenu')}?id={{d.id}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
     var $;
@@ -70,11 +70,11 @@
                     if (res.code === 1) {
                         if (res.open === 1) {
                             obj.update({
-                                open: '<a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="open">开启</a>'
+                                open: '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="open">开启</a>'
                             });
                         } else {
                             obj.update({
-                                open: '<a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="open">关闭</a>'
+                                open: '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="open">关闭</a>'
                             });
                         }
                     } else {

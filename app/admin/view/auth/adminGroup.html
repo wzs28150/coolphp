@@ -11,9 +11,9 @@
 {include file="common/foot"/}
 
 <script type="text/html" id="action">
-    <a href="{:url('groupAccess')}?id={{d.group_id}}" class="layui-btn layui-btn-mini layui-btn-normal">配置规则</a>
-    <a href="{:url('groupEdit')}?id={{d.group_id}}" class="layui-btn layui-btn-warm layui-btn-mini">{:lang('edit')}</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">{:lang('del')}</a>
+    <a href="{:url('groupAccess')}?id={{d.group_id}}" class="layui-btn layui-btn-xs layui-btn-normal">配置规则</a>
+    <a href="{:url('groupEdit')}?id={{d.group_id}}" class="layui-btn layui-btn-warm layui-btn-xs">{:lang('edit')}</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">{:lang('del')}</a>
 </script>
 <script>
     layui.use('table', function() {

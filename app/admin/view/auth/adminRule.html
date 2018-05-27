@@ -10,16 +10,16 @@
 </div>
 <script type="text/html" id="auth">
     {{# if(d.authopen==1){ }}
-    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="authopen">无需验证</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="authopen">无需验证</a>
     {{# }else{  }}
-    <a class="layui-btn layui-btn-warm layui-btn-mini" lay-event="authopen">需要验证</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="authopen">需要验证</a>
     {{# } }}
 </script>
 <script type="text/html" id="status">
     {{# if(d.menustatus==1){ }}
-    <a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="menustatus">显示状态</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="menustatus">显示状态</a>
     {{# }else{  }}
-    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="menustatus">隐藏状态</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="menustatus">隐藏状态</a>
     {{# } }}
 </script>
 <script type="text/html" id="order">
@@ -29,8 +29,8 @@
     <span class="icon {{d.icon}}"></span>
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('ruleEdit')}?id={{d.id}}" class="layui-btn layui-btn-mini">{:lang('edit')}</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">{:lang('del')}</a>
+    <a href="{:url('ruleEdit')}?id={{d.id}}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">{:lang('del')}</a>
 </script>
 {include file="common/foot"/}
 <script>
@@ -60,11 +60,11 @@
                     if (res.status==1) {
                         if (res.authopen == 1) {
                             obj.update({
-                                authopen: '<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="authopen">无需验证</a>'
+                                authopen: '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="authopen">无需验证</a>'
                             });
                         } else {
                             obj.update({
-                                authopen: '<a class="layui-btn layui-btn-warm layui-btn-mini" lay-event="authopen">需要验证</a>'
+                                authopen: '<a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="authopen">需要验证</a>'
                             });
                         }
                     }else{
@@ -80,11 +80,11 @@
                     if (res.status==1) {
                         if (res.menustatus == 1) {
                             obj.update({
-                                menustatus: '<a class="layui-btn layui-btn-warm layui-btn-mini" lay-event="menustatus">显示状态</a>'
+                                menustatus: '<a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="menustatus">显示状态</a>'
                             });
                         } else {
                             obj.update({
-                                menustatus: '<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="menustatus">隐藏状态</a>'
+                                menustatus: '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="menustatus">隐藏状态</a>'
                             });
                         }
                     }else{

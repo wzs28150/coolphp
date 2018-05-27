@@ -25,8 +25,8 @@
     {{# if(d.thumb){ }}<img src="__ADMIN__/images/image.gif" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.thumb}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();">{{# } }}
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('edit')}?id={{d.id}}&catid={{d.catid}}" class="layui-btn layui-btn-mini">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a href="{:url('edit')}?id={{d.id}}&catid={{d.catid}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
     layui.use('table', function() {
@@ -39,13 +39,13 @@
             method: 'post',
             page: true,
             cols: [[
-                {checkbox: true, fixed: true},
-                {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
-                {field: 'title', title: '{:lang("title")}', width: 400, templet: '#title'},
-                {field: 'hits',  title: '{:lang("hit")}', width: 80},
-                {field: 'createtime', title: '{:lang("add")}{:lang("time")}', width: 180},
-                {field: 'listorder', align: 'center', title: '{:lang("order")}', width: 120, templet: '#order'},
-                {width: 160, align: 'center', toolbar: '#action',title:'操作'}
+                {type: "checkbox", fixed: true},
+                {field: 'id', title: '{:lang("id")}', fixed: true},
+                {field: 'title', title: '{:lang("title")}',  templet: '#title'},
+                {field: 'hits',  title: '{:lang("hit")}'},
+                {field: 'createtime', title: '{:lang("add")}{:lang("time")}'},
+                {field: 'listorder', align: 'center', title: '{:lang("order")}', templet: '#order'},
+                {align: 'center', toolbar: '#action',title:'操作'}
             ]],
             limit: 10
         });

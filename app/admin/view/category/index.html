@@ -6,15 +6,15 @@
     <blockquote class="layui-elem-quote">
         <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}栏目</a>
     </blockquote>
-    <table class="layui-table" lay-filter="list">
+    <table class="layui-table" >
         <thead>
         <tr>
-            <th lay-data="{field:'id', width:60,fixed: true}">编号</th>
-            <th lay-data="{field:'catname', width:180}">栏目名称<span id="cateNameMsg">(点击查看内容)</span></th>
-            <th lay-data="{field:'moduleid', width:120}">所属模型</th>
-            <th lay-data="{field:'ismenu', align:'center',width:80}">导航</th>
-            <th lay-data="{field:'listorder',align:'center',width:120}">{:lang('order')}</th>
-            <th lay-data="{field:'action',width:130, align:'right'}">操作</th>
+          <th>编号</th>
+          <th>栏目名称<span id="cateNameMsg">(点击查看内容)</span></th>
+          <th>所属模型</th>
+          <th>导航</th>
+          <th>{:lang('order')}</th>
+          <th>操作</th>
         </tr>
         </thead>
         <tbody id="con">
@@ -27,8 +27,7 @@
 <script src="__STATIC__/common/js/jquery.2.1.1.min.js"></script>
 <script>
     layui.use('table', function(){
-        var table = layui.table,$= layui.jquery;
-        table.init('list', {});
+        var $= layui.jquery;
 
         $('body').on('blur','.list_order',function() {
             var id = $(this).attr('data-id');

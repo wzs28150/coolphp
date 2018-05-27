@@ -10,15 +10,15 @@
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="action">
-    <a href="{:url('field')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-mini">模型字段</a>
-    <a href="{:url('edit')}?id={{d.id}}" class="layui-btn layui-btn-mini">{:lang('edit')}</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">{:lang('del')}</a>
+    <a href="{:url('field')}?id={{d.id}}" class="layui-btn layui-btn-normal layui-btn-xs">模型字段</a>
+    <a href="{:url('edit')}?id={{d.id}}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">{:lang('del')}</a>
 </script>
 <script type="text/html" id="status">
     {{# if(d.status==1){ }}
-    <a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="status">开启</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="status">开启</a>
     {{# }else{  }}
-    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="status">禁用</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="status">禁用</a>
     {{# } }}
 </script>
 <script>
@@ -47,11 +47,11 @@
                     if (res.status == 1) {
                         if (res.moduleState == 1) {
                             obj.update({
-                                status: '<a class="layui-btn layui-btn-warm layui-btn-mini" lay-event="status">开启</a>'
+                                status: '<a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="status">开启</a>'
                             });
                         } else {
                             obj.update({
-                                status: '<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="status">禁用</a>'
+                                status: '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="status">禁用</a>'
                             });
                         }
                     } else {

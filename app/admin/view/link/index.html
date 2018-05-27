@@ -18,14 +18,14 @@
 </script>
 <script type="text/html" id="open">
     {{# if(d.open==1){ }}
-    <a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="open">开启</a>
+    <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="open">开启</a>
     {{# }else{  }}
-    <a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="open">禁用</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="open">禁用</a>
     {{# } }}
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('edit')}?link_id={{d.link_id}}" class="layui-btn layui-btn-mini">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a href="{:url('edit')}?link_id={{d.link_id}}" class="layui-btn layui-btn-xs">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
     layui.use('table', function() {
@@ -56,11 +56,11 @@
                     if (res.status === 1) {
                         if (res.open === 1) {
                             obj.update({
-                                open: '<a class="layui-btn layui-btn-mini layui-btn-warm" lay-event="open">开启</a>'
+                                open: '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="open">开启</a>'
                             });
                         } else {
                             obj.update({
-                                open: '<a class="layui-btn layui-btn-mini layui-btn-danger" lay-event="open">禁用</a>'
+                                open: '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="open">禁用</a>'
                             });
                         }
                     } else {
@@ -124,12 +124,12 @@
         $.post('{:url("linkState")}', {id: id}, function (data) {
             if (data.status) {
                 if (data.info == '状态禁止') {
-                    var a = '<button class="layui-btn layui-btn-danger layui-btn-mini">状态禁用</button>'
+                    var a = '<button class="layui-btn layui-btn-danger layui-btn-xs">状态禁用</button>'
                     $('#zt' + id).html(a);
                     layer.msg(data.info, {icon: 5});
                     return false;
                 } else {
-                    var b = '<button class="layui-btn layui-btn-warm layui-btn-mini">状态开启</button>'
+                    var b = '<button class="layui-btn layui-btn-warm layui-btn-xs">状态开启</button>'
                     $('#zt' + id).html(b);
                     layer.msg(data.info, {icon: 6});
                     return false;
