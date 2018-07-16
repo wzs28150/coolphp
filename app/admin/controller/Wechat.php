@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 use think\Db;
-use clt\Leftnav;
+use cool\Leftnav;
 class Wechat extends Common{
 	public function index(){
 		$info = db('wx_user')->where('id',1)->find();

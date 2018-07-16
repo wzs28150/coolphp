@@ -42,9 +42,9 @@
                 <h5>推荐内容</h5>
                 <ul class="sidebar-list">
 
-                    {clt:list db="article" id="vo" where='posid = 2 and catid=".input(catId)." ' order="listorder asc,createtime desc" limit='10'}
+                    {cool:list db="article" id="vo" where='posid = 2 and catid=".input(catId)." ' order="listorder asc,createtime desc" limit='10'}
                        <li><a href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}" style="{:style($vo['title_style'])}" title="{$vo.title}">{$vo.title}</a></li>
-                    {/clt:list}
+                    {/cool:list}
                 </ul>
             </aside>
         </div>

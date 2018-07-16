@@ -1,109 +1,176 @@
 {include file="common/head"/}
-<script>
-    var ADMIN = '__ADMIN__';
-    var navs = {$menus};
-    var topmenus = {$topmenus};
-</script>
-<style media="screen">
-  .topnav{left: 185px;}
-  .topnav li{ background:none; }
-  .header .layui-nav.topnav .layui-this{background:none;}
-</style>
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header header">
-        <div class="layui-main">
-            <div class="admin-login-box">
-                <a class="logo" style="left: 0;" href="{:url('admin/index/index')}">
-                    <span style="font-size: 22px;">{:config('sys_name')}</span>
-                </a>
-            </div>
-            <ul class="layui-nav topnav" lay-filter="topnav">
+<div id="LAY_app">
+  <div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+      <!-- 头部区域 -->
+      <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item layadmin-flexible" lay-unselect>
+          <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+              <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+            </a>
+        </li>
+        <li class="layui-nav-item layui-hide-xs" lay-unselect>
+          <a href="/index.html" target="_blank" title="前台">
+              <i class="layui-icon layui-icon-website"></i>
+            </a>
+        </li>
+        <li class="layui-nav-item" lay-unselect>
+          <a href="javascript:;" layadmin-event="refresh" data-url="{:url(" clear ")}" title="刷新">
+              <i class="layui-icon layui-icon-refresh-3"></i>
+            </a>
+        </li>
+      </ul>
+      <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
 
-            </ul>
-            <ul class="layui-nav admin-header-item" lay-filter="side-top-right">
-                <li class="layui-nav-item" id="cache">
-                    <a href="javascript:;">{:lang('clearCache')}</a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="{:url('home/index/index')}" target="_blank">{:lang('home')}</a>
-                </li>
-                <li class="layui-nav-item">
-                    <a class="name" href="javascript:;">主题</a>
+        <!-- <li class="layui-nav-item" lay-unselect>
+            <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
+              <i class="layui-icon layui-icon-notice"></i>
+              <span class="layui-badge-dot"></span>
+            </a>
+          </li> -->
+        <li class="layui-nav-item layui-hide-xs" lay-unselect>
+          <a href="javascript:;" layadmin-event="theme">
+              <i class="layui-icon layui-icon-theme"></i>
+            </a>
+        </li>
+        <li class="layui-nav-item layui-hide-xs" lay-unselect>
+          <a href="javascript:;" layadmin-event="note">
+              <i class="layui-icon layui-icon-note"></i>
+            </a>
+        </li>
+        <li class="layui-nav-item" lay-unselect>
+          <a href="javascript:;">
+              <cite>{:session('username')}</cite>
+            </a>
+          <dl class="layui-nav-child">
+            <dd><a lay-href="/admin/auth/adminEdit.html?admin_id={:session('aid')}">基本资料</a></dd>
+            <dd><a lay-href="/admin/auth/adminEdit.html?admin_id={:session('aid')}">修改密码</a></dd>
+            <hr>
+            <dd style="text-align: center;"><a href="{:url('index/logout')}">{:lang('logout')}</a></dd>
+          </dl>
+        </li>
+
+        <li class="layui-nav-item layui-hide-xs" lay-unselect>
+          <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+        </li>
+        <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+          <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 侧边菜单 -->
+    <div class="layui-side layui-side-menu">
+      <div class="layui-side-scroll">
+        <div class="layui-logo" lay-href="{:url('main')}">
+          <span style="font-size:30px;font-weight: bold;">{:config('sys_name')}</span>
+        </div>
+
+        <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+          <li data-name="home" class="layui-nav-item">
+            <a lay-href="{:url('main')}" lay-tips="主页" lay-direction="2">
+                <i class="layui-icon layui-icon-home"></i>
+                <cite>主页</cite>
+              </a>
+          </li>
+          {volist name="menus" id="vo"}
+          <li data-name="{$vo.title}" class="layui-nav-item">
+            {if condition="$vo.children"}
+            <a href="javascript:;" lay-tips="{$vo.title}" lay-direction="2">
+              <i class="layui-icon layui-icon-{$vo.icon}"></i>
+                <cite>{$vo.title}</cite>
+            </a>
+            {else}
+            <a lay-href="{$vo.href}" lay-tips="{$vo.title}" lay-direction="2">
+              <i class="layui-icon layui-icon-{$vo.icon}"></i>
+                <cite>{$vo.title}</cite>
+            </a>
+            {/if}
+              {if condition="$vo.children"}
+                {volist name="$vo.children" id="voa"}
+                <dl class="layui-nav-child">
+                  {if condition="$voa.children"}
+                  <dd data-name="{$vob.title}">
+                    <a href="javascript:;">{$voa.title}</a>
                     <dl class="layui-nav-child">
-                        <dd data-skin="0"><a href="javascript:;">默认</a></dd>
-                        <dd data-skin="1"><a href="javascript:;">纯白</a></dd>
-                        <dd data-skin="2"><a href="javascript:;">蓝白</a></dd>
+                      <!-- {volist name="$voa.children" id="vob"}
+                        <dd data-name="{$vob.title}"><a lay-href="{$vob.href}">{$vob.title}</a></dd>
+                        {/volist} -->
+                      {volist name="$voa.children" id="vob"}
+                      <dd data-name="{$vob.title}" class="layui-nav-item">
+                        {if condition="$vob.children"}
+                        <a href="javascript:;">{$vob.title}</a>
+                        <dl class="layui-nav-child">
+                          {volist name="$vob.children" id="voc"}
+                          <dd data-name="{$voc.title}"><a lay-href="{$voc.href}">{$voc.title}</a></dd>
+                          {/volist}
+                        </dl>
+                        {else}
+                        <a lay-href="{$vob.href}">{$vob.title}</a>
+                        {/if}
+                      </dd>
+                      {/volist}
                     </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="admin-header-user">
-                        <img src="__ADMIN__/images/0.jpg" class="layui-nav-img" />
-                        <span>{:session('username')}</span>
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="{:url('index/logout')}"><i class="fa fa-sign-out" aria-hidden="true"></i>{:lang('logout')}</a>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
-            <ul class="layui-nav admin-header-item-mobile">
-                <li class="layui-nav-item">
-                    <a href="{:url('home/index/index')}" target="_blank">{:lang('home')}</a>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="{:url('index/logout')}"><i class="fa fa-sign-out" aria-hidden="true"></i> {:lang('logout')}</a>
-                </li>
-            </ul>
-        </div>
+                  </dd>
+                  {else}
+                  <dd data-name="{$vob.title}">
+                    <a lay-href="{$voa.href}">{$voa.title}</a>
+                  </dd>
+                  {/if}
+                </dl>
+                {/volist}
+              {/if}
+          </li>
+          {/volist}
+        </ul>
+      </div>
     </div>
-    <div class="layui-side layui-bg-black" id="admin-side">
-        <div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side"></div>
+
+    <!-- 页面标签 -->
+    <div class="layadmin-pagetabs" id="LAY_app_tabs">
+      <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+      <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+      <!-- <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div> -->
+      <div class="layui-icon layadmin-tabs-control layui-icon-down">
+        <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+          <li class="layui-nav-item" lay-unselect>
+            <a href="javascript:;"></a>
+            <dl class="layui-nav-child layui-anim-fadein">
+              <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+              <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+              <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+      <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+        <ul class="layui-tab-title" id="LAY_app_tabsheader">
+          <li lay-id="{:url('main')}" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+        </ul>
+      </div>
     </div>
-    <div class="layui-body" style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
-        <div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab" style="">
-            <ul class="layui-tab-title">
-                <li class="layui-this">
-                    <i class="icon icon-earth" aria-hidden="true"></i>
-                    <cite>控制面板</cite>
-                </li>
-            </ul>
-            <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0; " >
-                <div class="layui-tab-item layui-show">
-                    <iframe src="{:url('main')}"></iframe>
-                </div>
-            </div>
-        </div>
+
+
+    <!-- 主体内容 -->
+    <div class="layui-body" id="LAY_app_body">
+      <div class="layadmin-tabsbody-item layui-show">
+        <iframe src="{:url('main')}" frameborder="0" class="layadmin-iframe"></iframe>
+      </div>
     </div>
-    <div class="layui-footer footer footer-demo" id="admin-footer">
-        <div class="layui-main">
-            <p>2017 &copy;
-                <a href="http://www.hrbkcwl.com/">www.hrbkcwl.com</a>
-            </p>
-        </div>
-    </div>
-    <div class="site-tree-mobile layui-hide">
-        <i class="layui-icon">&#xe602;</i>
-    </div>
-    <div class="site-mobile-shade"></div>
-    {include file="common/foot"/}
-    <script src="__ADMIN__/js/index.js"></script>
-    <script>
-        localStorage.skin='';
-        layui.use('layer',function(){
-            var $ = layui.jquery, layer = layui.layer;
-            $('#cache').click(function () {
-                layer.confirm('确认要清除缓存？', {icon: 3}, function (data) {
-                    $.post('{:url("clear")}', {}, function (data) {
-                        layer.msg(data.info, {icon: 6}, function (index) {
-                            layer.close(index);
-                            window.location.href = data.url;
-                        });
-                    });
-                });
-            });
-        })
-    </script>
+
+    <!-- 辅助元素，一般用于移动设备下遮罩 -->
+    <div class="layadmin-body-shade" layadmin-event="shade"></div>
+  </div>
 </div>
+
+<script src="__ADMIN__/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: '__ADMIN__/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use('index');
+</script>
 </body>
+
 </html>

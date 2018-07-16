@@ -9,6 +9,15 @@ class Admin extends Model
 			if($user['pwd'] == md5($data['password'])){
 				session('username',$user['username']);
 				session('aid',$user['admin_id']);
+				session('gid',$user['group_id']);
+				if($user['pid']){
+					session('pid',$user['pid']);
+				}
+				if($user['lid']){
+					session('lid',$user['lid']);
+				}
+				$avatar = $user['avatar']==''?'/static/admin/images/0.jpg':$user['avatar'];
+				session('avatar',$avatar);
 				return 1; //信息正确
 			}else{
 				return -1; //密码错误

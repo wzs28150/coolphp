@@ -26,6 +26,7 @@ layui.define('jquery', function(exports){
           }
           d.interval = setInterval(k, c.refreshInterval);
           b(g);
+
           function k() {
               g += i;
               e++;
@@ -33,6 +34,7 @@ layui.define('jquery', function(exports){
               if (typeof(c.onUpdate) == "function") {
                   c.onUpdate.call(j, g)
               }
+
               if (e >= h) {
                   f.removeData("countTo");
                   clearInterval(d.interval);
@@ -44,6 +46,7 @@ layui.define('jquery', function(exports){
           }
           function b(m) {
               var l = c.formatter.call(j, m, c);
+              // console.log(j);
               f.html(l)
           }
       })
@@ -59,7 +62,7 @@ layui.define('jquery', function(exports){
       onComplete: null
   };
   function formatter(b, a) {
-      return Math.ceil(b)
+      return Math.round(b)
   }
   $("#count-number").data("countToOptions", {
       formatter: function(b, a) {

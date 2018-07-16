@@ -2,7 +2,7 @@
 namespace app\admin\controller;
 use think\Db;
 use think\Request;
-use clt\Form;
+use cool\Form;
 use think\Controller;
 class Plugin extends Common{
     public function _initialize()

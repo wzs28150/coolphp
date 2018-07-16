@@ -1,0 +1,159 @@
+{if condition="$isexamine neq 3"}
+<link href="/addons/comment/src/css/font-awesome.min.css" rel="stylesheet">
+<link href="/addons/comment/src/css/comment.css" rel="stylesheet">
+{if condition="$customstyle"}
+<style media="screen">
+  {$customstyle}
+</style>
+{/if}
+<div class="comment">
+  <div class="comment-form" style="display: none;">
+    <h2>发表评论</h2>
+    <div class="comment-textarea radius">
+      <ul class="comment-textarea-nav">
+        <li>
+          <a href="javascript:;" id="emoji_btn" data-ajax="no"> <i class="fa fa-smile-o"></i></a>
+        </li>
+        <!-- <li>
+          <a href="javascript:;" data-ajax="no"> <i class="fa fa-image"></i></a>
+        </li> -->
+      </ul>
+      <div id="easyEditor" class="textarea"></div>
+      <!-- <textarea name="name" id="easyEditor"  placeholder="请输入评论内容"></textarea> -->
+      <div class="emoji" id="emoji_list">
+        <ul>
+          <li>
+            <img src="/addons/comment/src/img/emoji/1.gif" alt="笑脸" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/2.gif" alt="撇嘴" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/3.gif" alt="色" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/4.gif" alt="发呆" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/5.gif" alt="流泪" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/6.gif" alt="害羞" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/7.gif" alt="闭嘴" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/8.gif" alt="睡" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/9.gif" alt="大哭" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/10.gif" alt="尴尬" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/11.gif" alt="发怒" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/12.gif" alt="调皮" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/13.gif" alt="呲牙" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/14.gif" alt="惊讶" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/15.gif" alt="难过" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/16.gif" alt="冷汗" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/17.gif" alt="抓狂" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/18.gif" alt="吐" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/19.gif" alt="偷笑" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/20.gif" alt="愉快" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/21.gif" alt="白银" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/22.gif" alt="傲慢" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/23.gif" alt="饥饿" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/24.gif" alt="困" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/25.gif" alt="惊恐" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/26.gif" alt="流汗" />
+          </li>
+          <li>
+            <img src="/addons/comment/src/img/emoji/27.gif" alt="憨笑" />
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="comment-info">
+      <form id="comment-form" data-url="{:addon_url('comment://index/index')}">
+        {if condition="$name"}
+        <div class="info-col-3 radius">
+        <img src="/addons/comment/src/img/none.png" alt="">{$name}({$company})
+        <input type="hidden" id="comment-name" name="name" value="{$name}">
+        <input type="hidden" id="comment-company" name="company" value="{$company}">
+        <input type="hidden" id="comment-certificate" name="certificate" value="{$certificate}">
+        </div>
+        {else}
+        <div class="info-col radius">
+          <label for="comment-name "><i class="fa fa-user-circle-o"></i></label>
+          <input type="text" id="comment-name" name="name" placeholder="姓名" data-msg="姓名不能为空" value="">
+        </div>
+        <div class="info-col radius">
+          <label for="comment-company "><i class="fa fa-building-o"></i></label>
+          <input type="text" id="comment-company" name="company" placeholder="单位" data-msg="单位不能为空" value="">
+        </div>
+        <div class="info-col radius">
+          <label for="comment-certificate "><i class="fa fa-id-card-o"></i></label>
+          <input type="text" id="comment-certificate" name="certificate" placeholder="军官证号" data-msg="军官证号不能为空" value="">
+        </div>
+        {/if}
+        <div class="info-col radius">
+          <input type="hidden" id="comment-aid" name="aid" value="{$aid}">
+          <input type="hidden" id="comment-title" name="title" value="{$title}">
+          <input type="hidden" id="comment-url" name="url" value="{$url}">
+          <button type="button" id="comment-submit" name="button">发布</button>
+        </div>
+      </form>
+    </div>
+    {if condition="$is_member"}
+      <div class="info" style="color:#999;margin-top:20px;">登录后评论,可获得更多体验。。。</div>
+    {/if}
+  </div>
+  <h2 style="color:#106755">评论列表<span style="display:none">(共<i class="num">0</i>条)</span></h2>
+  <div class="comment-list" id="comment-list" data-url="{:addon_url('comment://index/getlist')}">
+    <ul>
+      <li class="loading">
+        <div class="la-ball-clip-rotate-multiple la-dark la-x">
+          <div></div>
+          <div></div>
+        </div>
+        <div class="loading-text">加载中。。。</div>
+      </li>
+    </ul>
+  </div>
+</div>
+{/if}

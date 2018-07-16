@@ -1,12 +1,16 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{:lang('module')}{:lang('list')}</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}{:lang('module')}</a>
-    </blockquote>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">{:lang('module')}{:lang('list')}</div>
+      <div class="layui-card-body" pad15>
+        <div style="padding-bottom: 5px;">
+            <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}{:lang('module')}</a>
+        </div>
+        <table class="layui-table" id="list" lay-filter="list"></table>
+      </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="action">
@@ -29,11 +33,12 @@
             url: '{:url("index")}',
             method: 'post',
             page:true,
+            cellMinWidth: 80,
             cols: [[
                 {field: 'id', title: '{:lang("id")}', width:60, fixed: true},
-                {field: 'title', title: '{:lang("module")}{:lang("name")}', width: 120},
-                {field: 'name', title: '{:lang("table")}', width: 100},
-                {field: 'description', title: '{:lang("detail")}', width: 180},
+                {field: 'title', title: '{:lang("module")}{:lang("name")}'},
+                {field: 'name', title: '{:lang("table")}'},
+                {field: 'description', title: '{:lang("detail")}'},
                 {field: 'status', align: 'center',title: '{:lang("status")}', width: 80,toolbar: '#status'},
                 {width: 200, align: 'center', toolbar: '#action'}
             ]]

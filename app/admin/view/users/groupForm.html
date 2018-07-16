@@ -1,12 +1,13 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit" ng-app="hd" ng-controller="ctrl">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{$title}</legend>
-    </fieldset>
-    <form class="layui-form layui-form-pane">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit" ng-app="hd" ng-controller="ctrl">
+    <div class="layui-card-header">{$title}</div>
+    <div class="layui-card-body" pad15>
+      <form class="layui-form layui-form-pane">
         <div class="layui-form-item">
             <label class="layui-form-label">会员组名称</label>
-            <div class="layui-input-4">
+            <div class="layui-input-block">
                 <input type="text" name="level_name" ng-model="field.level_name" lay-verify="required" placeholder="输入会员组名称" class="layui-input">
             </div>
         </div>
@@ -24,7 +25,7 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">{:lang('order')}</label>
-            <div class="layui-input-4">
+            <div class="layui-input-block">
                 <input type="text" name="sort" ng-model="field.sort" placeholder="从小到大排序" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -38,6 +39,9 @@
             </div>
         </div>
     </form>
+    </div>
+</div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script src="__STATIC__/common/js/angular.min.js"></script>

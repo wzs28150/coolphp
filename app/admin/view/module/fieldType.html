@@ -1,6 +1,6 @@
 {switch name="type" }
 {case value="title"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td width="120">标题图片</td>
 		<td>
@@ -18,7 +18,7 @@
 </table>
 {/case}
 {case value="text" }
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td>默认值</td>
 		<td> <input type="text" class="input-text layui-input" size="50"  name="setup[default]" value="{$default}" /></td>
@@ -34,7 +34,7 @@
 </table>
 {/case}
 {case value="textarea" }
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td>字段类型</td>
 		<td>
@@ -53,7 +53,7 @@
 </table>
 {/case}
 {case value="select" }
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td width="120">选项列表:<br>例: <font color="red">选项名称|值</font></td>
 		<td>
@@ -95,14 +95,13 @@
 		</td>
 	</tr>
 </table>
-
 {/case}
 {case value="editor"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td width="140">编辑器类型：</td>
 		<td><select name="setup[edittype]">
-			<option value="layedit" {if $edittype=='layedit'} selected{/if}>layedit</option>
+			<!-- <option value="layedit" {if $edittype=='layedit'} selected{/if}>layedit</option> -->
 			<option value="UEditor" {if $edittype=='UEditor'} selected{/if}>UEditor</option>
 		</select></td>
 	</tr>
@@ -111,8 +110,11 @@
 {case value="datetime"}
 
 {/case}
+{case value="multicolumn"}
+
+{/case}
 {case value="groupid"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td width="120">选项类型</td>
 		<td>
@@ -142,7 +144,7 @@
 </table>
 {/case}
 {case value="typeid"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td width="120">选项类型</td>
 		<td>
@@ -175,7 +177,7 @@
 {case value="posid"}
 {/case}
 {case value="radio"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td width="120">选项列表:<br>例: <font color="red">选项名称|值</font></td>
 		<td>
@@ -204,10 +206,9 @@
 		</td>
 	</tr>
 </table>
-
 {/case}
 {case value="checkbox"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td width="120">选项列表:<br>例: <font color="red">选项名称|值</font></td>
 		<td>
@@ -238,7 +239,7 @@
 </table>
 {/case}
 {case value="number"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td>是否包括负数：</td>
 		<td>
@@ -268,7 +269,7 @@
 </table>
 {/case}
 {case value="image"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td>允许上传的图片类型</td>
 		<td><input type="text" name="setup[upload_allowext]" value="{$upload_allowext}" class="input-text layui-input"></td>
@@ -276,11 +277,11 @@
 </table>
 {/case}
 {case value="images"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 </table>
 {/case}
 {case value="file"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
 	<tr>
 		<td>允许上传的文件类型</td>
 		<td><input type="text" name="setup[upload_allowext]" value="{$upload_allowext}" class="input-text layui-input"></td>
@@ -288,7 +289,28 @@
 </table>
 {/case}
 {case value="files"}
-<table cellpadding="2" cellspacing="1" width="100%">
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
+</table>
+{/case}
+{case value="catid"}
+<table class="layui-table" cellpadding="2" cellspacing="1" width="100%">
+  <tr>
+      <td>是否多栏目：</td>
+      <td>
+          <input type="radio" id="" name = "setup[multi]" value="1" <?php if($multi ==1) echo 'checked';?> title="是"/>
+					<input type="radio" id="" name = "setup[multi]" value="0" <?php if($multi ==0) echo 'checked';?>  title="否"/>
+      </td>
+  </tr>
+</table>
+{/case}
+{case value="addbox"}
+<table class="layui-table" cellpadding="2" cellspacing="1" width="100%">
+  <tr>
+      <td>参数设置</td>
+      <td>
+          <input type="input" id="" name = "setup[multi]" />
+      </td>
+  </tr>
 </table>
 {/case}
 {default /}

@@ -2,7 +2,7 @@
 namespace app\home\controller;
 use think\Input;
 use think\Db;
-use clt\Leftnav;
+use cool\Leftnav;
 use think\Request;
 use think\Controller;
 date_default_timezone_set('PRC');

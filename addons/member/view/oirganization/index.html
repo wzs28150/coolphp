@@ -1,0 +1,74 @@
+{include file="common/head"/}
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">{$title}</div>
+    <div class="layui-card-body" pad15>
+      <div style="padding-bottom:5px;">
+          <a href="{:addon_url('member://oirganization/add')}?pid={:Input(pid)}" class="layui-btn layui-btn-small">添加</a>{if condition="Input(pid)"}<a href="{:addon_url('member://oirganization/index')}" class="layui-btn layui-btn-small">返回</a>{/if}
+      </div>
+      <table class="layui-table" id="list" lay-filter="list"></table>
+    </div>
+</div>
+   </div>
+</div>
+{include file="common/foot"/}
+<script src="__STATIC__/common/js/jquery.2.1.1.min.js"></script>
+
+<script type="text/html" id="action">
+  {if condition="Input(pid) eq 0"}
+  <a href="{:addon_url('member://oirganization/index')}?pid={{d.id}}" class="layui-btn layui-btn-xs">查看下级</a>
+  {/if}
+  <a href="{:addon_url('member://oirganization/edit')}?id={{d.id}}" class="layui-btn layui-btn-xs">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use('table', function() {
+        var table = layui.table, $ = layui.jquery;
+        var tableIn = table.render({
+            id: 'content',
+            elem: '#list',
+            url: '{:addon_url("member://oirganization/index")}?pid={:Input(pid)}',
+            // where:{type:'{$type}'},
+            method: 'post',
+            page: true,
+            cols: [[
+              {type: "checkbox", fixed: true},
+              {field: 'id', title: '编号', fixed: true},
+              {field: 'title',  title: '单位名称'},
+              {field: 'addtime',title:'添加时间'},
+              {align: 'center', toolbar: '#action',title:'操作',width:300}
+            ]],
+            limit: 10
+        });
+        //搜索
+        $('#search').on('click', function () {
+            var key = $('#key').val();
+            if ($.trim(key) === '') {
+                layer.msg('{:lang("pleaseEnter")}关键字！', {icon: 0});
+                return;
+            }
+            tableIn.reload({
+                where: {key: key,catid:'{:input("catid")}'}
+            });
+        });
+        table.on('tool(list)', function(obj) {
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('您确定要删除该内容吗？', function(index){
+                    var loading = layer.load(1, {shade: [0.1, '#fff']});
+                    $.post('{:addon_url("member://oirganization/del")}',{id:data.id},function(res){
+                        layer.close(loading);
+                        if(res.code===1){
+                            layer.msg(res.msg,{time:1000,icon:1});
+                            tableIn.reload();
+                        }else{
+                            layer.msg('操作失败！',{time:1000,icon:2});
+                        }
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+</script>

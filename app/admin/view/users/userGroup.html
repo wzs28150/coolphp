@@ -1,14 +1,18 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>会员组{:lang('list')}</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('groupAdd')}" class="layui-btn layui-btn-small">
-            {:lang('add')}会员组
-        </a>
-    </blockquote>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">会员组{:lang('list')}</div>
+      <div class="layui-card-body" pad15>
+        <div style="padding-bottom: 5px;">
+            <a href="{:url('groupAdd')}" class="layui-btn layui-btn-small">
+                {:lang('add')}会员组
+            </a>
+        </div>
+        <table class="layui-table" id="list" lay-filter="list"></table>
+      </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="bom">
@@ -28,13 +32,14 @@
             id: 'user',
             elem: '#list',
             url: '{:url("userGroup")}',
+            cellMinWidth: 80,
             method: 'post',
             cols: [[
                 {field: 'level_id', title: '{:lang("id")}', width: 80, fixed: true, sort: true},
-                {field: 'level_name', title: '名称', width: 120},
-                {field: 'bomlimit', title: '满足积分条件', width: 150,templet:'#bom'},
-                {field: 'sort',align: 'center',title: '{:lang("order")}', width: 120,templet:'#sort',sort: true},
-                {width: 160, align: 'center', toolbar: '#action'}
+                {field: 'level_name', title: '名称'},
+                {field: 'bomlimit', title: '满足积分条件', templet:'#bom'},
+                {field: 'sort',align: 'center',title: '{:lang("order")}', templet:'#sort',sort: true},
+                {align: 'center',title: '操作', toolbar: '#action'}
             ]]
         });
         table.on('tool(list)', function(obj){

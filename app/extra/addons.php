@@ -35,5 +35,4 @@ $array = [];
 foreach ($list as $key => $value) {
   $array[$value.'hook'] = $value;
 }
-
 return $array;

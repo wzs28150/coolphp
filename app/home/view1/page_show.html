@@ -10,7 +10,7 @@
 <section id="breadcrumb-wrapper">
     <div id="breadcrumb-content">
         <ul>
-            <li><a href="{:url('home/index/index')}" title="CLTPHP">首页</a></li>
+            <li><a href="{:url('home/index/index')}" title="COOLPHP">首页</a></li>
             <li><a href="{:url('home/'.MODULE_NAME.'/index',array('catId'=>input('catId')))}" title="{$title}">{$title}</a></li>
             <li>{$info.title}</li>
         </ul>
@@ -35,7 +35,7 @@
             <aside>
                 <h5>推荐文章</h5>
                 <ul class="popular-list">
-                    {clt:list_join db='article' dbfield='catid' id='vo' joindb='category' joinfield='id' where="posid = 1 or posid=2" order="listorder asc,createtime desc" limit='8'}
+                    {cool:list_join db='article' dbfield='catid' id='vo' joindb='category' joinfield='id' where="posid = 1 or posid=2" order="listorder asc,createtime desc" limit='8'}
                     <li>
                         <img src="{:imgUrl($vo['title_thumb'],__HOME__.'/images/portfolio-thumb/p'.$k.'.jpg')}" alt="" class="img-border" />
                         <p class="popular-title">
@@ -44,7 +44,7 @@
                         <p class="comment-count"><a href="single.html">{$vo.hits}</a></p>
                         <p class="author-name">{$vo.username}</p>
                     </li>
-                    {/clt:list_join}
+                    {/cool:list_join}
                 </ul>
             </aside>
         </div>

@@ -10,7 +10,7 @@
 <section id="breadcrumb-wrapper">
     <div id="breadcrumb-content">
         <ul>
-            <li><a href="{:url('home/index/index')}" title="CLTPHP">首页</a></li>
+            <li><a href="{:url('home/index/index')}" title="COOLPHP">首页</a></li>
             <li><a href="#">{$title}</a></li>
         </ul>
     </div>
@@ -41,9 +41,9 @@
             <aside>
                 <h5>推荐内容</h5>
                 <ul class="sidebar-list">
-                    {clt:list_join db='article' dbfield='catid' id='vo' joindb='category' joinfield='id' where='posid = 2 and catid=".input(catId)." ' order="listorder asc,createtime desc" limit='10'}
+                    {cool:list_join db='article' dbfield='catid' id='vo' joindb='category' joinfield='id' where='posid = 2 and catid=".input(catId)." ' order="listorder asc,createtime desc" limit='10'}
                        <li><a href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}" style="{:style($vo['title_style'])}" title="{$vo.title}">{$vo.services}{$vo.title}</a></li>
-                    {/clt:list_join}
+                    {/cool:list_join}
                 </ul>
             </aside>
         </div>

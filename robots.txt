@@ -1,8 +1,7 @@
-User-agent: * 
-Disallow: /admin
-Disallow: /think
-Disallow: /extend
+User-agent: *
+Disallow: /app/admin
+Disallow: /core
 Disallow: /public
 Disallow: /vendor
 Disallow: /runtime
-Disallow: /plugins
+Disallow: /addons

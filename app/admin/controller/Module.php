@@ -98,7 +98,7 @@ class Module extends Common
 			  `keywords` varchar(120) NOT NULL DEFAULT '',
 			  `description` mediumtext NOT NULL,
 			  `content` mediumtext NOT NULL,
-			  `template` varchar(40) NOT NULL DEFAULT '', 
+			  `template` varchar(40) NOT NULL DEFAULT '',
 			  `posid` tinyint(2) unsigned NOT NULL DEFAULT '0',
 			  `status` tinyint(1) unsigned NOT NULL DEFAULT '0',
 			  `recommend` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -141,7 +141,7 @@ class Module extends Common
 			  `createtime` int(11) unsigned NOT NULL DEFAULT '0',
 			  `updatetime` int(11) unsigned NOT NULL DEFAULT '0',
 			  `lang` tinyint(1) unsigned NOT NULL DEFAULT '0',
-			  `template` varchar(40) NOT NULL DEFAULT '', 
+			  `template` varchar(40) NOT NULL DEFAULT '',
 			  PRIMARY KEY (`id`)
 			) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8");
                 Db::execute("INSERT INTO `".$prefix."field` VALUES (NULL, '".$moduleid."', 'title', '标题', '', '1', '1', '80', '', '标题必须为1-80个字符', '', 'title', 'array (\n  \'thumb\' => \'1\',\n  \'style\' => \'1\',\n  \'size\' => \'55\',\n)','1','',  '2', '1', '1')");
@@ -541,6 +541,9 @@ class Module extends Common
                 break;
             case 'template':
                 $sql = "ALTER TABLE `$tablename` $do `$field` VARCHAR( 80 ) NOT NULL DEFAULT ''";
+                break;
+            case 'addbox':
+                $sql = "ALTER TABLE `$tablename` $do `$field` TEXT NOT NULL";
                 break;
         }
         return $sql;

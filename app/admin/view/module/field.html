@@ -1,27 +1,31 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>字段{:lang('list')}</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('fieldAdd',array('moduleid'=>input('id')))}" class="layui-btn layui-btn-small">{:lang('add')}{:lang('field')}</a>
-        <a href="{:url('index')}" class="layui-btn layui-btn-small layui-btn-primary pull-right">模型列表</a>
-    </blockquote>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">字段{:lang('list')}</div>
+    <div class="layui-card-body" pad15>
+      <div style="padding-bottom: 5px;">
+          <a href="{:url('fieldAdd',array('moduleid'=>input('id')))}" class="layui-btn layui-btn-small">{:lang('add')}{:lang('field')}</a>
+          <a href="{:url('index')}" class="layui-btn layui-btn-small layui-btn-primary pull-right">模型列表</a>
+      </div>
+      <table class="layui-table" id="list" lay-filter="list"></table>
+    </div>
+</div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="isSystem">
     {{# if(d.issystem==1){ }}
-    <i class="icon icon-checkmark green"></i>
+    <i class="layui-icon layui-icon-ok greenfont" style="font-weight: bold;"></i>
     {{# }else{  }}
-    <i class="icon icon-cross red"></i>
+    <i class="layui-icon layui-icon-close redfont" style="font-weight: bold;"></i>
     {{# } }}
 </script>
 <script type="text/html" id="required">
     {{# if(d.required==1){ }}
-    <i class="icon icon-checkmark green"></i>
+    <i class="layui-icon layui-icon-ok greenfont" style="font-weight: bold;"></i>
     {{# }else{  }}
-    <i class="icon icon-cross red"></i>
+    <i class="layui-icon layui-icon-close redfont" style="font-weight: bold;"></i>
     {{# } }}
 </script>
 <script type="text/html" id="action">
@@ -49,18 +53,19 @@
         var tableIn=table.render({
             elem: '#list',
             url: '{:url("field")}',
+            cellMinWidth: 80,
             where: { //设定异步数据接口的参数
                 id: '{:input("id")}'
             },
             method: 'post',
             cols: [[
-                {field: 'field', title: '字段名', width: 120,fixed: true},
-                {field: 'name', title: '别名', width: 100},
-                {field: 'type', title: '字段类型', width: 100},
-                {field: 'issystem', align: 'center', title: '系统字段', width: 100, toolbar: '#isSystem'},
-                {field: 'required', align: 'center', title: '必填', width: 80, toolbar: '#required'},
-                {field: 'listorder', title: '{:lang("order")}', width: 100, sort: true,templet: '#order'},
-                {width: 190, align: 'center', toolbar: '#action'}
+                {field: 'field', title: '字段名'},
+                {field: 'name', title: '别名'},
+                {field: 'type', title: '字段类型'},
+                {field: 'issystem', align: 'center', title: '系统字段', toolbar: '#isSystem'},
+                {field: 'required', align: 'center', title: '必填', toolbar: '#required'},
+                {field: 'listorder', title: '{:lang("order")}', sort: true,templet: '#order'},
+                {align: 'center', title:'操作', toolbar: '#action'}
             ]]
         });
         table.on('tool(list)', function(obj) {

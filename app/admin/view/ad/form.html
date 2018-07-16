@@ -1,68 +1,72 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit" ng-app="hd" ng-controller="ctrl">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{$title}</legend>
-    </fieldset>
-    <form class="layui-form layui-form-pane">
-        <div class="layui-form-item">
-            <label class="layui-form-label">所属位置</label>
-            <div class="layui-input-4">
-                <select name="type_id" lay-verify="required" ng-model="field.type_id" ng-options="v.type_id as v.name for v in group" ng-selected="v.type_id==field.type_id">
-                    <option value="">请选择所属广告位</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">广告名称</label>
-            <div class="layui-input-4">
-                <input type="text" name="name" ng-model="field.name" lay-verify="required" placeholder="{:lang('pleaseEnter')}广告名称" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">广告图片</label>
-            <input type="hidden" name="pic" id="pic" ng-model="field.pic">
-            <div class="layui-input-block">
-                <div class="layui-upload">
-                    <button type="button" class="layui-btn layui-btn-primary" id="adBtn"><i class="icon icon-upload3"></i>点击上传</button>
-                    <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="adPic">
-                        <p id="demoText"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">{:lang('ad')}URL</label>
-            <div class="layui-input-4">
-                <input type="text" name="url" ng-model="field.url" lay-verify="url" placeholder="{:lang('pleaseEnter')}{:lang('ad')}URL" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">是否审核</label>
-            <div class="layui-input-block">
-                <input type="radio" name="open" ng-model="field.open" ng-checked="field.open==1" ng-value="1" title="{:lang('open')}">
-                <input type="radio" name="open" ng-model="field.open" ng-checked="field.open==0" ng-value="0" title="{:lang('close')}">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">{:lang('order')}</label>
-            <div class="layui-input-4">
-                <input type="text" name="sort" ng-model="field.sort" value="" placeholder="从小到大排序" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">内容</label>
-            <div class="layui-input-block">
-                <textarea ng-model="field.content" placeholder="请输广告内容" name="content" class="layui-textarea"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
-                <a href="{:url('index')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
-            </div>
-        </div>
-    </form>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit" ng-app="hd" ng-controller="ctrl">
+      <div class="layui-card-header">{$title}</div>
+      <div class="layui-card-body" pad15>
+        <form class="layui-form layui-form-pane">
+          <div class="layui-form-item">
+              <label class="layui-form-label">所属位置</label>
+              <div class="layui-input-block">
+                  <select name="type_id" lay-verify="required" ng-model="field.type_id" ng-options="v.type_id as v.name for v in group" ng-selected="v.type_id==field.type_id">
+                      <option value="">请选择所属广告位</option>
+                  </select>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">广告名称</label>
+              <div class="layui-input-block">
+                  <input type="text" name="name" ng-model="field.name" lay-verify="required" placeholder="{:lang('pleaseEnter')}广告名称" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">广告图片</label>
+              <input type="hidden" name="pic" id="pic" ng-model="field.pic">
+              <div class="layui-input-block">
+                  <div class="layui-upload">
+                      <button type="button" class="layui-btn layui-btn-primary" id="adBtn"><i class="icon icon-upload3"></i>点击上传</button>
+                      <div class="layui-upload-list">
+                          <img class="layui-upload-img" id="adPic">
+                          <p id="demoText"></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">{:lang('ad')}URL</label>
+              <div class="layui-input-block">
+                  <input type="text" name="url" ng-model="field.url"  placeholder="{:lang('pleaseEnter')}{:lang('ad')}URL" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">是否审核</label>
+              <div class="layui-input-block">
+                  <input type="radio" name="open" ng-model="field.open" ng-checked="field.open==1" ng-value="1" title="{:lang('open')}">
+                  <input type="radio" name="open" ng-model="field.open" ng-checked="field.open==0" ng-value="0" title="{:lang('close')}">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">{:lang('order')}</label>
+              <div class="layui-input-block">
+                  <input type="text" name="sort" ng-model="field.sort" value="" placeholder="从小到大排序" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">内容</label>
+              <div class="layui-input-block">
+                  <textarea ng-model="field.content" placeholder="请输广告内容" name="content" class="layui-textarea"></textarea>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <div class="layui-input-block">
+                  <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
+                  <a href="{:url('index')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+              </div>
+          </div>
+      </form>
+      </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script src="__STATIC__/common/js/angular.min.js"></script>

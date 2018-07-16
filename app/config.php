@@ -144,14 +144,15 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__PUBLIC__' => __PUBLIC__,//public目录的全局变量，在/public/home.php中定义
-        '__STATIC__' =>__PUBLIC__.'/static',
+        '__PUBLIC__' => __PUBLIC__.'/',
+        '__STATIC__' => __PUBLIC__.'/static',
         '__ADMIN__'    => __PUBLIC__.'/static/admin',
         '__HOME__'     => __PUBLIC__.'/static/home',
+        '__ADDON__'     => __DIR__.'/../addons',
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
-    'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
+    'dispatch_error_tmpl'    => __DIR__ . '/admin/view/error/error.html',
 
     // +----------------------------------------------------------------------
     // | 异常及错误设置
@@ -240,12 +241,12 @@ return [
     ],
     //分页配置
     'paginate'               => [
-        'type'      => 'clt\Bootstrap',
+        'type'      => 'cool\Bootstrap',
         'var_page'  => 'page',
         'list_rows' => 15,
         'page_size'=>5, //页码数量
         'page_button'=>[
-            'total_rows'=>true, //是否显示总条数
+            'total_rows'=>false, //是否显示总条数
             'turn_page'=>true, //上下页按钮
             'turn_group'=>true, //上下组按钮
             'first_page'=>true, //首页

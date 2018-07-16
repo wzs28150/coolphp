@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-use clt\Tree;
+use cool\Tree;
 class Category extends Common
 {
     protected $dao, $categorys , $module;
@@ -8,34 +8,51 @@ class Category extends Common
     {
         parent::_initialize();
         foreach ((array)$this->module as $rw){
-            if($rw['type']==1 && $rw['status']==1){
-				$data['module'][$rw['id']] = $rw;
-			}
+          if($rw['type']==1 && $rw['status']==1){
+    				$data['module'][$rw['id']] = $rw;
+    			}
         }
         $this->module=$data['module'];
         $this->assign($data);
         unset($data);
         $this->dao = db('category');
+        $gid =  session('gid');
+        if($gid>2){
+          $glist = db('auth_group')->field('rules')->find($gid);
+          $rlist = db('auth_rule')->field('catid')->where('id','in',$glist['rules'])->where('catid','<>',
+          '')->select();
+          $rlist = array_column($rlist, 'catid');
+          $rules = explode(',',$glist['rules']);
+          foreach ($this->categorys as $key => $value) {
+            if(in_array($key,$rlist)){
+
+            }else{
+
+              unset($this->categorys[$key]);
+            }
+          }
+        }
+
     }
+    /**
+     * 列表页
+     */
     public function index()
     {
         if ($this->categorys) {
             foreach ($this->categorys as $r) {
+                $r['str_manage'] = '';
+                $r['str_manage'] .= '<a class="blue layui-btn layui-btn-normal layui-btn-xs" title="添加子栏目" href="' . url('Category/add', array('parentid' => $r['id'])) . '"> <i class="layui-icon layui-icon-add-1"></i>添加子栏目</a><a class="green layui-btn layui-btn-normal layui-btn-xs" href="' . url('Category/edit', array('id' => $r['id'])) . '" title="修改"><i class="layui-icon layui-icon-edit"></i>修改</a><a class="red layui-btn layui-btn-normal layui-btn-xs" href="javascript:del(\'' . $r['id'] . '\')" title="删除"><i class="layui-icon layui-icon-delete"></i>删除</a> ';
                 if ($r['module'] == 'page') {
-                    $r['str_manage'] = '<a class="orange" href="' . url('page/edit', array('id' => $r['id'])) . '" title="修改内容"><i class="icon icon-file-text2"></i></a> | ';
-                } else {
-                    $r['str_manage'] = '';
+                    $r['str_manage'] .= '<a class="orange layui-btn layui-btn-normal layui-btn-xs" href="' . url('page/edit', array('id' => $r['id'])) . '" title="修改内容"><i class="layui-icon layui-icon-form"></i>修改内容</a>';
                 }
-                $r['str_manage'] .= '<a class="blue" title="添加子栏目" href="' . url('Category/add', array('parentid' => $r['id'])) . '"> <i class="icon icon-plus"></i></a> | <a class="green" href="' . url('Category/edit', array('id' => $r['id'])) . '" title="修改"><i class="icon icon-pencil2"></i></a> | <a class="red" href="javascript:del(\'' . $r['id'] . '\')" title="删除"><i class="icon icon-bin"></i></a> ';
-
                 $r['modulename'] = $this->module[$r['moduleid']]['title'];
-
                 $r['dis'] = $r['ismenu'] == 1 ? '<font color="green">显示</font>' : '<font color="red">不显示</font>';
                 $array[] = $r;
             }
 
             $str = "<tr><td class='visible-lg visible-md'>\$id</td>";
-            $str .= "<td class='text-left'>\$spacer<a href='__ROOT__/admin/\$module/\$action/\$files/\$id.html' class='green' title='查看内容'>\$catname </a>&nbsp;</td>";
+            $str .= "<td class='text-left'>\$spacer \$catname</td>";
 
             $str .= "<td class='visible-lg visible-md'>\$modulename</td><td class='visible-lg visible-md'>\$dis</td>";
             $str .= "<td><input type='text' size='10' data-id='\$id' value='\$listorder' class='layui-input list_order'></td><td>\$str_manage</td></tr>";
@@ -49,8 +66,11 @@ class Category extends Common
         $this->assign('title','栏目列表');
         return $this->fetch();
     }
-
-    public function add(){
+    /**
+     * 添加页面
+     */
+    public function add()
+    {
         $parentid =	input('param.parentid');
         //模型列表
         $module = db('module')->where('status',1)->field('id,title,name')->select();
@@ -77,7 +97,11 @@ class Category extends Common
         $this->assign('title','添加栏目');
         return $this->fetch();
     }
-    public function insert(){
+    /**
+     * 执行添加
+     */
+    public function insert()
+    {
         $data = input('post.');
         if(!empty($data['readgroup'])){
             $data['readgroup'] = implode(',',$data['readgroup']);
@@ -111,6 +135,26 @@ class Category extends Common
                 $data['status']= '1';
                 $Attachment->where("aid in (".$aids.")")->updata($data);
             }
+            //更新权限管理  href catid pid   title
+            $data3['catid'] = $id;
+            if ($data['parentid']) {
+                $rul = db('menu')->field('id')->where('catid', $data['parentid'])->find();
+                $data3['pid'] = $rul['id'];
+            } else {
+                $data3['pid'] = 28;
+            }
+            $data3['title'] = $data['catname'];
+            if($data['module'] == 'page'){
+              $data3['href'] = 'Page/edit/?id='.$id;
+            }else{
+              $data3['href'] = $data['module'] . '/index?catid='.$id;
+            }
+
+            $data3['addtime'] = time();
+            $data3['authopen'] = 0;
+            $data3['menustatus'] = 1;
+            $authrule = db('menu');
+            $authid = $authrule->insertGetId($data3);
             $this->repair();
             savecache('Category');
             $result['msg'] = '栏目添加成功!';
@@ -124,8 +168,12 @@ class Category extends Common
             return $result;
         }
     }
-
-    public function edit(){
+    /**
+     * 修改页面
+     * @return [type] [description]
+     */
+    public function edit()
+    {
         $id = input('id');
         $this->assign('module',$this->categorys[$id]['moduleid']);
         $module = db('module')->field('id,title,name')->select();
@@ -154,7 +202,11 @@ class Category extends Common
         $this->assign ( 'templates',$templates );
         return $this->fetch();
     }
-    public function catUpdate(){
+    /**
+     * 执行修改
+     */
+    public function catUpdate()
+    {
         $data = input('post.');
         $data['module'] = db('module')->where(array('id'=>$data['moduleid']))->value('name');
         if(!empty($data['readgroup'])){
@@ -186,8 +238,11 @@ class Category extends Common
         }
     }
 
-
-    public function repair() {
+    /**
+     * 修复栏目关系
+     */
+    public function repair()
+    {
         @set_time_limit(500);
         $this->categorys = $categorys = array();
         $categorys =  $this->dao->where("parentid=0")->order('listorder ASC,id ASC')->select();
@@ -202,9 +257,74 @@ class Category extends Common
             }
         }
     }
+    /**
+     * 修复菜单权限列表里的内容 待优化 递归
+     * @return [type] [description]
+     */
+    public function fixed()
+    {
+      // dump($this->categorys);
+      db('menu')->where('catid','>',0)->delete();
+      // exit;
+      $catelist0 = db('category')->where('parentid',0)->fetchsql(false)->order('listorder desc')->select();
+      foreach ($catelist0 as $key => $value) {
+        $data['title'] = $value['catname'];
+        $data['href'] = 'Article/index?catid='.$value['id'];
+        $data['pid'] = 28;
+        $data['addtime'] = time();
+        $data['menustatus'] = 1;
+        $data['catid'] = $value['id'];
+        $data['roleid'] = 2;
+        $data['sort'] = $value['listorder'];
+        $authmenu[] = db('menu')->insertGetId($data);
+        $parentidarr[] = $value['id'];
+      }
+      $parentidstr = implode(",", $parentidarr);
+      $authmenuarr = implode(",", $authmenu);
+      $catelist = db('category')->where('parentid','in',$parentidstr)->fetchsql(false)->order('listorder desc')->select();
+      $menulist = db('menu')->where('id','in',$authmenuarr)->fetchsql(false)->select();
+    // dump($catelist);exit;  dump($menulist);
+      foreach ($menulist as $k => $v) {
+        foreach ($catelist as $key => $value) {
+          if($value['parentid'] == $v['catid']){
+            $data['title'] = $value['catname'];
+            $data['href'] = 'Article/index?catid='.$value['id'];
+            $data['pid'] = $v['id'];
+            $data['addtime'] = time();
+            $data['menustatus'] = 1;
+            $data['catid'] = $value['id'];
+            $data['sort'] = $value['listorder'];
+            $data['roleid'] = 2;
+            $authmenu2[] = db('menu')->insertGetId($data);
+            $parentidarr2[] = $value['id'];
+          }
+        }
+      }
+      $parentidstr2= implode(",", $parentidarr2);
+      $authmenuarr2 = implode(",", $authmenu2);
+      $catelist2 = db('category')->where('parentid','in',$parentidstr2)->fetchsql(false)->order('listorder desc')->select();
+      $menulist2 = db('menu')->where('id','in',$authmenuarr2)->fetchsql(false)->select();
+      foreach ($menulist2 as $k => $v) {
+        foreach ($catelist2 as $key => $value) {
+          if($value['parentid'] == $v['catid']){
+            $data['title'] = $value['catname'];
+            $data['href'] = 'Article/index?catid='.$value['id'];
+            $data['pid'] = $v['id'];
+            $data['addtime'] = time();
+            $data['menustatus'] = 1;
+            $data['catid'] = $value['id'];
+            $data['sort'] = $value['listorder'];
+            $data['roleid'] = 2;
+            $authmenu2[] = db('menu')->insertGetId($data);
+            $parentidarr2[] = $value['id'];
+          }
+        }
+      }
 
+    }
 
-    public function set_categorys($categorys = array()) {
+    public function set_categorys($categorys = array())
+    {
         if (is_array($categorys) && !empty($categorys)) {
             foreach ($categorys as $id => $c) {
                 $this->categorys[$c['id']] = $c;
@@ -214,7 +334,14 @@ class Category extends Common
         }
         return true;
     }
-    public function get_arrparentid($id, $arrparentid = '') {
+    /**
+     * 获取所有父级id
+     * @param  [int] $id          [当前id]
+     * @param  string $arrparentid [description]
+     * @return [type]              [description]
+     */
+    public function get_arrparentid($id, $arrparentid = '')
+    {
         if(!is_array($this->categorys) || !isset($this->categorys[$id])) return false;
         $parentid = $this->categorys[$id]['parentid'];
         $arrparentid = $arrparentid ? $parentid.','.$arrparentid : $parentid;
@@ -225,7 +352,13 @@ class Category extends Common
         }
         return $arrparentid;
     }
-    public function get_arrchildid($id) {
+    /**
+     * 获取所有子级id
+     * @param  [int] $id [description]
+     * @return [type]     [description]
+     */
+    public function get_arrchildid($id)
+    {
         $arrchildid = $id;
         if(is_array($this->categorys)) {
             foreach($this->categorys as $catid => $cat) {
@@ -239,7 +372,12 @@ class Category extends Common
         }
         return $arrchildid;
     }
-    public function get_parentdir($id) {
+    /**
+     * 获取父级id目录
+     * @param  [type] $id [当前id]
+     */
+    public function get_parentdir($id)
+    {
         if($this->categorys[$id]['parentid']==0){
             return '';
         }
@@ -255,9 +393,11 @@ class Category extends Common
             return implode('/', $arrcatdir).'/';
         }
     }
-
-
-    public function del() {
+    /**
+     * 删除
+     */
+    public function del()
+    {
         $catid = input('param.id');
         $modules = $this->categorys[$catid]['module'];
         $modulesId = $this->categorys[$catid]['moduleid'];
@@ -302,6 +442,8 @@ class Category extends Common
                 $module->delete($r);
             }
         }
+        //删权限
+        db('menu')->where('catid',$catid)->delete();
         $this->repair();
         savecache('Category');
         $result['info'] = '栏目删除成功!';
@@ -310,8 +452,11 @@ class Category extends Common
         $result['status'] = 1;
         return $result;
     }
-
-    public function cOrder(){
+    /**
+     * 排序
+     */
+    public function cOrder()
+    {
         $data = input('post.');
         $this->dao->update($data);
         $result = ['msg' => '排序成功！', 'code' => 1,'url'=>url('index')];

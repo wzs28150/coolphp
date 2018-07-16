@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="icon" type="image/png" href="__HOME__/favicon/favicon.png">
+  <link rel="stylesheet" href="__HOME__/css/style.bundle.css">
+  <title>
+    会员注册
+  </title>
+  <style media="screen">
+    html,
+    body {
+      height: 100%;
+    }
+
+    .invoice .met_main dl {
+      width: auto;
+    }
+
+    .invoice .met_main .btn {
+      width: calc(100% - 24px)
+    }
+
+    .answer_main {
+      padding: 60px 5% 5%;
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    input[type=radio]:checked+label {
+      color: red
+    }
+
+    input[type=checkbox]:checked+label {
+      color: red
+    }
+
+    .tk {
+      border: 0;
+      border-bottom: 1px solid #000;
+      outline: none;
+    }
+
+    #showtime {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      line-height: 20px;
+      padding-top: 20px;
+    }
+
+    #showtime input {
+      width: 20px;
+      border: 0;
+      outline: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="progress">
+    <span></span>
+  </div>
+  <!-- 弹窗 -->
+  <div class="alert_player" style="display:none;">
+    <div class="bg"></div>
+    <div class="layer">
+      <div class="info"></div>
+      <a class="queren_btn" data-ajax="no">确认</a>
+    </div>
+  </div>
+  <!-- 弹窗 -->
+
+  <main>
+    <article class="invoice" data-main="member" style="background-color: #fff;">
+      <section class="main-container business index-inner">
+        <form>
+          <div id="showtime">
+            <input type="text" name="h" readonly value="00">
+            <span>:</span>
+            <input type="text" name="i" readonly value="00">
+            <span>:</span>
+            <input type="text" name="s" readonly value="00">
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="met_main">
+                  <dl>
+                    <dd>
+                      <label for="name">您的姓名</label>
+                      <input id="name" type="text" name="name" value="" placeholder="请填写您的姓名">
+                    </dd>
+                    <dd>
+                      <label for="company">所属单位</label>
+                      <input id="company" type="text" name="company" value="" placeholder="请填写您的单位">
+                    </dd>
+                    <dd>
+                      <label for="certificate">军官证件号码</label>
+                      <input id="certificate" type="text" name="certificate" value="" placeholder="请填写您的军官证件号码">
+                    </dd>
+                    <dd><button type="button" id="membersubmit" class="btn btn-primary">开始答题</button></dd>
+                  </dl>
+                </div>
+              </div>
+              {volist name="list" id="vo" key="k"}
+              <div class="swiper-slide">
+                <div class="answer_main">
+                  <h4>第{$k}题: {$vo.title}{if condition="$vo.type eq 1"}(单选){elseif condition="$vo.type eq 2"}(多选){/if}</h4> {if condition="$vo.type eq 1"}
+                  <ul>
+                    {volist name=":decompose($vo.answerkey)" id="voa" }
+                    <li>
+                      <input type="radio" name="{$vo.id}" id="{$voa.k}{$vo.id}" value="{$voa.k}">
+                      <label for="{$voa.k}{$vo.id}">{$voa.k}.{$voa.title}</label>
+                    </li>
+                    {/volist}
+                  </ul>
+                  {elseif condition="$vo.type eq 2"}
+                  <ul>
+                    {volist name=":decompose($vo.answerkey)" id="voa" }
+                    <li>
+                      <input type="checkbox" name="{$vo.id}[]" id="{$voa.k}{$vo.id}" value="{$voa.k}">
+                      <label for="{$voa.k}{$vo.id}">{$voa.k}.{$voa.title}</label>
+                    </li>
+                    {/volist}
+                  </ul>
+                  {elseif condition="$vo.type eq 3"}
+                  <ul>
+                    <li><input type="text" class="tk" placeholder="请填写答案" name="{$vo.id}" value=""></li>
+                  </ul>
+                  {/if} {if condition="$k gt 1"}
+                  <button type="button" name="prevbutton">上一题</button> {/if} {if condition="$num eq $k"}
+                  <button type="button" name="submit">提交答案</button> {else}
+                  <button type="button" name="nextbutton">下一题</button> {/if}
+                </div>
+              </div>
+              {/volist}
+            </div>
+          </div>
+        </form>
+      </section>
+    </article>
+  </main>
+  <script src="__HOME__/../common/js/jquery.2.1.1.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <script src="__HOME__/../common/js/swiper.min.js"></script>
+  <script type="text/javascript">
+    var init, myswiper, start, ctrl, submit, timing, min = 0,
+      sec = 0,
+      ms = 0,
+      timer = null,
+      count = 0,
+      timeshow;
+
+    // 开始答题
+    start = function(myswiper) {
+      $('#membersubmit').click(function(event) {
+        var name = $('#name').val();
+        var company = $('#company').val();
+        var certificate = $('#certificate').val();
+        $.cookie('name', name, {
+          expires: 1
+        });
+        $.cookie('company', company, {
+          expires: 1
+        });
+        $.cookie('certificate', certificate, {
+          expires: 1
+        });
+        $('#showtime').show();
+        //开始计时
+        timing(true);
+        myswiper.slideNext();
+      });
+    }
+
+    // 计时
+    timing = function(flag) {
+      if (flag) {
+        clearInterval(timer);
+        timer = setInterval(timeshow, 10)
+      } else {
+        clearInterval(timer);
+      }
+    }
+
+    // 计时展示
+    timeshow = function() {
+      ms++;
+      if (sec == 60) {
+        min++;
+        sec = 0;
+      }
+      if (ms == 100) {
+        sec++;
+        ms = 0;
+      }
+      var msStr = ms;
+      if (ms < 10) {
+        msStr = "0" + ms;
+      }
+      var secStr = sec;
+      if (sec < 10) {
+        secStr = "0" + sec;
+      }
+      var minStr = min;
+      if (min < 10) {
+        minStr = "0" + min;
+      }
+      $('#showtime input:eq(0)').val(minStr);
+      $('#showtime input:eq(1)').val(secStr);
+      $('#showtime input:eq(2)').val(msStr);
+    }
+
+    // 答题控制
+    ctrl = function(myswiper) {
+      //下一题
+      $('button[name="nextbutton"]').click(function(event) {
+        myswiper.slideNext();
+      });
+      //上一题
+      $('button[name="prevbutton"]').click(function(event) {
+        myswiper.slidePrev();
+      });
+    }
+
+    // 提交答题
+    submit = function() {
+      //提交submit
+      $('button[name="submit"]').click(function(event) {
+        var d = {};
+        var t = $('form').serializeArray();
+        $.post("{:addon_url('answer://index/sendquestion')}?tid={:Input(id)}", t, function(result) {
+          //停止计时
+          timing(false);
+          alert(result.msg)
+
+        });
+      });
+    }
+
+    // 初始化
+    init = function() {
+      myswiper = new Swiper('.swiper-container', {
+        allowTouchMove: false,
+      });
+
+      //
+      $.post("{:addon_url('answer://index/index')}?tid={:Input(id)}",function(result) {
+        if(result.code == 0){
+          alert(result.msg)
+          $('#membersubmit').click(function(event) {
+            alert(result.msg)
+          });
+        }else{
+          start(myswiper);
+          ctrl(myswiper);
+          submit();
+        }
+
+      });
+    }
+
+    $(document).ready(function() {
+      init();
+    });
+  </script>
+</body>
+
+</html>

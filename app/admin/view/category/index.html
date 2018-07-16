@@ -1,27 +1,31 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{$title}</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}栏目</a>
-    </blockquote>
-    <table class="layui-table" >
-        <thead>
-        <tr>
-          <th>编号</th>
-          <th>栏目名称<span id="cateNameMsg">(点击查看内容)</span></th>
-          <th>所属模型</th>
-          <th>导航</th>
-          <th>{:lang('order')}</th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <tbody id="con">
-        {$categorys}
-        </tbody>
-        <tfoot>
-    </table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">{$title}</div>
+      <div class="layui-card-body" pad15>
+        <div style="padding-bottom: 10px;">
+            <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}栏目</a>
+        </div>
+        <table class="layui-table" >
+            <thead>
+            <tr>
+              <th>编号</th>
+              <th>栏目名称</th>
+              <th>所属模型</th>
+              <th>导航</th>
+              <th>{:lang('order')}</th>
+              <th width="300">操作</th>
+            </tr>
+            </thead>
+            <tbody id="con">
+            {$categorys}
+            </tbody>
+            <tfoot>
+        </table>
+      </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script src="__STATIC__/common/js/jquery.2.1.1.min.js"></script>

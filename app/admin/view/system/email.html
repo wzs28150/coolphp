@@ -1,24 +1,24 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>邮箱配置</legend>
-    </fieldset>
-    <form class="layui-form layui-form-pane">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="layui-card-header">邮箱配置</div>
+    <div class="layui-card-body" pad15>
+      <form class="layui-form layui-form-pane">
         <div class="layui-form-item">
             <label class="layui-form-label">服务器</label>
-            <div class="layui-input-4">
+            <div class="layui-input-block">
                 <input type="text" lay-verify="required" name="smtp_server" placeholder="SMTP服务器" value="{$info.smtp_server}" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">SMTP端口</label>
-            <div class="layui-input-4">
+            <div class="layui-input-block">
                 <input type="text" lay-verify="required" name="smtp_port" placeholder="SMTP端口" value="{$info.smtp_port}" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">发信人</label>
-            <div class="layui-input-4">
+            <div class="layui-input-block">
                 <input type="text" name="smtp_user" lay-verify="required" placeholder="发信人邮件地址" value="{$info.smtp_user}" class="layui-input">
             </div>
         </div>
@@ -44,6 +44,8 @@
             </div>
         </div>
     </form>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script>

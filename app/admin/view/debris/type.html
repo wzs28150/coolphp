@@ -1,8 +1,9 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>碎片分类管理</legend>
-    </fieldset>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">碎片分类管理</div>
+    <div class="layui-card-body" pad15>
     <div class="demoTable">
         <div class="layui-inline">
             <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
@@ -13,6 +14,9 @@
         <div style="clear: both;"></div>
     </div>
     <table class="layui-table" id="list" lay-filter="list"></table>
+    </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="order">
@@ -30,9 +34,10 @@
             elem: '#list',
             url: '{:url("type")}',
             method: 'post',
+            cellMinWidth: 80,
             cols: [[
                 {field: 'id', title: '{:lang("id")}', width: 80, fixed: true, sort: true},
-                {field: 'title', title: '碎片分类名称', width: 400},
+                {field: 'title', title: '碎片分类名称', },
                 {field: 'sort', align: 'center', title: '{:lang("order")}', width: 120, templet: '#order', sort: true},
                 {width: 160, align: 'center', toolbar: '#action'}
             ]]

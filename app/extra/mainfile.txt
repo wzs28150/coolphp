@@ -1,0 +1,70 @@
+<?php
+// +----------------------------------------------------------------------
+// | @title 入口
+// +----------------------------------------------------------------------
+// | Copyright (c) 2018 http://www.hrbkcwl.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: wzs <1003418012@qq.com>
+// +
+
+namespace addons\@name;
+
+use think\Addons;
+require_once(ADDONS_PATH."@name/common.php");
+/**
+ * 插件测试
+ * @author byron sampson
+ */
+class @uname extends Addons
+{
+    public $info = [
+        "name" => "@uname",
+        "title" => "@title",
+        "description" => "@description",
+        "status" => @status,
+        "author" => "by @author",
+        "version" => "0.1",
+        "is_page"=>@is_page,
+        "is_weixin"=>@is_weixin,
+        "has_adminlist"=>@has_adminlist,
+        "icon"=>"@icon"
+    ];
+
+    public function _initialize()
+    {
+      //获取setting
+
+    }
+
+    /**
+     * 插件安装方法(公共方法已设置 无需多写)
+     * @return bool
+     */
+    public function install()
+    {
+      return true;
+    }
+
+    /**
+     * 插件卸载方法(公共方法已设置 无需多写)
+     * @return bool
+     */
+     public function uninstall()
+     {
+        return true;
+     }
+
+    /**
+     * 实现的钩子方法
+     * @return mixed
+     */
+    public function @namehook($param)
+    {
+      if($param['type'] == 'index'){
+        $this->fetch('index');
+      }
+    }
+
+}

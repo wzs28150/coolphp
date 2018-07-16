@@ -1,0 +1,248 @@
+{include file="common/head"/}
+<style media="screen">
+  .fieldinfo{ color: red; display: block;}
+</style>
+<div class="layui-fluid">
+  <div style="" class="fadeInUp animated">
+    <div class="layui-card">
+      <div class="layui-card-header">注册项设置</div>
+      <div class="layui-card-body" pad15>
+        <blockquote class="demoTable">
+            <a href="{:addon_url('member://setting/regadd')}?pid={:Input(pid)}" class="layui-btn layui-btn-small">添加</a>
+        </blockquote>
+        <table class="layui-table" id="list" lay-filter="list" style="width:702px;"></table>
+      </div>
+    </div>
+    <div class="layui-card">
+      <div class="layui-card-header">登录项设置</div>
+      <div class="layui-card-body" pad15>
+        <blockquote class="demoTable">
+            <a href="{:addon_url('member://setting/loginadd')}?pid={:Input(pid)}" class="layui-btn layui-btn-small">添加</a>
+        </blockquote>
+        <table class="layui-table" id="list2" lay-filter="list2" style="width:702px;"></table>
+      </div>
+    </div>
+    <div class="layui-card">
+      <form class="layui-form ">
+        <div class="layui-card-header">审核设置</div>
+        <div class="layui-card-body" pad15>
+          <div class="layui-form-item">
+            <label class="layui-form-label">是否审核</label>
+            <div class="layui-input-block">
+              <input type="radio" name="state" {if condition="$state eq 0"}checked{/if} value="0" title="不审核">
+              <input type="radio" name="state" {if condition="$state eq 1"}checked{/if} value="1" title="审核">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button type="button" class="layui-btn" lay-submit="" lay-filter="auth">立即提交</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+</div>
+{include file="common/foot"/}
+<script>
+  layui.use(['form', 'layer'], function() {
+    var form = layui.form,
+      layer = layui.layer,
+      $ = layui.jquery;
+    form.on('submit(auth)', function(data) {
+      // 提交到方法 默认为本身
+      $.post("{:addon_url($addon.'://setting/setstate')}", data.field, function(res) {
+        if (res.code > 0) {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 1
+          }, function() {
+            // location.href = res.url;
+          });
+        } else {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 2
+          });
+        }
+      });
+    })
+  });
+</script>
+<script type="text/html" id="action">
+  <a href="{:addon_url('member://setting/regedit')}?id={{d.LAY_INDEX }}" class="layui-btn layui-btn-xs">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs regdel" data-id="{{d.LAY_INDEX }}" >删除</a>
+</script>
+<script type="text/html" id="action2">
+  <a href="{:addon_url('member://setting/loginedit')}?id={{d.LAY_INDEX }}" class="layui-btn layui-btn-xs">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs logindel" data-id="{{d.LAY_INDEX }}" >删除</a>
+</script>
+<script type="text/html" id="order">
+    <input name="{{d.LAY_INDEX }}" data-id="{{d.LAY_INDEX }}" class="list_order reglistorder layui-input" value="{{d.listorder}}" type="number" size="10"/>
+</script>
+<script type="text/html" id="order2">
+    <input name="{{d.LAY_INDEX }}" data-id="{{d.LAY_INDEX }}" class="list_order loginlistorder layui-input" value="{{d.listorder}}" type="number" size="10"/>
+</script>
+<script type="text/html" id="required">
+  {{# if(d.required==1){ }}
+  <a class="layui-btn layui-btn-xs layui-btn-warm regrequired"  data-id="{{d.LAY_INDEX }}" data-value="0">必填</a>
+  {{# }else{  }}
+  <a class="layui-btn layui-btn-xs layui-btn regrequired" data-id="{{d.LAY_INDEX }}" data-value="1">非必填</a>
+  {{# } }}
+</script>
+<script type="text/html" id="required2">
+  {{# if(d.required==1){ }}
+  <a class="layui-btn layui-btn-xs layui-btn-warm loginrequired"  data-id="{{d.LAY_INDEX }}" data-value="0">必填</a>
+  {{# }else{  }}
+  <a class="layui-btn layui-btn-xs layui-btn loginrequired" data-id="{{d.LAY_INDEX }}" data-value="1">非必填</a>
+  {{# } }}
+</script>
+<script>
+    layui.use('table', function() {
+        var table = layui.table, $ = layui.jquery;
+        var tableIn = table.render({
+            id: 'content',
+            elem: '#list',
+            width:1105,
+            url: '{:addon_url("member://setting/reglist")}',
+            // where:{type:'{$type}'},
+            method: 'post',
+            // page: true,
+            cols: [[
+              {type: 'numbers', title: '编号', fixed: true,width:100},
+              {field: 'title',  title: '选项名称',width:200},
+              {field: 'name',  title: '英文名称',width:200},
+              {field: 'type',title:'类型',width:200},
+              {field: 'required',title:'是否必填',width:100, templet: '#required'},
+              {field: 'listorder', align: 'center', title: '排序', templet: '#order'},
+              {align: 'center', toolbar: '#action',title:'操作',width:200}
+            ]],
+            limit: 10
+        });
+        $('body').on('blur','.reglistorder',function() {
+            var id = $(this).attr('data-id');
+            var listorder = $(this).val();
+            var loading = layer.load(1, {shade: [0.1, '#fff']});
+            $.post('{:addon_url("member://setting/reglistorder")}',{id:id,listorder:listorder},function(res){
+                layer.close(loading);
+                if(res.code === 1){
+                    layer.msg(res.msg, {time: 1000, icon: 1}, function () {
+                      tableIn.reload();
+                    });
+                }else{
+                    layer.msg(res.msg,{time:1000,icon:2});
+                }
+            })
+        });
+        //删除
+        $('body').on('click','.regdel', function () {
+            var id = $(this).data('id');
+            layer.confirm('您确定要修改该内容吗？', function(index){
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post('{:addon_url("member://setting/regdel")}',{id:id},function(res){
+                    layer.close(loading);
+                    if(res.code===1){
+                        layer.msg(res.msg,{time:1000,icon:1});
+                        tableIn.reload();
+                    }else{
+                        layer.msg('操作失败！',{time:1000,icon:2});
+                    }
+                });
+                layer.close(index);
+            });
+        });
+        //必填
+        $('body').on('click','.regrequired', function () {
+            var id = $(this).data('id'),required = $(this).data('value');
+            layer.confirm('您确定要修改该内容吗？', function(index){
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post('{:addon_url("member://setting/regrequired")}',{id:id,required:required},function(res){
+                    layer.close(loading);
+                    if(res.code===1){
+                        layer.msg(res.msg,{time:1000,icon:1});
+                        tableIn.reload();
+                    }else{
+                        layer.msg('操作失败！',{time:1000,icon:2});
+                    }
+                });
+                layer.close(index);
+            });
+        });
+    });
+</script>
+
+
+<script>
+    layui.use('table', function() {
+        var table = layui.table, $ = layui.jquery;
+        var tableIn = table.render({
+            id: 'content',
+            elem: '#list2',
+            width:1105,
+            url: '{:addon_url("member://setting/loginlist")}',
+            // where:{type:'{$type}'},
+            method: 'post',
+            // page: true,
+            cols: [[
+              {type: 'numbers', title: '编号', fixed: true,width:100},
+              {field: 'title',  title: '选项名称',width:200},
+              {field: 'name',  title: '英文名称',width:200},
+              {field: 'type',title:'类型',width:200},
+              {field: 'required',title:'是否必填',width:100, templet: '#required2'},
+              {field: 'listorder', align: 'center', title: '排序', templet: '#order2'},
+              {align: 'center', toolbar: '#action2',title:'操作',width:200}
+            ]],
+            limit: 10
+        });
+        //排序
+        $('body').on('blur','.loginlistorder',function() {
+            var id = $(this).attr('data-id');
+            var listorder = $(this).val();
+            var loading = layer.load(1, {shade: [0.1, '#fff']});
+            $.post('{:addon_url("member://setting/loginlistorder")}',{id:id,listorder:listorder,catid:'{:input("catid")}'},function(res){
+                layer.close(loading);
+                if(res.code === 1){
+                    layer.msg(res.msg, {time: 1000, icon: 1}, function () {
+                        tableIn.reload();
+                    });
+                }else{
+                    layer.msg(res.msg,{time:1000,icon:2});
+                }
+            })
+        });
+        //删除
+        $('body').on('click','.logindel', function () {
+            var id = $(this).data('id');
+            layer.confirm('您确定要修改该内容吗？', function(index){
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post('{:addon_url("member://setting/logindel")}',{id:id},function(res){
+                    layer.close(loading);
+                    if(res.code===1){
+                        layer.msg(res.msg,{time:1000,icon:1});
+                        tableIn.reload();
+                    }else{
+                        layer.msg('操作失败！',{time:1000,icon:2});
+                    }
+                });
+                layer.close(index);
+            });
+        });
+        //必填
+        $('body').on('click','.loginrequired', function () {
+            var id = $(this).data('id'),required = $(this).data('value');
+            layer.confirm('您确定要修改该内容吗？', function(index){
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post('{:addon_url("member://setting/loginrequired")}',{id:id,required:required},function(res){
+                    layer.close(loading);
+                    if(res.code===1){
+                        layer.msg(res.msg,{time:1000,icon:1});
+                        tableIn.reload();
+                    }else{
+                        layer.msg('操作失败！',{time:1000,icon:2});
+                    }
+                });
+                layer.close(index);
+            });
+        });
+    });
+</script>

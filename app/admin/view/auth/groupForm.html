@@ -1,22 +1,26 @@
 {include file="common/head"/}
-<div class="admin-main fadeInUp animated" ng-app="hd" ng-controller="ctrl">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{$title}</legend>
-    </fieldset>
-    <form class="layui-form layui-form-pane">
-        <div class="layui-form-item">
-            <label class="layui-form-label">用户组名</label>
-            <div class="layui-input-4">
-                <input type="text" name="title" ng-model="field.title" lay-verify="required" placeholder="{:lang('pleaseEnter')}用户组名" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
-                <a href="{:url('adminGroup')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
-            </div>
-        </div>
-    </form>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main fadeInUp animated" ng-app="hd" ng-controller="ctrl">
+      <div class="layui-card-header">{$title}</div>
+      <div class="layui-card-body" pad15>
+        <form class="layui-form layui-form-pane">
+          <div class="layui-form-item">
+              <label class="layui-form-label">用户组名</label>
+              <div class="layui-input-block">
+                  <input type="text" name="title" ng-model="field.title" lay-verify="required" placeholder="{:lang('pleaseEnter')}用户组名" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <div class="layui-input-block">
+                  <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
+                  <a href="{:url('adminGroup')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+              </div>
+          </div>
+      </form>
+      </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script src="__STATIC__/common/js/angular.min.js"></script>

@@ -1,12 +1,16 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>文本回复</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('addText')}" class="layui-btn layui-btn-small">{:lang('add')}文本回复</a>
-    </blockquote>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+        <div class="layui-card-header">文本回复</div>
+        <div class="layui-card-body" pad15>
+        <div style="padding-bottom: 5px;">
+            <a href="{:url('addText')}" class="layui-btn layui-btn-small">{:lang('add')}文本回复</a>
+        </div>
+        <table class="layui-table" id="list" lay-filter="list"></table>
+        </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="action">
@@ -22,12 +26,13 @@
             elem: '#list',
             url: '{:url("text")}',
             method: 'post',
+            cellMinWidth: 80,
             page:true,
             cols: [[
-                {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
-                {field: 'keyword', title: '关键词', width: 120, templet: '#name'},
-                {field: 'text', title: '回复', width: 400},
-                {width: 160, align: 'center', toolbar: '#action', title: '操作'}
+                {field: 'id', title: '{:lang("id")}', fixed: true},
+                {field: 'keyword', title: '关键词',templet: '#name'},
+                {field: 'text', title: '回复'},
+                {align: 'center', toolbar: '#action', title: '操作'}
             ]],
             limit:10
         });

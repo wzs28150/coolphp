@@ -1,15 +1,16 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{$title}</legend>
-    </fieldset>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">{$title}</div>
+    <div class="layui-card-body" pad15>
     <form class="layui-form layui-form-pane">
         <input type="hidden" name="type" value="{:input('type')}">
         <input type="hidden" name="code" value="{:input('code')}">
         {volist name="info.config" id="vo"}
         <div class="layui-form-item">
             <label class="layui-form-label">{$vo.label}</label>
-            <div class="layui-input-4">
+            <div class="layui-input-block">
                 {if condition="$vo['type'] eq 'select'"}
                 <select name="config[{$vo['name']}]" class="col-select col-xs-12 col-md-3 selector">
                     {volist name="vo.option" id="option" key="o"}
@@ -31,6 +32,9 @@
             </div>
         </div>
     </form>
+    </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script>

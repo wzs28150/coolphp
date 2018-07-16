@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-use clt\Tree;
+use cool\Tree;
 class Contentmanager extends Common
 {
     protected $dao, $categorys , $module;

@@ -1,13 +1,17 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>菜单管理</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">菜单管理</div>
+    <div class="layui-card-body" pad15>
+    <div style="padding-bottom: 5px;">
         <a href="{:url('addMenu')}" class="layui-btn layui-btn-small">{:lang('add')}菜单</a>
         <a  href="javascript:;" onclick="return createMenu();" class="layui-btn layui-btn-small">生成菜单</a>
-    </blockquote>
+    </div>
     <table class="layui-table" id="list" lay-filter="list"></table>
+    </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="name">
@@ -37,14 +41,15 @@
             elem: '#list',
             url: '{:url("menu")}',
             method: 'post',
+            cellMinWidth: 80,
             cols: [[
-                {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
-                {field: 'name', title: '主菜单名称', width: 120,templet:'#name'},
-                {field: 'type', title: '菜单类型', width: 100},
-                {field: 'open', align:'center',title: '{:lang("status")}', width: 100, toolbar: '#status'},
-                {field: 'listorder', align:'center', title: '{:lang("order")}', width: 100,toolbar:'#listorder'},
-                {field: 'value', title: '菜单操作值', width: 320},
-                {width: 160, align: 'center', toolbar: '#action',title:'操作'}
+                {field: 'id', title: '{:lang("id")}',  fixed: true},
+                {field: 'name', title: '主菜单名称', templet:'#name'},
+                {field: 'type', title: '菜单类型'},
+                {field: 'open', align:'center',title: '{:lang("status")}',  toolbar: '#status'},
+                {field: 'listorder', align:'center', title: '{:lang("order")}',toolbar:'#listorder'},
+                {field: 'value', title: '菜单操作值'},
+                {align: 'center', toolbar: '#action',title:'操作'}
             ]]
         });
         $('body').on('blur','.list_order',function() {

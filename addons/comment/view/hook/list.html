@@ -1,0 +1,21 @@
+{if condition="$isexamine neq 3"}
+<link href="/addons/comment/src/css/font-awesome.min.css" rel="stylesheet">
+<link href="/addons/comment/src/css/comment.css" rel="stylesheet">
+{if condition="$customstyle"}
+<style media="screen">
+  {$customstyle}
+</style>
+{/if}
+<h2 style="color:#106755">评论列表<span style="display:none">(共<i class="num">0</i>条)</span></h2>
+<div class="comment-list" id="comment-list" data-url="{:addon_url('comment://index/getlist')}">
+  <ul>
+    <li class="loading">
+      <div class="la-ball-clip-rotate-multiple la-dark la-x">
+        <div></div>
+        <div></div>
+      </div>
+      <div class="loading-text">加载中。。。</div>
+    </li>
+  </ul>
+</div>
+{/if}

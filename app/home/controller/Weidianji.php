@@ -5,8 +5,8 @@ use think\Controller;
 use think\Input;
 use think\Db;
 use think\Request;
-use clt\Gather;
-use clt\Sign;
+use cool\Gather;
+use cool\Sign;
 
 class Weidianji extends Common
 {

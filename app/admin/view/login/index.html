@@ -1,83 +1,153 @@
 <!DOCTYPE html>
-<html lang="zh_cn">
+
+
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>登录</title>
-    <link rel="stylesheet" href="__STATIC__/plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="__ADMIN__/css/login.css" />
-    <link rel="stylesheet" href="__STATIC__/common/css/font.css" />
+  <meta charset="utf-8">
+  <title>{:config('sys_name')}后台登录</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="__ADMIN__/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="__ADMIN__/css/admin.css" media="all">
+  <link rel="stylesheet" href="__ADMIN__/css/login.css" media="all">
 </head>
-<body class="beg-login-bg">
-<div class="container login">
-    <div class="content">
-        <div id="large-header" class="large-header">
-            <!-- <canvas id="demo-canvas"></canvas> -->
-            <div class="main-title">
-                <div class="beg-login-box">
-                    <header>
-                        <h1>{:config('sys_name')}后台登录</h1>
-                    </header>
-                    <div class="beg-login-main">
-                        <form class="layui-form layui-form-pane" method="post">
-                            <div class="layui-form-item">
-                                <label class="beg-login-icon fs1">
-                                    <span class="icon icon-user"></span>
-                                </label>
-                                <input type="text" name="username" lay-verify="required" placeholder="这里输入登录名" value="" class="layui-input">
-                            </div>
-                            <div class="layui-form-item">
-                                <label class="beg-login-icon fs1">
-                                    <i class="icon icon-key"></i>
-                                </label>
-                                <input type="password"  name="password" lay-verify="required" placeholder="这里输入密码" value="" class="layui-input">
-                            </div>
-                            <div class="layui-form-item">
-                                <input type="text" name="captcha" id="captcha" lay-verify="required" placeholder="验证码" autocomplete="off" class="layui-input">
-                                <div class="captcha">
-                                    <img src="{:captcha_src()}" alt="captcha" onclick="this.src=this.src+'?'+'id='+Math.random()"/>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
-                                <button type="submit" class="layui-btn btn-submit btn-blog" lay-submit lay-filter="login">登录</button>
-                            </div>
-                        </form>
-                    </div>
-                    <footer>
-                        <p>{:config('sys_name')} © {:config('url_domain_root')}</p>
-                    </footer>
-                </div>
-            </div>
+
+<body>
+  <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+
+    <div class="layadmin-user-login-main">
+      <div class="layadmin-user-login-box layadmin-user-login-header">
+        <h2>{:config('sys_name')}后台登录</h2>
+        <p>酷创网络官方后台系统</p>
+      </div>
+      <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+          <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
         </div>
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+          <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-row">
+            <div class="layui-col-xs7">
+              <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
+              <input type="text" name="captcha" id="captcha" lay-verify="required" placeholder="验证码" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-col-xs5">
+              <div style="margin-left: 10px;">
+                <img src="{:captcha_src()}" alt="captcha" class="layadmin-user-login-codeimg" onclick="this.src=this.src+'?'+'id='+Math.random()" height="38"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="layui-form-item" style="margin-bottom: 20px;">
+            <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+            <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
+          </div> -->
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
+        </div>
+        <!-- <div class="layui-trans layui-form-item layadmin-user-login-other">
+            <label>社交账号登入</label>
+            <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
+            <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
+            <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>
+
+            <a href="reg.html" class="layadmin-user-jump-change layadmin-link">注册帐号</a>
+          </div> -->
+      </div>
     </div>
-</div>
-<!-- <script src="__ADMIN__/js/rAF.js"></script> -->
-<!-- <script src="__ADMIN__/js/login.js"></script> -->
-<script type="text/javascript" src="__STATIC__/plugins/layui/layui.js"></script>
-<script type="text/javascript" src="__STATIC__/plugins/three/three.min.js"></script>
-<script type="text/javascript" src="__STATIC__/plugins/three/an.js"></script>
-<script>
-    layui.use('form',function(){
-        var form = layui.form,$ = layui.jquery;
-        //监听提交
-        form.on('submit(login)', function(data){
-            loading =layer.load(1, {shade: [0.1,'#fff'] });//0.1透明度的白色背景
-            $.post('{:url("login/index")}',data.field,function(res){
-                layer.close(loading);
-                if(res.code == 1){
-                    layer.msg(res.msg, {icon: 1, time: 1000}, function(){
-                        location.href = res.url;
-                    });
-                }else{
-                    $('#captcha').val('');
-                    layer.msg(res.msg, {icon: 2, anim: 6, time: 1000});
-                    $('.captcha img').attr('src','{:captcha_src()}?id='+Math.random());
-                }
+
+    <div class="layui-trans layadmin-user-login-footer">
+      <p>{:config('sys_name')} © {:config('url_domain_root')}</p>
+    </div>
+  </div>
+  <div class="covervid-wrapper">
+    <video class="covervid-video" autoplay muted loop>
+      <source src="__ADMIN__/bg/homepage-slider-bg.mp4" type="video/mp4">
+      <source src="__ADMIN__/bg/homepage-slider-bg.webm" type="video/webm">
+    </video>
+  </div>
+  <script src="__ADMIN__/layui/layui.js"></script>
+  <!-- <script src="__STATIC__/common/js/jquery.2.1.1.min.js"></script>
+  <script src="__ADMIN__/lib/covervid.js"></script> -->
+  <script>
+    layui.config({
+      base: '__ADMIN__/' //静态资源所在路径
+    }).extend({
+      index: 'lib/index' //主入口模块
+    }).use(['index', 'user'], function() {
+      var $ = layui.$,
+        setter = layui.setter,
+        admin = layui.admin,
+        form = layui.form,
+        router = layui.router(),
+        search = router.search;
+
+      form.render();
+      // $('.covervid-video').coverVid(1920, 1080);
+      //提交
+      $(document).on('keyup', function(event){
+
+         var keynum = (event.keyCode ? event.keyCode : event.which);
+         if(keynum == '13'){
+             $('.layui-btn').click()
+         }
+      })
+      form.on('submit(LAY-user-login-submit)', function(obj) {
+        loading = layer.load(1, {
+          shade: [0.1, '#fff']
+        }); //0.1透明度的白色背景
+        $.post('{:url("login/index")}', obj.field, function(res) {
+          layer.close(loading);
+          if (res.code == 1) {
+            layer.msg(res.msg, {
+              icon: 1,
+              offset: '15px',
+              time: 1000
+            }, function() {
+              location.href = res.url;
             });
-            return false;
+          } else {
+            $('#captcha').val('');
+            layer.msg(res.msg, {
+              icon: 2,
+              anim: 6,
+              offset: '15px',
+              time: 1000
+            });
+            $('.captcha img').attr('src', '{:captcha_src()}?id=' + Math.random());
+          }
         });
+        return false;
+        //请求登入接口
+        // admin.req({
+        //   url: '{:url("login/index")}',
+        //   data: obj.field,
+        //   type: 'post',
+        //   done: function(res) {
+        //     console.log(res);return false;
+        //
+        //     //请求成功后，写入 access_token
+        //     // layui.data(setter.tableName, {
+        //     //   key: setter.request.tokenName
+        //     //   ,value: res.data.access_token
+        //     // });
+        //
+        //     //登入成功的提示与跳转
+        //
+        //   }
+        // });
+
+      });
     });
-</script>
+  </script>
+
+
 </body>
+
 </html>

@@ -2,7 +2,7 @@
 namespace app\home\controller;
 use think\Db;
 use think\Request;
-use clt\Form;
+use cool\Form;
 class EmptyController extends Common{
     protected  $dao,$fields;
     public function _initialize()

@@ -1,12 +1,16 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>用户组列表</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('groupAdd')}" class="layui-btn layui-btn-small">{:lang('add')}用户组</a>
-    </blockquote>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">用户组列表</div>
+    <div class="layui-card-body" pad15>
+      <div style="padding-bottom: 10px;">
+          <a href="{:url('groupAdd')}" class="layui-btn layui-btn-small">{:lang('add')}用户组</a>
+      </div>
+      <table class="layui-table" id="list" lay-filter="list"></table>
+    </div>
+</div>
+   </div>
 </div>
 {include file="common/foot"/}
 
@@ -24,7 +28,7 @@
             method:'post',
             cols: [[
                 {field:'group_id', title: '{:lang("id")}', width:80,fixed: true,sort: true},
-                {field:'title', title: '用户组名', width:180},
+                {field:'title', title: '用户组名'},
                 {field:'addtime', title: '添加时间', width:200,sort: true},
                 {width:260, align:'center',toolbar:'#action'}
             ]]

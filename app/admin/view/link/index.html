@@ -1,13 +1,17 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>友情链接</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}友链</a>
-        <button type="button" class="layui-btn layui-btn-small layui-btn-danger" id="delAll">批量删除</button>
-    </blockquote>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">友情链接</div>
+      <div class="layui-card-body" pad15>
+        <div style="padding-bottom: 15px;">
+            <a href="{:url('add')}" class="layui-btn layui-btn-small">{:lang('add')}友链</a>
+            <button type="button" class="layui-btn layui-btn-small layui-btn-danger" id="delAll">批量删除</button>
+        </div>
+        <table class="layui-hide" id="list" lay-filter="list"></table>
+      </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="url">
@@ -35,16 +39,17 @@
             elem: '#list',
             url: '{:url("index")}',
             method: 'post',
+            cellMinWidth: 80,
             cols: [[
                 {checkbox: true, fixed: true},
-                {field: 'link_id', title: '{:lang("id")}', width: 80, fixed: true, sort: true},
-                {field: 'name', title: '链接名称', width: 200},
-                {field: 'url', title: '链接URL', width: 300,templet:'#url'},
-                {field: 'qq', title: '{:lang("qq")}', width: 120},
-                {field: 'addtime', title: '{:lang("add")}{:lang("time")}', width: 150,sort: true},
-                {field: 'sort',align: 'center',title: '{:lang("order")}', width: 120, templet: '#order', sort: true},
-                {field: 'open',align: 'center', title: '{:lang("status")}', width: 100, sort: true,toolbar: '#open'},
-                {width: 160, align: 'center', toolbar: '#action'}
+                {field: 'link_id', title: '{:lang("id")}',  fixed: true, sort: true},
+                {field: 'name', title: '链接名称'},
+                {field: 'url', title: '链接URL',templet:'#url'},
+                {field: 'qq', title: '{:lang("qq")}'},
+                {field: 'addtime', title: '{:lang("add")}{:lang("time")}',sort: true},
+                {field: 'sort',align: 'center',title: '{:lang("order")}', templet: '#order', sort: true},
+                {field: 'open',align: 'center', title: '{:lang("status")}', sort: true,toolbar: '#open'},
+                {align: 'center', toolbar: '#action', title: '操作'}
             ]]
         });
         table.on('tool(list)', function(obj) {

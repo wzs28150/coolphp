@@ -50,7 +50,7 @@ class Attachment extends Common{
             if(input('post.isthumb')==1){
                 $imagearr = explode(',', 'jpeg,jpg,png,gif');
             }else{
-                $imagearr = explode(',', 'zip,rar,doc,ppt');
+                $imagearr = explode(',', 'zip,rar,doc,ppt,mp3,mp4,swf,flv,pdf');
             }
             $data['isimage'] = in_array($info->getExtension(),$imagearr) ? 1 : 0;
             $data['isthumb'] = intval($_REQUEST['isthumb']);

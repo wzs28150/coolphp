@@ -86,13 +86,13 @@
                         <h5 class="side-tittle margin-top-50"> 热点文章</h5>
                         <hr class="main">
                         <ul class="papu-post margin-top-20">
-                            {clt:list_join db='blog' dbfield='catid' id='vo' joindb='category' joinfield='id' where='posid = 2
+                            {cool:list_join db='blog' dbfield='catid' id='vo' joindb='category' joinfield='id' where='posid = 2
                             ' order="listorder asc,createtime desc" limit='3'}
                             <li class="media">
                                 <div class="media-left"> <a href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}"> <img class="media-object" src="__PUBLIC__{$vo.thumb}" alt=""></a> </div>
                                 <div class="media-body"> <a class="media-heading" href="{:url('home/'.$vo['catdir'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}">{$vo.title}</a> <span>{:toDate($vo['createtime'],'Y-m-d')}</span> </div>
                             </li>
-                            {/clt:list_join}
+                            {/cool:list_join}
                         </ul>
                         <!--======= Archives =========-->
                         <h5 class="side-tittle margin-top-50">时间线</h5>

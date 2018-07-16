@@ -1,53 +1,57 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit" ng-app="hd" ng-controller="ctrl">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{$title}</legend>
-    </fieldset>
-    <form class="layui-form layui-form-pane">
-        <div class="layui-form-item">
-            <label class="layui-form-label">关键词</label>
-            <div class="layui-input-4">
-                <input type="text" name="keyword" ng-model="field.keyword" lay-verify="required" placeholder="{:lang('pleaseEnter')}关键词" class="layui-input">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit" ng-app="hd" ng-controller="ctrl">
+        <div class="layui-card-header">{$title}</div>
+        <div class="layui-card-body" pad15>
+          <form class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label class="layui-form-label">关键词</label>
+                <div class="layui-input-block">
+                    <input type="text" name="keyword" ng-model="field.keyword" lay-verify="required" placeholder="{:lang('pleaseEnter')}关键词" class="layui-input">
+                </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">{:lang('title')}</label>
-            <div class="layui-input-4">
-                <input type="text" name="title" ng-model="field.title" lay-verify="required" placeholder="{:lang('pleaseEnter')}{:lang('title')}" class="layui-input">
+            <div class="layui-form-item">
+                <label class="layui-form-label">{:lang('title')}</label>
+                <div class="layui-input-block">
+                    <input type="text" name="title" ng-model="field.title" lay-verify="required" placeholder="{:lang('pleaseEnter')}{:lang('title')}" class="layui-input">
+                </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">URL</label>
-            <div class="layui-input-4">
-                <input type="text" name="url" ng-model="field.url" lay-verify="required" placeholder="http://" class="layui-input">
+            <div class="layui-form-item">
+                <label class="layui-form-label">URL</label>
+                <div class="layui-input-block">
+                    <input type="text" name="url" ng-model="field.url" lay-verify="required" placeholder="http://" class="layui-input">
+                </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">封面图片</label>
-            <input type="hidden" name="pic" id="pic" ng-model="field.pic">
-            <div class="layui-input-block">
-                <div class="layui-upload">
-                    <button type="button" class="layui-btn layui-btn-primary" id="imgBtn"><i class="icon icon-upload3"></i>点击上传</button>
-                    <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="wxPic">
-                        <p id="demoText"></p>
+            <div class="layui-form-item">
+                <label class="layui-form-label">封面图片</label>
+                <input type="hidden" name="pic" id="pic" ng-model="field.pic">
+                <div class="layui-input-block">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-primary" id="imgBtn"><i class="icon icon-upload3"></i>点击上传</button>
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="wxPic">
+                            <p id="demoText"></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">简介</label>
-            <div class="layui-input-block">
-                <textarea ng-model="field.desc" lay-verify="required" name="desc" placeholder="{:lang('pleaseEnter')}回复内容" class="layui-textarea"></textarea>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">简介</label>
+                <div class="layui-input-block">
+                    <textarea ng-model="field.desc" lay-verify="required" name="desc" placeholder="{:lang('pleaseEnter')}回复内容" class="layui-textarea"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
-                <a href="{:url('img')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
+                    <a href="{:url('img')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+                </div>
             </div>
+        </form>
         </div>
-    </form>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script src="__STATIC__/common/js/angular.min.js"></script>

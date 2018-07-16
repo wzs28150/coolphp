@@ -1,6 +1,6 @@
 <?php
 return [
-    'hello'         => '欢迎使用CLTPHP',
+    'hello'         => '欢迎使用COOLPHP',
     'adminInfo'     => '个人信息',
     'logout'        =>'注销',
     'home'          =>'浏览网站',

@@ -107,13 +107,13 @@
     <div id="main-wrapper">
         <!-- logo start here -->
         <div id="logo">
-            <a href="{:url('home/index/index')}" title="CLTPHP内容管理系统"><img src="__PUBLIC__{$sys.logo}" alt="mainlogo" /></a>
+            <a href="{:url('home/index/index')}" title="COOLPHP内容管理系统"><img src="__PUBLIC__{$sys.logo}" alt="mainlogo" /></a>
         </div>
         <!-- logo end here -->
         <!-- mainmenu start here -->
         <nav id="mainmenu">
             <ul id="menu">
-                <li {if condition="$controller eq 'index'"}class="selected"{/if}><a href="{:url('home/index/index')}" title="CLTPHP内容管理系统">首页</a></li>
+                <li {if condition="$controller eq 'index'"}class="selected"{/if}><a href="{:url('home/index/index')}" title="COOLPHP内容管理系统">首页</a></li>
 
                 {volist name="category" id="vo"}
                 <li {if condition="$controller eq $vo['catdir']"}class="selected"{/if}>
@@ -121,11 +121,11 @@
                         <a href="#">{$vo.catname}</a>
                         <ul>
                             {volist name="$vo.sub" id="v"}
-                                <li><a href="{:url('home/'.$vo['catdir'].'/index',['catId'=>$v['id']] )}" title="{$v.catname}-CLTPHP内容管理系统"><span>-</span> {$v.catname}</a></li>
+                                <li><a href="{:url('home/'.$vo['catdir'].'/index',['catId'=>$v['id']] )}" title="{$v.catname}-COOLPHP内容管理系统"><span>-</span> {$v.catname}</a></li>
                             {/volist}
                         </ul>
                     {else /}
-                        <a href="{:url('home/'.$vo['catdir'].'/index',['catId'=>$vo['id']] )}" title="{$vo.catname}-CLTPHP内容管理系统">{$vo.catname}</a>
+                        <a href="{:url('home/'.$vo['catdir'].'/index',['catId'=>$vo['id']] )}" title="{$vo.catname}-COOLPHP内容管理系统">{$vo.catname}</a>
                     {/if}
                 </li>
                 {/volist}

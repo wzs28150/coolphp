@@ -30,7 +30,7 @@
 
                         <!-- Tab -->
                         <ul class="tabs margin-top-20 margin-bottom-30" role="tablist">
-                            {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
+                            {cool:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
                             <li role="presentation" class="active">
                                 {else/}
                                 <li role="presentation">
@@ -46,12 +46,12 @@
                                     0{$i+1}. {$list.title}
                                 </a>
                                 </li>
-                                {/clt:list}
+                                {/cool:list}
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
+                            {cool:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
                             <div role="tabpanel" class="tab-pane fade in active" id="retina{$i}">
                                 {$list.content}
                             </div>
@@ -59,7 +59,7 @@
                             <div role="tabpanel" class="tab-pane fade" id="retina{$i}">
                                 {$list.content}
                             </div>
-                            {/if} {/clt:list}
+                            {/if} {/cool:list}
                         </div>
                     </div>
                 </div>
@@ -67,9 +67,9 @@
                 <!-- Story Img -->
                 <div class="col-md-4">
                     <div class="single-slide">
-                        {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 7"}
+                        {cool:list db='debris' id='list' limit="3" key="i" where="type_id = 7"}
                         <div>{$list.content}</div>
-                        {/clt:list}
+                        {/cool:list}
                     </div>
                 </div>
             </div>
@@ -244,7 +244,7 @@
             <!-- CLIENTS -->
             <div class="clients-img">
                 <ul class="row">
-                    {clt:list db='ad' id='list' limit="999" key="i" where="type_id = 10"}
+                    {cool:list db='ad' id='list' limit="999" key="i" where="type_id = 10"}
                     {if condition="$i > 5"}
                         {if condition="$list['url'] eq '#.'"}
                         <li style="margin-top:30px;"><a href="javascript:void(0);"> <img src="__PUBLIC__{$list.pic}" class="img-responsive" alt=""> </a></li>
@@ -258,7 +258,7 @@
                         <li><a href="{$list.url}" target="_blank"> <img src="__PUBLIC__{$list.pic}" class="img-responsive" alt=""> </a></li>
                         {/if}
                     {/if}
-                    {/clt:list}
+                    {/cool:list}
                 </ul>
             </div>
         </div>

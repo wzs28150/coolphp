@@ -1,0 +1,80 @@
+{include file="common/head"/}
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">会员统计</div>
+      </div>
+      <div class="layui-row layui-col-space15">
+        {volist name="olist" id="vo"}
+        <div class="layui-col-md4">
+          <div class="layui-card">
+            <div class="layui-card-body">
+            <div class="grid-demo grid-fk-bg1">
+              <div class="layui-col-md4">
+                <div class="ico timer" data-to="{:getmembernum($vo.id)}" data-speed="1500" data-decimals="10" style="font-size:1.2em;width: 3em;height: 1em;  padding: 1em 0; line-height: 1em;background:#{:random_color()}">0</div>
+              </div>
+              <div class="layui-col-md8">
+                <div class="num" >{$vo.title}</div>
+                <div class="title">会员人数</div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        {/volist}
+      </div>
+
+    </div>
+  </div>
+</div>
+{include file="common/foot"/}
+<script>
+  layui.use('table', function() {
+    var table = layui.table;
+  })
+  layui.use(['countTo'], function(countTo) {
+    countTo.init();
+  });
+  layui.use('element', function() {
+    var $ = layui.jquery,
+      element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+    //触发事件
+    var active = {
+      setPercent: function() {
+        //设置50%进度
+        element.progress('demo', '50%')
+      },
+      loading: function(othis) {
+        var DISABLED = 'layui-btn-disabled';
+        if (othis.hasClass(DISABLED)) return;
+
+        //模拟loading
+        var n = 0,
+          timer = setInterval(function() {
+            n = n + Math.random() * 10 | 0;
+            if (n > 100) {
+              n = 100;
+              clearInterval(timer);
+              othis.removeClass(DISABLED);
+            }
+            element.progress('demo', n + '%');
+          }, 300 + Math.random() * 1000);
+
+        othis.addClass(DISABLED);
+      }
+    };
+
+    $('.site-demo-active').on('click', function() {
+      var othis = $(this),
+        type = $(this).data('type');
+      active[type] ? active[type].call(this, othis) : '';
+    });
+
+
+  });
+</script>
+</body>
+
+</html>

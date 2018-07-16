@@ -1,51 +1,102 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{:lang('list')}</legend>
-    </fieldset>
-    <div class="demoTable">
-        <div class="layui-inline">
-            <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">{:lang('list')}</div>
+      <div class="layui-card-body" pad15>
+        <div class="demoTable" style="padding-bottom:5px;">
+          {if condition="$modelname eq 'lhb'"}
+          <div class="layui-inline">
+              <select class="layui-select ymd" name="year"></select>
+              <select class="layui-select ymd" name="month"></select>
+          </div>
+          <button class="layui-btn" id="search1" data-type="reload">{:lang('search')}</button>
+          {else}
+            <div class="layui-inline">
+                <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+            </div>
+            <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
+            <a href="{:url('index',['catid'=>input('catid')])}" class="layui-btn">显示全部</a>
+            <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
+          {/if}
+            {if condition="input('status')"}
+            {else}
+            <a href="{:url('Category/index')}" class="layui-btn layui-btn-normal" style="float:right;">返回栏目</a>
+            <a href="{:url('add',array('catid'=>input('catid')))}" class="layui-btn" style="float:right;margin-right: 15px;">{:lang('add')}</a>
+            {/if}
+            <div style="clear: both;"></div>
         </div>
-        <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
-        <a href="{:url('index',['catid'=>input('catid')])}" class="layui-btn">显示全部</a>
-        <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
-        <a href="{:url('Category/index')}" class="layui-btn layui-btn-normal" style="float:right;">返回栏目</a>
-        <a href="{:url('add',array('catid'=>input('catid')))}" class="layui-btn" style="float:right;margin-right: 15px;">{:lang('add')}</a>
-        <div style="clear: both;"></div>
+        <table class="layui-table" id="list" lay-filter="list"></table>
+      </div>
     </div>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+   </div>
 </div>
 {include file="common/foot"/}
+{if condition="$modelname eq 'lhb'"}
+<script src="__STATIC__/plugins/ymd.js" type="text/javascript"></script>
+{/if}
 <script type="text/html" id="order">
     <input name="{{d.id}}" data-id="{{d.id}}" class="list_order layui-input" value=" {{d.listorder}}" size="10"/>
 </script>
 <script type="text/html" id="title">
+  {{# if(d.thumb){ }}<i class="layui-icon layui-icon-picture" style="margin-right:5px;" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.thumb}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>{{# } }}
     <span style="{{d.title_style}}">{{d.title}}</span>
-    {{# if(d.thumb){ }}<img src="__ADMIN__/images/image.gif" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.thumb}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();">{{# } }}
+</script>
+<script type="text/html" id="status">
+  {{# if(d.status==1){ }}
+  <a class="layui-btn layui-btn-xs layui-btn-danger  layui-btn-disabled" lay-event="status">审核通过</a>
+  <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="status">审核不通过</a>
+  {{# }else{  }}
+  <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="status">审核通过</a>
+  <a class="layui-btn layui-btn-xs layui-btn-warm  layui-btn-disabled" lay-event="status">审核不通过</a>
+  {{# } }}
 </script>
 <script type="text/html" id="action">
-    <a href="{:url('edit')}?id={{d.id}}&catid={{d.catid}}" class="layui-btn layui-btn-xs">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  <a href="{:url('edit')}?id={{d.id}}&catid={:input('catid')}" class="layui-btn layui-btn-xs">编辑</a>
+	<a href="/{{d.catdir}}Info_{{d.id}}_{{d.catid}}.html" target="_blank" class="layui-btn layui-btn-xs">预览</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="info">
+  {{# if(d.mid){ }}
+  {{d.mid}}({{d.oid}})
+  {{# }else{  }}
+    无
+  {{# } }}
 </script>
 <script>
+{if condition="$modelname eq 'lhb'"}
+var y;
+  var m;
+  let myDate = new Date();
+  y = myDate.getFullYear();
+  m = myDate.getMonth();
+  new YMDselect('year', 'month', y, m);
+  {/if}
     layui.use('table', function() {
         var table = layui.table, $ = layui.jquery;
         var tableIn = table.render({
             id: 'content',
             elem: '#list',
             url: '{:url("index")}',
-            where:{catid:'{:input("catid")}'},
+            where:{catid:'{:input("catid")}',status:'{:input("status")}'},
             method: 'post',
             page: true,
+            cellMinWidth: 80,
             cols: [[
                 {type: "checkbox", fixed: true},
-                {field: 'id', title: '{:lang("id")}', fixed: true},
+                {field: 'id', title: '{:lang("id")}',width: 80, fixed: true},
                 {field: 'title', title: '{:lang("title")}',  templet: '#title'},
-                {field: 'hits',  title: '{:lang("hit")}'},
-                {field: 'createtime', title: '{:lang("add")}{:lang("time")}'},
-                {field: 'listorder', align: 'center', title: '{:lang("order")}', templet: '#order'},
-                {align: 'center', toolbar: '#action',title:'操作'}
+                {if condition="$modelname eq 'lhb'"}
+                  {align: 'center',field: 'danwei',  title: '所属单位'},
+                {/if}
+                {field: 'catname',  title: '所属栏目',width: 100},
+                {field: 'mid',  title: '投稿信息',width: 100 ,templet: '#info'},
+                {align: 'center',field: 'hits',  title: '{:lang("hit")}',width: 80},
+                {field: 'userid',  title: '发布人',width: 100},
+                {field: 'createtime', title: '{:lang("add")}{:lang("time")}',width: 200},
+                {align: 'center',field: 'listorder', align: 'center', title: '{:lang("order")}',width: 80, templet: '#order'},
+                {align: 'center', toolbar: '#status',width: 200,title:'审核'},
+                {align: 'center', toolbar: '#action',width: 200,title:'操作'}
             ]],
             limit: 10
         });
@@ -58,6 +109,11 @@
             }
             tableIn.reload({
                 where: {key: key,catid:'{:input("catid")}'}
+            });
+        });
+        $('#search1').on('click', function () {
+            tableIn.reload({
+                where: {year: $('select[name="year"]').val(),month: $('select[name="month"]').val(),catid:'{:input("catid")}'}
             });
         });
         $('body').on('blur','.list_order',function() {
@@ -91,6 +147,22 @@
                     });
                     layer.close(index);
                 });
+            }else if (obj.event === 'status') {
+                var loading = layer.load(1, {shade: [0.1, '#fff']});
+                $.post("{:url('listStatus')}", {'id': data.id,'status':data.status}, function (res) {
+                    layer.close(loading);
+                    if (res.code === 1) {
+                      // if(res.url){
+                      //   location.href = res.url;
+                      // }else{
+                      //   tableIn.reload();
+                      // }
+                      tableIn.reload();
+                    } else {
+                        layer.msg('操作失败！', {time: 1000, icon: 2});
+                        return false;
+                    }
+                })
             }
         });
         $('#delAll').click(function(){

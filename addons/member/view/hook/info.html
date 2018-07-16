@@ -1,0 +1,31 @@
+<form action="#" id="infoform" method="post">
+  <div class="reg_i">
+    <label for="name">姓名:</label>
+    <input id="name" type="text" name="name" value="{$memberinfo.name}" readonly>
+  </div>
+  <div class="reg_i">
+    <label for="certificate">军官证号:</label>
+    <input id="certificate" type="text" name="certificate" value="{$memberinfo.certificate}">
+  </div>
+  <div class="reg_i">
+    <label for="oirganization">所属单位:</label>
+    <select id="oirganization" name="oirganization">
+         <option>— — 请选择所属单位 — —</option>
+         {volist name="oirganization" id="vo"}
+         <option {if condition="$vo.id eq $memberinfo.oirganization"}selected{/if} value="{$vo.id}">{$vo.title}</option>
+         {/volist}
+    </select>
+  </div>
+  <div class="reg_i">
+    <label for="idcard">身份证号:</label>
+    <input id="idcard" type="text" name="idcard" value="{$memberinfo.idcard}">
+  </div>
+  <div class="reg_i">
+    <label for="birthday">生日:</label>
+    <input id="birthday" type="text" name="birthday" value="{$memberinfo.certificate}">
+    <span></span>
+  </div>
+  <div class="reg_tj">
+    <input type="button" id="m_info_s" value="确认修改">
+  </div>
+</form>

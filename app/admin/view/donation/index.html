@@ -1,19 +1,23 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>捐赠{:lang('list')}</legend>
-    </fieldset>
-    <div class="demoTable">
-        <div class="layui-inline">
-            <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">捐赠{:lang('list')}</div>
+      <div class="layui-card-body" pad15>
+        <div class="demoTable" style="padding-bottom: 5px;">
+            <div class="layui-inline">
+                <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+            </div>
+            <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
+            <a href="{:url('index')}" class="layui-btn">显示全部</a>
+            <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
+            <a href="{:url('add')}" class="layui-btn" style="float:right;"><i class="fa fa-plus" aria-hidden="true"></i>{:lang('add')}捐赠名单</a>
+            <div style="clear: both;"></div>
         </div>
-        <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
-        <a href="{:url('index')}" class="layui-btn">显示全部</a>
-        <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
-        <a href="{:url('add')}" class="layui-btn" style="float:right;"><i class="fa fa-plus" aria-hidden="true"></i>{:lang('add')}捐赠名单</a>
-        <div style="clear: both;"></div>
+        <table class="layui-table" id="list" lay-filter="list"></table>
+      </div>
     </div>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="action">
@@ -32,12 +36,13 @@
             url: '{:url("index")}',
             method: 'post',
             page: true,
+            cellMinWidth: 80,
             cols: [[
                 {checkbox: true, fixed: true},
-                {field: 'name', title: '{:lang("name")}', width: 150, fixed: true},
-                {field: 'mnum', title: '金额', width: 100,templet:'#money'},
-                {field: 'addtime', title: '{:lang("time")}', width: 150},
-                {width: 160, align: 'center', toolbar: '#action'}
+                {field: 'name', title: '{:lang("name")}',fixed: true},
+                {field: 'mnum', title: '金额', templet:'#money'},
+                {field: 'addtime', title: '{:lang("time")}'},
+                {align: 'center', toolbar: '#action',title: '操作'}
             ]],
             limit: 10
         });

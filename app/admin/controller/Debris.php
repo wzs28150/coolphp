@@ -3,7 +3,7 @@ namespace app\admin\controller;
 use think\Db;
 use think\Request;
 use think\Controller;
-use clt\Form;
+use cool\Form;
 class Debris extends Common
 {
     public function index(){

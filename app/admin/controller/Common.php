@@ -13,25 +13,32 @@ class Common extends Controller
         if (!session('aid')) {
             $this->redirect('login/index');
         }
+        // dump(input('session.'));
         define('MODULE_NAME',strtolower(request()->controller()));
         define('ACTION_NAME',strtolower(request()->action()));
-        //权限管理
-        //当前操作权限ID
-        if(session('aid')!=1){
-            $this->HrefId = db('auth_rule')->where('href',MODULE_NAME.'/'.ACTION_NAME)->value('id');
-            //当前管理员权限
-            $map['a.admin_id'] = session('aid');
-            $rules=Db::table(config('database.prefix').'admin')->alias('a')
-                ->join(config('database.prefix').'auth_group ag','a.group_id = ag.group_id','left')
-                ->where($map)
-                ->value('ag.rules');
-            $this->adminRules = explode(',',$rules);
-            if($this->HrefId){
-                if(!in_array($this->HrefId,$this->adminRules)){
-                    $this->error('您无此操作权限','index');
-                }
-            }
-        }
+        // 权限管理
+        // 当前操作权限ID
+        // if(session('aid')!=1){
+        //     $this->HrefId = db('auth_rule')->where('href','like',MODULE_NAME.'/'.ACTION_NAME)->value('id');
+        //     //当前管理员权限
+        //     $map['a.admin_id'] = session('aid');
+        //     $rules=Db::table(config('database.prefix').'admin')->alias('a')
+        //         ->join(config('database.prefix').'auth_group ag','a.group_id = ag.group_id','left')
+        //         ->where($map)
+        //         ->value('ag.rules');
+        //     $this->adminRules = explode(',',$rules);
+        //     if($this->HrefId){
+        //         if(!in_array($this->HrefId,$this->adminRules)){
+        //             $this->error('您无此操作权限','index');
+        //         }
+        //     }
+        // }
+        $request = Request::instance();
+
+        $controller = $request->controller();
+        $action = $request->action();
+        $this->assign('controller',$controller);
+        $this->assign('action',$action);
         $this->system = F('System');
         $this->categorys = F('Category');
         $this->module = F('Module');
@@ -46,6 +53,7 @@ class Common extends Controller
     }
     //空操作
     public function _empty(){
+      
         return $this->error('空操作，返回上次访问页面中...');
     }
 }

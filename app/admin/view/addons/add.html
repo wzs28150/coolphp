@@ -1,0 +1,126 @@
+{include file="common/head"/}
+<style media="screen">
+  .fieldinfo{ color: red; display: block;}
+</style>
+<div class="layui-fluid">
+    <div style="" class="fadeInUp animated">
+      <form class="layui-form ">
+        <div class="layui-card">
+          <div class="layui-card-header">{$title}</div>
+          <div class="layui-card-body" pad15>
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-bottom:15px;">
+              提示：预添加只添加插件骨架文件 功能需自行开发
+            </blockquote>
+            <div class="layui-form-item">
+              <label class="layui-form-label">插件名称</label>
+              <div class="layui-input-block">
+                <input type="text" name="name" lay-verify="required" placeholder="请输入插件名称(英文)" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">插件别名</label>
+              <div class="layui-input-block">
+                <input type="text" name="title" lay-verify="required" placeholder="请输入插件别名(中文)" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">插件描述</label>
+              <div class="layui-input-block">
+                <textarea name="description" id="description" placeholder="请输入插件描述" class="layui-textarea"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">插件作者</label>
+              <div class="layui-input-block">
+                <input type="text" name="author" lay-verify="required" placeholder="请输入插件作者" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">插件版本</label>
+              <div class="layui-input-block">
+                <input type="text" name="version" lay-verify="required" placeholder="请输入插件版本(如：0.1)" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">独立页面</label>
+              <div class="layui-input-block">
+                <input type="radio" name="is_page" checked value="1" title="拥有独立页面">
+                <input type="radio" name="is_page"  value="0" title="无独立页面">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">微信插件</label>
+              <div class="layui-input-block">
+                <input type="radio" name="is_weixin" class="layui-radio" checked value="0" title="是">
+                <input type="radio" name="is_weixin" class="layui-radio"  value="1" title="否">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">后台快捷栏</label>
+              <div class="layui-input-block">
+                <input type="radio" name="has_adminlist" checked value="0" title="添加">
+                <input type="radio" name="has_adminlist"  value="1" title="不添加">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label  class="layui-form-label">图标</label>
+              <div class="layui-input-block tubiao">
+                <style media="screen">
+                  .tubiao .layui-form-radio{
+                    margin:4px 0; padding: 0 0 0 10px;
+                  }
+                </style>
+                {volist name="iconarr" id="vo" key="k"}
+                  {if condition="$k eq 1"}
+                    <div style="border:1px solid #ccc; display:inline-block; width:74px; overflow:hidden;">
+                      <input type="radio" name="icon" checked value="{$vo}"><label class='layui-icon {$vo}' style="line-height: 28px;margin: 0;padding-right: 10px;cursor: pointer;display:inline-block;vertical-align: middle;text-align:center;color: #666;"></label>
+                    </div>
+                  {else}
+                    <div style="border:1px solid #ccc; display:inline-block;width:74px; overflow:hidden;">
+                      <input type="radio" name="icon"  value="{$vo}"><label class='layui-icon {$vo}' style="line-height: 28px;margin: 0;padding-right: 10px;cursor: pointer;display:inline-block;vertical-align: middle;min-width:22px;text-align:center;color: #666;"></label>
+                    </div>
+                    {if condition="$k%14 eq 0"}<br/>{/if}
+                  {/if}
+                {/volist}
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <input type="hidden" name="status" value="0">
+                <button type="button" class="layui-btn" lay-submit="" lay-filter="auth">立即提交</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </form>
+    </div>
+
+</div>
+{include file="common/foot"/}
+<script>
+  layui.use(['form', 'layer'], function() {
+    var form = layui.form,
+      layer = layui.layer,
+      $ = layui.jquery;
+    form.on('submit(auth)', function(data) {
+      // 提交到方法 默认为本身
+      $.post("{:url('add')}", data.field, function(res) {
+        if (res.code > 0) {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 1
+          }, function() {
+            // location.href = res.url;
+          });
+        } else {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 2
+          });
+        }
+      });
+    })
+  });
+</script>

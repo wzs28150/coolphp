@@ -1,17 +1,21 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{:lang('user')}{:lang('list')}</legend>
-    </fieldset>
-    <div class="demoTable">
-        <div class="layui-inline">
-            <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+        <div class="layui-card-header">{:lang('user')}{:lang('list')}</div>
+        <div class="layui-card-body" pad15>
+          <div class="demoTable">
+              <div class="layui-inline">
+                  <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+              </div>
+              <button class="layui-btn" id="search" data-type="reload">搜索</button>
+              <a href="{:url('index')}" class="layui-btn">显示全部</a>
+              <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
+          </div>
+          <table class="layui-table" id="list" lay-filter="list"></table>
         </div>
-        <button class="layui-btn" id="search" data-type="reload">搜索</button>
-        <a href="{:url('index')}" class="layui-btn">显示全部</a>
-        <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
     </div>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+   </div>
 </div>
 <script type="text/html" id="is_lock">
     {{# if(d.is_lock==1){ }}
@@ -43,10 +47,10 @@
             cols: [[
                 {checkbox:true,fixed: true},
                 {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
-                {field: 'username', title: '{:lang("nickname")}', width: 120},
-                {field: 'level_name', title: '会员等级', width: 100},
-                {field: 'email', title: '{:lang("email")}', width: 250,templet:'#email'},
-                {field: 'mobile', title: '{:lang("tel")}', width: 150},
+                {field: 'username', title: '{:lang("nickname")}'},
+                {field: 'level_name', title: '会员等级'},
+                {field: 'email', title: '{:lang("email")}', templet:'#email'},
+                {field: 'mobile', title: '{:lang("tel")}'},
                 {field: 'is_lock', align: 'center',title: '{:lang("status")}', width: 120,toolbar: '#is_lock'},
                 {field: 'reg_time', title: '注册时间', width: 150},
                 {width: 160, align: 'center', toolbar: '#action'}

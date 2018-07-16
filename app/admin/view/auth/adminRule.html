@@ -1,12 +1,17 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>权限{:lang('list')}</legend>
-    </fieldset>
-    <blockquote class="layui-elem-quote">
-        <a href="{:url('ruleAdd')}" class="layui-btn layui-btn-small">{:lang('add')}权限</a>
-    </blockquote>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+        <div class="layui-card-header">权限{:lang('list')}</div>
+        <div class="layui-card-body" pad15>
+          <div style="padding-bottom: 10px;">
+              <a href="{:url('ruleAdd')}" class="layui-btn layui-btn-small">{:lang('add')}权限</a>
+              <a href="javascript:void(0);" id="fixed" class="layui-btn layui-btn-small">修复权限</a>
+          </div>
+          <table class="layui-table" id="list" lay-filter="list"></table>
+        </div>
+    </div>
+   </div>
 </div>
 <script type="text/html" id="auth">
     {{# if(d.authopen==1){ }}
@@ -26,7 +31,7 @@
     <input name="{{d.id}}" data-id="{{d.id}}" class="list_order layui-input" value=" {{d.sort}}" size="10"/>
 </script>
 <script type="text/html" id="icon">
-    <span class="icon {{d.icon}}"></span>
+    <span class="layui-icon layui-icon-{{d.icon}}"></span>
 </script>
 <script type="text/html" id="action">
     <a href="{:url('ruleEdit')}?id={{d.id}}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
@@ -42,11 +47,11 @@
             method: 'post',
             cols: [[
                 {field: 'id', title: '{:lang("id")}', width: 70, fixed: true},
-                {field: 'icon', align: 'center',title: '{:lang("icon")}', width: 60,templet: '#icon'},
-                {field: 'ltitle', title: '权限名称', width: 200},
+                {field: 'icon', align: 'center',title: '{:lang("icon")}', templet: '#icon'},
+                {field: 'ltitle', title: '权限名称', },
                 {field: 'href', title: '控制器/方法', width: 200},
-                {field: 'authopen',align: 'center', title: '是否验证权限', width: 150,toolbar: '#auth'},
-                {field: 'menustatus',align: 'center',title: '菜单{:lang("status")}', width: 150,toolbar: '#status'},
+                {field: 'authopen',align: 'center', title: '是否验证权限', toolbar: '#auth'},
+                {field: 'menustatus',align: 'center',title: '菜单{:lang("status")}', toolbar: '#status'},
                 {field: 'sort',align: 'center', title: '{:lang("order")}', width: 80, templet: '#order'},
                 {width: 160,align: 'center', toolbar: '#action'}
             ]]
@@ -109,6 +114,21 @@
                 });
             }
         });
+        $('body').on('click','#fixed',function () {
+          layer.confirm('您确定要修复吗？修复权限,用户组内容栏目权限及插件权限需重新分配.', function(index){
+              var loading = layer.load(1, {shade: [0.1, '#fff']});
+              $.post("{:url('ruleFix')}",function(res){
+                  layer.close(loading);
+                  if(res.code==1){
+                      layer.msg(res.msg,{time:1000,icon:1});
+                      tableIn.reload();
+                  }else{
+                      layer.msg(res.msg,{time:1000,icon:2});
+                  }
+              });
+              layer.close(index);
+          });
+        })
         $('body').on('blur','.list_order',function() {
            var id = $(this).attr('data-id');
            var sort = $(this).val();

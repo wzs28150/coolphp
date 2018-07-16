@@ -1,0 +1,27 @@
+{if condition="$isexamine neq 3"}
+<!-- <link href="/addons/comment/src/css/font-awesome.min.css" rel="stylesheet">
+<link href="/addons/comment/src/css/comment.css" rel="stylesheet"> -->
+{if condition="$customstyle"}
+<style media="screen">
+  {
+    $customstyle
+  }
+</style>
+{/if}
+  <div class="new-likes">
+    <a href="#" class="likesaa on"  data-ajax="no">
+      <span class="ico"><i class="fa fa-heart-o"></i>&nbsp;<b class="new_zan_num">{$num}</b></span>
+      <span class="info">文章不错,支持一下！</span>
+      <div class="clear"></div>
+    </a>
+    <a href="#" class="commentshow on" data-ajax="no">
+      <span class="ico"><i class="fa fa-comments-o"></i>&nbsp;<b class="commentnum">0</b></span>
+      <span class="info">文章不错,评论一下！</span>
+      <div class="clear"></div>
+    </a>
+  </div>
+  <input type="hidden" id="likes-aid" name="aid" value="{$aid}">
+  <input type="hidden" id="likes-title" name="title" value="{$title}">
+  <input type="hidden" id="likes-url" name="url" value="{$url}">
+
+{/if}

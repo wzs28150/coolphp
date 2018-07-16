@@ -1,17 +1,21 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{:lang('message')}{:lang('list')}</legend>
-    </fieldset>
-    <div class="demoTable">
-        <div class="layui-inline">
-            <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">{:lang('message')}{:lang('list')}</div>
+      <div class="layui-card-body" pad15>
+        <div class="demoTable" style="padding-bottom: 15px;">
+            <div class="layui-inline">
+                <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+            </div>
+            <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
+            <a href="{:url('index')}" class="layui-btn">显示全部</a>
+            <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
         </div>
-        <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
-        <a href="{:url('index')}" class="layui-btn">显示全部</a>
-        <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
+        <table class="layui-hide" id="list" lay-filter="list"></table>
+      </div>
     </div>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="action">
@@ -26,16 +30,17 @@
             url: '{:url("index")}',
             method: 'post',
             page: true,
+            cellMinWidth: 80,
             cols: [[
                 {checkbox: true, fixed: true},
-                {field: 'message_id', title: '{:lang("id")}', width: 80,fixed: true},
-                {field: 'name', title: '{:lang("name")}', width: 120},
-                {field: 'email', title: '{:lang("email")}', width: 180},
-                {field: 'tel', title: '{:lang("tel")}', width: 180 },
-                {field: 'content', title: '{:lang("content")}', width: 300},
-                {field: 'addtime', title: '留言时间', width: 150},
-                {field: 'ip', title: '{:lang("ip")}', width: 180},
-                {width: 80, align: 'center', toolbar: '#action'}
+                {field: 'message_id', title: '{:lang("id")}',fixed: true},
+                {field: 'name', title: '{:lang("name")}'},
+                {field: 'email', title: '{:lang("email")}'},
+                {field: 'tel', title: '{:lang("tel")}'},
+                {field: 'content', title: '{:lang("content")}'},
+                {field: 'addtime', title: '留言时间'},
+                {field: 'ip', title: '{:lang("ip")}'},
+                {align: 'center', toolbar: '#action'}
             ]],
             limit: 10 //每页默认显示的数量
         });

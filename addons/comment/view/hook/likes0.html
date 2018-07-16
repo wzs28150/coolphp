@@ -1,0 +1,28 @@
+{if condition="$isexamine neq 3"}
+<!-- <link href="/addons/comment/src/css/font-awesome.min.css" rel="stylesheet">
+<link href="/addons/comment/src/css/comment.css" rel="stylesheet"> -->
+{if condition="$customstyle"}
+<style media="screen">
+  {$customstyle}
+</style>
+{/if}
+<div class="likes">
+  <!-- {if condition="$isdian eq 1"}
+  <a class="fa fa-heart" data-ajax="no" href="javascript:void(0);" title="已有{$num}人点赞"></a>
+  {else}
+  <a class="fa fa-heart-o" data-ajax="no" href="javascript:void(0);" title="已有{$num}人点赞"></a>
+  {/if} -->
+  <div class="new_zan">
+    <div class="new_zan_l">
+      <span>文章不错 支持一下！</span>
+      <a data-ajax="no" href="javascript:void(0);" class="new_zan_pic"></a>
+      <div class="new_zan_num">
+        {$num}人
+      </div>
+    </div>
+  </div>
+  <input type="hidden" id="likes-aid" name="aid" value="{$aid}">
+  <input type="hidden" id="likes-title" name="title" value="{$title}">
+  <input type="hidden" id="likes-url" name="url" value="{$url}">
+</div>
+{/if}

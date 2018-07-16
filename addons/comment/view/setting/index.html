@@ -1,0 +1,96 @@
+{include file="common/head"/}
+<style media="screen">
+  .fieldinfo{ color: red; display: block;}
+</style>
+<div class="layui-fluid">
+
+    <div style="" class="fadeInUp animated">
+      <!-- <blockquote class="layui-elem-quote">
+        提示
+      </blockquote> -->
+      <form class="layui-form ">
+        <!-- <div class="layui-form-item">
+          <label class="layui-form-label">类别名称</label>
+          <div class="layui-input-4">
+            <input type="text" name="title" lay-verify="required" placeholder="请输入类别名称" class="layui-input">
+          </div>
+        </div> -->
+        <div class="layui-card">
+          <div class="layui-card-header">基础设置</div>
+          <div class="layui-card-body" pad15>
+            <div class="layui-form-item">
+              <label class="layui-form-label">审核规则</label>
+              <div class="layui-input-block">
+                <input type="radio" name="isexamine" {if condition="$info.isexamine eq 1"}checked{/if} value="1" title="先发后审(默认审核通过，立即显示)"><br/>
+                <input type="radio" name="isexamine" {if condition="$info.isexamine eq 2"}checked{/if} value="2" title="先审后发(通过站长后台审核才显示)"><br/>
+                <input type="radio" name="isexamine" {if condition="$info.isexamine eq 3"}checked{/if} value="3" title="全站关闭评论(所有文章将被关闭评论,且用户不能发表评论)">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">层级设置</label>
+              <div class="layui-input-block">
+                <input type="radio" name="hierarchy" {if condition="$info.hierarchy eq 1"}checked{/if} value="1" title="只有一层">
+                <input type="radio" name="hierarchy" {if condition="$info.hierarchy eq 2"}checked{/if} value="2" title="多层级">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-card">
+          <div class="layui-card-header">点赞设置</div>
+          <div class="layui-card-body" pad15>
+            <div class="layui-form-item">
+              <label class="layui-form-label">是否开启</label>
+              <div class="layui-input-block">
+                <input type="radio" name="is_zan" {if condition="$info.is_zan eq 1"}checked{/if} value="1" title="开启">
+                <input type="radio" name="is_zan" {if condition="$info.is_zan eq 2"}checked{/if} value="2" title="关闭">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-card">
+          <div class="layui-card-header">样式设置</div>
+          <div class="layui-card-body" pad15>
+            <div class="layui-form-item">
+              <label class="layui-form-label">设置样式</label>
+              <div class="layui-input-block">
+                <textarea name="customstyle" rows="8" cols="80">{$info['customstyle']}</textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit="" lay-filter="auth">立即提交</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+</div>
+{include file="common/foot"/}
+<script>
+  layui.use(['form', 'layer'], function() {
+    var form = layui.form,
+      layer = layui.layer,
+      $ = layui.jquery;
+    form.on('submit(auth)', function(data) {
+      // 提交到方法 默认为本身
+      $.post("{:addon_url($addon.'://setting/index')}", data.field, function(res) {
+        if (res.code > 0) {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 1
+          }, function() {
+            // location.href = res.url;
+          });
+        } else {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 2
+          });
+        }
+      });
+    })
+  });
+</script>

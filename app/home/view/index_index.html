@@ -112,7 +112,7 @@
 
                         <!-- Tab -->
                         <ul class="tabs margin-top-20 margin-bottom-30" role="tablist">
-                            {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
+                            {cool:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
                             <li role="presentation" class="active">
                                 {else/}
                                 <li role="presentation">
@@ -128,12 +128,12 @@
                                     0{$i+1}. {$list.title}
                                 </a>
                                 </li>
-                                {/clt:list}
+                                {/cool:list}
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
+                            {cool:list db='debris' id='list' limit="3" key="i" where="type_id = 6"} {if condition="$i eq 0"}
                             <div role="tabpanel" class="tab-pane fade in active" id="retina{$i}">
                                 {$list.content}
                             </div>
@@ -141,7 +141,7 @@
                             <div role="tabpanel" class="tab-pane fade" id="retina{$i}">
                                 {$list.content}
                             </div>
-                            {/if} {/clt:list}
+                            {/if} {/cool:list}
                         </div>
                     </div>
                 </div>
@@ -149,9 +149,9 @@
                 <!-- Story Img -->
                 <div class="col-md-4">
                     <div class="single-slide">
-                        {clt:list db='debris' id='list' limit="3" key="i" where="type_id = 7"}
+                        {cool:list db='debris' id='list' limit="3" key="i" where="type_id = 7"}
                         <div>{$list.content}</div>
-                        {/clt:list}
+                        {/cool:list}
                     </div>
                 </div>
             </div>
@@ -577,11 +577,11 @@
                     <div data-filter="*" class="cbp-filter-item-active cbp-filter-item"> 全部
                         <div class="cbp-filter-counter"></div>
                     </div>
-                    {clt:list db='category' id='list' limit="3" where="parentid = 10"}
+                    {cool:list db='category' id='list' limit="3" where="parentid = 10"}
                     <div data-filter=".w{$list.id}" class="cbp-filter-item"> {$list.catname}
                         <div class="cbp-filter-counter"></div>
                     </div>
-                    {/clt:list}
+                    {/cool:list}
                 </div>
             </div>
         </div>
@@ -589,7 +589,7 @@
         <!-- PORTFOLIO ITEMS -->
         <div class="ajax-work">
             <div class="col-4 gallery">
-                {clt:list_join db='case' dbfield='catid' id='list' joindb='category' joinfield='id'  order="listorder asc,createtime desc" limit='8'}
+                {cool:list_join db='case' dbfield='catid' id='list' joindb='category' joinfield='id'  order="listorder asc,createtime desc" limit='8'}
                 <!-- ITEM -->
                 <div class="cbp-item item portfolio-item w{$list.catid}">
                     <div class="port-item"><img src="{:imgUrl($list['thumb'])}" alt="">
@@ -609,7 +609,7 @@
                         </div>
                     </div>
                 </div>
-                {/clt:list_join}
+                {/cool:list_join}
 
             </div>
         </div>
@@ -804,7 +804,7 @@
                     <!-- Test Slider -->
                     <div class="testi">
                         <div class="two-slider">
-                            {clt:list_join db='fuwukehu' dbfield='catid' id='vo' joindb='category' joinfield='id' where='catid=22 ' order="listorder
+                            {cool:list_join db='fuwukehu' dbfield='catid' id='vo' joindb='category' joinfield='id' where='catid=22 ' order="listorder
                             asc,createtime desc" limit='10'}
                             <!-- Slider 1 -->
                             <div class="in-testi">
@@ -820,7 +820,7 @@
 
                             <!-- Slider 1 -->
 
-                            {/clt:list_join}
+                            {/cool:list_join}
                         </div>
                     </div>
                 </div>
@@ -843,7 +843,7 @@
 
             <!-- Row -->
             <div class="row">
-                {clt:list_join db='blog' dbfield='catid' id='vo' joindb='category' joinfield='id' where='catid in(17,18,19,20,21,30) ' order="listorder
+                {cool:list_join db='blog' dbfield='catid' id='vo' joindb='category' joinfield='id' where='catid in(17,18,19,20,21,30) ' order="listorder
                 asc,createtime desc" limit='3'}
                 <!-- BLOG POST -->
                 <div class="col-md-4">
@@ -865,7 +865,7 @@
                       </a>
                     </article>
                 </div>
-                {/clt:list_join}
+                {/cool:list_join}
             </div>
         </div>
     </section>

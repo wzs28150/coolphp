@@ -1,0 +1,1 @@
+define([],function(){var e,u={isdebug:!0,isdebugauth:0};return e=function(e,o){o||(o=1),(u.isdebug||1==o)&&(0==u.isdebugauth?console.log(e+" - Created by wzs"):1==u.isdebugauth?1==o&&console.log(e+" - Created by wzs"):2==u.isdebugauth&&2==o&&console.log(e+" - Created by wzs"))},{initModule:e}});

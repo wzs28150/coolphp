@@ -1,9 +1,10 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>碎片管理</legend>
-    </fieldset>
-    <div class="demoTable">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">碎片管理</div>
+    <div class="layui-card-body" pad15>
+    <div class="demoTable" style="padding-bottom:5px;">
         <div class="layui-inline">
             <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
         </div>
@@ -14,6 +15,9 @@
         <div style="clear: both;"></div>
     </div>
     <table class="layui-table" id="list" lay-filter="list"></table>
+    </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="order">
@@ -32,11 +36,12 @@
             url: '{:url("index")}',
             method: 'post',
             page:true,
+            cellMinWidth: 80,
             cols: [[
                 {checkbox: true, fixed: true},
                 {field: 'id', title: '{:lang("id")}', width: 80, fixed: true},
-                {field: 'title', title: '碎片标题', width: 400},
-                {field: 'typename', title: '碎片位置', width: 300},
+                {field: 'title', title: '碎片标题'},
+                {field: 'typename', title: '碎片位置'},
                 {field: 'addtime', title: '{:lang("add")}{:lang("time")}',width: 150},
                 {field: 'sort', align: 'center', title: '{:lang("order")}', width: 120, templet: '#order'},
                 {width: 160, align: 'center', toolbar: '#action'}

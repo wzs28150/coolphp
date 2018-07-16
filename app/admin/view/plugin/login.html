@@ -1,9 +1,13 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>登录插件</legend>
-    </fieldset>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">登录插件</div>
+    <div class="layui-card-body" pad15>
     <table class="layui-table" id="list" lay-filter="list"></table>
+    </div>
+    </div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="icon">
@@ -26,9 +30,9 @@
             url: '{:url("login")}',
             method: 'post',
             cols: [[
-                {field: 'name', title: '插件名称', width: 120,fixed: true},
-                {field: 'code', align: 'center', title: '图片', width: 120, templet: '#icon'},
-                {field: 'desc', title: '插件描述', width:400},
+                {field: 'name', title: '插件名称', fixed: true},
+                {field: 'code', align: 'center', title: '图片',  templet: '#icon'},
+                {field: 'desc', title: '插件描述'},
                 {width: 160, align: 'center', toolbar: '#action'}
             ]]
         });

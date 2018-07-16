@@ -25,6 +25,12 @@ function callback($status = 0, $msg = '', $url = null, $data = '')
 // 快速文件数据读取和保存 针对简单类型数据 字符串、数组
 function F($name, $value='', $path=DATA_PATH)
 {
+    // if(session('gid')){
+    //   $path = DATA_PATH.'/r'.session('gid').'/';
+    // }else{
+    //   $path = DATA_PATH.'/';
+    // }
+    $path = DATA_PATH.'/';
     static $_cache = array();
     $filename   =   $path.$name.'.php';
     if ('' !== $value) {
@@ -56,6 +62,7 @@ function F($name, $value='', $path=DATA_PATH)
 //缓存
 function savecache($name = '', $id='')
 {
+
     if ($name=='Field') {
         if ($id) {
             $Model = db($name);
@@ -339,7 +346,7 @@ function DeleteHtml($str)
     return trim($str); //返回字符串
 }
 //字符串截取
-function str_cut($sourcestr, $cutlength, $suffix='...')
+function str_cut($sourcestr, $cutlength, $suffix='')
 {
     $returnstr='';
     $i=0;
@@ -367,7 +374,7 @@ function str_cut($sourcestr, $cutlength, $suffix='...')
             $n=$n+0.5;        //小写字母和半角标点等与半个高位字符宽...
         }
     }
-    if ($n>$cutlength) {
+    if ($suffix) {
         $returnstr = $returnstr . $suffix;//超过长度时在尾处加上省略号
     }
     return DeleteHtml($returnstr);
@@ -503,13 +510,13 @@ function imgUrl($img, $defaul='')
         if (substr($img, 0, 4)=='http') {
             $imgUrl = $img;
         } else {
-            $imgUrl = '__PUBLIC__'.$img;
+            $imgUrl = __PUBLIC__.$img;
         }
     } else {
         if ($defaul) {
             $imgUrl = $defaul;
         } else {
-            $imgUrl = '__ADMIN__/images/tong.png';
+            $imgUrl = __ADMIN__.'/images/tong.png';
         }
     }
     return $imgUrl;
@@ -727,10 +734,16 @@ function send_email($to, $subject='', $content='')
  * @throws Exception
  * @throws phpmailerException
  */
- function getcatname($id)
+ function getcatname($id,$field='')
  {
-     $info = db('category')->field('catname')->find($id);
-     return $info['catname'];
+    if($field){
+      $info = db('category')->field($field)->find($id);
+      return $info[$field];
+    }else{
+      $info = db('category')->field('catname')->find($id);
+      return $info['catname'];
+    }
+
  }
 
  /**
@@ -801,7 +814,7 @@ function send_email($to, $subject='', $content='')
       if ($ip) {
           $ips = array_unshift($ips, $ip);
       }
-
+      dump($_SERVER);
       $count = count($ips);
       for ($i=0;$i<$count;$i++) {
           if (!preg_match("/^(10|172\.16|192\.168)\./i", $ips[$i])) {//排除局域网ip
@@ -869,4 +882,281 @@ function send_email($to, $subject='', $content='')
       $alltext = preg_replace("/[ ]+/s", " ", $alltext);
       return $alltext;
   }
-  
+  /**
+   * 生成随机颜色
+   * @return [type] [description]
+   */
+  function random_color(){
+    mt_srand((double)microtime()*1000000);
+    $c = '';
+    while(strlen($c)<6){
+        $c .= sprintf("%02X", mt_rand(0, 255));
+    }
+    return $c;
+  }
+
+  function getvalue($id,$dbname,$field) {
+    $list = db($dbname)->field($field)->find($id);
+    return $list[$field];
+  }
+
+  /**
+   * 文章上一篇下一篇
+   * @param  [int]  $catid     [栏目id]
+   * @param  [int]  $id        [文章id]
+   * @param  [str]  $dbname    [表名]
+   * @return [str]  $str       [html]
+   */
+   function getwlink($catid, $id, $dbname) {
+     $str = "";
+     $createtime = getvalue($id, $dbname, 'createtime');
+     $listorder = getvalue($id, $dbname, 'listorder');
+     $rsup = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND a.listorder < $listorder")->order('a.listorder desc,a.createtime')->limit(1)->fetchsql(false)->find();
+     if ($rsup) {
+       $str .= '<a href="' . url('home/'.$rsup['catdir'].'/info',array('id'=>$rsup['id'],'catId'=>$rsup['catid'])) . '">上一篇：'.$rsup['title'].'</a> ';
+     } else {
+       $rstup = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND a.listorder = $listorder AND a.createtime > $createtime")->order('a.createtime')->limit(1)->find();
+       if ($rstup) {
+         $str .= '<a href="' . url('home/'.$rstup['catdir'].'/info',array('id'=>$rstup['id'],'catId'=>$rstup['catid'])) . '">上一篇：'.$rstup['title'].'</a> ';
+       } else {
+         $str .= '<a data-ajax="no" href="javascript:void(0)">上一篇：无</a> ';
+       }
+     }
+     $rsdown = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND a.listorder > $listorder")->order('a.listorder,a.createtime desc')->limit(1)->find();
+     if ($rsdown)
+     {
+       $str .= '<a href="' . url('home/'.$rsdown['catdir'].'/info',array('id'=>$rsdown['id'],'catId'=>$rsdown['catid'])) . '">下一篇：'.$rsdown['title'].'</a>';
+     }
+     else
+     {
+       $rstdown = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND  a.listorder = $listorder AND a.createtime < $createtime")->order('a.createtime desc')->limit(1)->fetchsql(false)->find();
+       // dump($rstdown);
+       if ($rstdown) {
+         $str .= '<a href="' . url('home/'.$rstdown['catdir'].'/info',array('id'=>$rstdown['id'],'catId'=>$rstdown['catid'])) . '">下一篇：'.$rstdown['title'].'</a>';
+       } else {
+         $str .= '<a class="next" href="javascript:void(0)">下一篇：无</a>';
+       }
+     }
+     return $str;
+   }
+   /**
+    * 获取日期
+    * @return [type] [description]
+    */
+   function getdatexq() {
+     $weekarray=array("日","一","二","三","四","五","六");
+     return "星期".$weekarray[date("w")];
+   }
+   /**
+    * 获取文章投稿数
+    * @param  [type] $oid [组织id]
+    * @return [int]       [投稿数]
+    */
+   function getarticlenum($oid) {
+     if(!cache('articlenum_'.$oid)){
+       $num = db('article')->where('oid',$oid)->count();
+       cache('articlenum_'.$oid, $num, 3600);
+     }
+     return cache('articlenum_'.$oid);
+   }
+   /**
+    * 根据父级id获取下级栏目
+    * @param  [type]  $pid   [父级id]
+    * @param  integer $limit [个数不设置则不限制]
+    * @return [arry]         [栏目数组]
+    */
+   function getcategory($pid,$limit = 0) {
+     if(!cache('catel_'.$pid.'_'.$limit)){
+       if($limit!=0){
+         $list = db('category')->field('id,catname,catdir,child,parentid,url,image')->where('parentid',$pid)->where('ismenu',1)->limit($limit)->order('listorder,id')->select();
+       }else{
+         $list = db('category')->field('id,catname,catdir,child,parentid,url,image')->where('parentid',$pid)->where('ismenu',1)->order('listorder,id')->select();
+       }
+       cache('catel_'.$pid.'_'.$limit, $list, 3600);
+     }
+
+     return cache('catel_'.$pid.'_'.$limit);
+   }
+   /**
+    * 根据父级id获取下级栏目id字符串
+    * @param  [type]  $pid   [父级id]
+    * @param  integer $limit [个数不设置则不限制]
+    * @return [str ]         [字符串如：1,2,3,4]
+    */
+   function getcategorystr($pid,$limit = 0) {
+     if(!cache('catelstr_'.$pid.'_'.$limit)){
+       if($limit!=0){
+         $list = db('category')->field('id')->where('parentid',$pid)->where('ismenu',1)->limit($limit)->order('listorder,id')->select();
+       }else{
+         $list = db('category')->field('id')->where('parentid',$pid)->where('ismenu',1)->order('listorder,id')->select();
+       }
+       $str = '';
+       foreach ($list as $key => $value) {
+         $str .= $value['id'].',';
+       }
+       $str = rtrim($str,',');
+       cache('catelstr_'.$pid.'_'.$limit, $str, 3600);
+     }
+
+     return cache('catelstr_'.$pid.'_'.$limit);
+   }
+   /**
+    * 根据会员id获取详细信息
+    * @param  [int] $mid    [会员id]
+    * @param  [str] $fields [字段]
+    * @return [type]        [会员信息]
+    */
+   function getmemberinfo($mid,$fields='') {
+     $info = db('member')->find($mid);
+     if($fields){
+       return $info[$fields];
+     }else{
+       return $info;
+     }
+   }
+   /**
+    * 根据组织id获取组织信息
+    * @param  [int] $oid    [组织id]
+    * @param  [str] $fields [字段]
+    * @return [str]         [description]
+    */
+   function getoirganizationinfo($oid,$fields) {
+     $info = db('member_oirganization')->find($oid);
+     if($fields){
+       return $info[$fields];
+     }else{
+       return $info;
+     }
+   }
+   /**
+    * 根据广告位id 获取广告列表
+    * @param  [int] $type_id [栏目id]
+    * @param  [int] $limit   [个数]
+    * @return [arr]          [列表数组]
+    */
+  function getadlist($type_id,$limit) {
+    $list = db('ad')->where('type_id',$type_id)->limit($limit)->select();
+    return $list;
+  }
+  /**
+   * 根据管理员id获取信息
+   * @param  [int] $aid   [管理员id]
+   * @param  [str] $field [字段名称]
+   * @return [str]        [字段值]
+   */
+  function getadmininfo($aid,$field) {
+    $list = db('admin')->find($aid);
+    return $list[$field];
+  }
+  function getleftnav($pid,$level,$map = array(), &$result = array()){
+    $roleid = session('gid');
+    $menu = db('menu')->field('id,pid,title,icon,href,roleid,aid')->where('pid',$pid)->where($map)->order('sort')->fetchsql(false)->select();
+    // dump($map);
+    // echo $menu;exit;
+    if ($menu) {
+      if($level == 1)
+      {
+        foreach ($menu as $key => $value) {
+          if($roleid == 1){
+            if($value['aid']==0){
+              $value['href'] = url('admin/'.$value['href']);
+            }
+            $value['level'] = 1;
+            $result[] = $value;
+          }else{
+            if(in_array($roleid,explode(',',$value['roleid']))){
+              if($value['aid']==0){
+                $value['href'] = url('admin/'.$value['href']);
+              }
+              $value['level'] = 1;
+              $result[] = $value;
+            }
+          }
+        }
+      }
+      elseif($level == 2)
+      {
+        foreach ($result as $key => $value) {
+          foreach ($menu as $k => $val) {
+            if($roleid == 1){
+              if($value['id']==$val['pid']){
+                if($value['aid']==0){
+                  $val['href'] = url('admin/'.$val['href']);
+                }
+
+                $result[$key]['children'][] = $val;
+              }
+            }else{
+              if($value['id']==$val['pid'] && in_array($roleid,explode(',',$val['roleid']))){
+                if($value['aid']==0){
+                  $val['href'] = url('admin/'.$val['href']);
+                }
+                $result[$key]['children'][] = $val;
+              }
+            }
+
+          }
+        }
+      }
+      elseif($level == 3)
+      {
+        foreach ($result as $key => $value) {
+          if($value['children']){
+            foreach ($value['children'] as $kk => $vv) {
+              foreach ($menu as $k => $val) {
+                if($roleid == 1){
+                  if($vv['id']==$val['pid']){
+                    if($value['aid']==0){
+                      $val['href'] = url('admin/'.$val['href']);
+                    }
+                    $result[$key]['children'][$kk]['children'][] = $val;
+                  }
+                }else{
+                  if($vv['id']==$val['pid']  && in_array($roleid,explode(',',$val['roleid']))){
+                    if($value['aid']==0){
+                      $val['href'] = url('admin/'.$val['href']);
+                    }
+                    $result[$key]['children'][$kk]['children'][] = $val;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      elseif($level == 4)
+      {
+        foreach ($result as $key => $value) {
+          if($value['children']){
+            foreach ($value['children'] as $kk => $vv) {
+              if($vv['children']){
+                foreach ($vv['children'] as $kkk => $vvv) {
+                  foreach ($menu as $k => $val) {
+                    if($roleid == 1){
+                      if($vvv['id']==$val['pid']){
+                        if($value['aid']==0){
+                          $val['href'] = url('admin/'.$val['href']);
+                        }
+                        $result[$key]['children'][$kk]['children'][$kkk]['children'][] = $val;
+                      }
+                    }else{
+                      if($vvv['id']==$val['pid']  && in_array($roleid,explode(',',$val['roleid']))){
+                        if($value['aid']==0){
+                          $val['href'] = url('admin/'.$val['href']);
+                        }
+                        $result[$key]['children'][$kk]['children'][$kkk]['children'][] = $val;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+        foreach ($menu as $key => $value) {
+          getleftnav($value['id'],$level+1,$map, $result);
+        }
+    }
+    return $result;
+  }

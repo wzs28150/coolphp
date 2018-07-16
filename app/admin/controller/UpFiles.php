@@ -30,6 +30,7 @@ class UpFiles extends Common
         $fileKey = array_keys(request()->file());
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file($fileKey['0']);
+        // dump(request()->file());exit;
         // 移动到框架应用根目录/public/uploads/ 目录下
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
 

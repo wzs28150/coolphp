@@ -1,0 +1,192 @@
+{include file="common/head"/}
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+          <div class="layui-card">
+            <div class="layui-card-header">统计</div>
+            <div class="layui-card-body">
+              <div class="layui-row">
+              <div class="layui-col-md6">
+                <div class="grid-demo grid-fk-bg2">
+                  <div class="layui-col-md4">
+                    <div class="ico" style="font-size:1.5em;width: 3em;height: 1em;  padding: 1em 0; ">CN</div>
+                  </div>
+                  <div class="layui-col-md8">
+                    <div class="num timer" id="jrrs" data-to="{$jrrs}" data-speed="1500" data-decimals="10">0</div>
+                    <div class="title">今日评论数</div>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-col-md6">
+                <div class="grid-demo grid-fk-bg1">
+                  <div class="layui-col-md4">
+                    <div class="ico" style="font-size:1.5em;width: 3em;height: 1em;  padding: 1em 0; ">CN</div>
+                  </div>
+                  <div class="layui-col-md8">
+                    <div class="num timer" id="zrs" data-to="{$zrs}" data-speed="1500">0</div>
+                    <div class="title">评论总数</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="layui-card">
+            <div class="layui-card-body layui-text">
+              <div id="main" style="width: 100%;height:400px; padding-top:12px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md6">
+          <div class="layui-card">
+            <div class="layui-card-header">评论页面排行</div>
+            <div class="layui-card-body">
+              <div class="layui-form" >
+                {volist name="maxnum" id="vo" key = "k"}
+                <table class="layui-table">
+                  <colgroup>
+                    <col width="150">
+                    <col>
+                  </colgroup>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <a href="{$vo['url']}">{$k}. {$vo['title']}</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 9px 15px 9px 35px;">
+                        <div class="layui-progress">
+                          {if condition="$zrs eq 0"}
+                          <div class="layui-progress-bar layui-bg-blue" lay-percent="0%"></div>
+                          {elseif condition="$maxnum eq 0"/}
+                          <div class="layui-progress-bar layui-bg-blue" lay-percent="0%"></div>
+                          {else/}
+                          <div class="layui-progress-bar layui-bg-blue" lay-percent="{$vo['maxnum']/$zrs*100}%"></div>
+                          {/if}
+                        </div>
+                        {$vo['maxnum']}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                {/volist}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="common/foot"/}
+<script>
+  layui.use('table', function() {
+    var table = layui.table;
+  })
+  layui.use(['countTo'], function(countTo) {
+    countTo.init();
+  });
+  layui.use('element', function() {
+    var $ = layui.jquery,
+      element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+    //触发事件
+    var active = {
+      setPercent: function() {
+        //设置50%进度
+        element.progress('demo', '50%')
+      },
+      loading: function(othis) {
+        var DISABLED = 'layui-btn-disabled';
+        if (othis.hasClass(DISABLED)) return;
+
+        //模拟loading
+        var n = 0,
+          timer = setInterval(function() {
+            n = n + Math.random() * 10 | 0;
+            if (n > 100) {
+              n = 100;
+              clearInterval(timer);
+              othis.removeClass(DISABLED);
+            }
+            element.progress('demo', n + '%');
+          }, 300 + Math.random() * 1000);
+
+        othis.addClass(DISABLED);
+      }
+    };
+
+    $('.site-demo-active').on('click', function() {
+      var othis = $(this),
+        type = $(this).data('type');
+      active[type] ? active[type].call(this, othis) : '';
+    });
+
+
+  });
+</script>
+<script type="text/javascript" src="__STATIC__/plugins/echarts/echarts.js"></script>
+<script type="text/javascript" src="__STATIC__/plugins/echarts/westeros.js"></script>
+<script type="text/javascript">
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('main'));
+
+  // 指定图表的配置项和数据
+  var option = {
+    title: {
+      text: '评论概况'
+    },
+    tooltip: {
+      trigger: 'axis'
+    },
+    color:['#62df62'],
+    legend: {
+      data: ['cn'],
+    },
+    grid: {
+      left: '2%',
+      right: '3.8%',
+      bottom: '0',
+      containLabel: true
+    },
+
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: [{$riqistr}]
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+        name: 'cn',
+        type: 'line',
+        stack: '总量',
+        smooth :true,
+        animation :true,
+        itemStyle : {
+          normal : {
+            lineStyle:{
+              color:'#62df62'
+            }
+          }
+        },
+        data: [{$cnstr}]
+      }
+
+    ]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+  window.onresize = function() {
+    //重置容器高宽
+    myChart.resize();
+  };
+</script>
+</body>
+
+</html>

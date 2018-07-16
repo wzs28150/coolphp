@@ -1,23 +1,28 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>{:lang('ad')}管理</legend>
-    </fieldset>
-    <div class="demoTable">
-        <div class="layui-inline">
-            <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+      <div class="layui-card-header">{:lang('ad')}管理</div>
+      <div class="layui-card-body" pad15>
+        <div class="demoTable" style="padding-bottom: 15px;">
+            <div class="layui-inline">
+                <input class="layui-input" name="key" id="key" placeholder="{:lang('pleaseEnter')}关键字">
+            </div>
+            <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
+            <a href="{:url('index')}" class="layui-btn">显示全部</a>
+            <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
+            <a href="{:url('add')}" class="layui-btn" style="float:right;"><i class="fa fa-plus" aria-hidden="true"></i>{:lang('add')}{:lang('ad')}</a>
+            <div style="clear: both;"></div>
         </div>
-        <button class="layui-btn" id="search" data-type="reload">{:lang('search')}</button>
-        <a href="{:url('index')}" class="layui-btn">显示全部</a>
-        <button type="button" class="layui-btn layui-btn-danger" id="delAll">批量删除</button>
-        <a href="{:url('add')}" class="layui-btn" style="float:right;"><i class="fa fa-plus" aria-hidden="true"></i>{:lang('add')}{:lang('ad')}</a>
-        <div style="clear: both;"></div>
+        <table class="layui-hide" id="list" lay-filter="list"></table>
+      </div>
     </div>
-    <table class="layui-table" id="list" lay-filter="list"></table>
+   </div>
 </div>
 {include file="common/foot"/}
 <script type="text/html" id="name">
-   {{d.name}}{{# if(d.pic){ }}<img src="__ADMIN__/images/image.gif" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.pic}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();">{{# } }}
+  {{# if(d.pic){ }}<i class="layui-icon layui-icon-picture" style="margin-right:5px;" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.pic}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>{{# } }}
+   {{d.name}}
 </script>
 <script type="text/html" id="order">
     <input name="{{d.ad_id}}" data-id="{{d.ad_id}}" class="list_order layui-input" value=" {{d.sort}}" size="10"/>
@@ -42,15 +47,16 @@
             url: '{:url("index")}',
             method: 'post',
             page:true,
+            cellMinWidth: 80,
             cols: [[
                 {checkbox: true, fixed: true},
-                {field: 'ad_id', title: '{:lang("id")}', width: 80, fixed: true},
-                {field: 'name', title: '广告名称', width: 400,templet: '#name'},
-                {field: 'typename', title: '所属位置', width: 100},
-                {field: 'addtime', title: '{:lang("add")}{:lang("time")}',width: 150},
-                {field: 'sort', align: 'center', title: '{:lang("order")}', width: 120, templet: '#order'},
-                {field: 'open', align: 'center', title: '{:lang("status")}', width: 100, toolbar: '#open'},
-                {width: 160, align: 'center', toolbar: '#action'}
+                {field: 'ad_id', title: '{:lang("id")}', fixed: true},
+                {field: 'name', title: '广告名称', templet: '#name'},
+                {field: 'typename', title: '所属位置'},
+                {field: 'addtime', title: '{:lang("add")}{:lang("time")}'},
+                {field: 'sort', align: 'center', title: '{:lang("order")}', templet: '#order'},
+                {field: 'open', align: 'center', title: '{:lang("status")}', toolbar: '#open'},
+                {align: 'center', toolbar: '#action'}
             ]],
             limit:10
         });

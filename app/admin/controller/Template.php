@@ -65,13 +65,18 @@ class Template extends Common{
 
     public function edit(){
         $filename = input('param.file');
+
         if(input('param.type')){
             $type = input('param.type');
         }else{
             $type = strtolower(substr($filename,strrpos($filename, '.')-strlen($filename)+1));
         }
         $path = $type==$this->viewSuffix ?  $this->filepath : $this->publicpath.$type.'/';
+        if($type == 'html'){
+          $filename = strtr($filename,'-','_');
+        }
         $file = $path.$filename;
+
         if(file_exists($file)){
             $file=iconv('gb2312','utf-8',$file);
             $content = htmlspecialchars(file_get_contents($file));

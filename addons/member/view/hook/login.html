@@ -1,0 +1,58 @@
+<form class="loginform" id="loginform" method="post">
+  {volist name="setting" id="vo"}
+  {if condition="$vo.type eq 'text'"}
+    <div class="reg_i">
+      <label for="m_{$vo.name}">{$vo.title}</label>
+      <input type="text" id="m_{$vo.name}" name="{$vo.name}" {if condition="$vo.required"} required="required" {/if} placeholder="请输入{$vo.title}">
+    </div>
+  {elseif condition="$vo.type eq 'phone'"}
+    <div class="reg_i">
+      <label for="m_{$vo.name}">{$vo.title}</label>
+      <input type="text" class="m_phone" id="m_{$vo.name}" name="{$vo.name}" {if condition="$vo.required"} required="required" {/if} onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入{$vo.title}">
+    </div>
+  {elseif condition="$vo.type eq 'sex'"}
+    <div class="reg_i">
+      <label for="">{$vo.title}</label>
+      <label for="m_man">男</label><input type="radio" class="m_sex" id="m_man" value="男" checked name="{$vo.name}">
+      <label for="m_women">女</label><input type="radio" class="m_sex" id="m_women" value="女" name="{$vo.name}">
+    </div>
+  {elseif condition="$vo.type eq 'password'"}
+    <div class="reg_i">
+      <label for="m_{$vo.name}">密码</label>
+      <input type="password" id="m_{$vo.name}" name="{$vo.name}" {if condition="$vo.required"} required="required" {/if} placeholder="请输入密码">
+    </div>
+  {elseif condition="$vo.type eq 'email'"}
+    <div class="reg_i">
+      <label for="m_{$vo.name}">{$vo.title}</label>
+      <input type="email" class="m_email" name="{$vo.name}" id="m_{$vo.name}" {if condition="$vo.required"} required="required" {/if}  placeholder="请输入{$vo.title}">
+    </div>
+  {elseif condition="$vo.type eq 'oirganization'"}
+    <div class="reg_i">
+      <label for="m_{$vo.name}">{$vo.title}</label>
+      <select class="m_select" name="oirganization" {if condition="$vo.required"} required="required" {/if}>
+        {volist name="oirganization" id="oa"}
+        <option value="{$oa.id}">{$oa.title}</option>
+        {/volist}
+      </select>
+    </div>
+  {elseif condition="$vo.type eq 'datatime'"}
+    <link href='/addons/member/src/js/src/package/rome/rome.css' rel='stylesheet' type='text/css' />
+    <div class="reg_i">
+      <label for="m_{$vo.name}">{$vo.title}</label>
+      <input type="email" class="m_time" name="{$vo.name}" {if condition="$vo.required"} required="required" {/if} id="m_{$vo.name}"  placeholder="请选择{$vo.title}">
+    </div>
+    <script type="text/javascript">
+        var moment = rome.moment;
+        rome(m_{$vo.name},{ time: false });
+    </script>
+  {/if}
+  {/volist}
+  <div class="reg_i reg_iz">
+    <label for="i_user">验证码:</label>
+    <input id="i_user" type="text" name="captcha" value="">
+    <img src="{:url('/addons/execute/member-index-showcaptcha')}" alt="" onclick="this.src=this.src+'?'+'id='+Math.random()" >
+  </div>
+  <div class="reg_tj">
+    <input type="button" id="m_login_s"  name="" value="提交登录">
+  </div>
+</form>

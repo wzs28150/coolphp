@@ -11,6 +11,7 @@ return array (
   'ads' => '黑龙江哈尔滨',
   'tel' => '13204660513',
   'email' => '1003418012@qq.com',
-  'logo' => '/uploads/20170904/9f04d8be2a05d926bc3e328eded02378.png',
+  'logo' => '/uploads/20180716/cb891519e0dbe85260b04320421f3da4.png',
+  'others' => 'a:3:{s:4:"file";s:0:"";s:8:"contacts";s:6:"李雷";s:3:"tel";s:12:"010-66387822";}',
 );
 ?>

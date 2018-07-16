@@ -1,10 +1,10 @@
 {include file="common/head"/}
-<div class="admin-main layui-anim layui-anim-upbit">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>模版管理</legend>
-    </fieldset>
-    <div>
-        <blockquote class="layui-elem-quote">
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="admin-main layui-anim layui-anim-upbit">
+    <div class="layui-card-header">模版管理</div>
+    <div class="layui-card-body" pad15>
+        <div style="padding-bottom: 10px;">
             <a href="{:url('index')}" class="layui-btn layui-btn-small {if condition="input('type') eq ''"}layui-btn-danger{/if}">
                 <i class="fa fa-file-code-o "></i> {:strtoupper($viewSuffix)}
             </a>
@@ -20,7 +20,7 @@
             <a href="{:url('add')}" style="float: right;" class="layui-btn layui-btn-small layui-btn-normal">
                 <i class="fa fa-plus"></i> {:lang('add')}模版
             </a>
-        </blockquote>
+        </div>
         <div class="table-responsive">
             <table class="layui-table table-hover">
                 <thead>
@@ -39,7 +39,7 @@
                     <td>{$v.filesize}</td>
                     <td>{$v.filemtime|date='Y-m-d h:i:s',###}</td>
                     <td>
-                        <a href="{:url('edit',['file'=>$v['filename'],'type'=>input('param.type')])}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
+                        <a href="{:url('edit',['file'=>strtr($v['filename'],'_','-'),'type'=>input('param.type')])}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
                         <a href="javascript:;" onclick="return del('{$v.filename}')" class="layui-btn layui-btn-xs layui-btn-danger">{:lang('del')}</a>
                     </td>
                 </tr>
@@ -49,6 +49,8 @@
         </div>
     </div>
 
+</div>
+   </div>
 </div>
 {include file="common/foot"/}
 <script>
