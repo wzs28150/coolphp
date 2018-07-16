@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-05-27 22:18:41
+Date: 2018-07-16 23:53:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,12 +65,11 @@ CREATE TABLE `cool_addons` (
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '安装时间',
   `has_adminlist` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否有后台列表',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='插件表';
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='插件表';
 
 -- ----------------------------
 -- Records of cool_addons
 -- ----------------------------
-INSERT INTO `cool_addons` VALUES ('38', 'diyform', '自定义表单', 'thinkph5插件测试', '1', '{\"display\":\"1\"}', 'by wzs', '0.1', '1527429947', '0');
 
 -- ----------------------------
 -- Table structure for cool_admin
@@ -503,6 +502,169 @@ INSERT INTO `cool_category` VALUES ('29', '微信平台', 'case', 'case/', '10',
 INSERT INTO `cool_category` VALUES ('30', '行业新闻', 'hyxw', 'blog/', '14', '9', 'blog', '0,14', '30', '0', '', '', '', '0', '0', '1', '0', '', '0', '', '', '', '0', '', '0', '0');
 
 -- ----------------------------
+-- Table structure for cool_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_comment`;
+CREATE TABLE `cool_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL COMMENT '父级ID',
+  `aid` int(11) NOT NULL COMMENT '文章ID',
+  `uid` int(11) NOT NULL COMMENT '用户ID',
+  `name` varchar(255) NOT NULL,
+  `certificate` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `content` longtext NOT NULL COMMENT '留言内容',
+  `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `title` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_comment
+-- ----------------------------
+INSERT INTO `cool_comment` VALUES ('1', '0', '10', '0', 'wzs', '10086', '一营', '文章写的不错！学习了', '1529221809', 'CMS泛滥的时代网站建设选择自己弄还是找专业网络公司？', '1', 'http://qiangjun.local.com/blogInfo_10_30.html', '1');
+INSERT INTO `cool_comment` VALUES ('2', '0', '39', '0', 'wzs', '10086222', '一营', '文章写得不错，支持下|笑脸|', '1529376147', '中国第17批赴黎维和部队组织首轮应急防卫演练', '1', 'http://qiangjun.local.com/NewsInfo_39_32.html', '0');
+INSERT INTO `cool_comment` VALUES ('3', '0', '39', '0', 'wzs', '1008611', '一营', '文章写得不错，支持下', '1529376237', '中国第17批赴黎维和部队组织首轮应急防卫演练', '1', 'http://qiangjun.local.com/NewsInfo_39_32.html', '0');
+INSERT INTO `cool_comment` VALUES ('4', '0', '0', '0', '', '', '', '', '1530932053', '', '1', '', '0');
+INSERT INTO `cool_comment` VALUES ('5', '0', '0', '0', '', '', '', '', '1530932060', '', '1', '', '0');
+INSERT INTO `cool_comment` VALUES ('6', '0', '0', '0', '', '', '', '', '1530932061', '', '1', '', '0');
+INSERT INTO `cool_comment` VALUES ('7', '0', '276', '0', 'wzs', '100861', '一营', '不错不错', '1531467814', '红军名将胡少海（为了民族复兴·英雄烈士谱）', '1', 'http://qiangjun.local.com/NewsInfo_276_32.html', '0');
+INSERT INTO `cool_comment` VALUES ('8', '0', '2', '0', 'wzs', '10086', '12', '起诉离婚孩子1岁八个月男方死活不同意，我作为女方胜算大吗起诉离婚孩子1岁八个月男方死活不同意，我作为女方胜算大吗起诉离婚孩子1岁八个月男方死活不同意，我作为女方胜算大吗', '1531648845', '起诉离婚孩子1岁八个月男方死活不同意，我作为女方胜算大吗', '1', 'http://qiangjun.local.com/LawInfo_2.html', '0');
+
+-- ----------------------------
+-- Table structure for cool_comment_category
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_comment_category`;
+CREATE TABLE `cool_comment_category` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `href` char(80) NOT NULL DEFAULT '',
+  `title` char(20) NOT NULL DEFAULT '',
+  `type` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `authopen` tinyint(2) NOT NULL DEFAULT '1',
+  `icon` varchar(20) DEFAULT NULL COMMENT '样式',
+  `condition` char(100) DEFAULT '',
+  `pid` int(5) NOT NULL DEFAULT '0' COMMENT '父栏目ID',
+  `sort` int(11) DEFAULT '0' COMMENT '排序',
+  `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `zt` int(1) DEFAULT NULL,
+  `menustatus` tinyint(1) DEFAULT NULL,
+  `catid` int(11) DEFAULT NULL,
+  `roleid` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_comment_category
+-- ----------------------------
+INSERT INTO `cool_comment_category` VALUES ('1', '/addons_execute_comment-comment-index', '评论管理', '1', '1', '0', 'reply-fill', '', '0', '0', '1446535750', '1', '1', null, '');
+INSERT INTO `cool_comment_category` VALUES ('4', '/addons_execute_comment-setting-index', '评论设置', '1', '1', '0', 'util', '', '0', '1', '1446535789', '1', '1', null, '');
+
+-- ----------------------------
+-- Table structure for cool_comment_likes
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_comment_likes`;
+CREATE TABLE `cool_comment_likes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `num` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_comment_likes
+-- ----------------------------
+INSERT INTO `cool_comment_likes` VALUES ('1', '10', '1', 'CMS泛滥的时代网站建设选择自己弄还是找专业网络公司？', 'http://qiangjun.local.com/blogInfo_10_30.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('2', '39', '0', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/NewsInfo_39_32.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('3', '59', '4', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/NewsInfo_59_68.html?_pjax=main', '1');
+INSERT INTO `cool_comment_likes` VALUES ('4', '67', '0', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/StudyInfo_67_37.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('5', '265', '0', '集团军党委机关组织“传承红色基因、担当强军重任”主题教育第二专题授课辅导', 'http://qiangjun.local.com/NewsInfo_265_34.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('6', '174', '0', '集团军心理法律巡回服务和文艺慰问演出综合服务小分队到勤务支援第78旅开展下基层服务活动', 'http://qiangjun.local.com/NewsInfo_174_32.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('7', '18', '0', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/TvInfo_18_82_6.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('8', '270', '0', '全国铁路 调图提速', 'http://qiangjun.local.com/NewsInfo_270_32.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('9', '277', '0', '退役军人工作经验交流会召开', 'http://qiangjun.local.com/NewsInfo_277_32.html', '1');
+INSERT INTO `cool_comment_likes` VALUES ('10', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '27');
+
+-- ----------------------------
+-- Table structure for cool_comment_likes_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_comment_likes_detail`;
+CREATE TABLE `cool_comment_likes_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aid` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `addtime` int(18) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_comment_likes_detail
+-- ----------------------------
+INSERT INTO `cool_comment_likes_detail` VALUES ('5', '10', '1', 'CMS泛滥的时代网站建设选择自己弄还是找专业网络公司？', 'http://qiangjun.local.com/blogInfo_10_30.html', '1529220864');
+INSERT INTO `cool_comment_likes_detail` VALUES ('6', '39', '0', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/NewsInfo_39_32.html', '1529375881');
+INSERT INTO `cool_comment_likes_detail` VALUES ('7', '59', '4', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/NewsInfo_59_68.html?_pjax=main', '1529502021');
+INSERT INTO `cool_comment_likes_detail` VALUES ('8', '67', '0', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/StudyInfo_67_37.html', '1530462516');
+INSERT INTO `cool_comment_likes_detail` VALUES ('9', '265', '0', '集团军党委机关组织“传承红色基因、担当强军重任”主题教育第二专题授课辅导', 'http://qiangjun.local.com/NewsInfo_265_34.html', '1530865344');
+INSERT INTO `cool_comment_likes_detail` VALUES ('10', '174', '0', '集团军心理法律巡回服务和文艺慰问演出综合服务小分队到勤务支援第78旅开展下基层服务活动', 'http://qiangjun.local.com/NewsInfo_174_32.html', '1531303625');
+INSERT INTO `cool_comment_likes_detail` VALUES ('11', '18', '0', '中国第17批赴黎维和部队组织首轮应急防卫演练', 'http://qiangjun.local.com/TvInfo_18_82_6.html', '1531366397');
+INSERT INTO `cool_comment_likes_detail` VALUES ('12', '270', '0', '全国铁路 调图提速', 'http://qiangjun.local.com/NewsInfo_270_32.html', '1531467081');
+INSERT INTO `cool_comment_likes_detail` VALUES ('13', '277', '0', '退役军人工作经验交流会召开', 'http://qiangjun.local.com/NewsInfo_277_32.html', '1531467284');
+INSERT INTO `cool_comment_likes_detail` VALUES ('14', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467375');
+INSERT INTO `cool_comment_likes_detail` VALUES ('15', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467643');
+INSERT INTO `cool_comment_likes_detail` VALUES ('16', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467644');
+INSERT INTO `cool_comment_likes_detail` VALUES ('17', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467649');
+INSERT INTO `cool_comment_likes_detail` VALUES ('18', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467720');
+INSERT INTO `cool_comment_likes_detail` VALUES ('19', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467794');
+INSERT INTO `cool_comment_likes_detail` VALUES ('20', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467795');
+INSERT INTO `cool_comment_likes_detail` VALUES ('21', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531467798');
+INSERT INTO `cool_comment_likes_detail` VALUES ('22', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468065');
+INSERT INTO `cool_comment_likes_detail` VALUES ('23', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468070');
+INSERT INTO `cool_comment_likes_detail` VALUES ('24', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468072');
+INSERT INTO `cool_comment_likes_detail` VALUES ('25', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468073');
+INSERT INTO `cool_comment_likes_detail` VALUES ('26', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468074');
+INSERT INTO `cool_comment_likes_detail` VALUES ('27', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468074');
+INSERT INTO `cool_comment_likes_detail` VALUES ('28', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468156');
+INSERT INTO `cool_comment_likes_detail` VALUES ('29', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468159');
+INSERT INTO `cool_comment_likes_detail` VALUES ('30', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468161');
+INSERT INTO `cool_comment_likes_detail` VALUES ('31', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468163');
+INSERT INTO `cool_comment_likes_detail` VALUES ('32', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468169');
+INSERT INTO `cool_comment_likes_detail` VALUES ('33', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468169');
+INSERT INTO `cool_comment_likes_detail` VALUES ('34', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468593');
+INSERT INTO `cool_comment_likes_detail` VALUES ('35', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468595');
+INSERT INTO `cool_comment_likes_detail` VALUES ('36', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531468630');
+INSERT INTO `cool_comment_likes_detail` VALUES ('37', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531469314');
+INSERT INTO `cool_comment_likes_detail` VALUES ('38', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531469315');
+INSERT INTO `cool_comment_likes_detail` VALUES ('39', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531469316');
+INSERT INTO `cool_comment_likes_detail` VALUES ('40', '276', '0', '红军名将胡少海（为了民族复兴·英雄烈士谱）', 'http://qiangjun.local.com/NewsInfo_276_32.html', '1531469386');
+
+-- ----------------------------
+-- Table structure for cool_comment_setting
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_comment_setting`;
+CREATE TABLE `cool_comment_setting` (
+  `id` int(11) NOT NULL,
+  `styleid` int(18) NOT NULL DEFAULT '0',
+  `hierarchy` int(18) NOT NULL DEFAULT '0',
+  `isexamine` tinyint(1) NOT NULL DEFAULT '0',
+  `customstyle` longtext NOT NULL COMMENT '自定义样式',
+  `is_zan` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_comment_setting
+-- ----------------------------
+INSERT INTO `cool_comment_setting` VALUES ('1', '0', '1', '1', '', '1');
+
+-- ----------------------------
 -- Table structure for cool_config
 -- ----------------------------
 DROP TABLE IF EXISTS `cool_config`;
@@ -591,23 +753,6 @@ CREATE TABLE `cool_debris_type` (
 INSERT INTO `cool_debris_type` VALUES ('1', '【首页】中部碎片', '1');
 INSERT INTO `cool_debris_type` VALUES ('6', '【关于我们】中部碎片', '50');
 INSERT INTO `cool_debris_type` VALUES ('7', '【关于我们】图片滚动', '50');
-
--- ----------------------------
--- Table structure for cool_diyform
--- ----------------------------
-DROP TABLE IF EXISTS `cool_diyform`;
-CREATE TABLE `cool_diyform` (
-  `document_id` int(10) unsigned NOT NULL,
-  `good` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '赞数',
-  `bad` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '批数',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `uids` longtext NOT NULL COMMENT '投过票的用户id 字符合集 id1,id2,',
-  PRIMARY KEY (`document_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of cool_diyform
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for cool_donation
@@ -880,6 +1025,272 @@ CREATE TABLE `cool_link` (
 -- ----------------------------
 -- Records of cool_link
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for cool_member
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_member`;
+CREATE TABLE `cool_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `certificate` int(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `oid` int(11) NOT NULL,
+  `other` text NOT NULL,
+  `addtime` int(11) NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_member
+-- ----------------------------
+INSERT INTO `cool_member` VALUES ('4', 'wzs', '10086', '96e79218965eb72c92a549dd5a330112', '12', 'a:3:{s:13:\"oirganization\";s:2:\"12\";s:8:\"birthday\";s:10:\"2018-06-23\";s:7:\"captcha\";s:4:\"vpl4\";}', '1529745622', '1');
+
+-- ----------------------------
+-- Table structure for cool_member_category
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_member_category`;
+CREATE TABLE `cool_member_category` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `href` char(80) NOT NULL DEFAULT '',
+  `title` char(20) NOT NULL DEFAULT '',
+  `type` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `authopen` tinyint(2) NOT NULL DEFAULT '1',
+  `icon` varchar(20) DEFAULT NULL COMMENT '样式',
+  `condition` char(100) DEFAULT '',
+  `pid` int(5) NOT NULL DEFAULT '0' COMMENT '父栏目ID',
+  `sort` int(11) DEFAULT '0' COMMENT '排序',
+  `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `zt` int(1) DEFAULT NULL,
+  `menustatus` tinyint(1) DEFAULT NULL,
+  `catid` int(11) DEFAULT NULL,
+  `roleid` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_member_category
+-- ----------------------------
+INSERT INTO `cool_member_category` VALUES ('1', '/addons_execute_member-oirganization-index', '编制管理', '1', '1', '0', 'group', '', '0', '0', '1446535750', '1', '1', null, '');
+INSERT INTO `cool_member_category` VALUES ('4', '', '会员管理', '1', '1', '0', 'friends', '', '0', '1', '1446535789', '1', '1', null, '');
+INSERT INTO `cool_member_category` VALUES ('5', '/addons_execute_member-member-index', '会员管理', '1', '1', '0', '', '', '4', '1', '1446535789', '1', '1', null, '');
+INSERT INTO `cool_member_category` VALUES ('6', '/addons_execute_member-setting-index', '会员设置', '1', '1', '0', '', '', '4', '1', '1446535789', '1', '1', null, '');
+
+-- ----------------------------
+-- Table structure for cool_member_oirganization
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_member_oirganization`;
+CREATE TABLE `cool_member_oirganization` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT '0',
+  `child` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `addtime` int(18) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ochild` (`child`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_member_oirganization
+-- ----------------------------
+INSERT INTO `cool_member_oirganization` VALUES ('12', '0', null, '合成第1旅', '1529502508');
+INSERT INTO `cool_member_oirganization` VALUES ('13', '0', null, '合成第2旅', '1529502615');
+INSERT INTO `cool_member_oirganization` VALUES ('14', '0', null, '合成第3旅', '1529502621');
+INSERT INTO `cool_member_oirganization` VALUES ('16', '0', null, '合成第4旅', '1529502747');
+INSERT INTO `cool_member_oirganization` VALUES ('17', '0', null, '合成第5旅', '1529502754');
+INSERT INTO `cool_member_oirganization` VALUES ('18', '0', null, '合成第6旅', '1529502761');
+INSERT INTO `cool_member_oirganization` VALUES ('19', '0', null, '合成第7旅', '1529502767');
+INSERT INTO `cool_member_oirganization` VALUES ('20', '0', null, '合成第8旅', '1529502774');
+INSERT INTO `cool_member_oirganization` VALUES ('21', '0', null, '合成第9旅', '1529502779');
+INSERT INTO `cool_member_oirganization` VALUES ('22', '0', null, '合成第10旅', '1529502786');
+
+-- ----------------------------
+-- Table structure for cool_member_setting
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_member_setting`;
+CREATE TABLE `cool_member_setting` (
+  `id` int(11) NOT NULL,
+  `regset` text NOT NULL,
+  `loginset` text NOT NULL,
+  `is_state` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_member_setting
+-- ----------------------------
+INSERT INTO `cool_member_setting` VALUES ('1', 'a:5:{i:0;a:5:{s:5:\"title\";s:6:\"姓名\";s:4:\"name\";s:4:\"name\";s:4:\"type\";s:4:\"text\";s:8:\"required\";s:1:\"1\";s:9:\"listorder\";s:1:\"1\";}i:1;a:5:{s:5:\"title\";s:12:\"军官证号\";s:4:\"name\";s:11:\"certificate\";s:4:\"type\";s:4:\"text\";s:8:\"required\";s:1:\"1\";s:9:\"listorder\";s:1:\"2\";}i:2;a:5:{s:5:\"title\";s:12:\"所属单位\";s:4:\"name\";s:13:\"oirganization\";s:4:\"type\";s:13:\"oirganization\";s:8:\"required\";s:1:\"1\";s:9:\"listorder\";s:1:\"3\";}i:3;a:5:{s:5:\"title\";s:6:\"密码\";s:4:\"name\";s:8:\"password\";s:4:\"type\";s:8:\"password\";s:8:\"required\";s:1:\"1\";s:9:\"listorder\";s:1:\"4\";}i:4;a:5:{s:5:\"title\";s:6:\"生日\";s:4:\"name\";s:8:\"birthday\";s:4:\"type\";s:8:\"datatime\";s:8:\"required\";s:1:\"0\";s:9:\"listorder\";s:2:\"99\";}}', 'a:3:{i:0;a:5:{s:5:\"title\";s:6:\"姓名\";s:4:\"name\";s:4:\"name\";s:4:\"type\";s:4:\"text\";s:9:\"listorder\";s:2:\"99\";s:8:\"required\";s:1:\"1\";}i:1;a:5:{s:5:\"title\";s:12:\"军官证号\";s:4:\"name\";s:11:\"certificate\";s:4:\"type\";s:4:\"text\";s:9:\"listorder\";s:2:\"99\";s:8:\"required\";s:1:\"1\";}i:2;a:5:{s:5:\"title\";s:6:\"密码\";s:4:\"name\";s:8:\"password\";s:4:\"type\";s:8:\"password\";s:9:\"listorder\";s:2:\"99\";s:8:\"required\";s:1:\"1\";}}', '0');
+
+-- ----------------------------
+-- Table structure for cool_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `cool_menu`;
+CREATE TABLE `cool_menu` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `href` char(80) NOT NULL DEFAULT '',
+  `title` char(20) NOT NULL DEFAULT '',
+  `type` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `authopen` tinyint(2) NOT NULL DEFAULT '1',
+  `icon` varchar(20) DEFAULT NULL COMMENT '样式',
+  `condition` char(100) DEFAULT '',
+  `pid` int(5) NOT NULL DEFAULT '0' COMMENT '父栏目ID',
+  `sort` int(11) DEFAULT '0' COMMENT '排序',
+  `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `zt` int(1) DEFAULT NULL,
+  `menustatus` tinyint(1) DEFAULT NULL,
+  `catid` int(11) DEFAULT NULL,
+  `aid` int(11) NOT NULL DEFAULT '0',
+  `roleid` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2163 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cool_menu
+-- ----------------------------
+INSERT INTO `cool_menu` VALUES ('2', 'System/system', '系统设置', '1', '1', '0', '', '', '1', '1', '1446535789', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('1', 'index', '系统设置', '1', '1', '1', 'set', '', '0', '1', '1527305359', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('5', 'Database/database', '数据库备份', '1', '1', '0', '', '', '4', '1', '1446535834', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('3', 'System/email', '邮箱配置', '1', '1', '0', '', '', '1', '2', '1502331829', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('4', 'Database', '数据管理', '1', '1', '0', 'console', '', '0', '3', '1446535805', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('6', 'Database/restore', '还原数据库', '1', '1', '0', '', '', '4', '10', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('7', 'Auth', '权限管理', '1', '1', '0', 'username', '', '0', '2', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('8', 'Auth/adminList', '管理员列表', '1', '1', '0', '', '', '7', '0', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('9', 'Auth/adminGroup', '用户组列表', '1', '1', '0', '', '', '7', '1', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('10', 'Auth/adminRule', '权限管理', '1', '1', '0', '', '', '7', '2', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('11', 'Ad', '广告管理', '1', '1', '0', 'carousel', '', '0', '4', '1450314297', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('12', 'Ad/type', '广告位管理', '1', '1', '0', '', '', '11', '4', '1450314324', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('13', 'Ad/index', '广告管理', '1', '1', '0', '', '', '11', '3', '1450314297', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('14', 'Link/index', '友情链接', '1', '1', '0', '', '', '11', '5', '1447232183', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('28', 'Article', '内容管理', '1', '1', '0', 'list', '', '0', '8', '1527311011', '1', '1', null, '0', '1,2,3');
+INSERT INTO `cool_menu` VALUES ('15', 'Category', '栏目管理', '1', '1', '0', 'align-center', '', '0', '7', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('16', 'Category/add', '添加栏目', '1', '1', '0', '', '', '15', '0', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('17', 'Category/index', '管理栏目', '1', '1', '0', '', '', '15', '1', '1446535750', '1', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('25', 'Module', '模型管理', '1', '1', '0', 'template-1', '', '0', '6', '1466826681', '0', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('26', 'Module/add', '添加模型', '1', '1', '0', '', '', '25', '1', '1467007955', '0', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('27', 'Module/index', '模型管理', '1', '1', '0', '', '', '25', '2', '1466826681', '0', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('37', 'Menu/index', '菜单管理', '1', '1', '0', 'menu-fill', '', '0', '11', '1484797759', null, '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('32', 'Addons/fixed', '插件修复', '1', '1', '0', '', '', '29', '3', '1527393444', null, '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('29', 'Addons/index', '插件管理', '1', '1', '0', 'app', '', '0', '9', '1527393444', null, '1', null, '0', '1,2,3');
+INSERT INTO `cool_menu` VALUES ('30', 'Addons/add', '插件添加', '1', '1', '0', '', '', '29', '1', '1527393444', null, '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('31', 'Addons/index', '插件管理', '1', '1', '0', '', '', '29', '2', '1527393444', null, '1', null, '0', '1,2,3');
+INSERT INTO `cool_menu` VALUES ('33', 'Template', '模版主题', '1', '1', '0', 'theme', '', '0', '10', '1481857304', '0', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('34', 'Template/index', '模版管理', '1', '1', '0', '', '', '33', '1', '1481857540', '0', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('35', 'Debris/type', '碎片分类', '1', '1', '0', '', '', '33', '3', '1504082720', null, '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('36', 'Debris/index', '碎片管理', '1', '1', '0', '', '', '33', '2', '1484797759', '0', '1', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('108', 'Wechat/weixin', '操作-设置', '1', '1', '0', '', '', '101', '1', '1487064541', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('107', 'Wechat/text', '文本回复', '1', '1', '0', '', '', '89', '3', '1487063834', '0', '1', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('106', 'Wechat/news', '多图文回复', '1', '1', '0', '', '', '89', '7', '1501221710', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('105', 'Wechat/news', '消息推送', '1', '1', '0', '', '', '89', '5', '1487063934', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('104', 'Wechat/menuState', '操作-状态', '1', '1', '0', '', '', '102', '4', '1497429764', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('103', 'Wechat/menuOrder', '操作-排序', '1', '1', '0', '', '', '102', '3', '1497429707', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('102', 'Wechat/menu', '菜单管理', '1', '1', '0', '', '', '89', '2', '1487063765', '0', '1', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('101', 'Wechat/index', '公众号管理', '1', '1', '0', '', '', '89', '1', '1487063705', '0', '1', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('100', 'Wechat/img', '图文回复', '1', '1', '0', '', '', '89', '4', '1487063858', '0', '1', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('99', 'Wechat/editText', '操作-编辑', '1', '1', '0', '', '', '107', '2', '1487233984', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('98', 'Wechat/editMenu', '操作-编辑', '1', '1', '0', '', '', '102', '2', '1497429671', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('97', 'Wechat/editImg', '操作-编辑', '1', '1', '0', '', '', '100', '2', '1487318148', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('96', 'Wechat/delText', '操作-删除', '1', '1', '0', '', '', '107', '3', '1497430020', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('95', 'Wechat/delMenu', '操作-删除', '1', '1', '0', '', '', '102', '5', '1497429822', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('94', 'Wechat/delImg', '操作-删除', '1', '1', '0', '', '', '100', '3', '1497430159', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('93', 'Wechat/createMenu', '操作-生成菜单', '1', '1', '0', '', '', '102', '6', '1497429886', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('92', 'Wechat/addText', '操作-添加', '1', '1', '0', '', '', '107', '1', '1487234062', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('91', 'Wechat/addMenu', '操作-添加', '1', '1', '0', '', '', '102', '1', '1487149151', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('90', 'Wechat/addImg', '操作-添加', '1', '1', '0', '', '', '100', '1', '1487318175', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('88', 'Template/update', '操作-改存', '1', '1', '0', '', '', '34', '4', '1497428951', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('89', 'Wechat', '微信管理', '1', '1', '0', 'login-wechat', '', '0', '8', '1487063570', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('87', 'Template/insert', '操作-添存', '1', '1', '0', '', '', '34', '2', '1481857587', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('86', 'Template/imgDel', '操作-文件删除', '1', '1', '0', '', '', '85', '1', '1497429217', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('85', 'Template/images', '媒体文件管理', '1', '1', '0', '', '', '33', '6', '1497429157', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('83', 'Template/delete', '操作-删除', '1', '1', '0', '', '', '34', '5', '1497429018', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('82', 'Template/add', '操作-添加', '1', '1', '0', '', '', '34', '1', '1481859447', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('81', 'page/edit', '单页编辑', '1', '1', '0', '', '', '28', '2', '1497425142', '0', '0', null, '0', ',3');
+INSERT INTO `cool_menu` VALUES ('79', 'Module/listOrder', '操作-排序', '1', '1', '0', '', '', '78', '3', '1497426179', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('78', 'Module/field', '模型字段', '1', '1', '0', '', '', '25', '6', '1497425972', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('75', 'Module/fieldDel', '操作-删除', '1', '1', '0', '', '', '78', '5', '1497426241', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('76', 'Module/fieldEdit', '操作-修改', '1', '1', '0', '', '', '78', '2', '1497426134', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('72', 'Module/del', '操作-删除', '1', '1', '0', '', '', '27', '4', '1497425850', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('73', 'Module/edit', '操作-修改', '1', '1', '0', '', '', '27', '5', '1467007920', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('74', 'Module/fieldAdd', '操作-添加', '1', '1', '0', '', '', '78', '1', '1497426089', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('71', 'Module/add', '操作-添加', '1', '1', '0', '', '', '27', '3', '1467007955', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('67', 'Link/add', '操作-添加', '1', '1', '0', '', '', '14', '1', '1447639935', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('68', 'Link/del', '操作-删除', '1', '1', '0', '', '', '14', '4', '1497427780', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('69', 'Link/edit', '操作-编辑', '1', '1', '0', '', '', '14', '2', '1497427694', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('70', 'Link/linkState', '操作-状态', '1', '1', '0', '', '', '14', '3', '1497427734', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('66', 'Debris/edit', '操作-编辑', '1', '1', '0', '', '', '36', '2', '1484797849', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('40', 'Ad/adOrder', '操作-排序', '1', '1', '0', '', '', '13', '4', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('113', 'Auth/ruleAdd', '操作-添加', '1', '1', '0', '', '', '10', '0', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('23', 'Category/catUpdate', '操作-该存', '1', '1', '0', '', '', '15', '6', '1497424301', '0', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('65', 'Debris/del', '操作-删除', '1', '1', '0', '', '', '36', '3', '1497429416', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('64', 'Debris/add', '操作-添加', '1', '1', '0', '', '', '36', '1', '1484797878', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('61', 'Database/optimize', '操作-优化', '1', '1', '0', '', '', '5', '1', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('60', 'Database/export', '操作-备份', '1', '1', '0', '', '', '5', '1', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('49', 'Auth/adminDel', '操作-删除', '1', '1', '0', '', '', '8', '4', '1461554152', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('48', 'Auth/adminAdd', '操作-添加', '1', '1', '0', '', '', '8', '0', '1461553162', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('47', 'Article/index?status=3', '审核管理', '1', '1', '0', '', '', '28', '0', '1529486821', null, '1', null, '0', '1,2,3');
+INSERT INTO `cool_menu` VALUES ('45', 'Ad/editType', '操作-修改', '1', '1', '0', '', '', '12', '2', '1461834988', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('44', 'Ad/editState', '操作-状态', '1', '1', '0', '', '', '13', '3', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('43', 'Ad/edit', '操作-修改', '1', '1', '0', '', '', '13', '2', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('42', 'Ad/delType', '操作-删除', '1', '1', '0', '', '', '12', '4', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('41', 'Ad/del', '操作-删除', '1', '1', '0', '', '', '13', '5', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('39', 'Ad/addType', '操作-添加', '1', '1', '0', '', '', '12', '1', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('84', 'Template/edit', '操作-编辑', '1', '1', '0', '', '', '34', '3', '1497428906', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('80', 'Module/moduleState', '操作-状态', '1', '1', '0', '', '', '27', '5', '1497425764', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('77', 'Module/fieldStatus', '操作-状态', '1', '1', '0', '', '', '78', '4', '1497426044', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('63', 'Database/restore', '还原数据库', '1', '1', '0', '', '', '4', '10', '1446535750', '1', '1', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('62', 'Database/repair', '操作-修复', '1', '1', '0', '', '', '5', '1', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('59', 'Database/downFile', '操作-下载', '1', '1', '0', '', '', '63', '2', '1497423744', '0', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('58', 'Database/delSqlFiles', '操作-删除', '1', '1', '0', '', '', '63', '3', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('57', 'Auth/groupState', '操作-状态', '1', '1', '0', '', '', '9', '50', '1461834340', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('56', 'Auth/groupRunaccess', '操作-权存', '1', '1', '0', '', '', '9', '50', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('55', 'Auth/groupEdit', '操作-修改', '1', '1', '0', '', '', '9', '3', '1461552326', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('54', 'Auth/groupDel', '操作-删除', '1', '1', '0', '', '', '9', '30', '1461552349', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('53', 'Auth/groupAdd', '操作-添加', '1', '1', '0', '', '', '9', '1', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('52', 'Auth/groupAccess', '操作-权限', '1', '1', '0', '', '', '9', '40', '1461552404', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('51', 'Auth/adminState', '操作-状态', '1', '1', '0', '', '', '8', '5', '1461550835', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('50', 'Auth/adminEdit', '操作-修改', '1', '1', '0', '', '', '8', '2', '1461554130', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('46', 'Ad/typeOrder', '操作-排序', '1', '1', '0', '', '', '12', '3', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('38', 'Ad/add', '操作-添加', '1', '1', '0', '', '', '13', '1', '1461550835', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('20', 'Category/insert', '操作-添存', '1', '1', '0', '', '', '15', '3', '1497424143', '0', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('24', 'Category/cOrder', '操作-排序', '1', '1', '0', '', '', '15', '6', '1497424979', '0', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('21', 'Category/del', '操作-删除', '1', '1', '0', '', '', '15', '5', '1497424900', '0', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('19', 'Category/edit', '操作-修改', '1', '1', '0', '', '', '15', '4', '1446535750', '1', '0', null, '0', '1,2');
+INSERT INTO `cool_menu` VALUES ('112', 'Auth/ruleDel', '操作-删除', '1', '1', '0', '', '', '10', '4', '1461551536', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('114', 'Auth/ruleEdit', '操作-修改', '1', '1', '0', '', '', '10', '2', '1461551913', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('111', 'Auth/ruleorder', '操作-排序', '1', '1', '0', '', '', '10', '7', '1461551263', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('109', 'Auth/ruleState', '操作-状态', '1', '1', '0', '', '', '10', '5', '1461550949', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('110', 'Auth/ruleTz', '操作-验证', '1', '1', '0', '', '', '10', '6', '1461551129', '1', '0', null, '0', '');
+INSERT INTO `cool_menu` VALUES ('2162', 'case/index?catid=29', '微信平台', '1', '1', '1', null, '', '2146', '0', '1531755861', null, '1', '29', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2161', 'case/index?catid=28', '店铺装修', '1', '1', '1', null, '', '2146', '0', '1531755861', null, '1', '28', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2160', 'case/index?catid=27', '平面设计', '1', '1', '1', null, '', '2146', '0', '1531755861', null, '1', '27', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2159', 'case/index?catid=23', '网站建设', '1', '1', '1', null, '', '2146', '0', '1531755861', null, '1', '23', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2158', 'service/index?catid=26', '微信平台', '1', '1', '1', null, '', '2145', '0', '1531755861', null, '1', '26', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2157', 'service/index?catid=25', '店铺装修', '1', '1', '1', null, '', '2145', '0', '1531755861', null, '1', '25', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2156', 'service/index?catid=24', '平面设计', '1', '1', '1', null, '', '2145', '0', '1531755861', null, '1', '24', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2155', 'fuwukehu/index?catid=22', '服务客户', '1', '1', '1', null, '', '2145', '0', '1531755861', null, '1', '22', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2154', 'blog/index?catid=30', '行业新闻', '1', '1', '1', null, '', '2144', '0', '1531755861', null, '1', '30', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2153', 'blog/index?catid=21', '微信运营', '1', '1', '1', null, '', '2144', '0', '1531755861', null, '1', '21', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2152', 'blog/index?catid=20', '网页制作', '1', '1', '1', null, '', '2144', '0', '1531755861', null, '1', '20', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2151', 'blog/index?catid=19', '网页设计', '1', '1', '1', null, '', '2144', '0', '1531755861', null, '1', '19', '0', '2');
+INSERT INTO `cool_menu` VALUES ('115', '', '插件列表', '1', '1', '1', null, '', '0', '12', '0', null, '0', null, '0', '1,2,3');
+INSERT INTO `cool_menu` VALUES ('2026', 'comment', '评论系统', '1', '1', '1', 'dialogue', '', '115', '101', '1530783109', null, '0', null, '79', '1,2,3');
+INSERT INTO `cool_menu` VALUES ('2028', 'member', '会员系统', '1', '1', '1', 'user', '', '115', '103', '1530783109', null, '0', null, '77', '1,2');
+INSERT INTO `cool_menu` VALUES ('2037', '/addons_execute_comment-setting-index', '评论设置', '1', '1', '1', '', '', '2026', '0', '1530783109', null, '1', null, '79', '1,2');
+INSERT INTO `cool_menu` VALUES ('2036', '/addons_execute_comment-comment-index', '评论管理', '1', '1', '1', '', '', '2026', '0', '1530783109', null, '1', null, '79', '1,2,3');
+INSERT INTO `cool_menu` VALUES ('2049', '/addons_execute_member-setting-index', '会员设置', '1', '1', '1', '', '', '2040', '0', '1530783109', null, '1', null, '77', '1,2');
+INSERT INTO `cool_menu` VALUES ('2047', '/addons_execute_member-member-index', '会员管理', '1', '1', '1', '', '', '2040', '0', '1530783109', null, '1', null, '77', '1,2');
+INSERT INTO `cool_menu` VALUES ('2149', 'blog/index?catid=17', '公司新闻', '1', '1', '1', null, '', '2144', '0', '1531755861', null, '1', '17', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2048', 'blog/index?catid=18', '网络营销', '1', '1', '1', null, '', '2144', '0', '1531755861', null, '1', '18', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2147', 'product/index?catid=9', '产品中心', '1', '1', '1', null, '', '28', '2', '1531755861', null, '1', '9', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2148', 'page/index?catid=2', '关于我们', '1', '1', '1', null, '', '28', '1', '1531755861', null, '1', '2', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2146', 'case/index?catid=10', '项目展示', '1', '1', '1', null, '', '28', '3', '1531755861', null, '1', '10', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2144', 'blog/index?catid=14', '博客资讯', '1', '1', '1', null, '', '28', '5', '1531755861', null, '1', '14', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2145', 'service/index?catid=13', '服务中心', '1', '1', '1', null, '', '28', '4', '1531755861', null, '1', '13', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2143', 'page/index?catid=16', '联系我们', '1', '1', '1', null, '', '28', '6', '1531755861', null, '1', '16', '0', '2');
+INSERT INTO `cool_menu` VALUES ('2039', '/addons_execute_member-oirganization-index', '编制管理', '1', '1', '1', '', '', '2028', '0', '1530783109', null, '1', null, '77', '1,2');
+INSERT INTO `cool_menu` VALUES ('2040', '', '会员管理', '1', '1', '1', '', '', '2028', '0', '1530783109', null, '1', null, '77', '1,2');
 
 -- ----------------------------
 -- Table structure for cool_message
@@ -4772,13 +5183,14 @@ CREATE TABLE `cool_system` (
   `tel` varchar(15) DEFAULT NULL COMMENT '公司电话',
   `email` varchar(50) DEFAULT NULL COMMENT '公司邮箱',
   `logo` varchar(120) DEFAULT NULL COMMENT 'logo',
+  `others` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_system
 -- ----------------------------
-INSERT INTO `cool_system` VALUES ('1', '哈尔滨酷创网络', 'http://api.hrbkcwl.com', '哈尔滨酷创网络', '酷创网络,哈尔滨网站建设,哈尔滨网站制作,哈尔滨网页设计,哈尔滨微信开发,哈尔滨网络公司', '哈尔滨酷创网络科技有限公司，企业致力于网站建设，网页设计，网站优化，手机网站制作，微信开发，小程序，网络营销的互联网公司。最好的技术服务让您放心。方案订制、报价合理，期待您的合作！', '黑ICP备17007278号-1', '2017', '黑龙江哈尔滨', '13204660513', '1003418012@qq.com', '/uploads/20170904/9f04d8be2a05d926bc3e328eded02378.png');
+INSERT INTO `cool_system` VALUES ('1', '哈尔滨酷创网络', 'http://api.hrbkcwl.com', '哈尔滨酷创网络', '酷创网络,哈尔滨网站建设,哈尔滨网站制作,哈尔滨网页设计,哈尔滨微信开发,哈尔滨网络公司', '哈尔滨酷创网络科技有限公司，企业致力于网站建设，网页设计，网站优化，手机网站制作，微信开发，小程序，网络营销的互联网公司。最好的技术服务让您放心。方案订制、报价合理，期待您的合作！', '黑ICP备17007278号-1', '2017', '黑龙江哈尔滨', '13204660513', '1003418012@qq.com', '/uploads/20180716/cb891519e0dbe85260b04320421f3da4.png', 'a:3:{s:4:\"file\";s:0:\"\";s:8:\"contacts\";s:6:\"李雷\";s:3:\"tel\";s:12:\"010-66387822\";}');
 
 -- ----------------------------
 -- Table structure for cool_users
@@ -4860,702 +5272,11 @@ CREATE TABLE `cool_visit_day` (
   `lang` varchar(50) NOT NULL DEFAULT '',
   `keystr` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3267 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3271 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_visit_day
 -- ----------------------------
-INSERT INTO `cool_visit_day` VALUES ('1515', '111.206.221.41', '1519700876', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1514', '112.103.96.150', '1519700558', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=ovkSsNqJStyZvpyx0UEsxZDzeZbg0g-MU6QXgbyp5Y4DupPAZ5FPVxc8iSoviOpJ', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1513', '112.103.96.150', '1519700384', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=ovkSsNqJStyZvpyx0UEsxZDzeZbg0g-MU6QXgbyp5Y4DupPAZ5FPVxc8iSoviOpJ', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1511', '111.206.198.105', '1519694240', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1512', '220.181.108.104', '1519696841', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2146', '123.165.251.30', '1522854628', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2145', '123.165.251.30', '1522854619', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2144', '123.165.251.30', '1522854612', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2143', '123.165.251.30', '1522854611', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2142', '123.165.251.30', '1522854602', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2141', '123.165.251.30', '1522854599', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2140', '123.165.251.30', '1522854598', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2139', '123.165.251.30', '1522854596', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2138', '123.165.251.30', '1522854594', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2137', '123.165.251.30', '1522854592', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2136', '123.165.251.30', '1522854589', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1519', '111.206.198.123', '1519787355', 'http://www.hrbkcwl.com/products_9.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1517', '220.181.108.182', '1519755567', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1518', '111.206.221.33', '1519780753', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2135', '123.165.251.30', '1522854420', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2134', '123.165.251.30', '1522854418', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2133', '123.165.251.30', '1522854416', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2132', '123.165.251.30', '1522854415', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2131', '123.165.251.30', '1522854399', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2130', '123.165.251.30', '1522854395', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2129', '123.165.251.30', '1522854394', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2128', '123.165.251.30', '1522853820', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2127', '123.165.251.30', '1522853817', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2126', '123.165.251.30', '1522853814', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2125', '123.165.251.30', '1522853812', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2124', '123.165.251.30', '1522853810', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2123', '123.165.251.30', '1522853807', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2122', '123.165.251.30', '1522853803', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2121', '123.165.251.30', '1522853784', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2120', '123.165.251.30', '1522853779', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2119', '123.165.251.30', '1522853778', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2118', '123.165.251.30', '1522853776', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2117', '123.165.251.30', '1522853774', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2116', '123.165.251.30', '1522853771', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2115', '123.165.251.30', '1522853760', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2114', '123.165.251.30', '1522853751', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2113', '123.165.251.30', '1522853747', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2112', '123.165.251.30', '1522853740', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2111', '123.165.251.30', '1522853724', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2110', '123.165.251.30', '1522853723', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2109', '123.165.251.30', '1522853721', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2108', '123.165.251.30', '1522853715', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2107', '123.165.251.30', '1522853709', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2106', '123.165.251.30', '1522853705', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2105', '123.165.251.30', '1522853700', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2104', '123.165.251.30', '1522853651', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2103', '123.165.251.30', '1522853644', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2102', '123.165.251.30', '1522853641', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2101', '123.165.251.30', '1522853639', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2100', '123.165.251.30', '1522853638', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2099', '123.165.251.30', '1522853621', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2098', '123.165.251.30', '1522853611', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2097', '123.165.251.30', '1522853609', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2096', '123.165.251.30', '1522853608', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2095', '123.165.251.30', '1522853603', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2094', '123.165.251.30', '1522853601', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2093', '123.165.251.30', '1522853591', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2092', '123.165.251.30', '1522853520', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2091', '123.165.251.30', '1522853471', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2090', '123.165.251.30', '1522853466', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2089', '123.165.251.30', '1522853464', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2088', '123.165.251.30', '1522853462', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2087', '123.165.251.30', '1522853458', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2086', '123.165.251.30', '1522853457', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2085', '123.165.251.30', '1522853456', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2084', '123.165.251.30', '1522853452', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2083', '123.165.251.30', '1522853431', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2082', '123.165.251.30', '1522853403', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2081', '123.165.251.30', '1522853400', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2080', '123.165.251.30', '1522853372', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2079', '123.165.251.30', '1522853336', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2078', '123.165.251.30', '1522851390', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2077', '123.165.251.30', '1522851310', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2076', '123.165.251.30', '1522851308', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2075', '123.165.251.30', '1522851305', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2074', '123.165.251.30', '1522851302', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2073', '123.165.251.30', '1522851299', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2072', '123.165.251.30', '1522851295', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2071', '123.165.251.30', '1522851260', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2070', '123.165.251.30', '1522851243', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2069', '123.165.251.30', '1522851234', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2068', '123.165.251.30', '1522851232', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2067', '123.165.251.30', '1522851230', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2066', '123.165.251.30', '1522851229', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2065', '123.165.251.30', '1522851227', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2063', '123.165.251.30', '1522851162', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2064', '123.165.251.30', '1522851224', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2062', '123.165.251.30', '1522851157', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2061', '123.165.251.30', '1522851150', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2060', '123.165.251.30', '1522851148', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2059', '123.165.251.30', '1522851140', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2058', '123.165.251.30', '1522851137', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2057', '123.165.251.30', '1522851128', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2056', '123.165.251.30', '1522851122', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2055', '123.165.251.30', '1522851116', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2054', '123.165.251.30', '1522851038', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2053', '123.165.251.30', '1522850944', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2052', '123.165.251.30', '1522850870', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2051', '123.165.251.30', '1522850814', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2050', '123.165.251.30', '1522849412', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2049', '123.165.251.30', '1522849400', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2048', '123.165.251.30', '1522847531', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2047', '123.165.251.30', '1522847525', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2046', '123.165.251.30', '1522847513', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2045', '123.165.251.30', '1522847510', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2044', '123.165.251.30', '1522847506', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2043', '123.165.251.30', '1522847501', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2042', '123.165.251.30', '1522847496', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2041', '123.165.251.30', '1522847474', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2040', '123.165.251.30', '1522847420', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2039', '123.165.251.30', '1522847414', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2038', '123.165.251.30', '1522847408', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2037', '123.165.251.30', '1522847241', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2036', '123.165.251.30', '1522847237', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2035', '123.165.251.30', '1522847232', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2034', '123.165.251.30', '1522847229', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2033', '123.165.251.30', '1522847197', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1524', '111.206.221.37', '1519894971', 'http://www.hrbkcwl.com/blogInfo_7_21.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1523', '182.77.16.39', '1519882122', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1522', '111.206.198.55', '1519867004', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1520', '183.36.114.111', '1519840058', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'b357e09a09706b8c78c6b4ecd3ed3e99');
-INSERT INTO `cool_visit_day` VALUES ('1521', '220.181.108.182', '1519860696', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2032', '123.165.251.30', '1522847193', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2031', '123.165.251.30', '1522847191', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2030', '123.165.251.30', '1522847138', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2029', '123.165.251.30', '1522847132', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2028', '123.165.251.30', '1522847131', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2027', '123.165.251.30', '1522847105', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1529', '82.36.205.23', '1519982143', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1527', '220.181.108.123', '1519933508', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1528', '5.92.148.118', '1519975560', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', 'a917b4470492df465fe58621c7c75a9a');
-INSERT INTO `cool_visit_day` VALUES ('1525', '93.157.199.222', '1519926442', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '836d1bdf7203d84be0043f166b06575c');
-INSERT INTO `cool_visit_day` VALUES ('1526', '60.54.96.205', '1519929775', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', 'de6d637d0bd368d46f53febc11fc2413');
-INSERT INTO `cool_visit_day` VALUES ('2026', '123.165.251.30', '1522847101', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2025', '123.165.251.30', '1522847098', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2024', '123.165.251.30', '1522847002', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2023', '123.165.251.30', '1522846947', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2022', '123.165.251.30', '1522846704', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2021', '123.165.251.30', '1522846692', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1530', '223.206.119.200', '1520056896', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '8bd58ae12544610d54b331b20801f4ac');
-INSERT INTO `cool_visit_day` VALUES ('2020', '123.165.251.30', '1522846590', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2019', '123.165.251.30', '1522846309', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1538', '81.191.178.54', '1520177190', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1537', '186.233.179.7', '1520127786', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1536', '111.206.198.54', '1520120365', 'http://www.hrbkcwl.com/services_13.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1535', '111.206.198.109', '1520114385', 'http://www.hrbkcwl.com/blogInfo_6_20.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1533', '111.206.198.69', '1520099211', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1534', '77.28.145.232', '1520102840', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '1ef364dd2efc2af45347342e2509c337');
-INSERT INTO `cool_visit_day` VALUES ('1532', '123.123.68.218', '1520098840', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'd7bf113c2c5dcdfe9d52bc7237ef5775');
-INSERT INTO `cool_visit_day` VALUES ('1531', '123.123.68.218', '1520098835', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=DaqgqhtwbKK-p1y-b6BoKF_aZLa7ZN7NqyX203B8rdlPBTBQZFNfz8m3CYRQfteB', '0', '0', 'Chrome', '', '', '', 'd7bf113c2c5dcdfe9d52bc7237ef5775');
-INSERT INTO `cool_visit_day` VALUES ('1551', '39.190.24.9', '1520342069', 'http://www.hrbkcwl.com/', 'http://www.sogou.com/web?query=site:tutuaiai.com  百度权重_百度权重提升_联系Q:1278774066_kyehsdl.com', '0', '0', 'MSIE', '', '', '', '1c33c0b9a8cef84e1b7ebff82f10c5af');
-INSERT INTO `cool_visit_day` VALUES ('1549', '59.45.223.108', '1520313373', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1550', '122.114.191.64', '1520313673', 'http://www.hrbkcwl.com/', 'http://www.sogou.com/web?query=site:tutuaiai.com 百度权重_百度权重提升_联系Q:1278774066_kyehsdl.com', '0', '0', 'Other', '', '', '', '7c3855d9d4997dd54ad0901b167ef8ba');
-INSERT INTO `cool_visit_day` VALUES ('1539', '123.165.241.132', '1520218005', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '');
-INSERT INTO `cool_visit_day` VALUES ('1548', '59.45.223.108', '1520313339', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1547', '59.45.223.108', '1520311910', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1546', '59.45.223.108', '1520311811', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1545', '59.45.223.108', '1520311762', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1544', '59.45.223.108', '1520311735', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1543', '59.45.223.108', '1520311715', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1542', '59.45.223.108', '1520311714', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '03ecc094b551440b7f0a9d68f0119f0c');
-INSERT INTO `cool_visit_day` VALUES ('1541', '120.210.207.162', '1520280755', 'http://www.hrbkcwl.com/blogInfo_8_17.html', 'http://www.hrbkcwl.com/', '0', '0', 'MSIE', '', '', '', 'a59ea7dec8fbd9311087471c9e76f499');
-INSERT INTO `cool_visit_day` VALUES ('1540', '120.210.207.162', '1520280718', 'http://www.hrbkcwl.com/', 'http://www.sogou.com/web?query=site:tutuaiai.com 百度权重_百度权重提升_联系Q:1278774066_kyehsdl.com', '0', '0', 'MSIE', '', '', '', 'a59ea7dec8fbd9311087471c9e76f499');
-INSERT INTO `cool_visit_day` VALUES ('2018', '123.165.251.30', '1522846096', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2017', '123.165.251.30', '1522846093', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2016', '123.165.251.30', '1522846090', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2015', '123.165.251.30', '1522846083', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2014', '123.165.251.30', '1522846029', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2013', '101.199.108.59', '1522845891', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2012', '123.165.251.30', '1522845384', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2011', '123.165.251.30', '1522845381', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2010', '123.165.251.30', '1522845212', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2009', '123.165.251.30', '1522844666', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2008', '123.165.251.30', '1522844659', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2007', '123.165.251.30', '1522844391', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_19_27.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2006', '123.165.251.30', '1522844326', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2005', '123.165.251.30', '1522844299', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2004', '123.165.251.30', '1522844247', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2003', '123.165.251.30', '1522844241', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2002', '123.165.251.30', '1522843607', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2001', '123.165.251.30', '1522843586', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2000', '123.165.251.30', '1522843583', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1999', '123.165.251.30', '1522843578', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1998', '123.165.251.30', '1522843567', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1997', '123.165.251.30', '1522843517', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1996', '123.165.251.30', '1522843393', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1995', '171.13.14.145', '1522843019', 'http://www.hrbkcwl.com/case_10.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('1994', '123.165.251.30', '1522841445', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1993', '123.165.251.30', '1522841428', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1992', '123.165.251.30', '1522841420', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1991', '123.165.251.30', '1522841413', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1990', '123.165.251.30', '1522841403', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1989', '123.165.251.30', '1522841378', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1988', '123.165.251.30', '1522841350', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_12_23.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1987', '123.165.251.30', '1522839822', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_16_23.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1986', '123.165.251.30', '1522839706', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1985', '123.165.251.30', '1522839704', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1984', '123.165.251.30', '1522839621', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1983', '123.165.251.30', '1522839615', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1588', '111.206.198.84', '1520604667', 'http://www.hrbkcwl.com/contact_16.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1587', '218.8.75.107', '1520578791', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1586', '111.206.198.26', '1520577302', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1585', '218.8.75.107', '1520576882', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1584', '1.189.179.231', '1520574826', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1583', '1.189.179.231', '1520565777', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1582', '1.189.179.231', '1520565757', 'http://www.hrbkcwl.com/case_10.html#cbp=/caseInfo_11_23.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'cd19b68c0a13d043ad1b7a895563450b');
-INSERT INTO `cool_visit_day` VALUES ('1581', '1.189.179.231', '1520565674', 'http://www.hrbkcwl.com/case_10.html#cbp=/caseInfo_11_23.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'cd19b68c0a13d043ad1b7a895563450b');
-INSERT INTO `cool_visit_day` VALUES ('1580', '1.189.179.231', '1520565616', 'http://www.hrbkcwl.com/case_10.html#cbp=/caseInfo_11_23.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'cd19b68c0a13d043ad1b7a895563450b');
-INSERT INTO `cool_visit_day` VALUES ('1579', '1.189.179.231', '1520564984', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_11_23.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1569', '113.4.25.48', '1520499418', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1568', '113.4.25.48', '1520499367', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1567', '222.171.139.210', '1520493418', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'MSIE', '', '', '', 'c4af50b300a5e3f3cd175e9782ab4215');
-INSERT INTO `cool_visit_day` VALUES ('1566', '222.171.139.210', '1520493162', 'http://www.hrbkcwl.com/', '', '0', '0', 'MSIE', '', '', '', 'c4af50b300a5e3f3cd175e9782ab4215');
-INSERT INTO `cool_visit_day` VALUES ('1555', '183.36.114.159', '1520414642', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', 'b357e09a09706b8c78c6b4ecd3ed3e99');
-INSERT INTO `cool_visit_day` VALUES ('1553', '113.0.200.197', '1520410359', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'cd19b68c0a13d043ad1b7a895563450b');
-INSERT INTO `cool_visit_day` VALUES ('1554', '113.0.200.197', '1520410401', 'http://www.hrbkcwl.com/blog_21.html', 'https://www.baidu.com/s?wd=site:www.hrbkcwl.com', '0', '0', 'Chrome', '', '', '', 'cd19b68c0a13d043ad1b7a895563450b');
-INSERT INTO `cool_visit_day` VALUES ('1552', '122.159.235.252', '1520384510', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1565', '42.102.156.149', '1520492584', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1564', '42.102.156.149', '1520492532', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1563', '42.102.156.149', '1520492170', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1562', '42.102.156.149', '1520492166', 'http://www.hrbkcwl.com/index.html#.', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1561', '42.102.156.149', '1520492139', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1560', '42.102.156.149', '1520491827', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', 'http://www.hrbkcwl.com/#.', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1559', '42.102.156.149', '1520491808', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1558', '42.102.156.149', '1520491665', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '1b08dd48527afb0cf3d5d17a3c80f9ad');
-INSERT INTO `cool_visit_day` VALUES ('1557', '101.199.112.49', '1520469814', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('1556', '101.199.108.52', '1520469810', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('1578', '1.189.179.231', '1520564794', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'cd19b68c0a13d043ad1b7a895563450b');
-INSERT INTO `cool_visit_day` VALUES ('1577', '1.189.179.231', '1520564729', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1576', '1.189.179.231', '1520564721', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1575', '1.189.179.231', '1520563837', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1574', '1.189.179.231', '1520563827', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1573', '1.189.179.231', '1520563795', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1572', '1.189.179.231', '1520563787', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1570', '1.189.179.231', '1520563727', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1571', '1.189.179.231', '1520563774', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1982', '123.165.251.30', '1522836446', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1981', '123.165.251.30', '1522836444', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1980', '123.165.251.30', '1522833699', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1979', '123.165.251.30', '1522833512', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1978', '123.165.251.30', '1522833510', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1977', '123.165.251.30', '1522833455', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1976', '123.165.251.30', '1522833280', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1975', '123.165.251.30', '1522833278', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1974', '123.165.251.30', '1522833273', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1973', '123.165.251.30', '1522833262', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1972', '123.165.251.30', '1522833193', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1971', '123.165.251.30', '1522831172', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1970', '123.165.251.30', '1522831104', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1969', '123.165.251.30', '1522830928', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_17_23.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1968', '123.165.251.30', '1522830797', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1967', '123.165.251.30', '1522830776', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1966', '123.165.251.30', '1522830090', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1965', '123.165.251.30', '1522830088', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1964', '123.165.251.30', '1522830086', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1963', '123.165.251.30', '1522830080', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1962', '123.165.251.30', '1522830079', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1592', '112.103.210.232', '1520661279', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1590', '112.103.210.232', '1520650482', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1591', '112.103.210.232', '1520650537', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1589', '106.120.162.110', '1520618384', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '87889e47c485dda9b9075d0f27311236');
-INSERT INTO `cool_visit_day` VALUES ('1961', '123.165.251.30', '1522830071', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1960', '123.165.251.30', '1522830057', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1959', '123.165.251.30', '1522830053', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1958', '123.165.251.30', '1522830052', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1957', '123.165.251.30', '1522830051', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1956', '123.165.251.30', '1522830047', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1955', '123.165.251.30', '1522830021', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1598', '111.206.198.37', '1520749408', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1597', '111.41.173.43', '1520733136', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('1596', '111.41.173.43', '1520733122', 'http://www.hrbkcwl.com/about_2.html', 'https://www.baidu.com/link?url=rXKyVZqVv0MSOjBNTo5pCQRO8eKXIgqraK53vHKDQIYZf18_WFla69btQv18LCp7', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('1595', '111.206.198.90', '1520733106', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1594', '180.149.130.153', '1520731240', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Chrome', '', '', '', '88edbdcbef97a94dace210d7add06988');
-INSERT INTO `cool_visit_day` VALUES ('1593', '75.51.240.193', '1520719641', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', 'ab4cad77c906c7fa003b9757970e93b1');
-INSERT INTO `cool_visit_day` VALUES ('1954', '123.165.251.30', '1522830019', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1953', '123.165.251.30', '1522830015', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1952', '123.165.251.30', '1522830014', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1951', '123.165.251.30', '1522830012', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1950', '123.165.251.30', '1522830010', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1949', '123.165.251.30', '1522830006', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1618', '14.152.64.154', '1520844540', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'abce981242551cec03d4fe43b00d24f0');
-INSERT INTO `cool_visit_day` VALUES ('1617', '113.4.25.49', '1520833911', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1616', '113.0.65.127', '1520815083', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1615', '113.0.65.127', '1520814961', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1614', '113.0.65.127', '1520814023', 'http://www.hrbkcwl.com/home_hyxw_info_id_9_catId_30.html', 'http://www.hrbkcwl.com/blog_30.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1613', '113.0.65.127', '1520813728', 'http://www.hrbkcwl.com/home_hyxw_info_id_2_catId_30.html', 'http://www.hrbkcwl.com/blog_30.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1612', '113.0.65.127', '1520813721', 'http://www.hrbkcwl.com/blog_30.html', 'http://www.hrbkcwl.com/blogInfo_1_17.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1611', '113.0.65.127', '1520813553', 'http://www.hrbkcwl.com/blogInfo_1_17.html', 'http://www.hrbkcwl.com/blog_17.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1610', '113.0.65.127', '1520813531', 'http://www.hrbkcwl.com/blogInfo_1_17.html', 'http://www.hrbkcwl.com/blog_17.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1609', '113.0.65.127', '1520813056', 'http://www.hrbkcwl.com/blogInfo_8_17.html', 'http://www.hrbkcwl.com/blog_17.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1608', '113.0.65.127', '1520813049', 'http://www.hrbkcwl.com/blog_17.html', 'http://www.hrbkcwl.com/blog_30.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1607', '113.0.65.127', '1520812890', 'http://www.hrbkcwl.com/blog_30.html', 'http://www.hrbkcwl.com/blog_21.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1606', '113.0.65.127', '1520812884', 'http://www.hrbkcwl.com/blog_21.html', 'http://www.hrbkcwl.com/blog_19.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1605', '113.0.65.127', '1520812854', 'http://www.hrbkcwl.com/blog_19.html', 'http://www.hrbkcwl.com/blog_18.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1604', '113.0.65.127', '1520812770', 'http://www.hrbkcwl.com/blog_18.html', 'http://www.hrbkcwl.com/blog_17.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1603', '113.0.65.127', '1520812721', 'http://www.hrbkcwl.com/blog_17.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1602', '113.0.65.127', '1520812712', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1601', '113.0.65.127', '1520812694', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '0d41a056f09d6eb6220244e1f56599e2');
-INSERT INTO `cool_visit_day` VALUES ('1600', '42.120.160.102', '1520802706', 'http://www.hrbkcwl.com/contact_16.html', '', '0', '0', 'Chrome', '', '', '', 'd523abf6426620498a3fb36754b0a4ab');
-INSERT INTO `cool_visit_day` VALUES ('1599', '187.52.194.208', '1520802522', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '971064338897f18915dd8ea8263570be');
-INSERT INTO `cool_visit_day` VALUES ('1948', '123.165.251.30', '1522830005', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1946', '123.165.251.30', '1522829994', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1947', '123.165.251.30', '1522830004', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1945', '123.165.251.30', '1522829991', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1944', '123.165.251.30', '1522829990', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1943', '123.165.251.30', '1522829983', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1942', '123.165.251.30', '1522829903', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1941', '123.165.251.30', '1522829899', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1940', '123.165.251.30', '1522829898', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1939', '123.165.251.30', '1522829895', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1938', '123.165.251.30', '1522829894', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1937', '123.165.251.30', '1522829891', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1936', '123.165.251.30', '1522829886', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1622', '112.102.138.232', '1520941396', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '1749ba131c172b3692069fe5cb1d7c8b');
-INSERT INTO `cool_visit_day` VALUES ('1621', '93.54.116.78', '1520933555', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', 'cfdb33b0882bea5534d709507dc175a4');
-INSERT INTO `cool_visit_day` VALUES ('1620', '60.51.94.94', '1520921939', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', 'de6d637d0bd368d46f53febc11fc2413');
-INSERT INTO `cool_visit_day` VALUES ('1619', '111.206.221.4', '1520918816', 'http://www.hrbkcwl.com/blogInfo_5_19.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1935', '123.165.251.30', '1522829882', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1934', '123.165.251.30', '1522829353', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1629', '201.76.96.163', '1521027103', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', 'a917b4470492df465fe58621c7c75a9a');
-INSERT INTO `cool_visit_day` VALUES ('1628', '112.102.109.169', '1521011557', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Firefox', '', '', '', '41e1c5f11aaff6e7bfcf2c56f186509d');
-INSERT INTO `cool_visit_day` VALUES ('1627', '112.102.109.169', '1521011555', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=B-66x3oXYYCOWl2FpZFz0siEQpjFjugOKvzobv5LPbqJMCFxRXRRcyVJgzDFgO4f', '0', '0', 'Firefox', '', '', '', '41e1c5f11aaff6e7bfcf2c56f186509d');
-INSERT INTO `cool_visit_day` VALUES ('1626', '101.199.108.59', '1521000301', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('1625', '72.224.212.151', '1520995079', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1624', '189.55.167.209', '1520994061', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1623', '70.80.116.172', '1520966866', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '8bd58ae12544610d54b331b20801f4ac');
-INSERT INTO `cool_visit_day` VALUES ('1933', '123.165.251.30', '1522827660', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1932', '123.165.251.30', '1522827659', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1931', '123.165.251.30', '1522827640', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1930', '123.165.251.30', '1522827586', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1929', '123.165.251.30', '1522827560', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1928', '123.165.251.30', '1522826861', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1927', '123.165.251.30', '1522826859', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1926', '123.165.251.30', '1522826849', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1925', '123.165.251.30', '1522826817', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1637', '111.206.198.44', '1521125873', 'http://www.hrbkcwl.com/blog_14.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1636', '42.120.161.38', '1521123305', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'd523abf6426620498a3fb36754b0a4ab');
-INSERT INTO `cool_visit_day` VALUES ('1635', '177.18.64.33', '1521119387', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '532c1fe4ef673e1b8990a879b53df89d');
-INSERT INTO `cool_visit_day` VALUES ('1633', '42.156.138.62', '1521092149', 'http://www.hrbkcwl.com/blog_30.html', '', '0', '0', 'Chrome', '', '', '', 'd523abf6426620498a3fb36754b0a4ab');
-INSERT INTO `cool_visit_day` VALUES ('1634', '223.104.17.202', '1521094037', 'http://www.hrbkcwl.com/', 'http://wx.hrbkcwl.com/app/index.php?i=8', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1632', '111.206.221.49', '1521084362', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1631', '112.103.209.174', '1521083848', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=FGfkmWn537yIP4FeVbuckiGWZaxrq28vFFKv1bRyfujjgFHP594l0rM8AXoYf0E3', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1630', '101.226.225.59', '1521075528', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'e8116e6d73ca8d1b6901a64338b92ffe');
-INSERT INTO `cool_visit_day` VALUES ('1924', '123.165.251.30', '1522826816', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1923', '123.165.251.30', '1522826815', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1922', '123.165.251.30', '1522826808', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1921', '123.165.251.30', '1522826804', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1920', '123.165.251.30', '1522826681', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1919', '123.165.251.30', '1522826676', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1918', '123.165.251.30', '1522826669', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1917', '123.165.251.30', '1522826664', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1916', '123.165.251.30', '1522826595', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1915', '123.165.251.30', '1522826593', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1914', '123.165.251.30', '1522826589', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1913', '101.199.108.52', '1522826192', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('1912', '123.165.251.30', '1522826090', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1911', '123.165.251.30', '1522826087', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1910', '123.165.251.30', '1522826075', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1909', '123.165.251.30', '1522826072', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1908', '123.165.251.30', '1522826067', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1907', '123.165.251.30', '1522826054', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1906', '123.165.251.30', '1522826009', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1905', '123.165.251.30', '1522825880', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1904', '123.165.251.30', '1522825209', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1903', '123.165.251.30', '1522825207', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1902', '123.165.251.30', '1522825203', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1901', '123.165.251.30', '1522825201', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1900', '123.165.251.30', '1522825101', 'http://www.hrbkcwl.com/blog_18.html', 'https://www.baidu.com/link?url=j1kfHK6l1NMOefhZDYP3qanioF0NxWqC6HLMTXPhcI3gc8j-ZeEpscDn_XOo-89k', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1899', '123.165.251.30', '1522825043', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1898', '123.165.251.30', '1522825041', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1896', '111.206.221.28', '1522825035', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1897', '123.165.251.30', '1522825037', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1894', '111.206.221.82', '1522825029', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '0d77fbeeb2fabc53405c1c0cba02021e');
-INSERT INTO `cool_visit_day` VALUES ('1895', '123.165.251.30', '1522825034', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1885', '42.102.157.114', '1522768762', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1893', '123.165.251.30', '1522825026', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1884', '112.103.211.46', '1522768099', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1883', '112.103.211.46', '1522768052', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1882', '112.103.211.46', '1522767956', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1881', '112.103.211.46', '1522767943', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1880', '112.103.211.46', '1522767917', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1879', '112.103.211.46', '1522767827', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1878', '112.103.211.46', '1522767791', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1877', '112.103.211.46', '1522767693', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1876', '112.103.211.46', '1522767534', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1875', '112.103.211.46', '1522767398', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1874', '112.103.211.46', '1522767307', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1873', '112.103.211.46', '1522767215', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1872', '112.103.211.46', '1522767155', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1871', '112.103.211.46', '1522767146', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1870', '112.103.211.46', '1522767113', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1869', '112.103.211.46', '1522767105', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1868', '112.103.211.46', '1522767080', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1867', '112.103.211.46', '1522766927', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1866', '112.103.211.46', '1522766815', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1865', '112.103.211.46', '1522766747', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1864', '112.103.211.46', '1522766398', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1863', '188.81.238.138', '1522766130', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1862', '106.120.162.108', '1522764927', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '87889e47c485dda9b9075d0f27311236');
-INSERT INTO `cool_visit_day` VALUES ('1860', '111.206.198.7', '1522758493', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '0d77fbeeb2fabc53405c1c0cba02021e');
-INSERT INTO `cool_visit_day` VALUES ('1861', '111.206.221.46', '1522758510', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1859', '112.103.211.46', '1522758223', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1858', '112.103.211.46', '1522757987', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1857', '112.103.211.46', '1522757982', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1856', '112.103.211.46', '1522757978', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1855', '112.103.211.46', '1522757977', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1854', '112.103.211.46', '1522757971', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1642', '111.206.221.69', '1521178305', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1853', '112.103.211.46', '1522757960', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1641', '220.181.108.96', '1521171862', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1640', '113.4.25.249', '1521164361', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1639', '113.4.25.249', '1521164346', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=cQ628SHBnxIChEXh84oKy1RKArekFCagTcckSh3cZVBVH6x18R_Gp3rM85B7iRz6', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1638', '94.60.100.67', '1521155776', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '56e05f916c7c2d0277efc34bca90012c');
-INSERT INTO `cool_visit_day` VALUES ('1852', '112.103.211.46', '1522757937', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=6j5MPS9rVD0htbz5u15sb94kkIDazkd5jMMcwmItOWqjGBFn0D1zq09y0eUohtpN', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1847', '151.52.187.48', '1522682051', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1846', '42.102.157.114', '1522672145', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1845', '42.102.157.114', '1522664879', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1844', '42.102.157.114', '1522664801', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1843', '42.102.157.114', '1522663951', 'http://www.hrbkcwl.com/', 'http://kcmall.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1841', '111.206.221.28', '1522660059', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '0d77fbeeb2fabc53405c1c0cba02021e');
-INSERT INTO `cool_visit_day` VALUES ('1842', '111.206.221.19', '1522660061', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1840', '123.166.228.79', '1522659683', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1839', '123.166.228.79', '1522659667', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1838', '123.166.228.79', '1522659659', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1837', '123.166.228.79', '1522659585', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1836', '123.166.228.79', '1522659582', 'http://www.hrbkcwl.com/#.', 'https://www.baidu.com/link?url=H8SR-agJX3ShAoh-OEFQTY6duAhKzA9XK1T5IafFNk8-FdbXiHslZtvNo4TaeKAv', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1824', '123.165.245.211', '1522589306', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1823', '123.165.245.211', '1522589302', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1822', '123.165.245.211', '1522588673', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1821', '123.165.245.211', '1522588671', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1644', '42.156.137.120', '1521385793', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'd523abf6426620498a3fb36754b0a4ab');
-INSERT INTO `cool_visit_day` VALUES ('1643', '36.110.147.80', '1521324674', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '25ad193f20b0bd43b3e8f3790429acad');
-INSERT INTO `cool_visit_day` VALUES ('1820', '123.165.245.211', '1522588668', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1819', '123.165.245.211', '1522588592', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1818', '123.165.245.211', '1522588585', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1817', '123.165.245.211', '1522588583', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1816', '123.165.245.211', '1522588524', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1647', '42.156.136.14', '1521468471', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'd523abf6426620498a3fb36754b0a4ab');
-INSERT INTO `cool_visit_day` VALUES ('1646', '42.120.161.104', '1521468430', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'd523abf6426620498a3fb36754b0a4ab');
-INSERT INTO `cool_visit_day` VALUES ('1645', '111.206.221.102', '1521468146', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1815', '42.102.157.114', '1522588515', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1814', '123.165.245.211', '1522588511', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1813', '42.102.157.114', '1522588510', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1812', '123.165.245.211', '1522588507', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1811', '42.102.157.114', '1522588500', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1742', '111.206.221.85', '1521958212', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1741', '112.103.97.226', '1521957969', 'http://www.hrbkcwl.com/', 'http://hey.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1740', '112.103.97.226', '1521957967', 'http://www.hrbkcwl.com/', 'http://hey.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1739', '112.103.97.226', '1521957883', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=JHhbydG_lIkVmz4fhwOGt4ZeCuA6LBcnIfzTWPAgRLEDHZa-cC5mRRoNMbEXl3xj', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1738', '112.103.97.226', '1521957828', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=JHhbydG_lIkVmz4fhwOGt4ZeCuA6LBcnIfzTWPAgRLEDHZa-cC5mRRoNMbEXl3xj', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1737', '112.103.97.226', '1521948696', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1736', '112.103.97.226', '1521948597', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1648', '103.62.94.110', '1521529948', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', 'ab4cad77c906c7fa003b9757970e93b1');
-INSERT INTO `cool_visit_day` VALUES ('1735', '112.103.97.226', '1521948595', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1734', '112.103.97.226', '1521948593', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1733', '112.103.97.226', '1521948065', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1732', '112.103.97.226', '1521948061', 'http://www.hrbkcwl.com/index.html#.', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1731', '112.103.97.226', '1521947679', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1730', '112.103.97.226', '1521947676', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1729', '112.103.97.226', '1521947666', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1728', '112.103.97.226', '1521947663', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1727', '112.103.97.226', '1521947660', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1726', '112.103.97.226', '1521947656', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1725', '112.103.97.226', '1521947644', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1724', '112.103.97.226', '1521947418', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1723', '112.103.97.226', '1521947409', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1722', '112.103.97.226', '1521947408', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1721', '112.103.97.226', '1521947406', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1720', '112.103.97.226', '1521947380', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1719', '112.103.97.226', '1521947349', 'http://www.hrbkcwl.com/case_10.html#', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1718', '112.103.97.226', '1521947308', 'http://www.hrbkcwl.com/case_10.html#cbp=/caseInfo_13_23.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1717', '112.103.97.226', '1521946704', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1716', '112.103.97.226', '1521946703', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1715', '112.103.97.226', '1521946700', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1651', '111.206.221.69', '1521715257', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1650', '113.64.110.97', '1521714980', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1649', '113.64.110.97', '1521714952', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=DpRvS91dv0iEi-KtSyEc6r_RNmN9ccWzMNQPs9QTnCbjZKizEKEEwXeHYk_dkso-', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1714', '112.103.97.226', '1521943176', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1713', '171.7.247.34', '1521943132', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '8bd58ae12544610d54b331b20801f4ac');
-INSERT INTO `cool_visit_day` VALUES ('1712', '112.103.97.226', '1521943092', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1711', '112.103.97.226', '1521943034', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1710', '112.103.97.226', '1521943033', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1709', '112.103.97.226', '1521943030', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1708', '112.103.97.226', '1521943013', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1707', '112.103.97.226', '1521942975', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1706', '112.103.97.226', '1521940425', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1705', '112.103.97.226', '1521936294', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_14_23.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1704', '112.103.97.226', '1521935360', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_14_23.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1703', '112.103.97.226', '1521935292', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1702', '112.103.97.226', '1521934677', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1701', '112.103.97.226', '1521934675', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1700', '112.103.97.226', '1521934673', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1699', '112.103.97.226', '1521934672', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1698', '112.103.97.226', '1521934670', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1697', '112.103.97.226', '1521934668', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1696', '112.103.97.226', '1521934634', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1695', '112.103.97.226', '1521934631', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1694', '112.103.97.226', '1521934628', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1693', '112.103.97.226', '1521934627', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1692', '112.103.97.226', '1521934592', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1691', '112.103.97.226', '1521934588', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1690', '112.103.97.226', '1521934585', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1689', '112.103.97.226', '1521934571', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1688', '112.103.97.226', '1521934567', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1687', '112.103.97.226', '1521934564', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1686', '112.103.97.226', '1521934359', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1685', '112.103.97.226', '1521934100', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1684', '112.103.97.226', '1521933420', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1663', '111.206.198.90', '1521796799', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1662', '183.141.124.127', '1521786815', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '838921648c23e0c653458f5744eaf88b');
-INSERT INTO `cool_visit_day` VALUES ('1661', '183.141.124.127', '1521786456', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '838921648c23e0c653458f5744eaf88b');
-INSERT INTO `cool_visit_day` VALUES ('1660', '183.141.124.127', '1521786433', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '838921648c23e0c653458f5744eaf88b');
-INSERT INTO `cool_visit_day` VALUES ('1659', '183.141.124.127', '1521786393', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '838921648c23e0c653458f5744eaf88b');
-INSERT INTO `cool_visit_day` VALUES ('1658', '183.141.124.127', '1521786389', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=pvEtKQ8A-8fzjqgtjJURN_NyTLoZO9MmzMMBd7A25J8pkx8yZ5ppR_s0H6nTOKux', '0', '0', 'Chrome', '', '', '', '838921648c23e0c653458f5744eaf88b');
-INSERT INTO `cool_visit_day` VALUES ('1657', '110.140.189.21', '1521771725', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '56e05f916c7c2d0277efc34bca90012c');
-INSERT INTO `cool_visit_day` VALUES ('1656', '42.184.17.20', '1521767367', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1655', '42.184.17.20', '1521767330', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1654', '42.184.17.20', '1521767297', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1653', '42.184.17.20', '1521767293', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1652', '42.184.17.20', '1521767226', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1683', '112.103.97.226', '1521933407', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1682', '112.103.97.226', '1521933403', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1681', '112.103.97.226', '1521933401', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1680', '112.103.97.226', '1521933397', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1679', '112.103.97.226', '1521933381', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1678', '112.103.97.226', '1521933332', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1677', '112.103.97.226', '1521933322', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1676', '112.103.97.226', '1521933321', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1668', '171.13.14.132', '1521887455', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('1667', '101.199.108.52', '1521887452', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('1666', '111.206.221.13', '1521886999', 'http://www.hrbkcwl.com/case_10.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1665', '95.230.91.97', '1521885012', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '1ef364dd2efc2af45347342e2509c337');
-INSERT INTO `cool_visit_day` VALUES ('1664', '220.181.108.116', '1521860967', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1675', '112.103.97.226', '1521933318', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1674', '112.103.97.226', '1521933315', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1673', '112.103.97.226', '1521933312', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1672', '112.103.97.226', '1521933305', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1670', '112.103.97.226', '1521933199', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1671', '112.103.97.226', '1521933201', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1669', '112.103.97.226', '1521933181', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1810', '123.165.245.211', '1522588291', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1809', '123.165.245.211', '1522588234', 'http://www.hrbkcwl.com/index.html#.', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1808', '101.199.108.55', '1522588081', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('1799', '111.206.221.105', '1522509730', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1798', '111.206.221.83', '1522509720', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Other', '', '', '', '0d77fbeeb2fabc53405c1c0cba02021e');
-INSERT INTO `cool_visit_day` VALUES ('1797', '123.165.252.141', '1522499265', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1796', '123.165.252.141', '1522499233', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1747', '42.156.137.45', '1522077587', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'd523abf6426620498a3fb36754b0a4ab');
-INSERT INTO `cool_visit_day` VALUES ('1746', '123.166.153.56', '1522038706', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Firefox', '', '', '', 'a45f4686d540a2349ad47a7ae88022c2');
-INSERT INTO `cool_visit_day` VALUES ('1744', '220.181.108.104', '1522010812', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1745', '123.166.153.56', '1522038704', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=86plSYll2VmO_376kz5x0UJLUKX5FeIkR8vmqiCDkjyDo73vtBVjihr4J8HZqArh', '0', '0', 'Firefox', '', '', '', 'a45f4686d540a2349ad47a7ae88022c2');
-INSERT INTO `cool_visit_day` VALUES ('1743', '95.77.169.51', '1522002915', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '56e05f916c7c2d0277efc34bca90012c');
-INSERT INTO `cool_visit_day` VALUES ('1795', '101.199.108.54', '1522499091', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('1755', '177.154.249.119', '1522130352', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '836d1bdf7203d84be0043f166b06575c');
-INSERT INTO `cool_visit_day` VALUES ('1754', '183.141.120.180', '1522116481', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Safari', '', '', '', '3e72e37c46e226fa062a48983af6bc6c');
-INSERT INTO `cool_visit_day` VALUES ('1752', '111.206.198.16', '1522115506', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1753', '183.141.120.180', '1522116468', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=iOfn4WYojkVKKRrQbkpu_I8QsoM314i5HFh9kqwBaDW3z4pzYaKiL5FB1tOt2ANc', '0', '0', 'Safari', '', '', '', '3e72e37c46e226fa062a48983af6bc6c');
-INSERT INTO `cool_visit_day` VALUES ('1751', '183.141.120.180', '1522115169', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Safari', '', '', '', '3e72e37c46e226fa062a48983af6bc6c');
-INSERT INTO `cool_visit_day` VALUES ('1750', '183.141.120.180', '1522115162', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=zxezhp5GeEjgBdH_qS3zvQkSM0o2u_Qzzw0NMzAWvfruxLQrajaXO3IYOLEJqoDv', '0', '0', 'Safari', '', '', '', '3e72e37c46e226fa062a48983af6bc6c');
-INSERT INTO `cool_visit_day` VALUES ('1749', '220.181.108.176', '1522099216', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1748', '125.164.134.78', '1522096601', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1794', '220.181.132.191', '1522498759', 'http://www.hrbkcwl.com/services_13.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('1793', '106.120.162.107', '1522498466', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '87889e47c485dda9b9075d0f27311236');
-INSERT INTO `cool_visit_day` VALUES ('1792', '101.199.108.120', '1522498451', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('1791', '101.199.112.50', '1522498431', 'http://www.hrbkcwl.com/', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('1790', '123.165.252.141', '1522497127', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1789', '123.165.252.141', '1522497123', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1788', '123.165.252.141', '1522497122', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1787', '123.165.252.141', '1522497120', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1786', '123.165.252.141', '1522497110', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1785', '123.165.252.141', '1522497105', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1784', '123.165.252.141', '1522497029', 'http://www.hrbkcwl.com/index.html#.', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1783', '123.165.252.141', '1522497004', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1782', '123.165.252.141', '1522496982', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1781', '123.165.252.141', '1522496981', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1780', '123.165.252.141', '1522496980', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1779', '123.165.252.141', '1522496979', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1769', '111.206.198.41', '1522331373', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1768', '171.212.23.37', '1522311102', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=vpJZBrPeQYENX2hrRwQSEaZPsyxqBvOb5UZ_6d-HfHoBhQXKmTeum8-58-a0ljOb', '0', '0', 'Chrome', '', '', '', '3200468109407b3655c21b45eeadf780');
-INSERT INTO `cool_visit_day` VALUES ('1767', '171.113.88.140', '1522304140', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '89509945bcb71805e417d5b0f6da9f54');
-INSERT INTO `cool_visit_day` VALUES ('1766', '111.206.36.19', '1522298538', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('1765', '180.115.101.63', '1522293543', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '93850993bf8ad204a0b881807a60a383');
-INSERT INTO `cool_visit_day` VALUES ('1764', '180.115.101.63', '1522293493', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '93850993bf8ad204a0b881807a60a383');
-INSERT INTO `cool_visit_day` VALUES ('1763', '180.115.101.63', '1522293479', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '93850993bf8ad204a0b881807a60a383');
-INSERT INTO `cool_visit_day` VALUES ('1762', '221.212.38.106', '1522290730', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=j_DIlnDEBZbdTHZpHlFwnxBfunLCf7oiWeE2d-mWuDV9hmmiMjEtyYNqA5kpvB70', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1757', '14.215.176.4', '1522182726', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('1756', '220.181.108.121', '1522175663', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1761', '111.206.221.99', '1522288335', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1760', '218.90.14.124', '1522287038', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '93850993bf8ad204a0b881807a60a383');
-INSERT INTO `cool_visit_day` VALUES ('1759', '218.90.14.124', '1522287030', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '93850993bf8ad204a0b881807a60a383');
-INSERT INTO `cool_visit_day` VALUES ('1758', '218.90.14.124', '1522286979', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '93850993bf8ad204a0b881807a60a383');
-INSERT INTO `cool_visit_day` VALUES ('1772', '124.236.175.242', '1522400558', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1771', '124.236.175.242', '1522400401', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
-INSERT INTO `cool_visit_day` VALUES ('1770', '220.181.108.149', '1522389248', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1778', '123.165.252.141', '1522496978', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1777', '123.165.252.141', '1522496972', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1776', '123.165.252.141', '1522496834', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1775', '123.125.143.65', '1522473755', 'http://www.hrbkcwl.com/', 'http://www.baidu.com/s?wd=OF1B', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('1774', '123.126.113.17', '1522471057', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '25ad193f20b0bd43b3e8f3790429acad');
-INSERT INTO `cool_visit_day` VALUES ('1773', '220.181.108.119', '1522443382', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1807', '42.102.157.114', '1522587926', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', '4319ab992ff5fd0c09aaa00a48d8c3e9');
-INSERT INTO `cool_visit_day` VALUES ('1806', '42.102.157.114', '1522587912', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', '71a5bde2c92b45c639922cd6a7364514');
-INSERT INTO `cool_visit_day` VALUES ('1805', '42.102.157.114', '1522587863', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', '71a5bde2c92b45c639922cd6a7364514');
-INSERT INTO `cool_visit_day` VALUES ('1804', '123.165.245.211', '1522587787', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1803', '123.165.245.211', '1522587781', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1801', '101.199.108.55', '1522551113', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('1802', '123.165.245.211', '1522587761', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1800', '101.199.108.52', '1522551099', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('1835', '113.66.108.8', '1522650622', 'http://www.hrbkcwl.com/contact_16.html#.', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', 'f44a5ec3aefe6eb2f77fb8af339a3e0e');
-INSERT INTO `cool_visit_day` VALUES ('1834', '113.66.108.8', '1522650609', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', 'f44a5ec3aefe6eb2f77fb8af339a3e0e');
-INSERT INTO `cool_visit_day` VALUES ('1833', '113.66.108.8', '1522650585', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'f44a5ec3aefe6eb2f77fb8af339a3e0e');
-INSERT INTO `cool_visit_day` VALUES ('1832', '113.66.108.8', '1522650559', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=OrLKsNSNdDvCGH0e1jryBc9RUdUoSCJBqNWZqXbgxXVV7fZDLCCu92vn7RQ_l981', '0', '0', 'Chrome', '', '', '', 'f44a5ec3aefe6eb2f77fb8af339a3e0e');
-INSERT INTO `cool_visit_day` VALUES ('1831', '101.88.227.65', '1522645817', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1830', '101.88.227.65', '1522645813', 'http://www.hrbkcwl.com/', 'http://user.ihuyi.com/renzheng_success.html', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1829', '101.88.227.65', '1522641603', 'http://www.hrbkcwl.com/', 'http://user.ihuyi.com/renzheng_success.html', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1828', '101.88.227.65', '1522641598', 'http://www.hrbkcwl.com/', 'http://user.ihuyi.com/renzheng_success.html', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1827', '101.88.227.65', '1522641563', 'http://www.hrbkcwl.com/', 'http://user.ihuyi.com/renzheng_success.html', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('1826', '111.206.221.72', '1522604072', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1825', '111.206.221.32', '1522604061', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Other', '', '', '', '0d77fbeeb2fabc53405c1c0cba02021e');
-INSERT INTO `cool_visit_day` VALUES ('1851', '112.103.99.207', '1522721291', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '');
-INSERT INTO `cool_visit_day` VALUES ('1850', '177.11.119.58', '1522698278', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('1849', '111.206.198.121', '1522686102', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1848', '111.206.198.96', '1522686091', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Other', '', '', '', '0d77fbeeb2fabc53405c1c0cba02021e');
-INSERT INTO `cool_visit_day` VALUES ('1892', '123.165.251.30', '1522824506', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=BG9KFaACOCcRa7i17pWIHTG-OEvTZ_7oVh12I-HtPIPXYU9nGTMLTJHxntEDzFK9', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1890', '123.165.251.30', '1522813050', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('1891', '111.202.248.165', '1522815831', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '836d1bdf7203d84be0043f166b06575c');
-INSERT INTO `cool_visit_day` VALUES ('1889', '123.165.251.30', '1522806284', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1888', '123.165.251.30', '1522805594', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('1887', '220.181.108.76', '1522782126', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('1886', '179.176.177.234', '1522779603', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('2164', '123.165.251.30', '1522893540', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2163', '123.165.251.30', '1522893388', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2162', '123.165.251.30', '1522892568', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2161', '123.165.251.30', '1522890421', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2160', '177.195.30.125', '1522887552', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '880448bb19fc2cd0e0db86c688a4215b');
-INSERT INTO `cool_visit_day` VALUES ('2159', '111.206.36.141', '1522882347', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('2743', '117.179.5.224', '1522977294', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2742', '117.179.5.224', '1522977272', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2741', '117.179.5.224', '1522977208', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2740', '220.181.108.150', '1522976777', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2739', '117.179.5.224', '1522975675', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2738', '187.57.155.134', '1522961440', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '56e05f916c7c2d0277efc34bca90012c');
-INSERT INTO `cool_visit_day` VALUES ('2792', '112.103.97.250', '1523101377', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2791', '112.103.97.250', '1523101355', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2790', '220.181.108.153', '1523059315', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2789', '112.103.97.250', '1523056712', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2788', '119.188.64.4', '1523049153', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '0a9fa37310b9b4b326fe6a58357fb4a0');
-INSERT INTO `cool_visit_day` VALUES ('2787', '204.83.35.170', '1523045215', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '249ba73795004bee7a6cb10a78d371f4');
-INSERT INTO `cool_visit_day` VALUES ('2786', '42.156.136.19', '1523030515', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '0a27cbfa9ee9dc439201fff18e82f354');
-INSERT INTO `cool_visit_day` VALUES ('2822', '64.74.215.88', '1523182996', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2821', '123.166.228.79', '1523163187', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('2820', '123.166.228.79', '1523163163', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=9Ybl7JhuID6VoxUqjXyuEQ1ddhqGLDxUKAUslQtzGyVdmgX1G1OzsNmBIg_2PqMl', '0', '0', 'Chrome', '', '', '', '5b7df0d2e74798dfa7e7fa41ef8a6c53');
-INSERT INTO `cool_visit_day` VALUES ('2819', '117.179.5.224', '1523143944', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2818', '220.181.108.96', '1523139228', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2817', '64.74.215.1', '1523119730', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'ad04bd17ddd14bd98b9f9d6d81261909');
-INSERT INTO `cool_visit_day` VALUES ('2835', '123.165.255.103', '1523223478', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2834', '123.165.255.103', '1523223458', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2833', '123.165.255.103', '1523223268', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2832', '123.165.255.103', '1523223249', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2831', '123.125.71.100', '1523213176', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2882', '123.165.255.103', '1523349816', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2881', '123.165.255.103', '1523342674', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2880', '220.181.108.143', '1523300285', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2903', '95.40.105.126', '1523441637', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '1ef364dd2efc2af45347342e2509c337');
-INSERT INTO `cool_visit_day` VALUES ('2901', '113.5.3.150', '1523432390', 'http://www.hrbkcwl.com/index.html#contact', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '29e9d40db771071fe27b63a5d6caa2b6');
-INSERT INTO `cool_visit_day` VALUES ('2902', '123.165.255.103', '1523432844', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2900', '113.5.3.150', '1523432381', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '29e9d40db771071fe27b63a5d6caa2b6');
-INSERT INTO `cool_visit_day` VALUES ('2899', '113.5.3.150', '1523432344', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2898', '113.5.3.150', '1523432039', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2897', '123.165.255.103', '1523430614', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'aa9999dcebe05a71a16f22e6bd1dac2a');
-INSERT INTO `cool_visit_day` VALUES ('2896', '123.165.255.103', '1523429322', 'http://www.hrbkcwl.com/?from=singlemessage', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2895', '60.219.220.109', '1523429270', 'http://www.hrbkcwl.com/?from=singlemessage', '', '0', '0', 'Other', '', '', '', '05ef821ca6fd3771272d095d1482a242');
-INSERT INTO `cool_visit_day` VALUES ('2894', '123.165.255.103', '1523428984', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2893', '113.5.3.150', '1523419307', 'http://www.hrbkcwl.com/blogInfo_1_17.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2891', '123.165.255.103', '1523412804', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2892', '123.165.255.103', '1523414849', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2890', '113.5.3.150', '1523410468', 'http://www.hrbkcwl.com/blogInfo_1_17.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2888', '113.5.3.150', '1523410460', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2889', '113.5.3.150', '1523410464', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2887', '220.181.108.86', '1523401131', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2917', '111.206.221.5', '1523526107', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2916', '111.206.198.40', '1523526101', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '0d77fbeeb2fabc53405c1c0cba02021e');
-INSERT INTO `cool_visit_day` VALUES ('2914', '112.103.211.235', '1523485760', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2915', '220.181.108.174', '1523497085', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2913', '183.36.114.119', '1523476693', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'b357e09a09706b8c78c6b4ecd3ed3e99');
-INSERT INTO `cool_visit_day` VALUES ('2912', '189.74.65.23', '1523463732', 'http://www.hrbkcwl.com/', 'http://seocheckupx.com', '0', '0', 'Chrome', '', '', '', '8bd58ae12544610d54b331b20801f4ac');
 INSERT INTO `cool_visit_day` VALUES ('3011', '61.131.78.82', '1524736148', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '1c9f8f250fec3e7a8a028447e21543eb');
 INSERT INTO `cool_visit_day` VALUES ('3010', '123.151.77.74', '1524726613', 'http://www.hrbkcwl.com/', 'http://art.hrbkcwl.com/app/index.php?i=33', '0', '0', 'Chrome', '', '', '', 'c317c99921b1aaa953073ddb6ed8cd2f');
 INSERT INTO `cool_visit_day` VALUES ('3006', '111.41.173.29', '1524666594', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '2efc806fb74e7f8c5ddbacde358940b8');
@@ -5566,23 +5287,12 @@ INSERT INTO `cool_visit_day` VALUES ('2981', '111.206.198.89', '1524469511', 'ht
 INSERT INTO `cool_visit_day` VALUES ('2982', '111.206.221.107', '1524469514', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
 INSERT INTO `cool_visit_day` VALUES ('2980', '220.181.108.156', '1524433366', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
 INSERT INTO `cool_visit_day` VALUES ('2977', '220.181.108.78', '1524358290', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2922', '111.206.36.135', '1523590224', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('2921', '220.181.108.157', '1523583000', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2919', '220.181.132.193', '1523578359', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('2920', '101.199.108.118', '1523578387', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'bfe1eb95fafaae03182ba9392a6f2aae');
-INSERT INTO `cool_visit_day` VALUES ('2918', '42.156.138.112', '1523563212', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'ec5d3ca305eade2166962c0139efcfa2');
 INSERT INTO `cool_visit_day` VALUES ('2973', '101.199.108.118', '1524316774', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
 INSERT INTO `cool_visit_day` VALUES ('2943', '106.11.222.68', '1523979802', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '7861ab0a00054b86b04ca4b103faac2b');
 INSERT INTO `cool_visit_day` VALUES ('2937', '123.125.143.136', '1523889938', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('2925', '111.206.36.137', '1523721286', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('2924', '170.0.206.184', '1523666185', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '1e8704b9de07d4dad42399bc9411d327');
-INSERT INTO `cool_visit_day` VALUES ('2923', '220.181.108.97', '1523660105', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
 INSERT INTO `cool_visit_day` VALUES ('2936', '42.156.139.77', '1523886227', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', 'ec5d3ca305eade2166962c0139efcfa2');
 INSERT INTO `cool_visit_day` VALUES ('2935', '117.91.2.140', '1523882311', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=A8P2ZKEz01tG_zpSoZOXZnrlE52Pm-g5dWP96Yjr2rNtymGpZH3ZA47WemDr-xMt', '0', '0', 'Chrome', '', '', '', '379e31c90f84be5fa0c13852ec7fe2e9');
 INSERT INTO `cool_visit_day` VALUES ('2934', '123.125.143.29', '1523859520', 'http://www.hrbkcwl.com/', 'http://www.baidu.com/s?wd=YPAC', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('2928', '60.50.179.230', '1523802710', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '532c1fe4ef673e1b8990a879b53df89d');
-INSERT INTO `cool_visit_day` VALUES ('2926', '220.181.108.151', '1523747443', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2927', '123.125.143.27', '1523782006', 'http://www.hrbkcwl.com/', 'http://www.baidu.com/s?wd=TOP6', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
 INSERT INTO `cool_visit_day` VALUES ('2933', '43.224.128.210', '1523855896', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '493d1d7907fb053548a14db78bdc78c5');
 INSERT INTO `cool_visit_day` VALUES ('2932', '43.224.128.210', '1523855892', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '493d1d7907fb053548a14db78bdc78c5');
 INSERT INTO `cool_visit_day` VALUES ('2931', '43.224.128.210', '1523855879', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '493d1d7907fb053548a14db78bdc78c5');
@@ -5850,722 +5560,10 @@ INSERT INTO `cool_visit_day` VALUES ('3208', '111.41.173.109', '1527301398', 'ht
 INSERT INTO `cool_visit_day` VALUES ('3207', '220.181.108.116', '1527285135', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
 INSERT INTO `cool_visit_day` VALUES ('3215', '127.0.0.1', '1527389614', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
 INSERT INTO `cool_visit_day` VALUES ('3214', '127.0.0.1', '1527389224', 'http://coolphp.local.com/index.html', 'http://coolphp.local.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'b95a6bd3fdca360352b87616f4a981ff');
-INSERT INTO `cool_visit_day` VALUES ('1516', '111.206.221.8', '1519716267', 'http://www.hrbkcwl.com/blogInfo_8_17.html', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2147', '123.165.251.30', '1522854632', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2148', '123.165.251.30', '1522854637', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2149', '123.165.251.30', '1522854639', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2150', '123.165.251.30', '1522854642', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2151', '123.165.251.30', '1522854900', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2152', '123.165.251.30', '1522854908', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2153', '123.165.251.30', '1522854912', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2154', '123.165.251.30', '1522854914', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2155', '123.165.251.30', '1522854926', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2156', '123.165.251.30', '1522854933', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2157', '123.165.251.30', '1522854953', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2158', '101.199.112.45', '1522856561', 'http://www.hrbkcwl.com/services_13.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2165', '123.165.251.30', '1522893542', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2166', '123.165.251.30', '1522893559', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2167', '123.165.251.30', '1522893586', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2168', '123.165.251.30', '1522893597', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2169', '123.165.251.30', '1522893602', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2170', '123.165.251.30', '1522893604', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2171', '123.165.251.30', '1522893608', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2172', '123.165.251.30', '1522893617', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2173', '123.165.251.30', '1522893626', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2174', '123.165.251.30', '1522893654', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2175', '123.165.251.30', '1522893657', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2176', '123.165.251.30', '1522893660', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2177', '123.165.251.30', '1522893661', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2178', '123.165.251.30', '1522893662', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2179', '123.165.251.30', '1522893663', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2180', '123.165.251.30', '1522893667', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2181', '123.165.251.30', '1522893712', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2182', '123.165.251.30', '1522893713', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2183', '123.165.251.30', '1522893714', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2184', '123.165.251.30', '1522893716', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2185', '123.165.251.30', '1522893717', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2186', '123.165.251.30', '1522893719', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2187', '123.165.251.30', '1522893722', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2188', '123.165.251.30', '1522894299', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2189', '123.165.251.30', '1522894344', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2190', '123.165.251.30', '1522894347', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2191', '101.199.112.55', '1522894431', 'http://www.hrbkcwl.com/contact_16.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2192', '123.165.251.30', '1522894907', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2193', '123.165.251.30', '1522894931', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2194', '123.165.251.30', '1522894936', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2195', '123.165.251.30', '1522894945', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2196', '123.165.251.30', '1522894950', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2197', '123.165.251.30', '1522894953', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2198', '123.165.251.30', '1522894957', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2199', '123.165.251.30', '1522894967', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2200', '123.165.251.30', '1522894997', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2201', '123.165.251.30', '1522895001', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2202', '123.165.251.30', '1522895006', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2203', '123.165.251.30', '1522895010', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2204', '123.165.251.30', '1522895012', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2205', '123.165.251.30', '1522895017', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2206', '123.165.251.30', '1522895120', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2207', '123.165.251.30', '1522895135', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2208', '123.165.251.30', '1522895142', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2209', '123.165.251.30', '1522895257', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2210', '123.165.251.30', '1522895259', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2211', '123.165.251.30', '1522895334', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2212', '123.165.251.30', '1522895341', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2213', '123.165.251.30', '1522895477', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2214', '123.165.251.30', '1522895500', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2215', '123.165.251.30', '1522895512', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2216', '123.165.251.30', '1522895517', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2217', '123.165.251.30', '1522895518', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2218', '123.165.251.30', '1522895525', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2219', '123.165.251.30', '1522895526', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2220', '123.165.251.30', '1522895528', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2221', '123.165.251.30', '1522895530', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2222', '123.165.251.30', '1522895590', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2223', '123.165.251.30', '1522895596', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2224', '123.165.251.30', '1522895598', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2225', '123.165.251.30', '1522895601', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2226', '123.165.251.30', '1522895604', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2227', '123.165.251.30', '1522895605', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2228', '123.165.251.30', '1522895607', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2229', '123.165.251.30', '1522895639', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2230', '123.165.251.30', '1522895647', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2231', '123.165.251.30', '1522895650', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2232', '123.165.251.30', '1522895653', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2233', '123.165.251.30', '1522895659', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2234', '123.165.251.30', '1522895665', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2235', '123.165.251.30', '1522895678', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2236', '123.165.251.30', '1522895687', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2237', '123.165.251.30', '1522895690', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2238', '123.165.251.30', '1522895697', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2239', '123.165.251.30', '1522895698', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2240', '123.165.251.30', '1522895699', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2241', '123.165.251.30', '1522895797', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2242', '123.165.251.30', '1522895803', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2243', '123.165.251.30', '1522895805', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2244', '123.165.251.30', '1522895811', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2245', '123.165.251.30', '1522895812', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2246', '123.165.251.30', '1522895813', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2247', '123.165.251.30', '1522895816', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2248', '123.165.251.30', '1522895818', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2249', '123.165.251.30', '1522895859', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2250', '123.165.251.30', '1522895867', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2251', '123.165.251.30', '1522895869', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2252', '123.165.251.30', '1522895984', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2253', '123.165.251.30', '1522895985', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2254', '123.165.251.30', '1522895987', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2255', '123.165.251.30', '1522895988', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2256', '123.165.251.30', '1522896948', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2257', '123.165.251.30', '1522896953', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2258', '123.165.251.30', '1522896958', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2259', '123.165.251.30', '1522896997', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2260', '123.165.251.30', '1522897000', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2261', '123.165.251.30', '1522899596', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2262', '123.165.251.30', '1522899631', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2263', '123.165.251.30', '1522899636', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2264', '123.165.251.30', '1522899640', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2265', '123.165.251.30', '1522899644', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2266', '123.165.251.30', '1522899668', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2267', '123.165.251.30', '1522899675', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2268', '123.165.251.30', '1522899680', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2269', '123.165.251.30', '1522899684', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2270', '123.165.251.30', '1522899687', 'http://www.hrbkcwl.com/', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2271', '123.165.251.30', '1522899689', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2272', '123.165.251.30', '1522899704', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2273', '123.165.251.30', '1522899746', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2274', '123.165.251.30', '1522899768', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2275', '123.165.251.30', '1522899772', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2276', '123.165.251.30', '1522899797', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2277', '123.165.251.30', '1522899799', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2278', '123.165.251.30', '1522899819', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2279', '123.165.251.30', '1522899824', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2280', '123.165.251.30', '1522899826', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2281', '123.165.251.30', '1522899931', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2282', '123.165.251.30', '1522899932', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2283', '123.165.251.30', '1522899961', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2284', '123.165.251.30', '1522899970', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2285', '123.165.251.30', '1522899975', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2286', '123.165.251.30', '1522899977', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2287', '123.165.251.30', '1522899979', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2288', '123.165.251.30', '1522899980', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2289', '123.165.251.30', '1522899983', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2290', '123.165.251.30', '1522899990', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2291', '123.165.251.30', '1522899992', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2292', '123.165.251.30', '1522900022', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2293', '123.165.251.30', '1522900030', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2294', '123.165.251.30', '1522900044', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2295', '123.165.251.30', '1522900050', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2296', '123.165.251.30', '1522900092', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2297', '220.181.108.114', '1522900103', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2298', '123.165.251.30', '1522900117', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2299', '123.165.251.30', '1522900118', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2300', '123.165.251.30', '1522900148', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2301', '123.165.251.30', '1522900150', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2302', '123.165.251.30', '1522900184', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2303', '123.165.251.30', '1522900186', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2304', '123.165.251.30', '1522900196', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2305', '123.165.251.30', '1522900223', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2306', '123.165.251.30', '1522900227', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2307', '123.165.251.30', '1522900246', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2308', '123.165.251.30', '1522900251', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2309', '123.165.251.30', '1522900263', 'http://www.hrbkcwl.com/products_9.html#.', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2310', '123.165.251.30', '1522900268', 'http://www.hrbkcwl.com/products_9.html#.', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2311', '123.165.251.30', '1522900273', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2312', '123.165.251.30', '1522900315', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2313', '123.165.251.30', '1522900317', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2314', '123.165.251.30', '1522900319', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2315', '123.165.251.30', '1522900321', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2316', '123.165.251.30', '1522900323', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2317', '123.165.251.30', '1522900326', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2318', '123.165.251.30', '1522900338', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2319', '123.165.251.30', '1522900348', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2320', '123.165.251.30', '1522900352', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2321', '123.165.251.30', '1522900359', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2322', '123.165.251.30', '1522900362', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2323', '123.165.251.30', '1522900365', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2324', '123.165.251.30', '1522900369', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2325', '123.165.251.30', '1522900390', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2326', '123.165.251.30', '1522900418', 'http://www.hrbkcwl.com/index.html#.', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2327', '123.165.251.30', '1522900449', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2328', '123.165.251.30', '1522900451', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2329', '123.165.251.30', '1522900453', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2330', '123.165.251.30', '1522900454', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2331', '123.165.251.30', '1522900460', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2332', '123.165.251.30', '1522900470', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2333', '123.165.251.30', '1522900472', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2334', '123.165.251.30', '1522900478', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2335', '123.165.251.30', '1522900481', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2336', '123.165.251.30', '1522900491', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2337', '123.165.251.30', '1522900582', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2338', '123.165.251.30', '1522900586', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2339', '123.165.251.30', '1522900691', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2340', '123.165.251.30', '1522900696', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2341', '123.165.251.30', '1522900726', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2342', '123.165.251.30', '1522900774', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2343', '123.165.251.30', '1522900779', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2344', '123.165.251.30', '1522900782', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2345', '123.165.251.30', '1522900785', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2346', '123.165.251.30', '1522900788', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2347', '123.165.251.30', '1522900793', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2348', '123.165.251.30', '1522900797', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2349', '123.165.251.30', '1522900865', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2350', '123.165.251.30', '1522900894', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2351', '123.165.251.30', '1522900897', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2352', '123.165.251.30', '1522900898', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2353', '123.165.251.30', '1522900982', 'http://www.hrbkcwl.com/index.html#.', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2354', '123.165.251.30', '1522901147', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2355', '123.165.251.30', '1522901198', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2356', '123.165.251.30', '1522901349', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2357', '123.165.251.30', '1522901364', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2358', '123.165.251.30', '1522901642', 'http://www.hrbkcwl.com/', 'https://www.baidu.com/link?url=rF_5Oj43NpjV95SS8g1p9JYsO06_tQ8PYCv3l9oc-T5OLUux0smfO1Ror0VRzltV', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2359', '123.165.251.30', '1522901758', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2360', '123.165.251.30', '1522901764', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2361', '123.165.251.30', '1522901854', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2362', '123.165.251.30', '1522901857', 'http://www.hrbkcwl.com/contact_16.html#content', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2363', '123.165.251.30', '1522901859', 'http://www.hrbkcwl.com/contact_16.html#.', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2364', '123.165.251.30', '1522901862', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2365', '123.165.251.30', '1522901864', 'http://www.hrbkcwl.com/contact_16.html#content', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2366', '123.165.251.30', '1522901870', 'http://www.hrbkcwl.com/contact_16.html#.', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2367', '123.165.251.30', '1522901874', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2368', '123.165.251.30', '1522901912', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2369', '123.165.251.30', '1522901921', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2370', '123.165.251.30', '1522901924', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2371', '123.165.251.30', '1522902150', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2372', '123.165.251.30', '1522902162', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2373', '123.165.251.30', '1522902372', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2374', '123.165.251.30', '1522902452', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2375', '123.165.251.30', '1522902471', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2376', '123.165.251.30', '1522902604', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2377', '123.165.251.30', '1522902647', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2378', '123.165.251.30', '1522903021', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2379', '123.165.251.30', '1522903033', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2380', '123.165.251.30', '1522903112', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2381', '189.228.93.181', '1522904873', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '971064338897f18915dd8ea8263570be');
-INSERT INTO `cool_visit_day` VALUES ('2382', '123.165.251.30', '1522908062', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2383', '123.165.251.30', '1522908065', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2384', '123.165.251.30', '1522908095', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2385', '123.165.251.30', '1522908448', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2386', '123.165.251.30', '1522908503', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2387', '123.165.251.30', '1522908626', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2388', '123.165.251.30', '1522908689', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2389', '123.165.251.30', '1522908725', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2390', '123.165.251.30', '1522908840', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2391', '123.165.251.30', '1522908853', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2392', '123.165.251.30', '1522909657', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2393', '123.165.251.30', '1522910058', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2394', '123.165.251.30', '1522910142', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2395', '123.165.251.30', '1522910164', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2396', '123.165.251.30', '1522910189', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2397', '123.165.251.30', '1522910194', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2398', '123.165.251.30', '1522910198', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2399', '123.165.251.30', '1522910203', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2400', '123.165.251.30', '1522910209', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2401', '123.165.251.30', '1522910211', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2402', '123.165.251.30', '1522910271', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2403', '123.165.251.30', '1522910296', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2404', '123.165.251.30', '1522910300', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2405', '123.165.251.30', '1522910303', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2406', '123.165.251.30', '1522910308', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2407', '123.165.251.30', '1522910311', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2408', '123.165.251.30', '1522910313', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2409', '123.165.251.30', '1522910321', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2410', '123.165.251.30', '1522910519', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2411', '123.165.251.30', '1522910533', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2412', '123.165.251.30', '1522910541', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2413', '123.165.251.30', '1522910546', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2414', '123.165.251.30', '1522910555', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2415', '14.215.176.16', '1522910994', 'http://www.hrbkcwl.com/', '', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('2416', '123.165.251.30', '1522911611', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2417', '123.165.251.30', '1522912991', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2418', '123.165.251.30', '1522913111', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2419', '123.165.251.30', '1522913125', 'http://www.hrbkcwl.com/contact_16.html#content', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2420', '123.165.251.30', '1522913157', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2421', '123.165.251.30', '1522913158', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2422', '123.165.251.30', '1522913294', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_24_27.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2423', '123.165.251.30', '1522913777', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2424', '123.165.251.30', '1522913781', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2425', '123.165.251.30', '1522913785', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2426', '123.165.251.30', '1522913789', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2427', '123.165.251.30', '1522913793', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2428', '123.165.251.30', '1522913832', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2429', '123.165.251.30', '1522913856', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2430', '123.165.251.30', '1522914000', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2431', '123.165.251.30', '1522914028', 'http://www.hrbkcwl.com/#cbp=/caseInfo_24_27.html', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2432', '123.165.251.30', '1522914034', 'http://www.hrbkcwl.com/#cbp=/caseInfo_24_27.html', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2433', '123.165.251.30', '1522914052', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2434', '123.165.251.30', '1522914056', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2435', '123.165.251.30', '1522914180', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_26_28.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2436', '123.165.251.30', '1522914275', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_26_28.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2437', '123.165.251.30', '1522914892', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2438', '123.165.251.30', '1522914950', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2439', '123.165.251.30', '1522914959', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2440', '123.165.251.30', '1522915066', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2441', '123.165.251.30', '1522915640', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2442', '123.165.251.30', '1522915645', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2443', '123.165.251.30', '1522915747', 'http://www.hrbkcwl.com/index.html#cbp=/caseInfo_26_28.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2444', '123.165.251.30', '1522916695', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2445', '123.165.251.30', '1522916698', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2446', '123.165.251.30', '1522916713', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2447', '123.165.251.30', '1522916731', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2448', '123.165.251.30', '1522916753', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2449', '123.165.251.30', '1522916754', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2450', '123.165.251.30', '1522916756', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2451', '123.165.251.30', '1522916775', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2452', '123.165.251.30', '1522916776', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2453', '123.165.251.30', '1522916785', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2454', '123.165.251.30', '1522917414', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2455', '123.165.251.30', '1522917465', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2456', '123.165.251.30', '1522917718', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2457', '123.165.251.30', '1522917752', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2458', '123.165.251.30', '1522917755', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2459', '123.165.251.30', '1522917786', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2460', '123.165.251.30', '1522917865', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2461', '123.165.251.30', '1522917905', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2462', '101.199.112.49', '1522917944', 'http://www.hrbkcwl.com/blog_14.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2463', '123.165.251.30', '1522917976', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2464', '123.165.251.30', '1522918073', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2465', '123.165.251.30', '1522918077', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2466', '123.165.251.30', '1522918122', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2467', '123.165.251.30', '1522918141', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2468', '123.165.251.30', '1522918246', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2469', '123.165.251.30', '1522918460', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2470', '123.165.251.30', '1522918563', 'http://www.hrbkcwl.com/index.html#content', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2471', '123.165.251.30', '1522918610', 'http://www.hrbkcwl.com/index.html#contact', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2472', '123.165.251.30', '1522918701', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2473', '123.165.251.30', '1522918708', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2474', '123.165.251.30', '1522918719', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2475', '123.165.251.30', '1522918724', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2476', '123.165.251.30', '1522918727', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2477', '123.165.251.30', '1522918732', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2478', '123.165.251.30', '1522918734', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2479', '123.165.251.30', '1522918743', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2480', '123.165.251.30', '1522918746', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2481', '123.165.251.30', '1522918747', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2482', '123.165.251.30', '1522918752', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2483', '123.165.251.30', '1522918756', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2484', '123.165.251.30', '1522919142', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2485', '123.165.251.30', '1522919144', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2486', '123.165.251.30', '1522919146', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2487', '123.165.251.30', '1522919155', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2488', '123.165.251.30', '1522919199', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2489', '123.165.251.30', '1522919440', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2490', '123.165.251.30', '1522919544', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2491', '123.165.251.30', '1522919546', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2492', '123.165.251.30', '1522919555', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2493', '123.165.251.30', '1522919559', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2494', '123.165.251.30', '1522919938', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2495', '101.199.112.55', '1522919945', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2496', '123.165.251.30', '1522919949', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2497', '123.165.251.30', '1522919950', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2498', '123.165.251.30', '1522919952', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2499', '123.165.251.30', '1522919955', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2500', '123.165.251.30', '1522919957', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2501', '123.165.251.30', '1522919958', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2502', '123.165.251.30', '1522919959', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2503', '123.165.251.30', '1522919960', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2504', '123.165.251.30', '1522919962', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2505', '123.165.251.30', '1522920061', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2506', '123.165.251.30', '1522920063', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2507', '123.165.251.30', '1522920065', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2508', '123.165.251.30', '1522920066', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2509', '123.165.251.30', '1522920067', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2510', '123.165.251.30', '1522920070', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2511', '123.165.251.30', '1522920233', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2512', '123.165.251.30', '1522920235', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2513', '123.165.251.30', '1522920236', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2514', '123.165.251.30', '1522920237', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2515', '123.165.251.30', '1522920238', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2516', '123.165.251.30', '1522920240', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2517', '123.165.251.30', '1522920244', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2518', '123.165.251.30', '1522920245', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2519', '123.165.251.30', '1522920246', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2520', '123.165.251.30', '1522920290', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2521', '123.165.251.30', '1522920364', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2522', '123.165.251.30', '1522920376', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2523', '123.165.251.30', '1522920451', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2524', '123.165.251.30', '1522920454', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2525', '123.165.251.30', '1522920456', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2526', '123.165.251.30', '1522920460', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2527', '123.165.251.30', '1522920463', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2528', '123.165.251.30', '1522920466', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2529', '123.165.251.30', '1522920467', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2530', '123.165.251.30', '1522920489', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2531', '123.165.251.30', '1522920496', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2532', '123.165.251.30', '1522920497', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2533', '123.165.251.30', '1522920499', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2534', '123.165.251.30', '1522920513', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2535', '123.165.251.30', '1522920519', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2536', '101.199.108.120', '1522920741', 'http://www.hrbkcwl.com/products_9.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2537', '123.165.251.30', '1522921580', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2538', '123.165.251.30', '1522921590', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2539', '123.165.251.30', '1522921618', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2540', '123.165.251.30', '1522921620', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2541', '123.165.251.30', '1522921621', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2542', '123.165.251.30', '1522921622', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2543', '123.165.251.30', '1522921625', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2544', '123.165.251.30', '1522921626', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2545', '123.165.251.30', '1522921630', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2546', '123.165.251.30', '1522921634', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2547', '123.165.251.30', '1522921654', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2548', '123.165.251.30', '1522921655', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2549', '123.165.251.30', '1522921658', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2550', '123.165.251.30', '1522921660', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2551', '123.165.251.30', '1522921878', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2552', '123.165.251.30', '1522921885', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2553', '123.165.251.30', '1522921906', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2554', '123.165.251.30', '1522921907', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2555', '123.165.251.30', '1522921909', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2556', '123.165.251.30', '1522922693', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2557', '123.165.251.30', '1522922695', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2558', '123.165.251.30', '1522922696', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2559', '123.165.251.30', '1522922793', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2560', '123.165.251.30', '1522922841', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2561', '123.165.251.30', '1522922842', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2562', '123.165.251.30', '1522922843', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2563', '123.165.251.30', '1522922845', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2564', '123.165.251.30', '1522922850', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2565', '123.165.251.30', '1522922855', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2566', '123.165.251.30', '1522922877', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2567', '123.165.251.30', '1522922882', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2568', '123.165.251.30', '1522922883', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2569', '123.165.251.30', '1522922908', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2570', '123.165.251.30', '1522922925', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2571', '123.165.251.30', '1522922926', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2572', '123.165.251.30', '1522922930', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2573', '123.165.251.30', '1522922950', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2574', '123.165.251.30', '1522922952', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2575', '123.165.251.30', '1522922954', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2576', '123.165.251.30', '1522922958', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2577', '123.165.251.30', '1522922959', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2578', '123.165.251.30', '1522922960', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2579', '123.165.251.30', '1522922962', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2580', '123.165.251.30', '1522922963', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2581', '123.165.251.30', '1522922965', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2582', '123.165.251.30', '1522923327', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2583', '123.165.251.30', '1522923343', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2584', '123.165.251.30', '1522923345', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2585', '123.165.251.30', '1522923346', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2586', '123.165.251.30', '1522923347', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2587', '123.165.251.30', '1522923349', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2588', '123.165.251.30', '1522923351', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2589', '123.165.251.30', '1522923354', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2590', '123.165.251.30', '1522923397', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2591', '123.165.251.30', '1522923405', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2592', '123.165.251.30', '1522923415', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2593', '123.165.251.30', '1522923417', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2594', '123.165.251.30', '1522923418', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2595', '123.165.251.30', '1522923420', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2596', '123.165.251.30', '1522923421', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2597', '123.165.251.30', '1522923482', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2598', '123.165.251.30', '1522923484', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2599', '123.165.251.30', '1522923500', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2600', '123.165.251.30', '1522923503', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2601', '123.165.251.30', '1522923505', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2602', '123.165.251.30', '1522923507', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2603', '123.165.251.30', '1522923509', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2604', '123.165.251.30', '1522923512', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2605', '123.165.251.30', '1522923516', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2606', '123.165.251.30', '1522923520', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2607', '123.165.251.30', '1522923526', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2608', '123.165.251.30', '1522923528', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2609', '123.165.251.30', '1522923560', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2610', '123.165.251.30', '1522923562', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2611', '123.165.251.30', '1522923563', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2612', '123.165.251.30', '1522923565', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2613', '123.165.251.30', '1522923568', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2614', '123.165.251.30', '1522923571', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2615', '123.165.251.30', '1522923574', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2616', '123.165.251.30', '1522923577', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2617', '123.165.251.30', '1522923579', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2618', '123.165.251.30', '1522923581', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2619', '123.165.251.30', '1522923587', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2620', '123.165.251.30', '1522923595', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2621', '123.165.251.30', '1522923617', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2622', '123.165.251.30', '1522923622', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2623', '123.165.251.30', '1522923628', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2624', '123.165.251.30', '1522923629', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2625', '123.165.251.30', '1522923630', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2626', '123.165.251.30', '1522923632', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2627', '123.165.251.30', '1522923638', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2628', '123.165.251.30', '1522923644', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2629', '123.165.251.30', '1522923646', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2630', '123.165.251.30', '1522923654', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2631', '123.165.251.30', '1522923664', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2632', '123.165.251.30', '1522923686', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2633', '123.165.251.30', '1522923690', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2634', '123.165.251.30', '1522923696', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2635', '123.165.251.30', '1522923701', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2636', '123.165.251.30', '1522923707', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2637', '123.165.251.30', '1522923708', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2638', '123.165.251.30', '1522923712', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2639', '123.165.251.30', '1522923716', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2640', '123.165.251.30', '1522923823', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2641', '123.165.251.30', '1522923826', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2642', '123.165.251.30', '1522923829', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2643', '123.165.251.30', '1522923836', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2644', '123.165.251.30', '1522923838', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2645', '123.165.251.30', '1522923839', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2646', '123.165.251.30', '1522923843', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2647', '123.165.251.30', '1522923875', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2648', '123.165.251.30', '1522923878', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2649', '123.165.251.30', '1522923879', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2650', '123.165.251.30', '1522923880', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2651', '123.165.251.30', '1522923881', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2652', '123.165.251.30', '1522923901', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2653', '123.165.251.30', '1522923906', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2654', '123.165.251.30', '1522923908', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2655', '123.165.251.30', '1522924013', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2656', '123.165.251.30', '1522924030', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2657', '123.165.251.30', '1522924082', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2658', '123.165.251.30', '1522924137', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2659', '123.165.251.30', '1522924197', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2660', '123.165.251.30', '1522924283', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2661', '123.165.251.30', '1522924322', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2662', '123.165.251.30', '1522924391', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2663', '123.165.251.30', '1522924422', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2664', '123.165.251.30', '1522924436', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2665', '123.165.251.30', '1522924447', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2666', '123.165.251.30', '1522924544', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2667', '123.165.251.30', '1522924565', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2668', '123.165.251.30', '1522924594', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2669', '123.165.251.30', '1522924641', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2670', '123.165.251.30', '1522924721', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2671', '123.165.251.30', '1522924744', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2672', '123.165.251.30', '1522924781', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2673', '123.165.251.30', '1522924788', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2674', '123.165.251.30', '1522924853', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2675', '123.165.251.30', '1522924872', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2676', '123.165.251.30', '1522924922', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2677', '123.165.251.30', '1522924932', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2678', '123.165.251.30', '1522924976', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2679', '123.165.251.30', '1522924990', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2680', '123.165.251.30', '1522925014', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2681', '123.165.251.30', '1522925016', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2682', '123.165.251.30', '1522925028', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2683', '123.165.251.30', '1522925064', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2684', '123.165.251.30', '1522925079', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2685', '123.165.251.30', '1522925083', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2686', '123.165.251.30', '1522925085', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2687', '123.165.251.30', '1522925131', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2688', '123.165.251.30', '1522925141', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2689', '123.165.251.30', '1522925165', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2690', '123.165.251.30', '1522925190', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2691', '123.165.251.30', '1522925223', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2692', '123.165.251.30', '1522925225', 'http://www.hrbkcwl.com/home_hyxw_info_id_9_catId_30.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2693', '123.165.251.30', '1522925251', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/home_hyxw_info_id_9_catId_30.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2694', '123.165.251.30', '1522925288', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2695', '123.165.251.30', '1522925309', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2696', '123.165.251.30', '1522925459', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2697', '117.179.5.224', '1522925746', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2698', '117.179.5.224', '1522925835', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2699', '117.179.5.224', '1522925842', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2700', '117.179.5.224', '1522925849', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2701', '117.179.5.224', '1522925855', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2702', '117.179.5.224', '1522925866', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2703', '117.179.5.224', '1522925879', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2704', '123.165.251.30', '1522927815', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/home_hyxw_info_id_9_catId_30.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2705', '123.165.251.30', '1522927872', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/home_hyxw_info_id_9_catId_30.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2706', '123.165.251.30', '1522927955', 'http://www.hrbkcwl.com/index.html#', 'http://www.hrbkcwl.com/home_hyxw_info_id_9_catId_30.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2707', '123.165.251.30', '1522927986', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2708', '123.165.251.30', '1522927996', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2709', '123.165.251.30', '1522928030', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2710', '123.165.251.30', '1522928037', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2711', '123.165.251.30', '1522928048', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2712', '123.165.251.30', '1522928051', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2713', '123.165.251.30', '1522928054', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2714', '123.165.251.30', '1522928061', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2715', '123.165.251.30', '1522928109', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2716', '123.165.251.30', '1522928110', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2717', '123.165.251.30', '1522928489', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2718', '123.165.251.30', '1522928506', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2719', '123.165.251.30', '1522928512', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2720', '123.165.251.30', '1522928518', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2721', '123.165.251.30', '1522928521', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2722', '123.165.251.30', '1522928525', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2723', '123.165.251.30', '1522928531', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2724', '123.165.251.30', '1522930285', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2725', '123.165.251.30', '1522930299', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2726', '123.165.251.30', '1522930486', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2727', '123.165.251.30', '1522930716', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2728', '123.165.251.30', '1522930718', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2729', '123.165.251.30', '1522935799', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2730', '123.165.251.30', '1522935807', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2731', '123.165.251.30', '1522935810', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2732', '123.165.251.30', '1522935814', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2733', '123.165.251.30', '1522935819', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2734', '123.165.251.30', '1522935935', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2735', '123.165.251.30', '1522936536', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2736', '123.165.251.30', '1522937316', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2737', '123.165.251.30', '1522937334', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2744', '117.179.5.224', '1522977339', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2745', '112.103.97.250', '1522977379', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2746', '117.179.5.224', '1522977428', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2747', '117.179.5.224', '1522977440', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2748', '117.179.5.224', '1522977468', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2749', '117.179.5.224', '1522977470', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2750', '112.103.97.250', '1522977559', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2751', '117.179.5.224', '1522977659', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2752', '117.179.5.224', '1522977664', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2753', '112.103.97.250', '1522977736', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2754', '101.199.108.52', '1522978614', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2755', '117.179.5.224', '1522981012', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2756', '117.179.5.224', '1522982377', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2757', '117.179.5.224', '1522983248', 'http://www.hrbkcwl.com/case_10.html#.', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2758', '117.179.5.224', '1522983467', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2759', '117.179.5.224', '1522983652', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2760', '181.114.82.201', '1522984600', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '1e8704b9de07d4dad42399bc9411d327');
-INSERT INTO `cool_visit_day` VALUES ('2761', '112.103.97.250', '1522986675', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2762', '112.103.97.250', '1522986701', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2763', '112.103.97.250', '1522986703', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2764', '112.103.97.250', '1522986704', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2765', '112.103.97.250', '1522986705', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2766', '112.103.97.250', '1522986707', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2767', '112.103.97.250', '1522986710', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2768', '112.103.97.250', '1522986779', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2769', '112.103.97.250', '1522990915', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2770', '221.178.182.22', '1522992211', 'http://www.hrbkcwl.com/', 'http://www.sogou.com/web?query=site:tutuaiai.com  百度权重_百度权重提升_联系Q:1278774066_kyehsdl.com', '0', '0', 'MSIE', '', '', '', 'a59ea7dec8fbd9311087471c9e76f499');
-INSERT INTO `cool_visit_day` VALUES ('2771', '123.125.143.11', '1523007000', 'http://www.hrbkcwl.com/', 'http://www.baidu.com/s?wd=O04S', '0', '0', 'Firefox', '', '', '', '22d8b562026492e408a8dc8cfaa00226');
-INSERT INTO `cool_visit_day` VALUES ('2772', '112.103.97.250', '1523007380', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2773', '180.108.55.128', '1523021943', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '53d833aaef04677861d2e610f21f130e');
-INSERT INTO `cool_visit_day` VALUES ('2774', '112.103.97.250', '1523028880', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2775', '112.103.97.250', '1523028889', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2776', '112.103.97.250', '1523028892', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2777', '112.103.97.250', '1523028895', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2778', '112.103.97.250', '1523028897', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2779', '112.103.97.250', '1523028898', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2780', '112.103.97.250', '1523028903', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2781', '112.103.97.250', '1523028905', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2782', '112.103.97.250', '1523028907', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2783', '112.103.97.250', '1523028909', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2784', '112.103.97.250', '1523028910', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2785', '112.103.97.250', '1523028946', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2793', '112.103.97.250', '1523101428', 'http://www.hrbkcwl.com/#cbp=/home__info_id_12_catId_23.html', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2794', '112.103.97.250', '1523101443', 'http://www.hrbkcwl.com/#', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2795', '112.103.97.250', '1523101480', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2796', '112.103.97.250', '1523101554', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2797', '112.103.97.250', '1523101598', 'http://www.hrbkcwl.com/#', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2798', '117.179.5.224', '1523101713', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2799', '117.179.5.224', '1523101731', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2800', '117.179.5.224', '1523101755', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2801', '117.179.5.224', '1523101765', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2802', '117.179.5.224', '1523101767', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2803', '117.179.5.224', '1523101818', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2804', '117.179.5.224', '1523101821', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2805', '117.179.5.224', '1523101822', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2806', '117.179.5.224', '1523101824', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2807', '117.179.5.224', '1523101826', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', 'abca8730dac419feca37b700e6fbfc6a');
-INSERT INTO `cool_visit_day` VALUES ('2808', '112.103.97.250', '1523101915', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2809', '112.103.97.250', '1523101920', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2810', '112.103.97.250', '1523101924', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2811', '112.103.97.250', '1523101926', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2812', '112.103.97.250', '1523101929', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2813', '112.103.97.250', '1523101933', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2814', '112.103.97.250', '1523101936', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2815', '112.103.97.250', '1523103015', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2816', '220.181.132.197', '1523103166', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2823', '64.74.215.88', '1523183041', 'http://www.hrbkcwl.com/services_13.html', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2824', '64.74.215.88', '1523183123', 'http://www.hrbkcwl.com/contact_16.html', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2825', '64.74.215.88', '1523183160', 'http://www.hrbkcwl.com/products_9.html', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2826', '64.74.215.88', '1523183201', 'http://www.hrbkcwl.com/contact_16.html#content', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2827', '64.74.215.88', '1523183243', 'http://www.hrbkcwl.com/home_hyxw_info_id_10_catId_30.html', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2828', '64.74.215.88', '1523183347', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2829', '64.74.215.88', '1523183393', 'http://www.hrbkcwl.com/blog_14.html', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2830', '64.74.215.88', '1523183560', 'http://www.hrbkcwl.com/index.html#contact', '', '0', '0', 'Safari', '', '', '', 'fbe801d7d693516ebb68a25b376c787a');
-INSERT INTO `cool_visit_day` VALUES ('2836', '123.165.255.103', '1523223520', 'http://www.hrbkcwl.com/', '', '0', '0', 'Other', '', '', '', '82c91717c024e0d8b3e85125ba793f8c');
-INSERT INTO `cool_visit_day` VALUES ('2837', '123.165.255.103', '1523223562', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2838', '123.165.255.103', '1523223567', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2839', '123.165.255.103', '1523223706', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/admin/index/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2840', '123.165.255.103', '1523223869', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2841', '123.165.255.103', '1523223871', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2842', '123.165.255.103', '1523223874', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2843', '123.165.255.103', '1523223877', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2844', '123.165.255.103', '1523223878', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2845', '123.165.255.103', '1523223879', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2846', '123.165.255.103', '1523223881', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2847', '123.165.255.103', '1523223890', 'http://www.hrbkcwl.com/index.html', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2848', '123.165.255.103', '1523223947', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2849', '123.165.255.103', '1523223950', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2850', '123.165.255.103', '1523223953', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2851', '123.165.255.103', '1523223955', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2852', '123.165.255.103', '1523223958', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2853', '123.165.255.103', '1523223961', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2854', '123.165.255.103', '1523223965', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2855', '123.165.255.103', '1523223982', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2856', '123.165.255.103', '1523223983', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2857', '123.165.255.103', '1523223984', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2858', '123.165.255.103', '1523223986', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2859', '123.165.255.103', '1523223987', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2860', '123.165.255.103', '1523223988', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2861', '123.165.255.103', '1523223990', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2862', '123.165.255.103', '1523223996', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2863', '123.165.255.103', '1523223999', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2864', '123.165.255.103', '1523224000', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2865', '123.165.255.103', '1523224001', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2866', '123.165.255.103', '1523224002', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2867', '123.165.255.103', '1523224004', 'http://www.hrbkcwl.com/contact_16.html', 'http://www.hrbkcwl.com/blog_14.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2868', '123.165.255.103', '1523224005', 'http://www.hrbkcwl.com/index.html', 'http://www.hrbkcwl.com/contact_16.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2869', '101.199.108.50', '1523224009', 'http://www.hrbkcwl.com/blog_14.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2870', '101.199.108.120', '1523224033', 'http://www.hrbkcwl.com/contact_16.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2871', '220.181.132.194', '1523224038', 'http://www.hrbkcwl.com/about_2.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2872', '101.199.108.59', '1523224053', 'http://www.hrbkcwl.com/products_9.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2873', '220.181.132.195', '1523224054', 'http://www.hrbkcwl.com/services_13.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2874', '101.199.108.55', '1523224072', 'http://www.hrbkcwl.com/case_10.html', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2875', '123.165.255.103', '1523227679', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/index.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2876', '123.165.255.103', '1523227681', 'http://www.hrbkcwl.com/products_9.html', 'http://www.hrbkcwl.com/about_2.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2877', '123.165.255.103', '1523227682', 'http://www.hrbkcwl.com/case_10.html', 'http://www.hrbkcwl.com/products_9.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2878', '123.165.255.103', '1523227684', 'http://www.hrbkcwl.com/services_13.html', 'http://www.hrbkcwl.com/case_10.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2879', '123.165.255.103', '1523227686', 'http://www.hrbkcwl.com/blog_14.html', 'http://www.hrbkcwl.com/services_13.html', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2883', '220.181.132.195', '1523364652', 'http://www.hrbkcwl.com/', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2884', '123.165.255.103', '1523371455', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
-INSERT INTO `cool_visit_day` VALUES ('2885', '42.156.137.102', '1523374294', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '0a27cbfa9ee9dc439201fff18e82f354');
-INSERT INTO `cool_visit_day` VALUES ('2886', '101.199.108.51', '1523374658', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', 'e2f13a92cdc0d51f5fd7acccb397792b');
-INSERT INTO `cool_visit_day` VALUES ('2904', '191.187.4.71', '1523442334', 'http://www.hrbkcwl.com/', 'http://hrbkcwl.com.seocheckupx.net/try.php?u=http://hrbkcwl.com', '0', '0', 'Chrome', '', '', '', '9f4974d1e1fb3483f9949c4b6020d33d');
-INSERT INTO `cool_visit_day` VALUES ('2905', '117.179.5.219', '1523445707', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2906', '117.179.5.219', '1523445709', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '084060e99ac04bc025f74bb350716c06');
-INSERT INTO `cool_visit_day` VALUES ('2907', '111.206.221.87', '1523447802', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2908', '111.206.221.11', '1523447820', 'http://www.hrbkcwl.com/', '', '0', '0', 'Safari', '', '', '', '56ab9f8fa438dd2485e29360ee827a12');
-INSERT INTO `cool_visit_day` VALUES ('2909', '121.5.156.55', '1523448521', 'http://www.hrbkcwl.com/?from=singlemessage', '', '0', '0', 'Other', '', '', '', 'b73985a3ef9219f83a79c12b27a85fd4');
-INSERT INTO `cool_visit_day` VALUES ('2910', '103.87.130.133', '1523453122', 'http://www.hrbkcwl.com/', '', '0', '0', 'Chrome', '', '', '', '061e326a95080c83f7bddf76358463ef');
-INSERT INTO `cool_visit_day` VALUES ('2911', '123.165.255.103', '1523460820', 'http://www.hrbkcwl.com/about_2.html', 'http://www.hrbkcwl.com/', '0', '0', 'Chrome', '', '', '', '61c7954fc8d81538b10f4051c084eddb');
+INSERT INTO `cool_visit_day` VALUES ('3270', '127.0.0.1', '1531754999', 'http://coolphp.local.com/', '', '0', '0', 'Chrome', '', '', '', 'd6dfb1df1359e361d8ea9f31c9929a57');
+INSERT INTO `cool_visit_day` VALUES ('3269', '127.0.0.1', '1531754990', 'http://coolphp.local.com/', '', '0', '0', 'Chrome', '', '', '', 'd6dfb1df1359e361d8ea9f31c9929a57');
+INSERT INTO `cool_visit_day` VALUES ('3268', '127.0.0.1', '1531754422', 'http://coolphp.local.com/', '', '0', '0', 'Chrome', '', '', '', 'd6dfb1df1359e361d8ea9f31c9929a57');
+INSERT INTO `cool_visit_day` VALUES ('3267', '127.0.0.1', '1531754419', 'http://coolphp.local.com/', '', '0', '0', 'Chrome', '', '', '', 'd6dfb1df1359e361d8ea9f31c9929a57');
 INSERT INTO `cool_visit_day` VALUES ('3210', '127.0.0.1', '1527301562', 'http://hrbkcwl.local.com/', '', '0', '0', 'Chrome', '', '', '', '2efc806fb74e7f8c5ddbacde358940b8');
 INSERT INTO `cool_visit_day` VALUES ('3211', '127.0.0.1', '1527301578', 'http://hrbkcwl.local.com/', '', '0', '0', 'Chrome', '', '', '', '2efc806fb74e7f8c5ddbacde358940b8');
 INSERT INTO `cool_visit_day` VALUES ('3212', '127.0.0.1', '1527301614', 'http://hrbkcwl.local.com/', '', '0', '0', 'Chrome', '', '', '', '2efc806fb74e7f8c5ddbacde358940b8');
@@ -6640,7 +5638,7 @@ CREATE TABLE `cool_visit_detail` (
   `stattime` int(11) NOT NULL,
   `lang` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=752 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=753 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cool_visit_detail
@@ -7374,6 +6372,7 @@ INSERT INTO `cool_visit_detail` VALUES ('748', 'http://coolphp.local.com/index.h
 INSERT INTO `cool_visit_detail` VALUES ('749', 'http://coolphp.local.com/about_2.html', '7', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
 INSERT INTO `cool_visit_detail` VALUES ('750', 'http://coolphp.local.com/', '2', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
 INSERT INTO `cool_visit_detail` VALUES ('751', 'http://coolphp.local.com/index_index.html', '2', '1', '1', '0', '', '0', '0', '0', '1527350400', '');
+INSERT INTO `cool_visit_detail` VALUES ('752', 'http://coolphp.local.com/', '4', '1', '1', '0', '', '0', '0', '0', '1531670400', '');
 
 -- ----------------------------
 -- Table structure for cool_visit_summary
