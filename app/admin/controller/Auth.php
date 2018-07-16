@@ -59,10 +59,6 @@ class Auth extends Common
             }
         }else{
             $auth_group=db('auth_group')->select();
-            $letter_group=db('letter_boss')->select();
-            $p_group=db('psychological_tutor')->select();
-            $this->assign('letter_group',$letter_group);
-            $this->assign('p_group',$p_group);
             $this->assign('authGroup',json_encode($auth_group,true));
             $this->assign('title',lang('add').lang('admin'));
             $this->assign('info','null');
@@ -134,10 +130,6 @@ class Auth extends Common
             $info = Admin::get(['admin_id'=>input('admin_id')]);
             $data = db('admin')->find(input('admin_id'));
             $this->assign('data', $data);
-            $letter_group=db('letter_boss')->select();
-            $p_group=db('psychological_tutor')->select();
-            $this->assign('letter_group',$letter_group);
-            $this->assign('p_group',$p_group);
             $selected = db('auth_group')->where('group_id',$info['group_id'])->find();
             $this->assign('selected',json_encode($selected,true));
             $this->assign('info', $info->toJson());

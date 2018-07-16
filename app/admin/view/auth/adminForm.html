@@ -14,28 +14,6 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">咨询导师</label>
-                <div class="layui-input-block">
-                    <select name="pid" >
-                        <option value="">请选择心理咨询导师</option>
-                        {volist name="p_group" id="vo"}
-                        <option value="{$vo.id}" {if condition="$data.pid eq $vo.id"}selected{/if}>{$vo.name}</option>
-                        {/volist}
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">首长</label>
-                <div class="layui-input-block">
-                    <select name="lid" >
-                        <option value="">请选择用户组</option>
-                        {volist name="letter_group" id="vo"}
-                        <option value="{$vo.id}" {if condition="$data.lid eq $vo.id"}selected{/if}>{$vo.name}</option>
-                        {/volist}
-                    </select>
-                </div>
-            </div>
-            <div class="layui-form-item">
                 <label class="layui-form-label">{:lang('username')}</label>
                 <div class="layui-input-block">
                     <input type="text" name="username" ng-model="field.username" lay-verify="required" placeholder="{:lang('pleaseEnter')}登录用户名" class="layui-input">
