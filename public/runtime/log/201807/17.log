@@ -332,3 +332,318 @@
 [ info ] [ LOG ] INIT File
 [ sql ] [ DB ] CONNECT:[ UseTime:0.002706s ] mysql:host=127.0.0.1;port=3306;dbname=db_hrbkcwl;charset=utf8
 [ sql ] [ SQL ] select date(from_unixtime(stattime)) as riqi, sum(pv)as pvnum,sum(uv)as uvnum,sum(ip)as ipnum   from cool_visit_detail where from_unixtime(stattime) >= date(now()) - interval 7 day group by day(from_unixtime(stattime)); [ RunTime:0.000770s ]
+---------------------------------------------------------------
+[ 2018-07-17T21:49:22+08:00 ] 127.0.0.1 GET /admin/
+[ info ] coolphp.local.com/admin/ [运行时间：0.089698s][吞吐率：11.15req/s] [内存消耗：2,400.13kb] [文件加载：59]
+[ info ] [ LANG ] G:\coolphp\core\think\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6265329664; PHPSESSID=bj6ss6rgghq97r2q1usarblkg5; keystr=d6dfb1df1359e361d8ea9f31c9929a57; memory=37; cpu=47',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://coolphp.local.com/admin/',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'host' => 'coolphp.local.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] G:\coolphp/app/admin\lang\zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run Closure @action_begin [ RunTime:0.002356s ]
+[ info ] [ RUN ] app\admin\controller\Index->index[ G:\coolphp\app\admin\controller\Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] G:\coolphp/app/admin\view\index/index.html [ array (
+  0 => 'controller',
+  1 => 'action',
+  2 => 'menus',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002546s ] mysql:host=127.0.0.1;port=3306;dbname=db_hrbkcwl;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_menu` [ RunTime:0.007626s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 0  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000465s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 1  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000447s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000362s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 3  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000370s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 7  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000465s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 8  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000445s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 9  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000426s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 10  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000377s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 4  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000380s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 5  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000370s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 6  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000323s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 63  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000417s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 11  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000365s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 13  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000353s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 12  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000331s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 14  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000633s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 25  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000604s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 26  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000542s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 27  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000375s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 15  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000394s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 16  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000435s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 17  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000434s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 28  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000395s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 47  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000334s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2148  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000342s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2147  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000311s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2146  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000343s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2162  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000487s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2161  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000315s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2160  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000329s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2159  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000313s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2145  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000408s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2158  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000380s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2157  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000400s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2156  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000646s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2155  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000429s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2144  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000366s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2154  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000407s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2153  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000330s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2152  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000319s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2151  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000332s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2149  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000367s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2048  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000363s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 2143  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000903s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 89  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000498s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 101  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000525s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 102  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000498s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 107  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000426s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 100  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000426s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 29  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000475s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 30  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000409s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 31  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000348s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 32  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000331s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 33  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000348s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 34  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000336s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 36  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000322s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`title`,`icon`,`href`,`roleid`,`aid` FROM `cool_menu` WHERE  `pid` = 35  AND `menustatus` = 1 ORDER BY `sort` [ RunTime:0.000355s ]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\app\common.php:1104]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:133]
+[ error ] [8]未定义变量: vob[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:110]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:118]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+[ error ] [8]未定义数组索引: children[G:\coolphp\public\runtime\temp\b0d7b0218e74463e78e2d846a66aa04a.php:109]
+---------------------------------------------------------------
+[ 2018-07-17T21:49:22+08:00 ] 127.0.0.1 GET /admin/Index/main.html
+[ info ] coolphp.local.com/admin/Index/main.html [运行时间：0.060989s][吞吐率：16.40req/s] [内存消耗：2,289.61kb] [文件加载：60]
+[ info ] [ LANG ] G:\coolphp\core\think\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'Index',
+    2 => 'main',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6265329664; PHPSESSID=bj6ss6rgghq97r2q1usarblkg5; keystr=d6dfb1df1359e361d8ea9f31c9929a57; memory=37; cpu=47',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://coolphp.local.com/admin/',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'coolphp.local.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] G:\coolphp/app/admin\lang\zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run Closure @action_begin [ RunTime:0.002276s ]
+[ info ] [ RUN ] app\admin\controller\Index->main[ G:\coolphp\app\admin\controller\Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] G:\coolphp/app/admin\view\index/main.html [ array (
+  0 => 'controller',
+  1 => 'action',
+  2 => 'config',
+  3 => 'addons',
+  4 => 'addonsnum',
+  5 => 'disk',
+  6 => 'dsarticle',
+  7 => 'dscomment',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003144s ] mysql:host=127.0.0.1;port=3306;dbname=db_hrbkcwl;charset=utf8
+[ sql ] [ SQL ] SELECT VERSION() AS ver [ RunTime:0.000238s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_addons` [ RunTime:0.008024s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_addons` WHERE  `has_adminlist` = 1 [ RunTime:0.000915s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_article` [ RunTime:0.008176s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cool_article` WHERE  `status` = 3 LIMIT 1 [ RunTime:0.000306s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_comment` [ RunTime:0.007950s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `cool_comment` WHERE  `status` <> 1 LIMIT 1 [ RunTime:0.000311s ]
+[ error ] [8]未定义变量: letter[G:\coolphp\public\runtime\temp\1ecf2a5161c77154be80e4cf81b35d45.php:105]
+[ error ] [8]未定义变量: dsrepairs[G:\coolphp\public\runtime\temp\1ecf2a5161c77154be80e4cf81b35d45.php:111]
+[ error ] [8]未定义变量: memory[G:\coolphp\public\runtime\temp\1ecf2a5161c77154be80e4cf81b35d45.php:214]
+---------------------------------------------------------------
+[ 2018-07-17T21:49:24+08:00 ] 127.0.0.1 GET /admin/index/getsysinfo/type/cpu
+[ info ] coolphp.local.com/admin/index/getsysinfo/type/cpu [运行时间：2.077324s][吞吐率：0.48req/s] [内存消耗：1,564.13kb] [文件加载：50]
+[ info ] [ LANG ] G:\coolphp\core\think\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'getsysinfo',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6265329664; PHPSESSID=bj6ss6rgghq97r2q1usarblkg5; keystr=d6dfb1df1359e361d8ea9f31c9929a57; memory=37; cpu=47',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://coolphp.local.com/admin/Index/main.html',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'coolphp.local.com',
+)
+[ info ] [ PARAM ] array (
+  'type' => 'cpu',
+)
+[ info ] [ LANG ] G:\coolphp/app/admin\lang\zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run Closure @action_begin [ RunTime:0.002476s ]
+[ info ] [ RUN ] app\admin\controller\Index->getsysinfo[ G:\coolphp\app\admin\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+---------------------------------------------------------------
+[ 2018-07-17T21:49:24+08:00 ] 127.0.0.1 GET /admin/index/getpv
+[ info ] coolphp.local.com/admin/index/getpv [运行时间：2.037814s][吞吐率：0.49req/s] [内存消耗：1,706.00kb] [文件加载：52]
+[ info ] [ LANG ] G:\coolphp\core\think\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'index',
+    2 => 'getpv',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6265329664; PHPSESSID=bj6ss6rgghq97r2q1usarblkg5; keystr=d6dfb1df1359e361d8ea9f31c9929a57; memory=37; cpu=47',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://coolphp.local.com/admin/Index/main.html',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'application/json, text/javascript, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'coolphp.local.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LANG ] G:\coolphp/app/admin\lang\zh-cn.php
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run Closure @action_begin [ RunTime:0.002785s ]
+[ info ] [ RUN ] app\admin\controller\Index->getpv[ G:\coolphp\app\admin\controller\Index.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002531s ] mysql:host=127.0.0.1;port=3306;dbname=db_hrbkcwl;charset=utf8
+[ sql ] [ SQL ] select date(from_unixtime(stattime)) as riqi, sum(pv)as pvnum,sum(uv)as uvnum,sum(ip)as ipnum   from cool_visit_detail where from_unixtime(stattime) >= date(now()) - interval 7 day group by day(from_unixtime(stattime)); [ RunTime:0.001045s ]
