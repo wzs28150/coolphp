@@ -13,16 +13,19 @@ composer install
 ```
 .
 +-- addons(插件目录)
-|   +-- diyform(自定义表单插件)
-|   +-- temp(测试插件)
+|   +-- comment(评论插件)
+|   +-- member(会员插件)
 +-- app
 |   +-- admin(后台目录)
 |   +-- common(公共模块目录)
 |   +-- extra(插件配置目录)
 |   +-- home(前台目录)
 |   +-- user(用户目录)
-|   +-- command.php
 |   +-- common.php(公共函数)
+|   +-- command.php
++-- config
+|   +-- admin
+|   |   +-- config.php(后台单独配置文件)
 |   +-- config.php(配置文件)
 |   +-- database.php(数据库配置文件)
 |   +-- route.php(路由配置)
@@ -34,9 +37,8 @@ composer install
 |   +-- Data
 |   +-- static
 |   +-- uploads
-+-- runtime
-|   +-- members.yml
-+-- vendor
+|   |   +-- runtime
++-- vendor(第三方类库)
 +-- .htaccess
 +-- db_hrbkcwl.sql
 +-- delBom.php
