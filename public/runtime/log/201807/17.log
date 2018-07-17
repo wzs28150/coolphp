@@ -812,3 +812,162 @@
 [ error ] [8]未定义变量: ips[G:\coolphp\app\common.php:818]
 [ error ] [8]未定义变量: ip[G:\coolphp\app\common.php:814]
 [ error ] [8]未定义变量: ips[G:\coolphp\app\common.php:818]
+---------------------------------------------------------------
+[ 2018-07-17T21:53:30+08:00 ] 127.0.0.1 GET /about_2.html
+[ info ] coolphp.local.com/about_2.html [运行时间：0.083611s][吞吐率：11.96req/s] [内存消耗：2,339.98kb] [文件加载：54]
+[ info ] [ LANG ] G:\coolphp\core\think\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'about',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6265329664; PHPSESSID=bj6ss6rgghq97r2q1usarblkg5; keystr=d6dfb1df1359e361d8ea9f31c9929a57; memory=37; cpu=86',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://coolphp.local.com/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'host' => 'coolphp.local.com',
+)
+[ info ] [ PARAM ] array (
+  'catId' => '2',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run Closure @action_begin [ RunTime:0.001438s ]
+[ info ] [ RUN ] app\home\controller\EmptyController->index[ G:\coolphp\app\home\controller\EmptyController.php ]
+[ info ] [ VIEW ] G:\coolphp/app/home\view\page_show.html [ array (
+  0 => 'sys',
+  1 => 'action',
+  2 => 'controller',
+  3 => 'title',
+  4 => 'keywords',
+  5 => 'description',
+  6 => 'category',
+  7 => 'adList',
+  8 => 'linkList',
+  9 => 'module',
+  10 => 'info',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002553s ] mysql:host=127.0.0.1;port=3306;dbname=db_hrbkcwl;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_category` [ RunTime:0.009241s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_category` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000555s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_ad` [ RunTime:0.006421s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  `type_id` = 1  AND `open` = 1 ORDER BY `sort` ASC LIMIT 4 [ RunTime:0.000328s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_link` [ RunTime:0.007212s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_link` WHERE  `open` = 1 ORDER BY `sort` ASC [ RunTime:0.000427s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_page` [ RunTime:0.007496s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_page` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000363s ]
+[ sql ] [ SQL ] SELECT `template_show` FROM `cool_category` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000368s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_debris` [ RunTime:0.007751s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000331s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 6 ) LIMIT 3 [ RunTime:0.000257s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_debris` WHERE  (  type_id = 7 ) LIMIT 3 [ RunTime:0.000332s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_ad` WHERE  (  type_id = 10 ) LIMIT 999 [ RunTime:0.000380s ]
+[ error ] [8]未定义数组索引: template[G:\coolphp\app\home\controller\EmptyController.php:17]
+[ error ] [8]未定义数组索引: keywords[G:\coolphp\public\runtime\temp\6d25425a7d68d2dde31f28f79bb9b472.php:11]
+[ error ] [8]未定义数组索引: description[G:\coolphp\public\runtime\temp\6d25425a7d68d2dde31f28f79bb9b472.php:12]
+---------------------------------------------------------------
+[ 2018-07-17T21:53:31+08:00 ] 127.0.0.1 POST /datastatistics
+[ info ] coolphp.local.com/datastatistics [运行时间：0.036452s][吞吐率：27.43req/s] [内存消耗：2,043.74kb] [文件加载：45]
+[ info ] [ LANG ] G:\coolphp\core\think\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'datastatistics',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6265329664; PHPSESSID=bj6ss6rgghq97r2q1usarblkg5; keystr=d6dfb1df1359e361d8ea9f31c9929a57; memory=37; cpu=86',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://coolphp.local.com/about_2.html',
+  'accept' => '*/*',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'origin' => 'http://coolphp.local.com',
+  'content-length' => '159',
+  'connection' => 'close',
+  'host' => 'coolphp.local.com',
+)
+[ info ] [ PARAM ] array (
+  'screen_height' => '1080',
+  'screen_width' => '1920',
+  'os' => 'Win10',
+  'browser' => 'chrome67.0.3396.99',
+  'referrer' => 'http://coolphp.local.com/index.html',
+  'url' => 'http://coolphp.local.com/about_2.html',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run Closure @action_begin [ RunTime:0.002584s ]
+[ info ] [ RUN ] app\home\controller\Datastatistics->index[ G:\coolphp\app\home\controller\Datastatistics.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002795s ] mysql:host=127.0.0.1;port=3306;dbname=db_hrbkcwl;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_visit_day` [ RunTime:0.007431s ]
+[ sql ] [ SQL ] DELETE FROM `cool_visit_day`    WHERE  `acctime` < 1523894400 [ RunTime:0.000406s ]
+---------------------------------------------------------------
+[ 2018-07-17T21:53:31+08:00 ] 127.0.0.1 POST /datastatistics/dostatistics
+[ info ] coolphp.local.com/datastatistics/dostatistics [运行时间：0.052861s][吞吐率：18.92req/s] [内存消耗：2,140.64kb] [文件加载：51]
+[ info ] [ LANG ] G:\coolphp\core\think\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'datastatistics',
+    2 => 'dostatistics',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6265329664; PHPSESSID=bj6ss6rgghq97r2q1usarblkg5; keystr=d6dfb1df1359e361d8ea9f31c9929a57; memory=37; cpu=86',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://coolphp.local.com/about_2.html',
+  'accept' => '*/*',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
+  'origin' => 'http://coolphp.local.com',
+  'content-length' => '92',
+  'connection' => 'close',
+  'host' => 'coolphp.local.com',
+)
+[ info ] [ PARAM ] array (
+  'antepage' => 'http://coolphp.local.com/index.html',
+  'visitpage' => 'http://coolphp.local.com/about_2.html',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run Closure @action_begin [ RunTime:0.002913s ]
+[ info ] [ RUN ] app\home\controller\Datastatistics->dostatistics[ G:\coolphp\app\home\controller\Datastatistics.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.003887s ] mysql:host=127.0.0.1;port=3306;dbname=db_hrbkcwl;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_visit_day` [ RunTime:0.006876s ]
+[ sql ] [ SQL ] DELETE FROM `cool_visit_day`    WHERE  `acctime` < 1523894400 [ RunTime:0.000456s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `cool_visit_detail` [ RunTime:0.007399s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_visit_detail` WHERE  (  name ="http://coolphp.local.com/about_2.html" and stattime = 1531756800 ) LIMIT 1 [ RunTime:0.000626s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_visit_day` WHERE  (  visitpage ="http://coolphp.local.com/about_2.html"  and acctime >= 1531756800 and ip ="127.0.0.1" ) [ RunTime:0.000704s ]
+[ sql ] [ SQL ] SELECT * FROM `cool_visit_day` WHERE  (  visitpage ="http://coolphp.local.com/about_2.html"  and acctime >= 1531756800 and ip = "127.0.0.1" and keystr  = "d6dfb1df1359e361d8ea9f31c9929a57" ) [ RunTime:0.000778s ]
+[ sql ] [ SQL ] UPDATE `cool_visit_detail`  SET `pv`=6,`ip`=1  WHERE  (  id = 754 ) [ RunTime:0.000312s ]
+[ sql ] [ SQL ] INSERT INTO `cool_visit_day` (`antepage` , `visitpage` , `browser` , `ip` , `acctime` , `keystr`) VALUES ('http://coolphp.local.com/index.html' , 'http://coolphp.local.com/about_2.html' , 'Chrome' , '127.0.0.1' , 1531835611 , 'd6dfb1df1359e361d8ea9f31c9929a57') [ RunTime:0.000285s ]
+[ error ] [8]未定义变量: ip[G:\coolphp\app\common.php:814]
+[ error ] [8]未定义变量: ips[G:\coolphp\app\common.php:818]
+[ error ] [8]未定义变量: ip[G:\coolphp\app\common.php:814]
+[ error ] [8]未定义变量: ips[G:\coolphp\app\common.php:818]
+[ error ] [8]未定义变量: ip[G:\coolphp\app\common.php:814]
+[ error ] [8]未定义变量: ips[G:\coolphp\app\common.php:818]

@@ -1,2 +1,2 @@
 /public/runtime/*
-/public/runtime/log/*
+*.log
