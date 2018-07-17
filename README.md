@@ -3,7 +3,7 @@
 
 ### 安装
 ```
-git clone http://114.115.177.23:8099/root/Strongarmynet.git
+git clone https://github.com/wzs28150/coolphp.git
 
 composer install
 ```
