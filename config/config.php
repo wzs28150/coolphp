@@ -129,8 +129,9 @@ return [
         'view_path'    => '',
         // 模板后缀
         'view_suffix'  => 'html',
+        'taglib_pre_load'=> '\app\common\taglib\Cool',
         // 模板文件名分隔符
-        'view_depr'    => DS,
+        'view_depr'    => '_',
         // 模板引擎普通标签开始标记
         'tpl_begin'    => '{',
         // 模板引擎普通标签结束标记
@@ -139,6 +140,8 @@ return [
         'taglib_begin' => '{',
         // 标签库标签结束标记
         'taglib_end'   => '}',
+
+
 
     ],
 
