@@ -1048,115 +1048,42 @@ function send_email($to, $subject='', $content='')
     $list = db('admin')->find($aid);
     return $list[$field];
   }
-  function getleftnav($pid,$level,$map = array(), &$result = array()){
+
+
+  function subtree($data){
     $roleid = session('gid');
-    $menu = db('menu')->field('id,pid,title,icon,href,roleid,aid')->where('pid',$pid)->where($map)->order('sort')->fetchsql(false)->select();
-    // dump($map);
-    // echo $menu;exit;
-    if ($menu) {
-      if($level == 1)
-      {
-        foreach ($menu as $key => $value) {
-          if($roleid == 1){
-            if($value['aid']==0){
-              $value['href'] = url('admin/'.$value['href']);
-            }
-            $value['level'] = 1;
-            $result[] = $value;
-          }else{
-            if(in_array($roleid,explode(',',$value['roleid']))){
-              if($value['aid']==0){
-                $value['href'] = url('admin/'.$value['href']);
-              }
-              $value['level'] = 1;
-              $result[] = $value;
-            }
-          }
+    if($roleid == 1){
+      foreach($data as $key=>$vo){
+          $res[$vo['id']] = $vo;
+          $res[$vo['id']]['href'] = url('admin/'.$vo['href']);
+      		$res[$vo['id']]['children'] = [];
+    	}
+    }else{
+      foreach($data as $key=>$vo){
+        if(in_array($roleid,explode(',',$vo['roleid']))){
+          $res[$vo['id']] = $vo;
+          $res[$vo['id']]['href'] = url('admin/'.$vo['href']);
+      		$res[$vo['id']]['children'] = [];
         }
-      }
-      elseif($level == 2)
-      {
-        foreach ($result as $key => $value) {
-          foreach ($menu as $k => $val) {
-            if($roleid == 1){
-              if($value['id']==$val['pid']){
-                if($value['aid']==0){
-                  $val['href'] = url('admin/'.$val['href']);
-                }
-
-                $result[$key]['children'][] = $val;
-              }
-            }else{
-              if($value['id']==$val['pid'] && in_array($roleid,explode(',',$val['roleid']))){
-                if($value['aid']==0){
-                  $val['href'] = url('admin/'.$val['href']);
-                }
-                $result[$key]['children'][] = $val;
-              }
-            }
-
-          }
-        }
-      }
-      elseif($level == 3)
-      {
-        foreach ($result as $key => $value) {
-          if($value['children']){
-            foreach ($value['children'] as $kk => $vv) {
-              foreach ($menu as $k => $val) {
-                if($roleid == 1){
-                  if($vv['id']==$val['pid']){
-                    if($value['aid']==0){
-                      $val['href'] = url('admin/'.$val['href']);
-                    }
-                    $result[$key]['children'][$kk]['children'][] = $val;
-                  }
-                }else{
-                  if($vv['id']==$val['pid']  && in_array($roleid,explode(',',$val['roleid']))){
-                    if($value['aid']==0){
-                      $val['href'] = url('admin/'.$val['href']);
-                    }
-                    $result[$key]['children'][$kk]['children'][] = $val;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      elseif($level == 4)
-      {
-        foreach ($result as $key => $value) {
-          if($value['children']){
-            foreach ($value['children'] as $kk => $vv) {
-              if($vv['children']){
-                foreach ($vv['children'] as $kkk => $vvv) {
-                  foreach ($menu as $k => $val) {
-                    if($roleid == 1){
-                      if($vvv['id']==$val['pid']){
-                        if($value['aid']==0){
-                          $val['href'] = url('admin/'.$val['href']);
-                        }
-                        $result[$key]['children'][$kk]['children'][$kkk]['children'][] = $val;
-                      }
-                    }else{
-                      if($vvv['id']==$val['pid']  && in_array($roleid,explode(',',$val['roleid']))){
-                        if($value['aid']==0){
-                          $val['href'] = url('admin/'.$val['href']);
-                        }
-                        $result[$key]['children'][$kk]['children'][$kkk]['children'][] = $val;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-        foreach ($menu as $key => $value) {
-          getleftnav($value['id'],$level+1,$map, $result);
-        }
+    	}
     }
-    return $result;
+  	unset( $data );
+  	// 查询子孙
+  	foreach($res as $key=>$vo){
+  		if( $vo['pid'] != 0 && $vo['menustatus'] == 1 ){
+  			$res[$vo['pid']]['children'][] = &$res[$key];
+  		}
+  	}
+
+  	// 去除杂质
+  	foreach($res as $key=>$vo){
+      // dump($vo);exit;
+  		if($vo['pid'] == 0 && $vo['menustatus'] == 1){
+  			$tree[] = $vo;
+  		}
+  	}
+
+  	unset($res);
+
+  	return $tree;
   }

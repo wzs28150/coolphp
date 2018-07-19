@@ -16,12 +16,13 @@ class Index extends Common
     {
         //导航
         // 获取缓存数据
-        // $menus = F('Menus');
-        // if(!$menus){
-        //     $menus = $this->getleftnav(0,1);
-        //     F('Menus', $menus);
-        // }
-        $menus = getleftnav(0,1,array('menustatus'=>1));
+        $menus = F('Menus');
+        if(!$menus){
+          $menus = db('menu')->select();
+          F('Menus', $menus);
+        }
+        $menus =  subtree($menus);
+        // exit;
         $this->assign('menus', $menus);
         return $this->fetch();
     }
