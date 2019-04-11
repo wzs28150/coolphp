@@ -4,6 +4,7 @@ use think\Db;
 use think\Request;
 use cool\Leftnav;
 use app\admin\model\System as SysModel;
+use cool\Sms;
 class System extends Common
 {
     /********************************站点管理*******************************/
@@ -32,7 +33,7 @@ class System extends Common
                   }
 
             $datas['others'] = serialize($post);  //序列化
-
+						// dump($datas);exit;
             if($table->where('id',1)->update($datas)!==false) {
                 savecache('System');
                 return json(['code' => 1, 'msg' => '站点设置保存成功!', 'url' => url('system/system')]);
@@ -49,6 +50,7 @@ class System extends Common
             return $this->fetch();
         }
     }
+    // 邮箱设置
     public function email(){
         $table = db('config');
         if(request()->isPost()) {
@@ -77,5 +79,33 @@ class System extends Common
             return json(['code' => -1, 'msg' => '邮件发送失败！']);
         }
     }
+    // 短信设置
+    public function sms() {
+      $table = db('config');
+      if(request()->isPost()) {
+          $datas = input('post.');
+          foreach ($datas as $k=>$v){
+              $table->where(['name'=>$k,'inc_type'=>'sms'])->update(['value'=>$v]);
+          }
+          return json(['code' => 1, 'msg' => '短信设置成功!', 'url' => url('system/sms')]);
+      }else{
+          $smtp = $table->where(['inc_type'=>'sms'])->select();
+          $info = convert_arr_kv($smtp,'name','value');
+          $this->assign('info', $info);
+          return $this->fetch();
+      }
+    }
 
+    public function trySendSms(){
+      $sender = input('sms');
+      //检查是否邮箱格式
+      if (!is_mobile_phone($sender)) {
+          return json(['code' => -1, 'msg' => '测试手机号码格式有误']);
+      }
+      //短信内容(【签名】+短信内容)，系统提供的测试签名和内容，如需要发送自己的短信内容请在启瑞云平台申请签名和模板
+      $sms = new Sms();
+      $result = $sms->send($sender);
+      dump($result);
+      // {"success": true, "id": "157936116417279990"}
+    }
 }

@@ -39,28 +39,13 @@ class Admin extends Controller
      */
     public function index()
     {
-      $authRule = cache($this->addon.'_authRule');
-        if(!$authRule){
-            $authRule = db($this->addon.'_category')->where('menustatus=1')->order('sort')->select();
-            cache($this->addon.'_authRule', $authRule, 3600);
-       }
-
-        //声明数组
-        $menus = array();
-        foreach ($authRule as $key=>$val){
-            $authRule[$key]['href'] = url($val['href']);
-            if($val['pid']==0){
-                $menus[] = $val;
-            }
-        }
-        foreach ($menus as $k=>$v){
-            foreach ($authRule as $kk=>$vv){
-                if($v['id']==$vv['pid']){
-                    $menus[$k]['children'][] = $vv;
-                }
-            }
-        }
-        // dump($authRule);exit;
+      $menus = F('Menus');
+      if(!$menus){
+        $menus = db('menu')->select();
+        F('Menus', $menus);
+      }
+      $menus =  subtree($menus);
+      // exit;
       $this->assign('menus', $menus);
       return $this->fetch();
     }
@@ -71,9 +56,10 @@ class Admin extends Controller
      */
     public function main()
     {
-      $olist = db('member_oirganization')->field('title,id')->select();
-      $this->assign('olist',$olist);
-      return $this->fetch();
+      header('Location:/addons_execute_member-member-index');
+      // $olist = db('member_oirganization')->field('title,id')->select();
+      // $this->assign('olist',$olist);
+      // return $this->fetch();
     }
 
 }

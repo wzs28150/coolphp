@@ -6,9 +6,16 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'wlt\\wxmini\\' => array($vendorDir . '/xxh/think-wxminihelper/src'),
     'tp5er\\' => array($vendorDir . '/tp5er/tp5-databackup/src'),
     'think\\helper\\' => array($vendorDir . '/topthink/think-helper/src'),
     'think\\composer\\' => array($vendorDir . '/topthink/think-installer/src'),
     'think\\captcha\\' => array($vendorDir . '/topthink/think-captcha/src'),
     'think\\' => array($vendorDir . '/5ini99/think-addons/src', $vendorDir . '/topthink/framework/library/think'),
+    'ZipStream\\' => array($vendorDir . '/maennchen/zipstream-php/src'),
+    'WePay\\' => array($vendorDir . '/zoujingli/wechat-developer/WePay'),
+    'WeMini\\' => array($vendorDir . '/zoujingli/wechat-developer/WeMini'),
+    'WeChat\\' => array($vendorDir . '/zoujingli/wechat-developer/WeChat'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
+    'AliPay\\' => array($vendorDir . '/zoujingli/wechat-developer/AliPay'),
 );

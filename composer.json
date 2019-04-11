@@ -12,6 +12,11 @@
         "topthink/think-captcha": "1.0.7",
         "5ini99/think-addons": "2.0.0",
         "phpmailer/phpmailer": "5.2.14",
-        "tp5er/tp5-databackup": "^1.0"
+        "tp5er/tp5-databackup": "^1.0",
+        "xxh/think-wxminihelper": "^1.0",
+        "firebase/php-jwt": "^5.0",
+        "phpoffice/phpexcel": "^1.8",
+        "maennchen/zipstream-php": "^0.4.1",
+        "zoujingli/wechat-developer": "^1.2"
     }
 }

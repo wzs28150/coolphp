@@ -53,7 +53,7 @@ class Common extends Controller
     }
     //空操作
     public function _empty(){
-      
+
         return $this->error('空操作，返回上次访问页面中...');
     }
 }

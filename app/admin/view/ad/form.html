@@ -74,6 +74,7 @@
     var m = angular.module('hd',[]);
     m.controller('ctrl',['$scope',function($scope) {
         $scope.field = '{$info}'!='null'?{$info}:{type_id:'',ad_id:'',name:'',url:'',open:1,sort:50,pic:'',content:''};
+        console.log($scope.field);
         $scope.group = {$adtypeList};
         layui.use(['form', 'layer','upload'], function () {
             var form = layui.form, $ = layui.jquery, upload = layui.upload;
@@ -82,6 +83,7 @@
             }
             form.on('submit(submit)', function (data) {
                 // 提交到方法 默认为本身
+                console.log(data.field);
                 data.field.ad_id = $scope.field.ad_id;
                 var loading = layer.load(1, {shade: [0.1, '#fff']});
                 $.post("", data.field, function (res) {

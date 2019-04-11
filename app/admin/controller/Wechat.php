@@ -120,11 +120,11 @@ class Wechat extends Common{
         $url ="https://api.weixin.qq.com/cgi-bin/menu/create?access_token={$access_token}";
         $return = httpRequest($url,'POST',$post_str);
         $return = json_decode($return,1);
-        if($return['errcode'] == 0){
+        if($return['code'] == 0){
             $back['info'] = "菜单已成功生成";
             $back['code'] =1;
         }else{
-            $back['info'] = "错误代码;".$return['errcode'];
+            $back['info'] = "错误代码;".$return['code'];
             $back['code'] =0;
         }
         return $back;

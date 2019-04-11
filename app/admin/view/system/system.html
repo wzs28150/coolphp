@@ -1,4 +1,8 @@
 {include file="common/head"/}
+<style media="screen">
+  .layui-form-pane .layui-form-label{ width:130px;}
+  .layui-form-pane .layui-input-block{ margin-left: 130px; }
+</style>
 <div class="layui-fluid">
   <div class="layui-card">
     <div class="layui-card-header">{:lang('systemSet')}</div>
@@ -35,7 +39,7 @@
             <textarea name="des" lay-verify="required" placeholder="{:lang('pleaseEnter')}{:lang('description')}" class="layui-textarea">{$system.des}</textarea>
           </div>
         </div>
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="display:none">
           <label class="layui-form-label">网站LOGO</label>
           <input type="hidden" name="logo" id="logo" value="{$system.logo}">
           <div class="layui-input-block">
@@ -64,16 +68,30 @@
         </div>
 
         <div class="layui-form-item">
-          <label class="layui-form-label">联系人</label>
+          <label class="layui-form-label">咨询热线</label>
           <div class="layui-input-block">
-            <input type="text" name="contacts" value="{$uncertainty.contacts}" placeholder="{:lang('pleaseEnter')}哈尔滨办事处地址" class="layui-input">
+            <input type="text" name="zxrx" value="{$uncertainty.zxrx}" placeholder="{:lang('pleaseEnter')}咨询热线" class="layui-input">
           </div>
         </div>
+
         <div class="layui-form-item">
-          <!-- {:lang('tel')} -->
-          <label class="layui-form-label">电话</label>
+          <label class="layui-form-label">邮箱</label>
           <div class="layui-input-block">
-            <input type="text" name="tel" value="{$uncertainty.tel}" placeholder="{:lang('pleaseEnter')}{:lang('uncertaintytel')}" class="layui-input">
+            <input type="text" name="email" value="{$uncertainty.email}" placeholder="{:lang('pleaseEnter')}邮箱" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">地址</label>
+          <div class="layui-input-block">
+            <input type="text" name="address" value="{$uncertainty.address}" placeholder="{:lang('pleaseEnter')}地址" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">群力分校电话</label>
+          <div class="layui-input-block">
+            <input type="text" name="qlfxtel" value="{$uncertainty.qlfxtel}" placeholder="{:lang('pleaseEnter')}群力分校电话" class="layui-input">
           </div>
         </div>
 
@@ -83,6 +101,7 @@
             <button type="reset" class="layui-btn layui-btn-primary">{:lang('reset')}</button>
           </div>
         </div>
+
       </form>
     </div>
   </div>
@@ -127,18 +146,18 @@
     });
 
     var uploadInst2 = upload.render({
-      elem: '#bgBtn',
+      elem: '#erwBtn',
       url: '{:url("UpFiles/upload")}',
       before: function(obj) {
         //预读本地文件示例，不支持ie8
         obj.preview(function(index, file, result) {
-          $('#coolbg').attr('src', result); //图片链接（base64）
+          $('#coolerw').attr('src', result); //图片链接（base64）
         });
       },
       done: function(res) {
         //上传成功
         if (res.code > 0) {
-          $('#bg').val(res.url);
+          $('#erw').val(res.url);
         } else {
           //如果上传失败
           return layer.msg('上传失败');

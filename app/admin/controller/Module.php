@@ -323,6 +323,7 @@ class Module extends Common
     public function fieldEdit(){
         if(request()->isPost()){
             $data = input('post.');
+            // dump($data);exit;
             $oldfield = $data['oldfield'];
             $fieldName=$data['field'];
             $name = db('module')->where(array('id'=>$data['moduleid']))->value('name');
@@ -544,6 +545,12 @@ class Module extends Common
                 break;
             case 'addbox':
                 $sql = "ALTER TABLE `$tablename` $do `$field` TEXT NOT NULL";
+                break;
+            case 'multicolumn':
+                $sql = "ALTER TABLE `$tablename` $do `$field` VARCHAR( 255 ) NOT NULL DEFAULT ''";
+                break;
+            case 'linkage':
+                $sql = "ALTER TABLE `$tablename` $do `$field` VARCHAR( 80 ) NOT NULL DEFAULT '' COMMENT '$comment'";
                 break;
         }
         return $sql;

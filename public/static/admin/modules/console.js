@@ -139,8 +139,11 @@ layui.define(function(e) {
 
       $.get('/admin/index/getsysinfo/type/cpu', function(data, textStatus, xhr) {
         if (data) {
-          element.progress('demo', data.cpu + '%');
-          element.progress('demo2', data.memory + '%');
+          setTimeout(function () {
+            element.progress('demo', data.cpu + '%');
+            element.progress('demo2', data.memory + '%');
+            // element.render('progress');
+          }, 500)
         }
       }, 'json');
     })

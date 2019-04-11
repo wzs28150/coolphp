@@ -14,7 +14,8 @@ use think\Config;
 use think\Paginator;
 class Bootstrap extends Paginator
 {
-    protected function getTotal(){
+    protected function getTotal()
+    {
         // $html='<li><span>共<strong>'.$this->total().'</strong>条数据</span></li>';
         $html='';
         return $html;
@@ -22,7 +23,8 @@ class Bootstrap extends Paginator
 
     /**
      * 上一页按钮
-     * @param string $text
+     *
+     * @param  string $text
      * @return string
      */
     protected function getPreviousButton($text = "上一页")
@@ -41,7 +43,8 @@ class Bootstrap extends Paginator
 
     /**
      * 下一页按钮
-     * @param string $text
+     *
+     * @param  string $text
      * @return string
      */
     protected function getNextButton($text = '下一页')
@@ -85,14 +88,16 @@ class Bootstrap extends Paginator
     }
     /**
      * 页码按钮
+     *
      * @return string
      */
     protected function getLinks()
     {
         $page_cfg=Config::get('paginate.page_button');
         $page_size=Config::get('paginate.page_size');
-        if ($this->simple)
+        if ($this->simple) {
             return '';
+        }
 
         $block = [
             'top'=>null,
@@ -104,16 +109,19 @@ class Bootstrap extends Paginator
         if ($this->lastPage <= $page_size) {
             $block['first'] = $this->getUrlRange(1, $this->lastPage);
         } elseif ($this->lastPage < $this->currentPage+$page_size) {
-            if($this->currentPage>$page_size && $page_cfg['turn_group']) $block['top']=$this->getUrlRange($page_size*($cli-1)-4,$page_size*($cli-1)-4);
+            if($this->currentPage>$page_size && $page_cfg['turn_group']) { $block['top']=$this->getUrlRange($page_size*($cli-1)-4, $page_size*($cli-1)-4);
+            }
             $block['first'] = $this->getUrlRange($this->lastPage-$page_size+1, $this->lastPage);
         }else{
-            if($this->currentPage>$page_size && $page_cfg['turn_group']) $block['top']=$this->getUrlRange($page_size*($cli-1)-4,$page_size*($cli-1)-4);
+            if($this->currentPage>$page_size && $page_cfg['turn_group']) { $block['top']=$this->getUrlRange($page_size*($cli-1)-4, $page_size*($cli-1)-4);
+            }
             $block['first'] = $this->getUrlRange($page_size*($cli-1)+1, $page_size*$cli);
-            if($page_cfg['turn_group']) $block['last']  = $this->getUrlRange($page_size*$cli+1,$page_size*$cli+1);
+            if($page_cfg['turn_group']) { $block['last']  = $this->getUrlRange($page_size*$cli+1, $page_size*$cli+1);
+            }
         }
         $html = '';
-        if(is_array($block['top'])){
-            $html .= $this->getUrlGroup($block['top'],'top');
+        if(is_array($block['top'])) {
+            $html .= $this->getUrlGroup($block['top'], 'top');
         }
         if (is_array($block['first'])) {
             $html .= $this->getUrlLinks($block['first']);
@@ -123,7 +131,7 @@ class Bootstrap extends Paginator
             $html .= $this->getUrlLinks($block['slider']);
         }
         if (is_array($block['last'])) {
-            $html .= $this->getUrlGroup($block['last'],'last');
+            $html .= $this->getUrlGroup($block['last'], 'last');
         }
         return $html;
     }
@@ -131,6 +139,7 @@ class Bootstrap extends Paginator
 
     /**
      * 渲染分页html
+     *
      * @return mixed
      */
     public function render()
@@ -153,7 +162,7 @@ class Bootstrap extends Paginator
                 $btn_str.=$btn_cfg['turn_page']?'%s5':'';
                 $btn_str.=$btn_cfg['last_page']?'%s6':'';
 
-                $page_str=str_replace(array('%s1','%s2','%s3','%s4','%s5','%s6'),array($this->getFirstButton(),$this->getPreviousButton(),$this->getLinks(),$this->getNextButton(),$this->getLastButton()),$btn_str);
+                $page_str=str_replace(array('%s1','%s2','%s3','%s4','%s5','%s6'), array($this->getFirstButton(),$this->getPreviousButton(),$this->getLinks(),$this->getNextButton(),$this->getLastButton()), $btn_str);
                 return $page_str;
             }
         }else{
@@ -174,7 +183,7 @@ class Bootstrap extends Paginator
      */
     protected function getAvailablePageWrapper($url, $page)
     {
-        return '<a href="' . htmlentities($url) . '">' . $page . '</a>';
+        return '<a href="' . htmlentities($url) . '" data-istop="no"  data-target="breadcrumbs">' . $page . '</a>';
     }
 
     protected function getnextGroup($url,$tn=null)
@@ -236,7 +245,7 @@ class Bootstrap extends Paginator
         $html = '';
 
         foreach ($urls as $page => $url) {
-            $html .= $this->getGroupWrapper($url,$tn);
+            $html .= $this->getGroupWrapper($url, $tn);
         }
         return $html;
     }
@@ -258,6 +267,6 @@ class Bootstrap extends Paginator
     }
     protected function getGroupWrapper($url,$tn=null)
     {
-        return $this->getnextGroup($url,$tn);
+        return $this->getnextGroup($url, $tn);
     }
 }

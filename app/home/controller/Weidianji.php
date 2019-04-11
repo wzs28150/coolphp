@@ -29,7 +29,7 @@ class Weidianji extends Common
         //https://kuaibao.qq.com/s/20170929A00EB800?titleFlag=2
         //http://mp.weixin.qq.com/s/Cb3M0c8N6--rmnpX7dVuAg
         $url = Request::instance()->param('url');
-        $Gather = new Gather ($url, './image');
+        $Gather = new Gather($url, './image');
         $id = $Gather->fetch();
         if ($id) {
             $call_back['err_code'] = '118';
@@ -45,18 +45,18 @@ class Weidianji extends Common
     }
     private function getUrlRoot($url)
     {
-        #添加头部和尾巴
+        // 添加头部和尾巴
         $url = $url . "/";
         $arr=parse_url($url);
         return $arr['host'];
     }
 
-   
+
     public function show()
     {
         //dump($this->wc);
         //echo $this->getjsapi_ticket().'//';
-        $Sign = new Sign ();
+        $Sign = new Sign();
         //dump($Sign);
         $signPackage = $Sign->getsign();
 
@@ -64,7 +64,7 @@ class Weidianji extends Common
         //dump($signPackage);
         $wid = input('param.id');
         $list = db('wdjcontent')->find($wid);
-        
+
         //查询插件设置
         $configlist = db('plugin')->where('code="wdj"')->find();
         $config = unserialize($configlist['config_value']);
@@ -73,21 +73,21 @@ class Weidianji extends Common
         $this->assign('signPackage', $signPackage);
         $UrlRoot = $this->getUrlRoot($list['url']);
         switch ($UrlRoot) {
-            case 'mp.weixin.qq.com':
-                return $this->fetch();
+        case 'mp.weixin.qq.com':
+            return $this->fetch();
              break;
-            case 'kuaibao.qq.com':
-                return $this->fetch('weidianji_show_kuaibao');
+        case 'kuaibao.qq.com':
+            return $this->fetch('weidianji_show_kuaibao');
              break;
-            case 'wxn.qq.com':
-                return $this->fetch('weidianji_show_qq');
+        case 'wxn.qq.com':
+            return $this->fetch('weidianji_show_qq');
              break;
-             
-            case 'view.inews.qq.com':
-                return $this->fetch('weidianji_show_qq');
+
+        case 'view.inews.qq.com':
+            return $this->fetch('weidianji_show_qq');
              break;
-            default:
-                return $this->fetch();
+        default:
+            return $this->fetch();
              break;
         }
     }

@@ -140,6 +140,7 @@ class EmptyController extends Common {
         $controllerName = $request->controller();
         $model = $this->dao;
         $fields = $this->fields;
+				// dump(input('post.'));exit;
         $data = $this->checkfield($fields, input('post.'));
         if ($data['code'] == "0") {
             $result['msg'] = $data['msg'];
@@ -194,7 +195,10 @@ class EmptyController extends Common {
         $list = $model->update($data);
         if (false !== $list) {
             if ($controllerName == 'Page') {
-                $result['url'] = url("admin/category/index");
+                // $result['url'] = url("admin/category/index");
+                $result['url'] = url("/admin/page/edit/", array(
+                    'id' => input('backid')
+                ));
             } else {
                 $result['url'] = url("admin/" . $controllerName . "/index", array(
                     'catid' => input('backid')
@@ -247,6 +251,19 @@ class EmptyController extends Common {
                     $post[$key] = strtotime($post[$key]);
                 } elseif ($fields[$key]['type'] == 'textarea') {
                     $post[$key] = addslashes($post[$key]);
+                } elseif($fields[$key]['type']=='linkage'){
+                    if($post[$key][0]){
+                        $post[$key] = implode(',',$post[$key]);
+                    }else{
+                        unset($post[$key]);
+                    }
+                }elseif($fields[$key]['type']=='multicolumn'){
+                  // dump($post[$key]);
+                    // if($post[$key][0]){
+                    //     $post[$key] = implode(',',$post[$key]);
+                    // }else{
+                    //     unset($post[$key]);
+                    // }
                 } elseif ($fields[$key]['type'] == 'editor') {
                     if (isset($post['add_description']) && $post['description'] == '' && isset($post['content'])) {
                         $content = stripslashes($post['content']);
@@ -359,7 +376,7 @@ class EmptyController extends Common {
                 $Attachment->where("aid in (" . $aids . ")")->update($data2);
             }
             if ($controllerName == 'page') {
-                $result['url'] = url("admin/category/index");
+                $result['url'] = url("admin/page/edit/id/".$data['catid'].".html");
             } else {
                 $result['url'] = url("admin/" . $controllerName . "/index", array(
                     'catid' => $data['catid']
@@ -447,5 +464,11 @@ class EmptyController extends Common {
             $result['code'] = 0;
             return $result;
         }
+    }
+    public function getRegion(){
+        $Region=db("region");
+        $map['pid'] = input("pid");
+        $list=$Region->where($map)->select();
+        return $list;
     }
 }

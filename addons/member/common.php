@@ -10,5 +10,9 @@ function getmembernum($oid) {
   return $num;
 }
 
+function getmajor($mid) {
+  $list = db('tag')->field('title')->where('catid',42)->find($mid);
+  return $list['title'];
+}
 
  ?>

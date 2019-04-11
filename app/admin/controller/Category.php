@@ -44,7 +44,7 @@ class Category extends Common
                 $r['str_manage'] = '';
                 $r['str_manage'] .= '<a class="blue layui-btn layui-btn-normal layui-btn-xs" title="添加子栏目" href="' . url('Category/add', array('parentid' => $r['id'])) . '"> <i class="layui-icon layui-icon-add-1"></i>添加子栏目</a><a class="green layui-btn layui-btn-normal layui-btn-xs" href="' . url('Category/edit', array('id' => $r['id'])) . '" title="修改"><i class="layui-icon layui-icon-edit"></i>修改</a><a class="red layui-btn layui-btn-normal layui-btn-xs" href="javascript:del(\'' . $r['id'] . '\')" title="删除"><i class="layui-icon layui-icon-delete"></i>删除</a> ';
                 if ($r['module'] == 'page') {
-                    $r['str_manage'] .= '<a class="orange layui-btn layui-btn-normal layui-btn-xs" href="' . url('page/edit', array('id' => $r['id'])) . '" title="修改内容"><i class="layui-icon layui-icon-form"></i>修改内容</a>';
+                    // $r['str_manage'] .= '<a class="orange layui-btn layui-btn-normal layui-btn-xs" href="' . url('page/edit', array('id' => $r['id'])) . '" title="修改内容"><i class="layui-icon layui-icon-form"></i>修改内容</a>';
                 }
                 $r['modulename'] = $this->module[$r['moduleid']]['title'];
                 $r['dis'] = $r['ismenu'] == 1 ? '<font color="green">显示</font>' : '<font color="red">不显示</font>';
@@ -79,7 +79,7 @@ class Category extends Common
         //父级模型ID
         $vo['moduleid'] =$this->categorys[$parentid]['moduleid'];
         $this->assign('module', $vo);
-
+        $this->assign('catdir', $this->categorys[$parentid]['catdir']);
         //栏目选择列表
         foreach($this->categorys as $r) {
             $array[] = $r;
@@ -145,7 +145,7 @@ class Category extends Common
             }
             $data3['title'] = $data['catname'];
             if($data['module'] == 'page'){
-              $data3['href'] = 'Page/edit/?id='.$id;
+              $data3['href'] = 'page/edit?id='.$id;
             }else{
               $data3['href'] = $data['module'] . '/index?catid='.$id;
             }

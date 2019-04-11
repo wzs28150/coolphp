@@ -177,7 +177,7 @@ return [
 
     'log'                    => [
         // 日志记录方式，内置 file socket 支持扩展
-        'type'  => 'File',
+        'type'  => 'test',
         // 日志保存目录
         'path'  => LOG_PATH,
         // 日志记录级别
@@ -206,7 +206,13 @@ return [
         // 缓存有效期 0表示永久缓存
         'expire' => 0,
     ],
-
+    // 'cache'                  => [
+    //   'type'   => 'Redis',
+    //   'host'   => '127.0.0.1',
+    //   'port'   => '6379',
+    //   'password' => '',
+    //   'timeout'=> 3600
+    // ],
     // +----------------------------------------------------------------------
     // | 会话设置
     // +----------------------------------------------------------------------
@@ -263,5 +269,11 @@ return [
     //文件上传
     'addwater'=>false,
     'watertext'=>'COOLPHP',
-    'version'=>'1.1'
+    'version'=>'1.1',
+    'captcha'=>[
+      'length'      =>    4,
+      'useNoise'    =>    false,
+      'useCurve' =>    false,
+      'fontSize' => 16,
+    ]
 ];

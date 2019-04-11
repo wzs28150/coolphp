@@ -62,7 +62,6 @@ function F($name, $value='', $path=DATA_PATH)
 //缓存
 function savecache($name = '', $id='')
 {
-
     if ($name=='Field') {
         if ($id) {
             $Model = db($name);
@@ -92,7 +91,7 @@ function savecache($name = '', $id='')
         }
         F($name, $data);
         F('Mod', $smalldata);
-        //savecache
+    //savecache
     } else {
         $Model = db($name);
         $list = $Model->order('listorder')->select();
@@ -188,6 +187,14 @@ function toCity($id)
     $name = db('region')->where(['id'=>$id])->value('name');
     return $name;
 }
+function toLeibie($id)
+{
+    if (empty($id)) {
+        return '';
+    }
+    $name = db('tag')->where(['id'=>$id])->value('title');
+    return $name;
+}
 function template_file($module='')
 {
     $tempfiles = dir_list(APP_PATH.'home/view/', 'html');
@@ -247,11 +254,17 @@ function checkField($table, $value, $field)
 +----------------------------------------------------------
  * 产生随机字串，可用来自动生成密码 默认长度6位 字母和数字混合
 +----------------------------------------------------------
- * @param string $len 长度
- * @param string $type 字串类型
- * 0 字母 1 数字 其它 混合
- * @param string $addChars 额外字符
-+----------------------------------------------------------
+ *
+ * @param string $len      长度
+ * @param string $type     字串类型
+ *                         0
+ *                         字母
+ *                         1
+ *                         数字
+ *                         其它
+ *                         混合
+
+ * @param  string $addChars 额外字符                          +----------------------------------------------------------
  * @return string
 +----------------------------------------------------------
  */
@@ -259,25 +272,25 @@ function rand_string($len=6, $type='', $addChars='')
 {
     $str ='';
     switch ($type) {
-        case 0:
-            $chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.$addChars;
-            break;
-        case 1:
-            $chars= str_repeat('0123456789', 3);
-            break;
-        case 2:
-            $chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.$addChars;
-            break;
-        case 3:
-            $chars='abcdefghijklmnopqrstuvwxyz'.$addChars;
-            break;
-        case 4:
-            $chars = "们以我到他会作时要动国产的一是工就年阶义发成部民可出能方进在了不和有大这主中人上为来分生对于学下级地个用同行面说种过命度革而多子后自社加小机也经力线本电高量长党得实家定深法表着水理化争现所二起政三好十战无农使性前等反体合斗路图把结第里正新开论之物从当两些还天资事队批点育重其思与间内去因件日利相由压员气业代全组数果期导平各基或月毛然如应形想制心样干都向变关问比展那它最及外没看治提五解系林者米群头意只明四道马认次文通但条较克又公孔领军流入接席位情运器并飞原油放立题质指建区验活众很教决特此常石强极土少已根共直团统式转别造切九你取西持总料连任志观调七么山程百报更见必真保热委手改管处己将修支识病象几先老光专什六型具示复安带每东增则完风回南广劳轮科北打积车计给节做务被整联步类集号列温装即毫知轴研单色坚据速防史拉世设达尔场织历花受求传口断况采精金界品判参层止边清至万确究书术状厂须离再目海交权且儿青才证低越际八试规斯近注办布门铁需走议县兵固除般引齿千胜细影济白格效置推空配刀叶率述今选养德话查差半敌始片施响收华觉备名红续均药标记难存测士身紧液派准斤角降维板许破述技消底床田势端感往神便贺村构照容非搞亚磨族火段算适讲按值美态黄易彪服早班麦削信排台声该击素张密害侯草何树肥继右属市严径螺检左页抗苏显苦英快称坏移约巴材省黑武培著河帝仅针怎植京助升王眼她抓含苗副杂普谈围食射源例致酸旧却充足短划剂宣环落首尺波承粉践府鱼随考刻靠够满夫失包住促枝局菌杆周护岩师举曲春元超负砂封换太模贫减阳扬江析亩木言球朝医校古呢稻宋听唯输滑站另卫字鼓刚写刘微略范供阿块某功套友限项余倒卷创律雨让骨远帮初皮播优占死毒圈伟季训控激找叫云互跟裂粮粒母练塞钢顶策双留误础吸阻故寸盾晚丝女散焊功株亲院冷彻弹错散商视艺灭版烈零室轻血倍缺厘泵察绝富城冲喷壤简否柱李望盘磁雄似困巩益洲脱投送奴侧润盖挥距触星松送获兴独官混纪依未突架宽冬章湿偏纹吃执阀矿寨责熟稳夺硬价努翻奇甲预职评读背协损棉侵灰虽矛厚罗泥辟告卵箱掌氧恩爱停曾溶营终纲孟钱待尽俄缩沙退陈讨奋械载胞幼哪剥迫旋征槽倒握担仍呀鲜吧卡粗介钻逐弱脚怕盐末阴丰雾冠丙街莱贝辐肠付吉渗瑞惊顿挤秒悬姆烂森糖圣凹陶词迟蚕亿矩康遵牧遭幅园腔订香肉弟屋敏恢忘编印蜂急拿扩伤飞露核缘游振操央伍域甚迅辉异序免纸夜乡久隶缸夹念兰映沟乙吗儒杀汽磷艰晶插埃燃欢铁补咱芽永瓦倾阵碳演威附牙芽永瓦斜灌欧献顺猪洋腐请透司危括脉宜笑若尾束壮暴企菜穗楚汉愈绿拖牛份染既秋遍锻玉夏疗尖殖井费州访吹荣铜沿替滚客召旱悟刺脑措贯藏敢令隙炉壳硫煤迎铸粘探临薄旬善福纵择礼愿伏残雷延烟句纯渐耕跑泽慢栽鲁赤繁境潮横掉锥希池败船假亮谓托伙哲怀割摆贡呈劲财仪沉炼麻罪祖息车穿货销齐鼠抽画饲龙库守筑房歌寒喜哥洗蚀废纳腹乎录镜妇恶脂庄擦险赞钟摇典柄辩竹谷卖乱虚桥奥伯赶垂途额壁网截野遗静谋弄挂课镇妄盛耐援扎虑键归符庆聚绕摩忙舞遇索顾胶羊湖钉仁音迹碎伸灯避泛亡答勇频皇柳哈揭甘诺概宪浓岛袭谁洪谢炮浇斑讯懂灵蛋闭孩释乳巨徒私银伊景坦累匀霉杜乐勒隔弯绩招绍胡呼痛峰零柴簧午跳居尚丁秦稍追梁折耗碱殊岗挖氏刃剧堆赫荷胸衡勤膜篇登驻案刊秧缓凸役剪川雪链渔啦脸户洛孢勃盟买杨宗焦赛旗滤硅炭股坐蒸凝竟陷枪黎救冒暗洞犯筒您宋弧爆谬涂味津臂障褐陆啊健尊豆拔莫抵桑坡缝警挑污冰柬嘴啥饭塑寄赵喊垫丹渡耳刨虎笔稀昆浪萨茶滴浅拥穴覆伦娘吨浸袖珠雌妈紫戏塔锤震岁貌洁剖牢锋疑霸闪埔猛诉刷狠忽灾闹乔唐漏闻沈熔氯荒茎男凡抢像浆旁玻亦忠唱蒙予纷捕锁尤乘乌智淡允叛畜俘摸锈扫毕璃宝芯爷鉴秘净蒋钙肩腾枯抛轨堂拌爸循诱祝励肯酒绳穷塘燥泡袋朗喂铝软渠颗惯贸粪综墙趋彼届墨碍启逆卸航衣孙龄岭骗休借".$addChars;
-            break;
-        default:
-            // 默认去掉了容易混淆的字符oOLl和数字01，要添加请使用addChars参数
-            $chars='ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'.$addChars;
-            break;
+    case 0:
+        $chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.$addChars;
+        break;
+    case 1:
+        $chars= str_repeat('0123456789', 3);
+        break;
+    case 2:
+        $chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.$addChars;
+        break;
+    case 3:
+        $chars='abcdefghijklmnopqrstuvwxyz'.$addChars;
+        break;
+    case 4:
+        $chars = "们以我到他会作时要动国产的一是工就年阶义发成部民可出能方进在了不和有大这主中人上为来分生对于学下级地个用同行面说种过命度革而多子后自社加小机也经力线本电高量长党得实家定深法表着水理化争现所二起政三好十战无农使性前等反体合斗路图把结第里正新开论之物从当两些还天资事队批点育重其思与间内去因件日利相由压员气业代全组数果期导平各基或月毛然如应形想制心样干都向变关问比展那它最及外没看治提五解系林者米群头意只明四道马认次文通但条较克又公孔领军流入接席位情运器并飞原油放立题质指建区验活众很教决特此常石强极土少已根共直团统式转别造切九你取西持总料连任志观调七么山程百报更见必真保热委手改管处己将修支识病象几先老光专什六型具示复安带每东增则完风回南广劳轮科北打积车计给节做务被整联步类集号列温装即毫知轴研单色坚据速防史拉世设达尔场织历花受求传口断况采精金界品判参层止边清至万确究书术状厂须离再目海交权且儿青才证低越际八试规斯近注办布门铁需走议县兵固除般引齿千胜细影济白格效置推空配刀叶率述今选养德话查差半敌始片施响收华觉备名红续均药标记难存测士身紧液派准斤角降维板许破述技消底床田势端感往神便贺村构照容非搞亚磨族火段算适讲按值美态黄易彪服早班麦削信排台声该击素张密害侯草何树肥继右属市严径螺检左页抗苏显苦英快称坏移约巴材省黑武培著河帝仅针怎植京助升王眼她抓含苗副杂普谈围食射源例致酸旧却充足短划剂宣环落首尺波承粉践府鱼随考刻靠够满夫失包住促枝局菌杆周护岩师举曲春元超负砂封换太模贫减阳扬江析亩木言球朝医校古呢稻宋听唯输滑站另卫字鼓刚写刘微略范供阿块某功套友限项余倒卷创律雨让骨远帮初皮播优占死毒圈伟季训控激找叫云互跟裂粮粒母练塞钢顶策双留误础吸阻故寸盾晚丝女散焊功株亲院冷彻弹错散商视艺灭版烈零室轻血倍缺厘泵察绝富城冲喷壤简否柱李望盘磁雄似困巩益洲脱投送奴侧润盖挥距触星松送获兴独官混纪依未突架宽冬章湿偏纹吃执阀矿寨责熟稳夺硬价努翻奇甲预职评读背协损棉侵灰虽矛厚罗泥辟告卵箱掌氧恩爱停曾溶营终纲孟钱待尽俄缩沙退陈讨奋械载胞幼哪剥迫旋征槽倒握担仍呀鲜吧卡粗介钻逐弱脚怕盐末阴丰雾冠丙街莱贝辐肠付吉渗瑞惊顿挤秒悬姆烂森糖圣凹陶词迟蚕亿矩康遵牧遭幅园腔订香肉弟屋敏恢忘编印蜂急拿扩伤飞露核缘游振操央伍域甚迅辉异序免纸夜乡久隶缸夹念兰映沟乙吗儒杀汽磷艰晶插埃燃欢铁补咱芽永瓦倾阵碳演威附牙芽永瓦斜灌欧献顺猪洋腐请透司危括脉宜笑若尾束壮暴企菜穗楚汉愈绿拖牛份染既秋遍锻玉夏疗尖殖井费州访吹荣铜沿替滚客召旱悟刺脑措贯藏敢令隙炉壳硫煤迎铸粘探临薄旬善福纵择礼愿伏残雷延烟句纯渐耕跑泽慢栽鲁赤繁境潮横掉锥希池败船假亮谓托伙哲怀割摆贡呈劲财仪沉炼麻罪祖息车穿货销齐鼠抽画饲龙库守筑房歌寒喜哥洗蚀废纳腹乎录镜妇恶脂庄擦险赞钟摇典柄辩竹谷卖乱虚桥奥伯赶垂途额壁网截野遗静谋弄挂课镇妄盛耐援扎虑键归符庆聚绕摩忙舞遇索顾胶羊湖钉仁音迹碎伸灯避泛亡答勇频皇柳哈揭甘诺概宪浓岛袭谁洪谢炮浇斑讯懂灵蛋闭孩释乳巨徒私银伊景坦累匀霉杜乐勒隔弯绩招绍胡呼痛峰零柴簧午跳居尚丁秦稍追梁折耗碱殊岗挖氏刃剧堆赫荷胸衡勤膜篇登驻案刊秧缓凸役剪川雪链渔啦脸户洛孢勃盟买杨宗焦赛旗滤硅炭股坐蒸凝竟陷枪黎救冒暗洞犯筒您宋弧爆谬涂味津臂障褐陆啊健尊豆拔莫抵桑坡缝警挑污冰柬嘴啥饭塑寄赵喊垫丹渡耳刨虎笔稀昆浪萨茶滴浅拥穴覆伦娘吨浸袖珠雌妈紫戏塔锤震岁貌洁剖牢锋疑霸闪埔猛诉刷狠忽灾闹乔唐漏闻沈熔氯荒茎男凡抢像浆旁玻亦忠唱蒙予纷捕锁尤乘乌智淡允叛畜俘摸锈扫毕璃宝芯爷鉴秘净蒋钙肩腾枯抛轨堂拌爸循诱祝励肯酒绳穷塘燥泡袋朗喂铝软渠颗惯贸粪综墙趋彼届墨碍启逆卸航衣孙龄岭骗休借".$addChars;
+        break;
+    default:
+        // 默认去掉了容易混淆的字符oOLl和数字01，要添加请使用addChars参数
+        $chars='ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789'.$addChars;
+        break;
     }
     if ($len>10) {//位数过长重复字符串一定次数
         $chars= $type==1? str_repeat($chars, $len) : str_repeat($chars, 5);
@@ -412,11 +425,13 @@ function dir_delete($dir)
 }
 /**
  * CURL请求
- * @param $url 请求url地址
- * @param $method 请求方法 get post
- * @param null $postfields post数据数组
- * @param array $headers 请求header信息
- * @param bool|false $debug  调试开启 默认false
+ *
+ * @param  $url 请求url地址
+ * @param  $method 请求方法 get post
+ * @param  null                         $postfields post数据数组
+ * @param  array                        $headers    请求header信息
+ * @param  bool|false                   $debug      调试开启
+ *                                                  默认false
  * @return mixed
  */
 function httpRequest($url, $method, $postfields = null, $headers = array(), $debug = false)
@@ -430,16 +445,16 @@ function httpRequest($url, $method, $postfields = null, $headers = array(), $deb
     curl_setopt($ci, CURLOPT_TIMEOUT, 7); /* 设置cURL允许执行的最长秒数 */
     curl_setopt($ci, CURLOPT_RETURNTRANSFER, true);
     switch ($method) {
-        case "POST":
-            curl_setopt($ci, CURLOPT_POST, true);
-            if (!empty($postfields)) {
-                $tmpdatastr = is_array($postfields) ? http_build_query($postfields) : $postfields;
-                curl_setopt($ci, CURLOPT_POSTFIELDS, $tmpdatastr);
-            }
-            break;
-        default:
-            curl_setopt($ci, CURLOPT_CUSTOMREQUEST, $method); /* //设置请求方式 */
-            break;
+    case "POST":
+        curl_setopt($ci, CURLOPT_POST, true);
+        if (!empty($postfields)) {
+            $tmpdatastr = is_array($postfields) ? http_build_query($postfields) : $postfields;
+            curl_setopt($ci, CURLOPT_POSTFIELDS, $tmpdatastr);
+        }
+        break;
+    default:
+        curl_setopt($ci, CURLOPT_CUSTOMREQUEST, $method); /* //设置请求方式 */
+        break;
     }
     $ssl = preg_match('/^https:\/\//i', $url) ? true : false;
     curl_setopt($ci, CURLOPT_URL, $url);
@@ -469,8 +484,8 @@ function httpRequest($url, $method, $postfields = null, $headers = array(), $deb
     //return array($http_code, $response,$requestinfo);
 }
 /**
- * @param $arr
- * @param $key_name
+ * @param  $arr
+ * @param  $key_name
  * @return array
  * 将数据库中查出的列表以指定的 id 作为数组的键名
  */
@@ -523,6 +538,7 @@ function imgUrl($img, $defaul='')
 }
 /**
  * PHP格式化字节大小
+ *
  * @param  number $size      字节数
  * @param  string $delimiter 数字和单位分隔符
  * @return string            格式化后的带单位的大小
@@ -538,6 +554,7 @@ function format_bytes($size, $delimiter = '')
 /**
  * 判断当前访问的用户是  PC端  还是 手机端  返回true 为手机端  false 为PC 端
  *  是否移动端访问访问
+ *
  * @return boolean
  */
 function isMobile()
@@ -597,9 +614,12 @@ function is_alipay()
 
 /**
  * 获取用户信息
- * @param $user_id_or_name  用户id 邮箱 手机 第三方id
- * @param int $type  类型 0 user_id查找 1 邮箱查找 2 手机查找 3 第三方唯一标识查找
- * @param string $oauth  第三方来源
+ *
+ * @param  $user_id_or_name  用户id 邮箱 手机 第三方id
+ * @param  int                                                 $type  类型 0 user_id查找 1 邮箱查找 2
+ *                                                                    手机查找 3
+ *                                                                    第三方唯一标识查找
+ * @param  string                                              $oauth 第三方来源
  * @return mixed
  */
 function get_user_info($user_id_or_name, $type = 0, $oauth='')
@@ -630,7 +650,8 @@ function get_user_info($user_id_or_name, $type = 0, $oauth='')
 }
 /**
  * 过滤数组元素前后空格 (支持多维数组)
- * @param $array 要过滤的数组
+ *
+ * @param  $array 要过滤的数组
  * @return array|string
  */
 function trim_array_element($array)
@@ -641,8 +662,8 @@ function trim_array_element($array)
     return array_map('trim_array_element', $array);
 }
 /**
- * @param $arr
- * @param $key_name
+ * @param  $arr
+ * @param  $key_name
  * @return array
  * 将数据库中查出的列表以指定的 值作为数组的键名，并以另一个值作为键值
  */
@@ -656,9 +677,10 @@ function convert_arr_kv($arr, $key_name, $value)
 }
 /**
  * 邮件发送
- * @param $to    接收人
- * @param string $subject   邮件标题
- * @param string $content   邮件内容(html模板渲染后的内容)
+ *
+ * @param  $to    接收人
+ * @param  string          $subject 邮件标题
+ * @param  string          $content 邮件内容(html模板渲染后的内容)
  * @throws Exception
  * @throws phpmailerException
  */
@@ -718,372 +740,554 @@ function send_email($to, $subject='', $content='')
 }
 /**
  * 获取单页内容
- * @param int $id  栏目id
+ *
+ * @param  int $id 栏目id
  * @throws Exception
  * @throws phpmailerException
  */
- function getcontent($id)
- {
-     $info = db('page')->field('content')->find($id);
-     return $info['content'];
- }
+function getcontent($id)
+{
+    $info = db('page')->field('content')->find($id);
+    return $info['content'];
+}
 
  /**
- * 获取栏目名称
- * @param int $id  栏目id
- * @throws Exception
- * @throws phpmailerException
- */
- function getcatname($id,$field='')
- {
-    if($field){
-      $info = db('category')->field($field)->find($id);
-      return $info[$field];
-    }else{
-      $info = db('category')->field('catname')->find($id);
-      return $info['catname'];
+  * 获取栏目名称
+  *
+  * @param  int $id 栏目id
+  * @throws Exception
+  * @throws phpmailerException
+  */
+function getcatname($id, $field='')
+{
+    if ($field) {
+        $info = db('category')->field($field)->find($id);
+        return $info[$field];
+    } else {
+        $info = db('category')->field('catname')->find($id);
+        return $info['catname'];
     }
-
- }
+}
 
  /**
- * 删除开头空格
- * @param int $id  栏目id
- * @throws Exception
- * @throws phpmailerException
- */
- function delspa($str)
- {
-     $str = trim($str);
-     $str = ereg_replace("\t", "", $str);
-     $str = ereg_replace("\r\n", "", $str);
-     $str = ereg_replace("\r", "", $str);
-     $str = ereg_replace("\n", "", $str);
-     $str = ereg_replace("    ", "", $str);
-     return trim($str);
- }
+  * 删除开头空格
+  *
+  * @param  int $id 栏目id
+  * @throws Exception
+  * @throws phpmailerException
+  */
+function delspa($str)
+{
+    $str = trim($str);
+    $str = ereg_replace("\t", "", $str);
+    $str = ereg_replace("\r\n", "", $str);
+    $str = ereg_replace("\r", "", $str);
+    $str = ereg_replace("\n", "", $str);
+    $str = ereg_replace("    ", "", $str);
+    return trim($str);
+}
  /**
- * 获取组图数组
- * @param string $str  组图字符串
- * @throws Exception
- * @throws phpmailerException
- */
+  * 获取组图数组
+  *
+  * @param  string $str 组图字符串
+  * @throws Exception
+  * @throws phpmailerException
+  */
 
- function getzutu($str)
- {
-     $arr = explode(';', substr($str, 0, strlen($str)-1));
-     return $arr;
- }
+function getzutu($str)
+{
+    $arr = explode(';', substr($str, 0, strlen($str)-1));
+    return $arr;
+}
  /**
   * 正则获取客户端浏览器信息
+  *
   * @param  [type] $Agent [description]
   * @return [type]        [description]
   */
-  function GetBrowser()
-  {
-      if (!empty($_SERVER['HTTP_USER_AGENT'])) {
-          $br = $_SERVER['HTTP_USER_AGENT'];
-          if (preg_match('/MSIE/i', $br)) {
-              $br = 'MSIE';
-          } elseif (preg_match('/Firefox/i', $br)) {
-              $br = 'Firefox';
-          } elseif (preg_match('/Chrome/i', $br)) {
-              $br = 'Chrome';
-          } elseif (preg_match('/Safari/i', $br)) {
-              $br = 'Safari';
-          } elseif (preg_match('/Opera/i', $br)) {
-              $br = 'Opera';
-          } else {
-              $br = 'Other';
-          }
-          return $br;
-      } else {
-          return "获取浏览器信息失败！";
-      }
-  }
+function GetBrowser()
+{
+    if (!empty($_SERVER['HTTP_USER_AGENT'])) {
+        $br = $_SERVER['HTTP_USER_AGENT'];
+        if (preg_match('/MSIE/i', $br)) {
+            $br = 'MSIE';
+        } elseif (preg_match('/Firefox/i', $br)) {
+            $br = 'Firefox';
+        } elseif (preg_match('/Chrome/i', $br)) {
+            $br = 'Chrome';
+        } elseif (preg_match('/Safari/i', $br)) {
+            $br = 'Safari';
+        } elseif (preg_match('/Opera/i', $br)) {
+            $br = 'Opera';
+        } else {
+            $br = 'Other';
+        }
+        return $br;
+    } else {
+        return "获取浏览器信息失败！";
+    }
+}
 
   ////获得访客真实ip
-  function Getcip()
-  {
-      if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
-          $ip = $_SERVER["HTTP_CLIENT_IP"];
-      }
-      if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) { //获取代理ip
-          $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-      }
-      if ($ip) {
-          $ips = array_unshift($ips, $ip);
-      }
-      dump($_SERVER);
-      $count = count($ips);
-      for ($i=0;$i<$count;$i++) {
-          if (!preg_match("/^(10|172\.16|192\.168)\./i", $ips[$i])) {//排除局域网ip
-              $ip = $ips[$i];
-              break;
-          }
-      }
-      $tip = empty($_SERVER['REMOTE_ADDR']) ? $ip : $_SERVER['REMOTE_ADDR'];
-      if ($tip=="127.0.0.1") { //获得本地真实IP
-          return '127.0.0.1';
-      } else {
-          return $tip;
-      }
-  }
+function Getcip()
+{
+    if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+        $ip = $_SERVER["HTTP_CLIENT_IP"];
+    }
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) { //获取代理ip
+        $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+    }
+    if ($ip) {
+        $ips = array_unshift($ips, $ip);
+    }
+    dump($_SERVER);
+    $count = count($ips);
+    for ($i=0;$i<$count;$i++) {
+        if (!preg_match("/^(10|172\.16|192\.168)\./i", $ips[$i])) {//排除局域网ip
+            $ip = $ips[$i];
+            break;
+        }
+    }
+    $tip = empty($_SERVER['REMOTE_ADDR']) ? $ip : $_SERVER['REMOTE_ADDR'];
+    if ($tip=="127.0.0.1") { //获得本地真实IP
+        return '127.0.0.1';
+    } else {
+        return $tip;
+    }
+}
 
   ////获得本地真实IP
-  function get_onlineip()
-  {
-      $mip = file_get_contents("http://city.ip138.com/city0.asp");
-      if ($mip) {
-          preg_match("/\[.*\]/", $mip, $sip);
-          $p = array("/\[/","/\]/");
-          return preg_replace($p, "", $sip[0]);
-      } else {
-          return "获取本地IP失败！";
-      }
-  }
+function get_onlineip()
+{
+    $mip = file_get_contents("http://city.ip138.com/city0.asp");
+    if ($mip) {
+        preg_match("/\[.*\]/", $mip, $sip);
+        $p = array("/\[/","/\]/");
+        return preg_replace($p, "", $sip[0]);
+    } else {
+        return "获取本地IP失败！";
+    }
+}
 
   /**
    *  HTML转换为文本
    *
-   * @param    string  $str 需要转换的字符串
-   * @param    string  $r   如果$r=0直接返回内容,否则需要使用反斜线引用字符串
-   * @return   string
+   * @param  string $str 需要转换的字符串
+   * @param  string $r   如果$r=0直接返回内容,否则需要使用反斜线引用字符串
+   * @return string
    */
-  function Html2Text($str, $r=0)
-  {
-      if ($r==0) {
-          return SpHtml2Text($str);
-      } else {
-          $str = SpHtml2Text(stripslashes($str));
-          return addslashes($str);
-      }
-  }
+function Html2Text($str, $r=0)
+{
+    if ($r==0) {
+        return SpHtml2Text($str);
+    } else {
+        $str = SpHtml2Text(stripslashes($str));
+        return addslashes($str);
+    }
+}
 
-  function SpHtml2Text($str)
-  {
-      $str = preg_replace("/<sty(.*)\\/style>|<scr(.*)\\/script>|<!--(.*)-->/isU", "", $str);
-      $alltext = "";
-      $start = 1;
-      for ($i=0;$i<strlen($str);$i++) {
-          if ($start==0 && $str[$i]==">") {
-              $start = 1;
-          } elseif ($start==1) {
-              if ($str[$i]=="<") {
-                  $start = 0;
-                  $alltext .= " ";
-              } elseif (ord($str[$i])>31) {
-                  $alltext .= $str[$i];
-              }
-          }
-      }
-      $alltext = str_replace("　", " ", $alltext);
-      $alltext = preg_replace("/&([^;&]*)(;|&)/", "", $alltext);
-      $alltext = preg_replace("/[ ]+/s", " ", $alltext);
-      return $alltext;
-  }
+function SpHtml2Text($str)
+{
+    $str = preg_replace("/<sty(.*)\\/style>|<scr(.*)\\/script>|<!--(.*)-->/isU", "", $str);
+    $alltext = "";
+    $start = 1;
+    for ($i=0;$i<strlen($str);$i++) {
+        if ($start==0 && $str[$i]==">") {
+            $start = 1;
+        } elseif ($start==1) {
+            if ($str[$i]=="<") {
+                $start = 0;
+                $alltext .= " ";
+            } elseif (ord($str[$i])>31) {
+                $alltext .= $str[$i];
+            }
+        }
+    }
+    $alltext = str_replace("　", " ", $alltext);
+    $alltext = preg_replace("/&([^;&]*)(;|&)/", "", $alltext);
+    $alltext = preg_replace("/[ ]+/s", " ", $alltext);
+    return $alltext;
+}
   /**
    * 生成随机颜色
+   *
    * @return [type] [description]
    */
-  function random_color(){
+function random_color()
+{
     mt_srand((double)microtime()*1000000);
     $c = '';
-    while(strlen($c)<6){
+    while (strlen($c)<6) {
         $c .= sprintf("%02X", mt_rand(0, 255));
     }
     return $c;
-  }
+}
 
-  function getvalue($id,$dbname,$field) {
+function getvalue($id, $dbname, $field)
+{
     $list = db($dbname)->field($field)->find($id);
     return $list[$field];
-  }
+}
 
   /**
    * 文章上一篇下一篇
-   * @param  [int]  $catid     [栏目id]
-   * @param  [int]  $id        [文章id]
-   * @param  [str]  $dbname    [表名]
+   *
+   * @param  [int] $catid  [栏目id]
+   * @param  [int] $id     [文章id]
+   * @param  [str] $dbname [表名]
    * @return [str]  $str       [html]
    */
-   function getwlink($catid, $id, $dbname) {
-     $str = "";
-     $createtime = getvalue($id, $dbname, 'createtime');
-     $listorder = getvalue($id, $dbname, 'listorder');
-     $rsup = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND a.listorder < $listorder")->order('a.listorder desc,a.createtime')->limit(1)->fetchsql(false)->find();
-     if ($rsup) {
-       $str .= '<a href="' . url('home/'.$rsup['catdir'].'/info',array('id'=>$rsup['id'],'catId'=>$rsup['catid'])) . '">上一篇：'.$rsup['title'].'</a> ';
-     } else {
-       $rstup = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND a.listorder = $listorder AND a.createtime > $createtime")->order('a.createtime')->limit(1)->find();
-       if ($rstup) {
-         $str .= '<a href="' . url('home/'.$rstup['catdir'].'/info',array('id'=>$rstup['id'],'catId'=>$rstup['catid'])) . '">上一篇：'.$rstup['title'].'</a> ';
-       } else {
-         $str .= '<a data-ajax="no" href="javascript:void(0)">上一篇：无</a> ';
-       }
-     }
-     $rsdown = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND a.listorder > $listorder")->order('a.listorder,a.createtime desc')->limit(1)->find();
-     if ($rsdown)
-     {
-       $str .= '<a href="' . url('home/'.$rsdown['catdir'].'/info',array('id'=>$rsdown['id'],'catId'=>$rsdown['catid'])) . '">下一篇：'.$rsdown['title'].'</a>';
-     }
-     else
-     {
-       $rstdown = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c','a.catid = c.id','left')->where("a.status=1 AND a.catid=$catid AND  a.listorder = $listorder AND a.createtime < $createtime")->order('a.createtime desc')->limit(1)->fetchsql(false)->find();
-       // dump($rstdown);
-       if ($rstdown) {
-         $str .= '<a href="' . url('home/'.$rstdown['catdir'].'/info',array('id'=>$rstdown['id'],'catId'=>$rstdown['catid'])) . '">下一篇：'.$rstdown['title'].'</a>';
-       } else {
-         $str .= '<a class="next" href="javascript:void(0)">下一篇：无</a>';
-       }
-     }
-     return $str;
-   }
+function getwlink($catid, $id, $dbname)
+{
+    $str = "";
+    $createtime = getvalue($id, $dbname, 'createtime');
+    $listorder = getvalue($id, $dbname, 'listorder');
+    $rsup = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c', 'a.catid = c.id', 'left')->where("a.status=1 AND a.catid=$catid AND a.listorder < $listorder")->order('a.listorder desc,a.createtime')->limit(1)->fetchsql(false)->find();
+    if ($rsup) {
+        $str .= '<a href="' . url('home/'.$rsup['catdir'].'/info', array('id'=>$rsup['id'],'catId'=>$rsup['catid'])) . '">上一篇：'.$rsup['title'].'</a> ';
+    } else {
+        $rstup = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c', 'a.catid = c.id', 'left')->where("a.status=1 AND a.catid=$catid AND a.listorder = $listorder AND a.createtime > $createtime")->order('a.createtime')->limit(1)->find();
+        if ($rstup) {
+            $str .= '<a href="' . url('home/'.$rstup['catdir'].'/info', array('id'=>$rstup['id'],'catId'=>$rstup['catid'])) . '">上一篇：'.$rstup['title'].'</a> ';
+        } else {
+            $str .= '<a data-ajax="no" href="javascript:void(0)">上一篇：无</a> ';
+        }
+    }
+    $rsdown = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c', 'a.catid = c.id', 'left')->where("a.status=1 AND a.catid=$catid AND a.listorder > $listorder")->order('a.listorder,a.createtime desc')->limit(1)->find();
+    if ($rsdown) {
+        $str .= '<a href="' . url('home/'.$rsdown['catdir'].'/info', array('id'=>$rsdown['id'],'catId'=>$rsdown['catid'])) . '">下一篇：'.$rsdown['title'].'</a>';
+    } else {
+        $rstdown = db($dbname)->field('a.id,a.title,a.catid,c.catdir')->alias('a')->join(config('database.prefix').'category c', 'a.catid = c.id', 'left')->where("a.status=1 AND a.catid=$catid AND  a.listorder = $listorder AND a.createtime < $createtime")->order('a.createtime desc')->limit(1)->fetchsql(false)->find();
+        // dump($rstdown);
+        if ($rstdown) {
+            $str .= '<a href="' . url('home/'.$rstdown['catdir'].'/info', array('id'=>$rstdown['id'],'catId'=>$rstdown['catid'])) . '">下一篇：'.$rstdown['title'].'</a>';
+        } else {
+            $str .= '<a class="next" href="javascript:void(0)">下一篇：无</a>';
+        }
+    }
+    return $str;
+}
+   /**
+    * 根据管理员id获取信息
+    *
+    * @param  [int] $aid   [管理员id]
+    * @param  [str] $field [字段名称]
+    * @return [str]        [字段值]
+    */
+function getadmininfo($aid, $field)
+{
+    $list = db('admin')->find($aid);
+    return $list[$field];
+}
    /**
     * 获取日期
+    *
     * @return [type] [description]
     */
-   function getdatexq() {
-     $weekarray=array("日","一","二","三","四","五","六");
-     return "星期".$weekarray[date("w")];
-   }
+function getdatexq()
+{
+    $weekarray=array("日","一","二","三","四","五","六");
+    return "星期".$weekarray[date("w")];
+}
    /**
     * 获取文章投稿数
+    *
     * @param  [type] $oid [组织id]
     * @return [int]       [投稿数]
     */
-   function getarticlenum($oid) {
-     if(!cache('articlenum_'.$oid)){
-       $num = db('article')->where('oid',$oid)->count();
-       cache('articlenum_'.$oid, $num, 3600);
-     }
-     return cache('articlenum_'.$oid);
-   }
+function getarticlenum($oid)
+{
+    if (!cache('articlenum_'.$oid)) {
+        $num = db('article')->where('oid', $oid)->count();
+        cache('articlenum_'.$oid, $num, 3600);
+    }
+    return cache('articlenum_'.$oid);
+}
    /**
     * 根据父级id获取下级栏目
+    *
     * @param  [type]  $pid   [父级id]
     * @param  integer $limit [个数不设置则不限制]
     * @return [arry]         [栏目数组]
     */
-   function getcategory($pid,$limit = 0) {
-     if(!cache('catel_'.$pid.'_'.$limit)){
-       if($limit!=0){
-         $list = db('category')->field('id,catname,catdir,child,parentid,url,image')->where('parentid',$pid)->where('ismenu',1)->limit($limit)->order('listorder,id')->select();
-       }else{
-         $list = db('category')->field('id,catname,catdir,child,parentid,url,image')->where('parentid',$pid)->where('ismenu',1)->order('listorder,id')->select();
-       }
-       cache('catel_'.$pid.'_'.$limit, $list, 3600);
-     }
+function getcategory($pid, $limit = 0)
+{
+    if (!cache('catel_'.$pid.'_'.$limit)) {
+        if ($limit!=0) {
+            $list = db('category')->field('id,catname,catdir,child,parentid,url,image')->where('parentid', $pid)->where('ismenu', 1)->limit($limit)->order('listorder,id')->select();
+        } else {
+            $list = db('category')->field('id,catname,catdir,child,parentid,url,image')->where('parentid', $pid)->where('ismenu', 1)->order('listorder,id')->select();
+        }
+        cache('catel_'.$pid.'_'.$limit, $list, 3600);
+    }
 
-     return cache('catel_'.$pid.'_'.$limit);
-   }
+    return cache('catel_'.$pid.'_'.$limit);
+}
    /**
     * 根据父级id获取下级栏目id字符串
+    *
     * @param  [type]  $pid   [父级id]
     * @param  integer $limit [个数不设置则不限制]
     * @return [str ]         [字符串如：1,2,3,4]
     */
-   function getcategorystr($pid,$limit = 0) {
-     if(!cache('catelstr_'.$pid.'_'.$limit)){
-       if($limit!=0){
-         $list = db('category')->field('id')->where('parentid',$pid)->where('ismenu',1)->limit($limit)->order('listorder,id')->select();
-       }else{
-         $list = db('category')->field('id')->where('parentid',$pid)->where('ismenu',1)->order('listorder,id')->select();
-       }
-       $str = '';
-       foreach ($list as $key => $value) {
-         $str .= $value['id'].',';
-       }
-       $str = rtrim($str,',');
-       cache('catelstr_'.$pid.'_'.$limit, $str, 3600);
-     }
+function getcategorystr($pid, $limit = 0)
+{
+    if (!cache('catelstr_'.$pid.'_'.$limit)) {
+        if ($limit!=0) {
+            $list = db('category')->field('id')->where('parentid', $pid)->where('ismenu', 1)->limit($limit)->order('listorder,id')->select();
+        } else {
+            $list = db('category')->field('id')->where('parentid', $pid)->where('ismenu', 1)->order('listorder,id')->select();
+        }
+        $str = '';
+        foreach ($list as $key => $value) {
+            $str .= $value['id'].',';
+        }
+        $str = rtrim($str, ',');
+        cache('catelstr_'.$pid.'_'.$limit, $str, 3600);
+    }
 
-     return cache('catelstr_'.$pid.'_'.$limit);
-   }
+    return cache('catelstr_'.$pid.'_'.$limit);
+}
    /**
     * 根据会员id获取详细信息
+    *
     * @param  [int] $mid    [会员id]
     * @param  [str] $fields [字段]
     * @return [type]        [会员信息]
     */
-   function getmemberinfo($mid,$fields='') {
-     $info = db('member')->find($mid);
-     if($fields){
-       return $info[$fields];
-     }else{
-       return $info;
-     }
-   }
+function getmemberinfo($mid, $fields='')
+{
+    $info = db('member')->find($mid);
+    if ($fields) {
+        return $info[$fields];
+    } else {
+        return $info;
+    }
+}
    /**
     * 根据组织id获取组织信息
+    *
     * @param  [int] $oid    [组织id]
     * @param  [str] $fields [字段]
     * @return [str]         [description]
     */
-   function getoirganizationinfo($oid,$fields) {
-     $info = db('member_oirganization')->find($oid);
-     if($fields){
-       return $info[$fields];
-     }else{
-       return $info;
-     }
-   }
-   /**
-    * 根据广告位id 获取广告列表
-    * @param  [int] $type_id [栏目id]
-    * @param  [int] $limit   [个数]
-    * @return [arr]          [列表数组]
-    */
-  function getadlist($type_id,$limit) {
-    $list = db('ad')->where('type_id',$type_id)->limit($limit)->select();
-    return $list;
-  }
-  /**
-   * 根据管理员id获取信息
-   * @param  [int] $aid   [管理员id]
-   * @param  [str] $field [字段名称]
-   * @return [str]        [字段值]
-   */
-  function getadmininfo($aid,$field) {
-    $list = db('admin')->find($aid);
-    return $list[$field];
-  }
-
-
-  function subtree($data){
-    $roleid = session('gid');
-    if($roleid == 1){
-      foreach($data as $key=>$vo){
-          $res[$vo['id']] = $vo;
-          $res[$vo['id']]['href'] = url('admin/'.$vo['href']);
-      		$res[$vo['id']]['children'] = [];
-    	}
-    }else{
-      foreach($data as $key=>$vo){
-        if(in_array($roleid,explode(',',$vo['roleid']))){
-          $res[$vo['id']] = $vo;
-          $res[$vo['id']]['href'] = url('admin/'.$vo['href']);
-      		$res[$vo['id']]['children'] = [];
-        }
-    	}
+function getoirganizationinfo($oid, $fields)
+{
+    $info = db('member_oirganization')->find($oid);
+    if ($fields) {
+        return $info[$fields];
+    } else {
+        return $info;
     }
-  	unset( $data );
-  	// 查询子孙
-  	foreach($res as $key=>$vo){
-  		if( $vo['pid'] != 0 && $vo['menustatus'] == 1 ){
-  			$res[$vo['pid']]['children'][] = &$res[$key];
-  		}
-  	}
+}
+   /**
+    * 无限极分类整理
+    *
+    * @param  [type] $data [description]
+    * @return [type]       [description]
+    */
+function subtree($data, $pid = 0)
+{
+    $roleid = session('gid');
+    if ($roleid == 1) {
+        foreach ($data as $key=>$vo) {
+            $res[$vo['id']] = $vo;
+            if (substr($vo['href'], 0, 1) == '/') {
+                $res[$vo['id']]['href'] = url($vo['href']);
+            } else {
+                $res[$vo['id']]['href'] = url('admin/'.$vo['href']);
+            }
 
-  	// 去除杂质
-  	foreach($res as $key=>$vo){
-      // dump($vo);exit;
-  		if($vo['pid'] == 0 && $vo['menustatus'] == 1){
-  			$tree[] = $vo;
-  		}
-  	}
+            $res[$vo['id']]['children'] = [];
+        }
+    } else {
+        foreach ($data as $key=>$vo) {
+            if (in_array($roleid, explode(',', $vo['roleid']))) {
+                $res[$vo['id']] = $vo;
+                // $res[$vo['id']]['href'] = url('admin/'.$vo['href']);
+                $res[$vo['id']]['children'] = [];
+            }
+        }
+    }
+    unset($data);
+    // 查询子孙
+    foreach ($res as $key=>$vo) {
+        if ($vo['pid'] != $pid && $vo['menustatus'] == 1) {
+            $res[$vo['pid']]['children'][] = &$res[$key];
+        }
+    }
+    // 去除杂质
+    foreach ($res as $key=>$vo) {
+        // dump($vo);exit;
+        if ($vo['pid'] == $pid && $vo['menustatus'] == 1) {
+            $tree[] = $vo;
+        }
+    }
+    // dump($tree);exit;
+    unset($res);
 
-  	unset($res);
+    return $tree;
+}
 
-  	return $tree;
-  }
+/**
+ * 前台无限极分类整理
+ *
+ * @param  [type] $data [description]
+ * @return [type]       [description]
+ */
+function subtree2($data, $pid = 0)
+{
+    foreach ($data as $key=>$vo) {
+        $res[$vo['id']] = $vo;
+        $res[$vo['id']]['children'] = [];
+    }
+    unset($data);
+    // 查询子孙
+    foreach ($res as $key=>$vo) {
+        if ($vo['parentid'] != $pid) {
+          $num = count(explode(',', $vo['arrparentid']));
+          if($num == 3){
+            $res[$res[$vo['parentid']]['parentid']]['level']= count(explode(',', $vo['arrparentid']));
+          } else if($num == 2){
+            $res[$vo['parentid']]['level']= count(explode(',', $vo['arrparentid']));
+          } else {
+            $res[$vo['parentid']]['level']= 0;
+          }
+
+          $res[$vo['parentid']]['children'][] = &$res[$key];
+        }
+    }
+
+    // dump($res);
+    // 去除杂质
+    foreach ($res as $key=>$vo) {
+        // dump($vo);exit;
+        if ($vo['parentid'] == $pid) {
+            $tree[] = $vo;
+        }
+    }
+    // dump($tree);exit;
+    unset($res);
+
+    return $tree;
+}
+
+ /**
+  * [根据分数匹配学校结果]
+  *
+  * @param  [int] $x       [成绩一]
+  * @param  [int] $y       [成绩二]
+  * @param  [str] $formula [公式]
+  * @param  [str] $range   [成绩范围]
+  * @return [str]          [结果]
+  */
+function getAchievementResult($x, $y, $formula, $range)
+{
+    $formula = '$num ='.$formula.';';
+    eval($formula);
+    $rangearr = explode('-', $range);
+    $min = $rangearr[0];
+    $max = $rangearr[1];
+
+    if ($num>$max) {
+        //保底
+        $result = '3';
+    } elseif ($num<$min) {
+        //冲刺
+        $result = '1';
+    } else {
+        //正常
+        $result = '2';
+    }
+    return $result;
+}
+
+
+function getmajor1($id)
+{
+    $info = db('tag')->field('title')->find($id);
+    return $info['title'];
+}
+
+
+function getranking($exnum, $school, $score, $major, $arrangement)
+{
+    // 算比我分高的
+    // 我的$score
+    //  $school
+    $map['major']  = ['like','%'.$major.'%'];
+    // $list = db('xk_score')->field('id')->where('school', $school)->where('otherscore', '>=', $score)->where($map)->fetchsql(false)->order('otherscore desc')->cache(false)->count();
+    $list = db('xiaokao')->field('id')->group('name,score,arrangement')->order('school desc,arrangement desc,major desc,direction desc,score desc')->where('score', '>=', $score)->where('school', $school)->where('arrangement', $arrangement)->where($map)->fetchSql(false)->count();
+    // dump($list);
+    return $list;
+}
+function getotherscore($exnum)
+{
+    // 算比我分高的
+    // 我的$score
+    //  $school
+    $list = db('xk_score')->field('otherscore')->where('exnum', $exnum)->find();
+    return $list['otherscore'];
+}
+
+
+//$arr->传入数组   $key->判断的key值
+function array_unset_tt($arr, $key)
+{
+    //建立一个目标数组
+    $res = array();
+    foreach ($arr as $value) {
+        //查看有没有重复项
+        if (isset($res[$value[$key]])) {
+            //有：销毁
+            unset($value[$key]);
+        } else {
+            $res[$value[$key]] = $value;
+        }
+    }
+    return $res;
+}
+// 数组模糊查询
+function arrList($arrs, $keywords=null, $type='school')
+{
+    $result = array();
+    foreach ($arrs as $key => $searchData) {
+        if (strpos($searchData['school'], $keywords) !== false) {
+            array_push($result, $arrs[$key]);
+        }
+    }
+    return $result;
+}
+
+function arrListByid($arrs, $id=null)
+{
+    $result = array();
+    foreach ($arrs as $key => $searchData) {
+        if ($searchData['id'] == $id) {
+            array_push($result, $arrs[$key]);
+        }
+    }
+    return $result;
+}
+
+function toIndexArr($arr)
+{
+    $i=0;
+    foreach ($arr as $key => $value) {
+        $newArr[$i] = $value;
+        $i++;
+    }
+    return $newArr;
+}
+
+function getCatePath($cid, &$result = array())
+{
+    $category = db('category');
+    $row = $category->where('parentid', $cid)->select();
+    $result[] = $row;
+    foreach ($row as $key => $value) {
+        getCatePath($value['id'], $result);
+    }
+    krsort($result); //krsort对数组按键名逆向
+    return $result;
+}

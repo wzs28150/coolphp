@@ -17,8 +17,8 @@
             <div class="layadmin-contact-box">
               <div class="layui-col-md4 layui-col-sm6">
                 <a href="javascript:;">
-                  <div class="layadmin-text-center">
-                    <div style="width: 128px; height: 128px; border-radius: 50%;margin-top: 5px;display: inline-block; position:relative;text-align:center">
+                  <div class="layadmin-text-center" style="margin-top: 45px;">
+                    <div style="border-radius: 50%;margin-top: 5px;display: inline-block; position:relative;text-align:center">
                       <i class="layui-icon {$vo.icon}" style="position:absolute; font-size:30px; height:30px; top:50%; margin-top:-15px;left:50%; margin-left:-15px;"></i>
                     </div>
                   </div>
@@ -35,16 +35,16 @@
                   </p>
                 </a>
                 <div class="layadmin-address" style="margin-bottom:0">
-                  {$vo.description}
+                  <p style="overflow: hidden;text-overflow:ellipsis; white-space: nowrap; ">{$vo.description}</p>
                   <div style="margin-top:10px;">
                     <!-- <a href="/addons_execute_{$vo.name}-index-index" class="layui-btn layui-btn-xs qrshow" id="" target="_blank">前台入口</a> -->
                     <a href="/admin/Addons/loadadmin/id/{$vo.aid}.html" class="layui-btn layui-btn-xs" target="_blank" title="进入管理后台">后台</a>
                     {if condition="$vo.status eq 1"}
-                    <a class="layui-btn layui-btn-normal layui-btn-xs layui-btn-disabled" data-name="{$vo.name}" lay-event="install" title="安装插件">安装</a>
+                    <!-- <a class="layui-btn layui-btn-normal layui-btn-xs layui-btn-disabled" data-name="{$vo.name}" lay-event="install" title="安装插件">安装</a> -->
                     <a class="layui-btn layui-btn-danger layui-btn-xs uninstall" data-name="{$vo.name}" lay-event="uninstall" title="卸载插件">卸载</a>
                     {else}
                     <a class="layui-btn layui-btn-normal layui-btn-xs install" lay-event="install" data-name="{$vo.name}" title="安装插件">安装</a>
-                    <a class="layui-btn layui-btn-danger layui-btn-xs layui-btn-disabled uninstall" data-name="{$vo.name}" title="卸载插件">卸载</a>
+                    <!-- <a class="layui-btn layui-btn-danger layui-btn-xs layui-btn-disabled uninstall" data-name="{$vo.name}" title="卸载插件">卸载</a> -->
                     {/if}
 
                     {if condition="$vo.has_adminlist eq 1"}

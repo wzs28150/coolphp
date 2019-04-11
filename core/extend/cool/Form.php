@@ -74,6 +74,7 @@ class Form{
         $style_color='';
         $style_bold='';
         $title_thumb=$this->data['thumb'];
+        // dump($info['setup']);
         if(array_key_exists('title_style',$this->data)){
             if($this->data['title_style']){
                 $title_style = explode(';',$this->data['title_style']);
@@ -116,6 +117,9 @@ class Form{
         $thumbstr .='<button type="button" class="layui-btn layui-btn-primary" id="thumbBtn"><i class="icon icon-upload3"></i>点击上传</button>';
         $thumbstr .='<div class="layui-upload-list"><img class="layui-upload-img" width="95" id="coolThumb" src="'.$titleThumb.'"><p id="thumbText"></p>';
         $thumbstr .='</div></div>';
+        if($info['setup']['info']){
+          $thumbstr .= $info['setup']['info'];
+        }
         if($style){
             $parseStr = $parseStr.$stylestr;
         }
@@ -129,7 +133,7 @@ class Form{
         $info['setup']=is_array($info['setup']) ? $info['setup'] : string2array($info['setup']);
         $field = $info['field'];
         $name = $info['name'];
-
+        // dump($info['setup']);
         $info['setup']['ispassword'] ? $inputtext = 'password' : $inputtext = 'text';
         $action = ACTION_NAME;
         if($action=='add'){
@@ -144,8 +148,14 @@ class Form{
 
         if($info['required']==1){
             $parseStr   = '<input type="'.$inputtext.'" data-required="'.$info['required'].'" min="'.$info['minlength'].'" max="'.$info['maxlength'].'" errormsg="'.$info['errormsg'].'" title="'.$name.'" placeholder="请输入'.$name.'(必填)" lay-verify="defaul'.$pattern.'" class="'.$info['class'].' layui-input" name="'.$field.'" value="'.$value.'" /> ';
+            if($info['setup']['info']){
+              $parseStr .= $info['setup']['info'];
+            }
         }else{
           $parseStr   = '<input type="'.$inputtext.'" data-required="'.$info['required'].'" min="'.$info['minlength'].'" max="'.$info['maxlength'].'" errormsg="'.$info['errormsg'].'" title="'.$name.'" placeholder="请输入'.$name.'" lay-verify="defaul'.$pattern.'" class="'.$info['class'].' layui-input" name="'.$field.'" value="'.$value.'" /> ';
+          if($info['setup']['info']){
+            $parseStr .= $info['setup']['info'];
+          }
         }
         return $parseStr;
     }
@@ -487,6 +497,9 @@ class Form{
         $thumbstr .='<button type="button" class="layui-btn layui-btn-primary" id="'.$info['class'].'"><i class="icon icon-upload3"></i>点击上传</button>';
         $thumbstr .='<div class="layui-upload-list"><img class="layui-upload-img" id="'.$info['class'].'Img" src="'.$value.'"><p id="thumbText"></p>';
         $thumbstr .='</div></div></div>';
+        if($info['setup']['info']){
+          $thumbstr .= $info['setup']['info'];
+        }
         $thumbstr.="<script>
                         layui.use('upload', function () {
                             var upload = layui.upload;
@@ -502,6 +515,7 @@ class Form{
                             });
                         });
                     </script>";
+
         return $thumbstr;
     }
 
@@ -641,10 +655,201 @@ class Form{
 
     public function multicolumn($info,$value)
     {
-      echo 1;
+      $field = $info["field"];
+      $value = $value ? $value : $this->data[$field];
+      $multitype = $info["setup"]["multitype"];
+      $catid = $info["setup"]["catid"];
+      $multiple = $info["setup"]["multiple"];
+      if($multitype == 'con'){
+        // 内容
+        $moduleid = db('category')->field('moduleid')->find($catid);
+        $dbname = db('module')->field('name')->find($moduleid['moduleid']);
+        $list = db($dbname['name'])->field('title,id')->where('catid',$catid)->select();
+      }else{
+        // 栏目
+        $list = db('category')->field('id,catname as title')->where('parentid',$catid)->select();
+      }
+      $str = "";
+      if($multiple == 0){
+        $str.= "<select name=\"".$field."\">";
+        foreach ($list as $key => $val) {
+          if($value == $val['id']){
+            $str.= '<option value="'.$val['id'].'" selected>'.$val['title'].'</option>';
+          }else{
+            $str.= '<option value="'.$val['id'].'">'.$val['title'].'</option>';
+          }
+        }
+        $str.= "</select>";
+      }elseif($multiple == 1){
+        foreach ($list as $key => $val) {
+          if($value == $val['id']){
+            $str.= '<input type="radio" name="'.$field.'" value="'.$val['id'].'" title="'.$val['title'].'" checked/>';
+          }else{
+            $str.= '<input type="radio" name="'.$field.'" value="'.$val['id'].'" title="'.$val['title'].'"/>';
+          }
+        }
+      }elseif($multiple == 2){
+        $value = explode(',',$value);
+        foreach ($list as $key => $val) {
+          if(in_array($val['id'],$value)){
+            $str.= '<input type="checkbox" name="'.$field.'[]" value="'.$val['id'].'" title="'.$val['title'].'" checked/>';
+          }else{
+            $str.= '<input type="checkbox" name="'.$field.'[]" value="'.$val['id'].'" title="'.$val['title'].'"/>';
+          }
+        }
+      }
+      return $str;
     }
 
     public function addbox($info,$value)
+    {
+      $field = $info['field'];
+      $valuev = $value ? $value : $this->data[$field];
+      if($info['setup']['other']){
+        $otherarr = explode('|',$info['setup']['other']);
+        $otherstr = '';
+        foreach ($otherarr as $key => $value) {
+          $val = explode(':',$value);
+          $otherstr .= ' <div class="layui-inline">';
+          $otherstr .= '   <input name=""  value="" class="layui-input '.$val[0].'-'.$field.'" placeholder="请输入'.$val[1].'">';
+          $otherstr .= ' </div>';
+        }
+      }
+      $tagstr = '';
+      $list = db('tag')->field('id,title')->where('catid',42)->select();
+      foreach ($list as $key => $value) {
+        $tagstr .= '<option value="'.$value['id'].'" >'.$value['title'].'</option>';
+      }
+      $str  = '';
+      $str .= '<div class="layui-block addbox-'.$field.'">';
+      $str .= ' <div class="layui-inline" style="width:2em;text-align:center">';
+      $str .= ' 编号';
+      $str .= ' </div>';
+      $str .= ' <div class="layui-inline">';
+      $str .= '   <select class="layui-select title-'.$field.'">';
+      $str .=  $tagstr;
+      $str .= '   </select>';
+      $str .= ' </div>';
+      // $str .= ' <div class="layui-inline">';
+      // $str .= '   <input name="" value="" type="text" class="layui-input title-'.$field.'" placeholder="请输入标题">';
+      // $str .= ' </div>';
+      $str .= $otherstr;
+      $str .= ' <a class="layui-icon layui-icon-add-1" href="javascript:void(0)" id="addboxbtn-'.$field.'"></a>';
+      $str .= '</div>';
+
+      $str .= '<div class="layui-block addbox-list-'.$field.'">';
+
+      $str .= '</div>';
+      $str .= '<input name="'.$field.'" value=\''.$valuev.'\' class="layui-input" id="'.$field.'" type="hidden">';
+      $str .= "<script>";
+      $str .= "layui.use(['form','upload'],function () {";
+      $str .= "      var form = layui.form;";
+      $str .= "      var arr = new Array();";
+      if($this->data[$field]){
+        $str .= "    var dataobj = ".  $this->data[$field].";";
+        $str .= "    if(dataobj){";
+        $str .= "     $.each(dataobj,function(index,value){";
+        $str .= "       arr.push(value);";
+        $str .= "     });";
+        $str .= "     subhtml();";
+        $str .= "    }";
+      }
+      $str .= "    function addvideoarr() {";
+      $str .= "    var arritem = [];console.log($('.addbox-".$field." .title-".$field."').val());";
+      $str .= "      arritem['title'] = $('.addbox-".$field." .title-".$field."').val();";
+      foreach ($otherarr as $key => $value) {
+        $val = explode(':',$value);
+        $str .= "    arritem['".$val[0]."'] = $('.addbox-".$field." input.".$val[0]."-".$field."').val();";
+      }
+      $str .= "      arr.push(arritem);";
+      $str .= "    }function changevideoarr() {
+
+					arr.length = 0;
+					console.log(arr);
+					$('.addbox-item-zyfs').each(function(i){
+						var arritem = [];
+						arritem['title'] = $(this).find('select').val();
+						arritem['wkzdf'] = $(this).find('input.wkzdf-zyfs').val();
+						arritem['lkzdf'] = $(this).find('input.lkzdf-zyfs').val();
+						arritem['gongshi'] = $(this).find('input.gongshi-zyfs').val();
+						arr.push(arritem);
+					});
+
+	    }";
+
+      $str .= "    function encodeArray2D(obj) {";
+		  $str .= "     var array = [];";
+      $str .= "       $.each(obj,function(index,value){";
+      $str .= "         var str = '';";
+      $str .= "         for(var key in value){";
+      $str .= "           str = str + '\"' + key+'\":'+ '\"' + value[key] + '\",';";
+      $str .= "         }";
+      $str .= "         array[index] = '{'+str.substring(0,str.length-1)+'}';";
+      $str .= "       });";
+		  $str .= "     return '[' + array.join(',') + ']';";
+	    $str .= "    };";
+      $str .= "    function subhtmlarr() {";
+      $str .= "      $('#".$field."').val(encodeArray2D(arr));";
+      $str .= "    };";
+      $str .= "    function subhtml() {";
+      $str .= "      $('#".$field."').val(encodeArray2D(arr));";
+      $str .= "       var html = '',str='';";
+      $str .= "       $.each(arr,function(index,value){";
+      $str .= "           html = html + '<div class=\"layui-block addbox-item-".$field."\">';";
+      $str .= "           html = html + '<div class=\"layui-inline\" style=\"width:2em;text-align:center\">';";
+      $str .= "           html = html + (index + 1);";
+      $str .= "           html = html + '</div> ';";
+      $str .= "           html = html + '<div class=\"layui-inline\">';";
+      // $str .= "           html = html + '<input name=\"title-".$field."[]\" type=\"text\" class=\"layui-input\" placeholder=\"请输入标题\" value=\"'+value.title+'\">';";
+      $str .= "           html = html + '<select name=\"title-".$field."[]\" class=\"layui-select\" value=\"'+value.title+'\" disabled>';";
+      $tagstr1 = '';
+      $list = db('tag')->field('id,title')->where('catid',42)->select();
+      foreach ($list as $key => $value) {
+        $str .= "var a = ".$value['id'].";";
+        $str .= "if(a == value.title){";
+        $str .= "           html = html + '<option value=\"".$value['id']."\" selected >".$value['title']."</option>';";
+        $str .= "}else{";
+        $str .= "           html = html + '<option value=\"".$value['id']."\"  >".$value['title']."</option>';";
+        $str .= "}";
+      }
+      $str .= "           html = html + '".$tagstr1."';";
+      $str .= "           html = html + '</select>';";
+      $str .= "           html = html + '</div>';";
+      foreach ($otherarr as $key => $value) {
+          $val = explode(':',$value);
+          $str .= "          html = html + ' <div class=\"layui-inline\">';";
+          $str .= "          html = html + '   <input name=\"".$val[0]."-".$field."[]\" type=\"text\" value=\"'+value.".$val[0]."+'\" class=\"layui-input ".$val[0]."-".$field."\" placeholder=\"请输入".$val[1]."\">';";
+          $str .= "          html = html + ' </div>';";
+      }
+      // $str .= "           str = str + '".$otherstr."';";
+      $str .= "           html = html + ' <a class=\"layui-icon layui-icon-close addboxdelbtn-".$field."[]\" href=\"javascript:void(0)\"></a>';";
+      $str .= "           html = html + '</div>';";
+      $str .= "        });";
+      $str .= "       $('.addbox-list-".$field."').html(html);";
+      $str .= "       $('.addbox-".$field." input').val('');  form.render();";
+      $str .= "    }";
+      $str .= "    $('.addbox-".$field."').on('click','#addboxbtn-".$field."',function(){";
+      $str .= "       addvideoarr();";
+      $str .= "       subhtml();";
+      $str .= "    });";
+      $str .= "    $('.addbox-list-".$field."').on('input propertychange','input',function(){";
+      $str .= "       changevideoarr();";
+      $str .= "       subhtmlarr();";
+      $str .= "    });";
+      $str .= "    $('body').on('click','.addbox-item-".$field." a',function(){";
+      $str .= "       var i = $(this).parent().index();";
+      $str .= "       arr.splice(i,1);";
+      $str .= "       subhtml();";
+      $str .= "    });";
+      $str .= "});";
+      $str .= "</script>";
+      if($info['setup']['info']){
+        $str .= $info['setup']['info'];
+      }
+      return $str;
+    }
+
+    public function addbox1($info,$value)
     {
       $field = $info['field'];
       if($info['setup']['other']){
@@ -657,14 +862,24 @@ class Form{
           $otherstr .= ' </div>';
         }
       }
+      $tagstr = '';
+      $list = db('tag')->field('id,title')->where('catid',42)->select();
+      foreach ($list as $key => $value) {
+        $tagstr .= '<option value="'.$value['id'].'" >'.$value['title'].'</option>';
+      }
       $str  = '';
       $str .= '<div class="layui-block addbox-'.$field.'">';
       $str .= ' <div class="layui-inline" style="width:2em;text-align:center">';
       $str .= ' 编号';
       $str .= ' </div>';
-      $str .= ' <div class="layui-inline">';
-      $str .= '   <input name="" value="" type="text" class="layui-input title-'.$field.'" placeholder="请输入标题">';
-      $str .= ' </div>';
+      // $str .= ' <div class="layui-inline">';
+      // $str .= '   <select class="layui-select title-'.$field.'">';
+      // $str .=  $tagstr;
+      // $str .= '   </select>';
+      // $str .= ' </div>';
+      // $str .= ' <div class="layui-inline">';
+      // $str .= '   <input name="" value="" type="text" class="layui-input title-'.$field.'" placeholder="请输入标题">';
+      // $str .= ' </div>';
       $str .= $otherstr;
       $str .= ' <a class="layui-icon layui-icon-add-1" href="javascript:void(0)" id="addboxbtn-'.$field.'"></a>';
       $str .= '</div>';
@@ -674,8 +889,8 @@ class Form{
       $str .= '</div>';
       $str .= '<input name="'.$field.'" value="" class="layui-input" id="'.$field.'" type="hidden">';
       $str .= "<script>";
-      $str .= "layui.use('upload',function () {";
-      $str .= "    ";
+      $str .= "layui.use(['form','upload'],function () {";
+      $str .= "      var form = layui.form;";
       $str .= "      var arr = new Array();";
       if($this->data[$field]){
         $str .= "    var dataobj = ".  $this->data[$field].";";
@@ -687,11 +902,11 @@ class Form{
         $str .= "    }";
       }
       $str .= "    function addvideoarr() {";
-      $str .= "    var arritem = [];";
-      $str .= "      arritem['title'] = $('.addbox-morevideo input.title-".$field."').val();";
+      $str .= "    var arritem = [];console.log($('.addbox-".$field." .title-".$field."').val());";
+      $str .= "      arritem['title'] = $('.addbox-".$field." .title-".$field."').val();";
       foreach ($otherarr as $key => $value) {
         $val = explode(':',$value);
-        $str .= "    arritem['".$val[0]."'] = $('.addbox-morevideo input.".$val[0]."-".$field."').val();";
+        $str .= "    arritem['".$val[0]."'] = $('.addbox-".$field." input.".$val[0]."-".$field."').val();";
       }
       $str .= "      arr.push(arritem);";
       $str .= "    }";
@@ -715,9 +930,6 @@ class Form{
       $str .= "           html = html + '<div class=\"layui-inline\" style=\"width:2em;text-align:center\">';";
       $str .= "           html = html + (index + 1);";
       $str .= "           html = html + '</div> ';";
-      $str .= "           html = html + '<div class=\"layui-inline\">';";
-      $str .= "           html = html + '<input name=\"title-".$field."[]\" type=\"text\" class=\"layui-input\" placeholder=\"请输入标题\" value=\"'+value.title+'\">';";
-      $str .= "           html = html + '</div>';";
       foreach ($otherarr as $key => $value) {
           $val = explode(':',$value);
           $str .= "          html = html + ' <div class=\"layui-inline\">';";
@@ -729,7 +941,7 @@ class Form{
       $str .= "           html = html + '</div>';";
       $str .= "        });";
       $str .= "       $('.addbox-list-".$field."').html(html);";
-      $str .= "       $('.addbox-morevideo input').val('');";
+      $str .= "       $('.addbox-".$field." input').val('');  form.render();";
       $str .= "    }";
       $str .= "    $('.addbox-".$field."').on('click','#addboxbtn-".$field."',function(){";
       $str .= "       addvideoarr();";
@@ -742,8 +954,73 @@ class Form{
       $str .= "    });";
       $str .= "});";
       $str .= "</script>";
-
       return $str;
+    }
+
+    public function linkage($info){
+        $field = $info['field'];
+        $value = '';
+        if($this->data[$field]){
+            $value = explode(',',$this->data[$field]);
+        }
+        $region = db('region')->where(['pid'=>1])->select();
+        $html='<div class="layui-input-inline">';
+        $html .='<select name="'.$field.'[]" id="province" lay-filter="province">';
+        $html .='<option value="">请选择省</option>';
+        foreach ($region as $k=>$v){
+            if($value[0] == $v['id']){
+                $html .='<option selected value="'.$v['id'].'">'.$v['name'].'</option>';
+            }else{
+                $html .='<option value="'.$v['id'].'">'.$v['name'].'</option>';
+            }
+        }
+        $html .='</select>';
+        $html .='</div>';
+
+        $city ='';
+        if($value[0]){
+            $city = db('region')->where(['pid'=>$value[0]])->select();
+        }
+
+        $html .='<div class="layui-input-inline">';
+        $html .='<select name="'.$field.'[]" id="city" lay-filter="city">';
+        $html .='<option value="">请选择市</option>';
+        if($city){
+            foreach ($city as $k=>$v){
+                if($value[1] == $v['id']){
+                    $html .='<option selected value="'.$v['id'].'">'.$v['name'].'</option>';
+                }else{
+                    $html .='<option value="'.$v['id'].'">'.$v['name'].'</option>';
+                }
+            }
+        }
+
+        $html .='</select>';
+        $html .='</div>';
+
+        $district ='';
+        if($value[1]){
+            $district = db('region')->where(['pid'=>$value[1]])->select();
+        }
+
+
+        $html .='<div class="layui-input-inline">';
+        $html .='<select name="'.$field.'[]" id="district" lay-filter="district">';
+        $html .='<option value="">请选择县/区</option>';
+
+        if($district){
+            foreach ($district as $k=>$v){
+                if($value[2] == $v['id']){
+                    $html .='<option selected value="'.$v['id'].'">'.$v['name'].'</option>';
+                }else{
+                    $html .='<option value="'.$v['id'].'">'.$v['name'].'</option>';
+                }
+            }
+        }
+
+        $html .='</select>';
+        $html .='</div>';
+        return $html;
     }
 }
 ?>

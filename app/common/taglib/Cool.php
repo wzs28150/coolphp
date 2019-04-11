@@ -53,7 +53,7 @@ class Cool extends TagLib {
         $id = $attr['id'];
         $key = $attr['key']?$attr['key']:'k';
         $str = '<?php ';
-        $str.='$result = db("'.$db.'")->where("'.$where.'")->limit('.$limit.')->order("'.$order.'")->select();';
+        $str.='$result = db("'.$db.'")->where("'.$where.'")->limit('.$limit.')->order("'.$order.'")->fetchsql(false)->select();';
         $str .= 'foreach ($result as $'.$key.'=>$'.$id.'):';
         $str .= '?>';
         $str .= $content;

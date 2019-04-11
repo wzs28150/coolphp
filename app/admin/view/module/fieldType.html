@@ -9,6 +9,10 @@
 		</td>
 	</tr>
 	<tr>
+			<td>提示</td>
+			<td> <input type="text" class="input-text layui-input" size="50"  name="setup[info]" value="{$info}" /></td>
+	</tr>
+	<tr>
 		<td>标题样式</td>
 		<td>
 			<input type="radio" name="setup[style]" value="1" {if condition="$style==1"} checked{/if} title="是">
@@ -29,6 +33,12 @@
 			<input type="radio" name="setup[ispassword]" value="1" title="是" {if condition="$ispassword==1"} checked{/if}>
 			<input type="radio" name="setup[ispassword]" value="0" title="否" {if condition="$ispassword==0"} checked{/if}>
 		</td>
+	</tr>
+	<tr>
+			<td>提示</td>
+			<td>
+					<input type="text" class="layui-input input-text" size="50"  name="setup[info]" value="{$info}" />
+			</td>
 	</tr>
 	<input type="hidden" id="varchar" name="setup[fieldtype]" value="varchar"/>
 </table>
@@ -111,7 +121,36 @@
 
 {/case}
 {case value="multicolumn"}
+<table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
+	<tr>
+		<td width="120">选项类型</td>
+		<td>
+			<input type="radio" name="setup[multitype]" value="col" {if condition="$multitype=='col'"} checked{/if} title="栏目">
+			<input type="radio" name="setup[multitype]" value="con" {if condition="$multitype=='con'"} checked{/if} title="文章">
+		</td>
+	</tr>
+	<tr>
+		<td>栏目id</td>
+		<td>
+			<input type="text" class="input-text layui-input" name="setup[catid]" value="{$catid}" checked title="栏目id" />
+		</td>
+	</tr>
+	<tr>
+		<td>展现形式</td>
+		<td>
+			<input type="radio" name="setup[multiple]" value="0" title="下拉框" {if condition="$multiple==0"} checked{/if}>
+			<input type="radio" name="setup[multiple]" value="1" title="单选" {if condition="$multiple==1"} checked{/if}>
+			<input type="radio" name="setup[multiple]" value="2" title="多选" {if condition="$multiple==2"} checked{/if}>
+		</td>
+	</tr>
 
+	<tr>
+		<td>提示</td>
+		<td>
+			<input type="text" class="input-text layui-input" name="setup[info]" value="{$info}" />
+		</td>
+	</tr>
+</table>
 {/case}
 {case value="groupid"}
 <table cellpadding="2" class="layui-table" cellspacing="1" width="100%">
@@ -274,6 +313,12 @@
 		<td>允许上传的图片类型</td>
 		<td><input type="text" name="setup[upload_allowext]" value="{$upload_allowext}" class="input-text layui-input"></td>
 	</tr>
+	<tr>
+			<td>提示</td>
+			<td>
+					<input type="text" class="layui-input input-text" size="50"  name="setup[info]" value="{$info}" />
+			</td>
+	</tr>
 </table>
 {/case}
 {case value="images"}
@@ -308,7 +353,17 @@
   <tr>
       <td>参数设置</td>
       <td>
-          <input type="input" id="" name = "setup[multi]" />
+          <input type="text" class="input-text layui-input" id="" name = "setup[other]" value="{$other}" />
+      </td>
+  </tr>
+</table>
+{/case}
+{case value="addbox1"}
+<table class="layui-table" cellpadding="2" cellspacing="1" width="100%">
+  <tr>
+      <td>参数设置</td>
+      <td>
+          <input type="text" class="input-text layui-input" id="" name = "setup[other]" value="{$other}" />
       </td>
   </tr>
 </table>

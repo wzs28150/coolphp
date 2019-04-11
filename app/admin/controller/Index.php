@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 use think\Input;
+use think\Cache;
 use app\admin\controller\SysInfo;
 class Index extends Common
 {
@@ -17,11 +18,13 @@ class Index extends Common
         //导航
         // 获取缓存数据
         $menus = F('Menus');
-        if(!$menus){
-          $menus = db('menu')->select();
-          F('Menus', $menus);
+        if(!$menus) {
+            $menus = db('menu')->order('sort asc,id asc,addtime desc')->select();
+            F('Menus', $menus);
         }
+
         $menus =  subtree($menus);
+        // dump($menus);
         // exit;
         $this->assign('menus', $menus);
         return $this->fetch();
@@ -48,17 +51,17 @@ class Index extends Common
 
         $this->assign('config', $config);
         //获取快捷插件列表
-        $addons = db('addons')->where('has_adminlist',1)->select();
+        $addons = db('addons')->where('has_adminlist', 1)->select();
         $this->assign('addons', $addons);
         $this->assign('addonsnum', count($addons));
         //磁盘信息
-        $disk = round(100 - disk_free_space($_SERVER['DOCUMENT_ROOT'])/disk_total_space($_SERVER['DOCUMENT_ROOT'])*100,2);
+        $disk = round(100 - disk_free_space($_SERVER['DOCUMENT_ROOT'])/disk_total_space($_SERVER['DOCUMENT_ROOT'])*100, 2);
         $this->assign('disk', $disk);
         //待审文章
-        $dsarticle = db('article')->where('status',3)->count();
+        $dsarticle = db('article')->where('status', 3)->count();
         $this->assign('dsarticle', $dsarticle);
         //待审评论
-        $dscomment = db('comment')->where('status','<>',1)->count();
+        $dscomment = db('comment')->where('status', '<>', 1)->count();
         $this->assign('dscomment', $dscomment);
 
         return $this->fetch();
@@ -66,64 +69,139 @@ class Index extends Common
 
     public function getpv()
     {
-      $stattime = strtotime(date("Y-m-d"), time());
-      $shijianxian = Db::query("select date(from_unixtime(stattime)) as riqi, sum(pv)as pvnum,sum(uv)as uvnum,sum(ip)as ipnum   from cool_visit_detail where from_unixtime(stattime) >= date(now()) - interval 7 day group by day(from_unixtime(stattime));");
-      $riqistr = '';
-      $pvstr = '';
-      $uvstr = '';
-      $ipstr = '';
-      // dump($shijianxian);
-      foreach ($shijianxian as $key => $value) {
-          // $riqistr.=',"'.$value['riqi'].'"';
-          // $pvstr.=','.$value['pvnum'];
-          // $uvstr.=','.$value['uvnum'];
-          // $ipstr.=','.$value['ipnum'];
-          $riqistr[$key] = $value['riqi'];
-          $pvstr[$key] = $value['pvnum'];
-          $uvstr[$key] = $value['uvnum'];
-      }
-      // $riqistr = substr($riqistr, 1);
-      // $pvstr = substr($pvstr, 1);
-      // $uvstr = substr($uvstr, 1);
-      // $ipstr = substr($ipstr, 1);
-      $result['riqistr'] = $riqistr;
-      $result['pvstr'] = $pvstr;
-      $result['uvstr'] = $uvstr;
-      // $result['ipstr'] = $ipstr;
-      return $result;
+        $stattime = strtotime(date("Y-m-d"), time());
+        $shijianxian = Db::query("select date(from_unixtime(stattime)) as riqi, sum(pv)as pvnum,sum(uv)as uvnum,sum(ip)as ipnum   from cool_visit_detail where from_unixtime(stattime) >= date(now()) - interval 7 day group by day(from_unixtime(stattime));");
+        $riqistr = '';
+        $pvstr = '';
+        $uvstr = '';
+        $ipstr = '';
+        // dump($shijianxian);
+        foreach ($shijianxian as $key => $value) {
+            // $riqistr.=',"'.$value['riqi'].'"';
+            // $pvstr.=','.$value['pvnum'];
+            // $uvstr.=','.$value['uvnum'];
+            // $ipstr.=','.$value['ipnum'];
+            $riqistr[$key] = $value['riqi'];
+            $pvstr[$key] = $value['pvnum'];
+            $uvstr[$key] = $value['uvnum'];
+        }
+        // $riqistr = substr($riqistr, 1);
+        // $pvstr = substr($pvstr, 1);
+        // $uvstr = substr($uvstr, 1);
+        // $ipstr = substr($ipstr, 1);
+        $result['riqistr'] = $riqistr;
+        $result['pvstr'] = $pvstr;
+        $result['uvstr'] = $uvstr;
+        // $result['ipstr'] = $ipstr;
+        return $result;
     }
     public function getnews()
     {
-      $list = db('article')->where('status',1)->order('hits desc')->limit(10)->select();
-      $rsult['code'] = 0;
-      $rsult['msg'] = "";
-      foreach ($list as $k=>$v ){
-          $list[$k]['createtime'] = date('Y-m-d H:i:s',$v['createtime']);
-          $list[$k]['catid'] = getcatname($v['catid']);
-      }
-      $rsult['data'] = $list;
-      $rsult['count'] = 10;
-      $rsult['rel'] = 1;
-      return $rsult;
+        $list = db('article')->where('status', 1)->order('hits desc')->limit(10)->select();
+        $rsult['code'] = 0;
+        $rsult['msg'] = "";
+        foreach ($list as $k=>$v ){
+            $list[$k]['createtime'] = date('Y-m-d H:i:s', $v['createtime']);
+            $list[$k]['catid'] = getcatname($v['catid']);
+        }
+        $rsult['data'] = $list;
+        $rsult['count'] = 10;
+        $rsult['rel'] = 1;
+        return $rsult;
     }
     public function getsysinfo()
     {
-      $type=input('type');
-      $info = new SysInfo();
-      $memory = $info->getMemoryUsage();
-      $cpu = $info->getCpuUsage();
-      if($memory){
-        cookie('memory',$memory['usage']);
-      }
-      if($cpu){
-        cookie('cpu',$cpu);
-      }
-      $data['cpu'] = cookie('cpu');
-      $data['memory'] = cookie('memory');
-      echo json_encode($data);
+
+        if(php_uname('s') == 'Windows NT') {
+            $type=input('type');
+            $info = new SysInfo();
+            $memory = $info->getMemoryUsage();
+            $cpu = $info->getCpuUsage();
+        }else{
+            $status= $this->get_used_status();
+            $cpu = $status['cpu_usage'];
+            $memory['usage'] = $status['mem_usage'];
+            // dump($status);
+        }
+
+        if($memory) {
+            cookie('memory', $memory['usage']);
+        }
+        if($cpu) {
+            cookie('cpu', $cpu);
+        }
+        $data['cpu'] = round(cookie('cpu'));
+        $data['memory'] = round(cookie('memory'));
+        echo json_encode($data);
+    }
+    public function get_used_status()
+    {
+        $fp = popen('top -b -n 1', "r");//获取某一时刻系统cpu和内存使用情况
+        $rs = "";
+        while(!feof($fp)){
+            //dump(fgets($fp));
+            $rs .= fread($fp, 1024);
+        }
+        pclose($fp);
+        $sys_info = explode("\n", $rs);
+
+        $tast_info = explode(",", $sys_info[1]);//进程 数组
+        $cpu_info = explode(",", $sys_info[2]);  //CPU占有量  数组
+        $mem_info = explode(",", $sys_info[3]); //内存占有量 数组
+
+        //正在运行的进程数
+        $tast_running = trim(trim($tast_info[1], 'running'));
+
+
+        //CPU占有量
+        $cpu_usage = floatval(explode(':', str_replace(' ', '', $cpu_info[0]))[1]);  //百分比
+
+        //内存占有量
+        $mem_total = explode(':', str_replace(' ', '', $mem_info[0]))[1];
+
+        $mem_used = str_replace('k used', '', $mem_info[1]);
+        $mem_usage = round(100*intval($mem_used)/intval($mem_total), 2);  //百分比
+        // dump($cpu_info);
+
+        /*硬盘使用率 begin*/
+        $fp = popen('df -lh | grep -E "^(/)"', "r");
+        $rs = fread($fp, 1024);
+        pclose($fp);
+        $rs = preg_replace("/\s{2,}/", ' ', $rs);  //把多个空格换成 “_”
+        $hd = explode(" ", $rs);
+        $hd_avail = trim($hd[3], 'G'); //磁盘可用空间大小 单位G
+        $hd_usage = trim($hd[4], '%'); //挂载点 百分比
+        //print_r($hd);
+        /*硬盘使用率 end*/
+
+        //检测时间
+        $fp = popen("date +\"%Y-%m-%d %H:%M\"", "r");
+        $rs = fread($fp, 1024);
+        pclose($fp);
+        $detection_time = trim($rs);
+
+        /*获取IP地址  begin*/
+        /*
+        $fp = popen('ifconfig eth0 | grep -E "(inet addr)"','r');
+        $rs = fread($fp,1024);
+        pclose($fp);
+        $rs = preg_replace("/\s{2,}/",' ',trim($rs));  //把多个空格换成 “_”
+        $rs = explode(" ",$rs);
+        $ip = trim($rs[1],'addr:');
+        */
+        /*获取IP地址 end*/
+        /*
+        $file_name = "/tmp/data.txt"; // 绝对路径: homedata.dat
+        $file_pointer = fopen($file_name, "a+"); // "w"是一种模式，详见后面
+        fwrite($file_pointer,$ip); // 先把文件剪切为0字节大小， 然后写入
+        fclose($file_pointer); // 结束
+        */
+
+        return array('cpu_usage'=>$cpu_usage,'mem_usage'=>$mem_usage,'hd_avail'=>$hd_avail,'hd_usage'=>$hd_usage,'tast_running'=>$tast_running,'detection_time'=>$detection_time);
     }
     /**
      * seo 显示
+     *
      * @return [type] [description]
      */
     // public function seo()
@@ -200,6 +278,7 @@ class Index extends Common
     // }
     /**
      * 获取seo信息
+     *
      * @param  [type]  $url     [description]
      * @param  integer $limit   [description]
      * @param  string  $post    [description]
@@ -321,14 +400,12 @@ class Index extends Common
      */
     public function clear()
     {
+        Cache::clear();
         $R = RUNTIME_PATH;
-        if ($this->_deleteDir($R)) {
-            $result['info'] = '清除缓存成功!';
-            $result['status'] = 1;
-        } else {
-            $result['info'] = '清除缓存失败!';
-            $result['status'] = 0;
-        }
+        // echo $R;
+        $this->_deleteDir($R);
+        $result['info'] = '清除缓存成功!';
+        $result['status'] = 1;
         $result['url'] = url('admin/index/index');
         return $result;
     }

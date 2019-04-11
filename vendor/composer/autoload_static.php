@@ -13,6 +13,10 @@ class ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6
     );
 
     public static $prefixLengthsPsr4 = array (
+        'w' => 
+        array (
+            'wlt\\wxmini\\' => 11,
+        ),
         't' => 
         array (
             'tp5er\\' => 6,
@@ -21,9 +25,31 @@ class ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6
             'think\\captcha\\' => 14,
             'think\\' => 6,
         ),
+        'Z' => 
+        array (
+            'ZipStream\\' => 10,
+        ),
+        'W' => 
+        array (
+            'WePay\\' => 6,
+            'WeMini\\' => 7,
+            'WeChat\\' => 7,
+        ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
+        'A' => 
+        array (
+            'AliPay\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'wlt\\wxmini\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/xxh/think-wxminihelper/src',
+        ),
         'tp5er\\' => 
         array (
             0 => __DIR__ . '/..' . '/tp5er/tp5-databackup/src',
@@ -45,6 +71,40 @@ class ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6
             0 => __DIR__ . '/..' . '/5ini99/think-addons/src',
             1 => __DIR__ . '/..' . '/topthink/framework/library/think',
         ),
+        'ZipStream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'WePay\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zoujingli/wechat-developer/WePay',
+        ),
+        'WeMini\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zoujingli/wechat-developer/WeMini',
+        ),
+        'WeChat\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zoujingli/wechat-developer/WeChat',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
+        'AliPay\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zoujingli/wechat-developer/AliPay',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPExcel' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -54,6 +114,7 @@ class ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6
         'PHPMailerOAuthGoogle' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
         'POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.pop3.php',
         'SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.smtp.php',
+        'We' => __DIR__ . '/..' . '/zoujingli/wechat-developer/We.php',
         'ntlm_sasl_client_class' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
         'phpmailerException' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
     );
@@ -63,6 +124,7 @@ class ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit1af5f3b1f036cdeb6f1c8a2b01c641f6::$classMap;
 
         }, null, ClassLoader::class);

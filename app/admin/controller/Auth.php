@@ -331,7 +331,11 @@ class Auth extends Common
       $catelist0 = db('category')->where('parentid',0)->fetchsql(false)->order('listorder desc')->select();
       foreach ($catelist0 as $key => $value) {
         $data['title'] = $value['catname'];
-        $data['href'] = $value['module'].'/index?catid='.$value['id'];
+        if($value['module'] == 'page'){
+          $data['href'] = '/admin/page/edit/id/'.$value['id'].'.html';
+        }else{
+          $data['href'] = $value['module'].'/index?catid='.$value['id'];
+        }
         $data['pid'] = 28;
         $data['addtime'] = time();
         $data['menustatus'] = 1;
@@ -350,7 +354,11 @@ class Auth extends Common
         foreach ($catelist as $key => $value) {
           if($value['parentid'] == $v['catid']){
             $data['title'] = $value['catname'];
-            $data['href'] = $value['module'].'/index?catid='.$value['id'];
+            if($value['module'] == 'page'){
+              $data['href'] = '/admin/page/edit/id/'.$value['id'].'.html';
+            }else{
+              $data['href'] = $value['module'].'/index?catid='.$value['id'];
+            }
             $data['pid'] = $v['id'];
             $data['addtime'] = time();
             $data['menustatus'] = 1;
@@ -371,7 +379,12 @@ class Auth extends Common
         foreach ($catelist2 as $key => $value) {
           if($value['parentid'] == $v['catid']){
             $data['title'] = $value['catname'];
-            $data['href'] = $value['module'].'/index?catid='.$value['id'];
+            if($value['module'] == 'page'){
+              $data['href'] = '/page/edit/id/'.$value['id'].'.html';
+            }else{
+              $data['href'] = $value['module'].'/index?catid='.$value['id'];
+            }
+
             $data['pid'] = $v['id'];
             $data['addtime'] = time();
             $data['menustatus'] = 1;
@@ -383,54 +396,54 @@ class Auth extends Common
           }
         }
       }
-      db('menu')->where('aid','>',0)->delete();
-      $list = $this -> getDir(ADDONS_PATH);
-      foreach ($list as $key => $value) {
-        $info = db('addons')->where('name',$value)->find();
-        $data['title'] = $info['title'];
-        $data['href'] = $info['name'];
-        $data['pid'] = 115;
-        $data['icon'] = substr($info['icon'],11);
-        $data['addtime'] = time();
-        $data['menustatus'] = 0;
-        $data['aid'] = $info['id'];
-        $data['roleid'] = '1,2';
-        $data['sort'] = 99 + $key;
-        $authmenu[$info['id']] = db('menu')->insertGetId($data);
-        unset($data);
-        unset($info);
-      }
-      foreach ($authmenu as $key => $value) {
-        $info = db('addons')->find($key);
-        $list2 = db($info['name'].'_category')->where('pid',0)->select();
-        foreach ($list2 as $k => $v) {
-          $data['title'] = $v['title'];
-          $data['href'] = $v['href'];
-          $data['pid'] = $value;
-          $data['icon'] = '';
-          $data['addtime'] = time();
-          $data['menustatus'] = 1;
-          $data['aid'] = $key;
-          $data['roleid'] = '1,2';
-          $authmenu1[] = array('pid' => db('menu')->insertGetId($data),'aid' =>$info['id'],'id'=>$v['id']);
-          unset($data);
-        }
-      }
-      foreach ($authmenu1 as $key => $value) {
-        $info = db('addons')->find($value['aid']);
-        $list3 = db($info['name'].'_category')->where('pid',$value['id'])->select();
-        foreach ($list3 as $k => $v) {
-          $data['title'] = $v['title'];
-          $data['href'] = $v['href'];
-          $data['pid'] = $value['pid'];
-          $data['icon'] = '';
-          $data['addtime'] = time();
-          $data['menustatus'] = 1;
-          $data['aid'] = $value['aid'];
-          $data['roleid'] = '1,2';
-          $authmenu2[] = db('menu')->insertGetId($data);
-        }
-      }
+      // db('menu')->where('aid','>',0)->delete();
+      // $list = $this -> getDir(ADDONS_PATH);
+      // foreach ($list as $key => $value) {
+      //   $info = db('addons')->where('name',$value)->find();
+      //   $data['title'] = $info['title'];
+      //   $data['href'] = $info['name'];
+      //   $data['pid'] = 115;
+      //   $data['icon'] = substr($info['icon'],11);
+      //   $data['addtime'] = time();
+      //   $data['menustatus'] = 0;
+      //   $data['aid'] = $info['id'];
+      //   $data['roleid'] = '1,2';
+      //   $data['sort'] = 99 + $key;
+      //   $authmenu[$info['id']] = db('menu')->insertGetId($data);
+      //   unset($data);
+      //   unset($info);
+      // }
+      // foreach ($authmenu as $key => $value) {
+      //   $info = db('addons')->find($key);
+      //   $list2 = db($info['name'].'_category')->where('pid',0)->select();
+      //   foreach ($list2 as $k => $v) {
+      //     $data['title'] = $v['title'];
+      //     $data['href'] = $v['href'];
+      //     $data['pid'] = $value;
+      //     $data['icon'] = '';
+      //     $data['addtime'] = time();
+      //     $data['menustatus'] = 1;
+      //     $data['aid'] = $key;
+      //     $data['roleid'] = '1,2';
+      //     $authmenu1[] = array('pid' => db('menu')->insertGetId($data),'aid' =>$info['id'],'id'=>$v['id']);
+      //     unset($data);
+      //   }
+      // }
+      // foreach ($authmenu1 as $key => $value) {
+      //   $info = db('addons')->find($value['aid']);
+      //   $list3 = db($info['name'].'_category')->where('pid',$value['id'])->select();
+      //   foreach ($list3 as $k => $v) {
+      //     $data['title'] = $v['title'];
+      //     $data['href'] = $v['href'];
+      //     $data['pid'] = $value['pid'];
+      //     $data['icon'] = '';
+      //     $data['addtime'] = time();
+      //     $data['menustatus'] = 1;
+      //     $data['aid'] = $value['aid'];
+      //     $data['roleid'] = '1,2';
+      //     $authmenu2[] = db('menu')->insertGetId($data);
+      //   }
+      // }
       return $result = ['code'=>1,'msg'=>'修复成功!'];
     }
 
@@ -467,7 +480,8 @@ class Auth extends Common
     public function ruleEdit(){
         if(request()->isPost()) {
             $datas = input('post.');
-            if(authRule::update($datas)) {
+            $res = db('menu')->where('id',input('id'))->update($datas);
+            if($res) {
                 cache('authRule', NULL);
                 cache('authRuleList', NULL);
                 return json(['code' => 1, 'msg' => '保存成功!', 'url' => url('adminRule')]);
@@ -475,9 +489,7 @@ class Auth extends Common
                 return json(['code' => 0, 'msg' =>'保存失败！']);
             }
         }else{
-            $admin_rule = authRule::get(function($query){
-                $query->where(['id'=>input('id')])->field('id,href,title,icon,sort,menustatus');
-            });
+            $admin_rule = db('menu')->field('id,href,title,icon,sort,menustatus')->find(input('id'));
             $this->assign('rule',$admin_rule);
             return $this->fetch('ruleEdit');
         }

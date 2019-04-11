@@ -1,4 +1,8 @@
 {include file="common/head"/}
+<style media="screen">
+  .layui-layer-tips{ max-width: 200px; }
+  .layui-layer-tips img{ width: 100%!important;  }
+</style>
 <div class="layui-fluid">
    <div class="layui-card">
     <div class="admin-main layui-anim layui-anim-upbit">
@@ -39,7 +43,7 @@
     <input name="{{d.id}}" data-id="{{d.id}}" class="list_order layui-input" value=" {{d.listorder}}" size="10"/>
 </script>
 <script type="text/html" id="title">
-  {{# if(d.thumb){ }}<i class="layui-icon layui-icon-picture" style="margin-right:5px;" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.thumb}}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>{{# } }}
+  {{# if(d.thumb){ }}<i class="layui-icon layui-icon-picture" style="margin-right:5px;" onmouseover="layer.tips('<img src=__PUBLIC__/{{d.thumb}}>',this,{tips: [2, '#fff']});" onmouseout="layer.closeAll();"></i>{{# } }}
     <span style="{{d.title_style}}">{{d.title}}</span>
 </script>
 <script type="text/html" id="status">
@@ -53,7 +57,7 @@
 </script>
 <script type="text/html" id="action">
   <a href="{:url('edit')}?id={{d.id}}&catid={:input('catid')}" class="layui-btn layui-btn-xs">编辑</a>
-	<a href="/{{d.catdir}}Info_{{d.id}}_{{d.catid}}.html" target="_blank" class="layui-btn layui-btn-xs">预览</a>
+	<a href="/api_dataInfo_{{d.id}}_{{d.catid}}.html" target="_blank" class="layui-btn layui-btn-xs">预览</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="info">
@@ -86,12 +90,8 @@ var y;
                 {type: "checkbox", fixed: true},
                 {field: 'id', title: '{:lang("id")}',width: 80, fixed: true},
                 {field: 'title', title: '{:lang("title")}',  templet: '#title'},
-                {if condition="$modelname eq 'lhb'"}
-                  {align: 'center',field: 'danwei',  title: '所属单位'},
-                {/if}
                 {field: 'catname',  title: '所属栏目',width: 100},
-                {field: 'mid',  title: '投稿信息',width: 100 ,templet: '#info'},
-                {align: 'center',field: 'hits',  title: '{:lang("hit")}',width: 80},
+                // {field: 'mid',  title: '投稿信息',width: 100 ,templet: '#info'},
                 {field: 'userid',  title: '发布人',width: 100},
                 {field: 'createtime', title: '{:lang("add")}{:lang("time")}',width: 200},
                 {align: 'center',field: 'listorder', align: 'center', title: '{:lang("order")}',width: 80, templet: '#order'},

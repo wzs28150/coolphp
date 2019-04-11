@@ -17,132 +17,133 @@ class Addons extends Common
   /**
    * 插件列表
    */
-  public function index()
-  {
-      if(request()->isPost()){
-        if(session('gid')==1){
-          // 管理员可以根据文件来读取列表进行安装
-          $page =input('page')?input('page'):1;
-          $pageSize =input('limit')?input('limit'):config('pageSize');
-          $list = $this -> getDir(ADDONS_PATH);
-          $count = count($list);
-          foreach ($list as $key => $value) {
-            $class          =   get_addon_class($value);
-            if(!class_exists($class)){
-              $result['msg'] = '插件不存在!';
-              $result['code'] = 0;
-              return $result;
-            }
-            $addons  =   new $class;
-            $addonsJson = $addons->info;
-            $list[$key]=$addonsJson;
-          }
+   public function index()
+   {
+       if(request()->isPost()){
+         if(session('gid')==1){
+           // 管理员可以根据文件来读取列表进行安装
+           $page =input('page')?input('page'):1;
+           $pageSize =input('limit')?input('limit'):config('pageSize');
+           $list = $this -> getDir(ADDONS_PATH);
+           $count = count($list);
+           dump($list);
+           foreach ($list as $key => $value) {
+             $class          =   get_addon_class($value);
+             if(!class_exists($class)){
+               $result['msg'] = '插件不存在!';
+               $result['code'] = 0;
+               return $result;
+             }
+             $addons  =   new $class;
+             $addonsJson = $addons->info;
+             $list[$key]=$addonsJson;
+           }
 
-          foreach ($list as $key => $value)
-          {
-            $list[$key]['id'] = $key + 1;
-            if($this -> deep_in_array($value['name'], $this->addonsListM))
-            {
-              $info = db('addons')->where('name',$value['name'])->find();
-              $list[$key]['aid'] = $info['id'];
-              $list[$key]['status'] = 1;
-            }
-            else
-            {
-              $list[$key]['status'] = 0;
-            }
-            $list[$key]['has_adminlist'] = $this->gethasadminlist($value['name']);
+           foreach ($list as $key => $value)
+           {
+             $list[$key]['id'] = $key + 1;
+             if($this -> deep_in_array($value['name'], $this->addonsListM))
+             {
+               $info = db('addons')->where('name',$value['name'])->find();
+               $list[$key]['aid'] = $info['id'];
+               $list[$key]['status'] = 1;
+             }
+             else
+             {
+               $list[$key]['status'] = 0;
+             }
+             $list[$key]['has_adminlist'] = $this->gethasadminlist($value['name']);
 
-          }
+           }
 
-          $list = $this -> page_array($pageSize,$page,$list,0);
-          $rsult['code'] = 0;
-          $rsult['msg'] = "获取成功";
-          $rsult['data'] = $list;
-          $rsult['count'] = $count;
-          $rsult['rel'] = 1;
-          return $rsult;
-        }else{
-          // 非管理员只能查看已安装的
-          $page =input('page')?input('page'):1;
-          $pageSize =input('limit')?input('limit'):config('pageSize');
+           $list = $this -> page_array($pageSize,$page,$list,0);
+           $rsult['code'] = 0;
+           $rsult['msg'] = "获取成功";
+           $rsult['data'] = $list;
+           $rsult['count'] = $count;
+           $rsult['rel'] = 1;
+           return $rsult;
+         }else{
+           // 非管理员只能查看已安装的
+           $page =input('page')?input('page'):1;
+           $pageSize =input('limit')?input('limit'):config('pageSize');
 
-          $list = db('addons')->select();
-          foreach ($list as $key => $value) {
-            $list[$key]['aid'] = $list[$key]['id'];
-            if(!in_array(session('gid'),explode(',',$this->adminRules[$value['id']]))){
-              unset($list[$key]);
-            }
-          }
-          $count = count($list);
-          $list = $this -> page_array($pageSize,$page,$list,0);
-          $rsult['code'] = 0;
-          $rsult['msg'] = "获取成功";
-          $rsult['data'] = $list;
-          $rsult['count'] = $count;
-          $rsult['rel'] = 1;
-          return $rsult;
-        }
-      }
-
-
-      if(session('gid')==1){
-        // 管理员可以根据文件来读取列表进行安装
-        $page =input('page')?input('page'):1;
-        $pageSize =input('limit')?input('limit'):config('pageSize');
-        $list = $this -> getDir(ADDONS_PATH);
-        $count = count($list);
-        foreach ($list as $key => $value) {
-          $class          =   get_addon_class($value);
-          if(!class_exists($class)){
-            return $this->error('插件不存在!返回上次访问页面中...');
-          }
-          $addons  =   new $class;
-          $addonsJson = $addons->info;
-          $list[$key]=$addonsJson;
-        }
-        foreach ($list as $key => $value)
-        {
-          $list[$key]['id'] = $key + 1;
-          if($this -> deep_in_array($value['name'], $this->addonsListM))
-          {
-            $info = db('addons')->where('name',$value['name'])->find();
-            $list[$key]['aid'] = $info['id'];
-            $list[$key]['status'] = 1;
-          }
-          else
-          {
-            $list[$key]['status'] = 0;
-          }
-          $list[$key]['has_adminlist'] = $this->gethasadminlist($value['name']);
-
-        }
-
-        $list = $this -> page_array($pageSize,$page,$list,0);
-        $this->assign('list',$list);
-      }else{
-        // 非管理员只能查看已安装的
-        $page =input('page')?input('page'):1;
-        $pageSize =input('limit')?input('limit'):config('pageSize');
-
-        $list = db('addons')->select();
-        foreach ($list as $key => $value) {
-          $list[$key]['aid'] = $list[$key]['id'];
-          if(!in_array(session('gid'),explode(',',$this->adminRules[$value['id']]))){
-            unset($list[$key]);
-          }
-        }
-        $count = count($list);
-        $list = $this -> page_array($pageSize,$page,$list,0);
-        $this->assign('list',$list);
-      }
+           $list = db('addons')->select();
+           foreach ($list as $key => $value) {
+             $list[$key]['aid'] = $list[$key]['id'];
+             if(!in_array(session('gid'),explode(',',$this->adminRules[$value['id']]))){
+               unset($list[$key]);
+             }
+           }
+           $count = count($list);
+           $list = $this -> page_array($pageSize,$page,$list,0);
+           $rsult['code'] = 0;
+           $rsult['msg'] = "获取成功";
+           $rsult['data'] = $list;
+           $rsult['count'] = $count;
+           $rsult['rel'] = 1;
+           return $rsult;
+         }
+       }
 
 
-      $title = "插件列表";
-      $this->assign('title',$title);
-    return $this->fetch();
-  }
+       if(session('gid')==1){
+         // 管理员可以根据文件来读取列表进行安装
+         $page =input('page')?input('page'):1;
+         $pageSize =input('limit')?input('limit'):config('pageSize');
+         $list = $this -> getDir(ADDONS_PATH);
+         $count = count($list);
+         foreach ($list as $key => $value) {
+           $class          =   get_addon_class($value);
+           if(!class_exists($class)){
+             $result['msg'] = '插件不存在!';
+             $result['code'] = 0;
+             return $result;
+           }
+           $addons  =   new $class;
+           $addonsJson = $addons->info;
+           $list[$key]=$addonsJson;
+         }
 
+         foreach ($list as $key => $value)
+         {
+           $list[$key]['id'] = $key + 1;
+           if($this -> deep_in_array($value['name'], $this->addonsListM))
+           {
+             $info = db('addons')->where('name',$value['name'])->find();
+             $list[$key]['aid'] = $info['id'];
+             $list[$key]['status'] = 1;
+           }
+           else
+           {
+             $list[$key]['status'] = 0;
+           }
+           $list[$key]['has_adminlist'] = $this->gethasadminlist($value['name']);
+
+         }
+
+         $list = $this -> page_array($pageSize,$page,$list,0);
+         $this->assign('list',$list);
+       }else{
+         // 非管理员只能查看已安装的
+         $page =input('page')?input('page'):1;
+         $pageSize =input('limit')?input('limit'):config('pageSize');
+
+         $list = db('addons')->select();
+         foreach ($list as $key => $value) {
+           $list[$key]['aid'] = $list[$key]['id'];
+           if(!in_array(session('gid'),explode(',',$this->adminRules[$value['id']]))){
+             unset($list[$key]);
+           }
+         }
+         $count = count($list);
+         $list = $this -> page_array($pageSize,$page,$list,0);
+         $this->assign('list',$list);
+       }
+       $title = "插件列表";
+       $this->assign('title',$title);
+     return $this->fetch();
+   }
   /**
    * 插件安装
    * @return [type] [description]
@@ -390,7 +391,8 @@ class Addons extends Common
   {
     $id = input('id');
     $info = db('addons')->find($id);
-    $menus = getleftnav(115,1,array('aid'=>$id));
+  	$menus = db('menu')->where('aid',$id)->select();
+    $menus =  subtree($menus,115);
     $this->assign('menus', $menus);
     $this->assign('info',$info);
     return $this->fetch();
@@ -416,7 +418,7 @@ class Addons extends Common
       // ];
       $build = [
           $post['name'] =>[
-              '__file__'  => ['common.php',ucfirst($post['name']).'.php','index.html'],
+              '__file__'  => ['common.php',strtolower($post['name']).'.php','index.html'],
               '__dir__'   =>  ['controller','view','sql'],
               'controller'=>  ['Index','Admin'],
               'view'      =>  ['index/index','admin/main'],
@@ -428,7 +430,7 @@ class Addons extends Common
           if($value['__file__']){
             foreach ($value['__file__'] as $fk => $fv) {
 
-              if($fv == ucfirst($post['name']).'.php'){
+              if($fv == strtolower($post['name']).'.php'){
                   $myfile = fopen(APP_PATH.'../addons/'.$key.'/'.$fv, "w");
                   $file = APP_PATH.'/extra/mainfile.txt'; //先读取文件
                   $this->insertfile($file,APP_PATH.'../addons/'.$key.'/'.$fv,$post);
@@ -495,7 +497,7 @@ class Addons extends Common
   {
     $str = file_get_contents($txtfile);
     $str = preg_replace('/@name/i',$post['name'],$str);
-    $str = preg_replace('/@uname/i',ucfirst($post['name']),$str);
+    $str = preg_replace('/@uname/i',strtolower($post['name']),$str);
     $str = preg_replace('/@description/i',$post['description'],$str);
     $str = preg_replace('/@title/i',$post['title'],$str);
     $str = preg_replace('/@status/i',$post['status'],$str);
