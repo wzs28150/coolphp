@@ -1,0 +1,82 @@
+{include file="common/head"/}
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div class="layui-card-header">短信配置</div>
+    <div class="layui-card-body" pad15>
+      <form class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label class="layui-form-label">服务器</label>
+            <div class="layui-input-block">
+                <input type="text" lay-verify="required" name="sms_url" placeholder="短信服务器" value="{$info.sms_url}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">apiKey</label>
+            <div class="layui-input-block">
+                <input type="text" lay-verify="required" name="sms_appkey" placeholder="短信apiKey" value="{$info.sms_appkey}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">apiSecret</label>
+            <div class="layui-input-block">
+                <input type="text" name="sms_secretKey" lay-verify="required" placeholder="短信apiSecret" value="{$info.sms_secretKey}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">短信签名</label>
+            <div class="layui-input-block">
+                <input type="text" name="sms_templateCode" lay-verify="required" placeholder="短信签名" value="{$info.sms_templateCode}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">测试手机号</label>
+            <div class="layui-input-block">
+                <input type="text" name="test_tel" id="test_tel" placeholder="测试接收手机号" value="{$info.test_tel}" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">{:lang('submit')}</button>
+                <button type="reset" class="layui-btn layui-btn-primary">{:lang('reset')}</button>
+                <button type="button" class="layui-btn layui-btn-normal" id="trySend">测试发送</button>
+            </div>
+        </div>
+    </form>
+    </div>
+   </div>
+</div>
+{include file="common/foot"/}
+<script>
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form,layer = layui.layer,$= layui.jquery;
+        //发送测试邮件
+        $('#trySend').click(function(){
+            loading =layer.load(1, {shade: [0.1,'#fff']});
+            var sms = $('#test_tel').val();
+            $.post("{:url('trySendSms')}",{sms:sms},function(res){
+                layer.close(loading);
+                if(res.code > 0){
+                    layer.msg(res.msg,{time:1800});
+                }else{
+                    layer.msg(res.msg,{time:1800});
+                }
+            });
+        });
+        //提交监听
+        form.on('submit(submit)', function (data) {
+            loading =layer.load(1, {shade: [0.1,'#fff']});
+            $.post("{:url('system/sms')}",data.field,function(res){
+                layer.close(loading);
+                if(res.code > 0){
+                    layer.msg(res.msg,{icon: 1, time: 1000},function(){
+                        location.href = res.url;
+                    });
+                }else{
+                    layer.msg(res.msg,{icon: 2, time: 1000});
+                }
+            });
+        })
+    })
+</script>
+</body>
+</html>

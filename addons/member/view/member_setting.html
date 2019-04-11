@@ -1,0 +1,62 @@
+{include file="common/head"/}
+<style media="screen">
+  .fieldinfo{ color: red; display: block;}
+</style>
+<div class="layui-fluid">
+   <div class="layui-card">
+    <div style="" class="fadeInUp animated">
+      <div class="layui-card-header">{$title}</div>
+      <div class="layui-card-body" pad15>
+      <!-- <blockquote class="layui-elem-quote">
+        提示
+      </blockquote> -->
+      <form class="layui-form ">
+        <div class="layui-form-item">
+          <label class="layui-form-label">数据状态</label>
+          <div class="layui-input-block">
+            <input type="radio" name="status" lay-filter="status" {if condition="$status eq 1"}checked{/if} value="1" title="禁止修改">
+            <input type="radio" name="status" lay-filter="status" {if condition="$status eq 0"}checked{/if} value="0" title="允许修改">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">vip到期时间</label>
+          <div class="layui-input-block">
+            <input type="text" name="dqsj" lay-verify="required" value="{$dqsj}" placeholder="请输入到期月份" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button type="button" class="layui-btn" lay-submit="" lay-filter="auth">立即提交</button>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+   </div>
+</div>
+{include file="common/foot"/}
+<script>
+  layui.use(['form', 'layer'], function() {
+    var form = layui.form,
+      layer = layui.layer,
+      $ = layui.jquery;
+    form.on('submit(auth)', function(data) {
+      // 提交到方法 默认为本身
+      $.post("{:addon_url($addon.'://member/setting')}", data.field, function(res) {
+        if (res.code > 0) {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 1
+          }, function() {
+            location.href = res.url;
+          });
+        } else {
+          layer.msg(res.msg, {
+            time: 1000,
+            icon: 2
+          });
+        }
+      });
+    })
+  });
+</script>
