@@ -1,2 +1,40 @@
 <!-- <script type="text/javascript" src="__STATIC__/plugins/layui/layui.js"></script> -->
 <script src="__ADMIN__/layui/layui.js"></script>
+<!-- <script src="__STATIC__/plugins/rightmenu.js"></script> -->
+<style media="screen">
+  body{position:absolute;top:0;bottom:0;right:0;left:0;overflow:hidden;}
+  .RCM-Main{position:absolute}.RCM-container{border:1px solid #ccc;padding:5px 0;display:block;box-shadow:0 0 2px #ccc;font-size:14px;border-radius:3px;z-index:10000;background:#fff;color:#000}.RCM-container ul{list-style:none;padding:0;margin:0}.RCM-container ul li{height:30px;line-height:30px;padding:0 18px 0 15px;cursor:pointer;position:relative}.RCM-container ul li:hover{background-color:#343a40;color:#fff}.textcenter{text-align:center}.fa-align-right{position:absolute;right:0;top:10px}.RCM-child{position:absolute;top:0;width:100%}
+</style>
+<script type="text/javascript">
+
+
+  layui.use('rightmenu', function() {
+      var rightmenu = layui.rightmenu, $ = layui.jquery;
+      $(document).ready(function(){
+        var rcm = rightmenu;
+        rcm.init({
+          area:'body',
+          items:{
+            "del":{name:"清除缓存",icon:'trash-o'},
+            "refresh":{name:"刷新页面",icon:'refresh'},
+            "back":{name:"返回上级",icon:'undo'}
+          },
+          callback:function(res){
+            if(res.data == 'del'){
+              var url = "/admin/Index/clear.html"; 
+              $.post(url, {}, function (data) {
+                  layer.msg(data.info, {icon: 6}, function (index) {
+                    parent.location.reload();
+                  });
+              });
+            }else if(res.data == 'refresh'){
+              window.location.reload();
+            }else if(res.data == 'back'){
+              history.back(-1);
+            }
+          }
+        })
+      });
+
+  })
+</script>

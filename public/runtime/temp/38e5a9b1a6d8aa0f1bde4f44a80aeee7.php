@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:42:"F:\cool-php/app/admin\view\index/main.html";i:1554966007;s:43:"F:\cool-php\app\admin\view\common\head.html";i:1554966007;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:42:"F:\cool-php/app/admin\view\index/main.html";i:1554966007;s:43:"F:\cool-php\app\admin\view\common\head.html";i:1555029087;}*/ ?>
 <!DOCTYPE html>
   <html>
   <head>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/public/static/admin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/public/static/admin/css/admin.css" media="all">
     <link rel="stylesheet" href="/public/static/admin/css/template.css" media="all">
+    <link rel="stylesheet" href="/public/static/plugins/font-awesome/css/font-awesome.min.css" media="all">
   </head>
   <!-- <?php if($controller == 'Index' and $action == 'index'): ?>
   <body class="layui-layout-body">

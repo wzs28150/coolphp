@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:43:"F:\cool-php/app/admin\view\index/index.html";i:1554966007;s:43:"F:\cool-php\app\admin\view\common\head.html";i:1554966007;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:43:"F:\cool-php/app/admin\view\index/index.html";i:1555029462;s:43:"F:\cool-php\app\admin\view\common\head.html";i:1555029087;}*/ ?>
 <!DOCTYPE html>
   <html>
   <head>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/public/static/admin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/public/static/admin/css/admin.css" media="all">
     <link rel="stylesheet" href="/public/static/admin/css/template.css" media="all">
+    <link rel="stylesheet" href="/public/static/plugins/font-awesome/css/font-awesome.min.css" media="all">
   </head>
   <!-- <?php if($controller == 'Index' and $action == 'index'): ?>
   <body class="layui-layout-body">
@@ -180,13 +181,58 @@
 </div>
 
 <script src="/public/static/admin/layui/layui.js"></script>
+<script type="text/javascript">
+  // layui.use('rightmenu', function() {
+  //     var rightmenu = layui.rightmenu, $ = layui.jquery;
+  //     $(document).ready(function(){
+  //       var rcm = rightmenu;
+  //       rcm.init({
+  //         area:'body',
+  //         items:{
+  //           "edit":{name:"编辑",icon:'edit'},
+  //           "del":{name:"删除",icon:'trash-o'},
+  //           "add":{name:"添加",icon:'plus',items:{
+  //             "new-text":{name:"添加文件",icon:'file-text'},
+  //             "new-zip":{name:"添加ZIP",icon:'file-zip-o'}
+  //           }},
+  //           "refresh":{name:"刷新",icon:'refresh'},
+  //           "down":{name:"下载按钮",icon:'cloud-download'},
+  //           "new":{name:"新建",icon:'file',items:{
+  //             "new-text":{name:"新建文件",icon:'file-text'},
+  //             "new-zip":{name:"新建ZIP",icon:'file-zip-o'}
+  //           }}
+  //         },
+  //         callback:function(res){
+  //           if(res.data == 'edit'){
+  //             console.log('点击了edit');
+  //           }else if(res.data == 'del'){
+  //             console.log('点击了del');
+  //           }else if(res.data == 'add'){
+  //             console.log('点击了add');
+  //           }else if(res.data == 'refresh'){
+  //             window.location.reload();
+  //           }else if(res.data == 'down'){
+  //             console.log('点击了download');
+  //           }
+  //         }
+  //       })
+  //     });
+  //
+  // })
+</script>
 <script>
   layui.config({
     base: '/public/static/admin/' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
   }).use('index');
+
 </script>
+<style media="screen">
+  .RCM-Main{position:absolute}.RCM-container{border:1px solid #ccc;padding:5px 0;display:block;box-shadow:0 0 2px #ccc;font-size:14px;border-radius:3px;z-index:10000;background:#fff;color:#000}.RCM-container ul{list-style:none;padding:0;margin:0}.RCM-container ul li{height:30px;line-height:30px;padding:0 18px 0 15px;cursor:pointer;position:relative}.RCM-container ul li:hover{background-color:#343a40;color:#fff}.textcenter{text-align:center}.fa-align-right{position:absolute;right:0;top:10px}.RCM-child{position:absolute;top:0;width:100%}
+</style>
+
+
 </body>
 
 </html>

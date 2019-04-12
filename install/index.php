@@ -1,10 +1,9 @@
 <?php
 /**
- * @Author 张超.
- * @Copyright http://www.zhangchao.name
- * @Email 416716328@qq.com
- * @DateTime 2018/5/20 15:53
- * @Yes-Admin 安装引导
+ * @Author wzs.
+ * @Email 1003418012@qq.com
+ * @DateTime 2019/4/11 15:53
+ * @coolphp 安装引导
  */
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 ini_set('display_errors', '1');
@@ -117,7 +116,7 @@ if ($_GET['c'] = 'start' && isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUE
         die("<script>alert('安装失败、请确定install.lock是否有写入权限！:$error');history.go(-1)</script>");
     }
     $url=$_SERVER['HTTP_HOST'].trim($_SERVER['SCRIPT_NAME'], 'index.php');
-    header("Location:http://$url");
+    header("Location:http://$url/admin");
 }
 ?>
 <!doctype html>
